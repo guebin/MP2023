@@ -1,18 +1,6 @@
 [
   {
     "listing": "/index.html",
-    "items": [
-      "/posts/post-with-code/index.html",
-      "/mysite/posts/post-with-code/index.html",
-      "/posts/welcome/index.html",
-      "/mysite/posts/welcome/index.html"
-    ]
-  },
-  {
-    "listing": "/mysite/index.html",
-    "items": [
-      "/mysite/posts/post-with-code/index.html",
-      "/mysite/posts/welcome/index.html"
-    ]
+    "items": []
   }
 ]
