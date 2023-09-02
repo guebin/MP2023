@@ -1,14 +1,22 @@
 ---
-title: "MP2023"
+title: "기계학습활용 (2023)"
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: table
   categories: true
   sort-ui: false
   filter-ui: false
 page-layout: full
-title-block-banner: true
+title-block-banner: false
 ---
 
+**질문하는 방법**
 
+- 카카오톡: [질문하러 가기](http://pf.kakao.com/_skxnxdG/chat) // 학기종료이후 폐쇄함
+- 이메일: <guebin@jbnu.ac.kr>
+- 직접방문: 자연과학대학 본관 205호 
+- Zoom: *카카오톡이나 이메일로 미리 시간을 정할 것*
+- LMS쪽지: <https://ieilms.jbnu.ac.kr/>
+
+**강의노트** 
