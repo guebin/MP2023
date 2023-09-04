@@ -1,0 +1,12 @@
+---
+title: "01wk-1 -- draft"
+author: "최규빈"
+date: "09/04/2023"
+categories:
+  - matplotlib
+  - seaborn
+  - plotnine
+  - plotly
+---
+
+<a href="https://colab.research.google.com/github/guebin/DV2023/blob/main/posts/01wk-1.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" style="text-align: left"></a>
