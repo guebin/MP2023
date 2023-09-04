@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="최규빈">
+<meta name="dcterms.date" content="2023-09-04">
 
-<title>MP2023 - 기계학습활용 (2023)</title>
+<title>MP2023 - 01wk-02: 캐글자료 다운로드</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,40 +100,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
-      
-      searchColumns: [],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -109,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">MP2023</span>
     </a>
   </div>
@@ -137,25 +143,37 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="test.out.ipynb" download="test.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">기계학습활용 (2023)</h1>
+<h1 class="title">01wk-02: 캐글자료 다운로드</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>최규빈 </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 4, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -164,33 +182,241 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><strong>질문하는 방법</strong></p>
-<ul>
-<li>카카오톡: <a href="http://pf.kakao.com/_skxnxdG/chat">질문하러 가기</a> // 학기종료이후 폐쇄함</li>
-<li>이메일: <a href="mailto:guebin@jbnu.ac.kr" class="email">guebin@jbnu.ac.kr</a></li>
-<li>직접방문: 자연과학대학 본관 205호</li>
-<li>Zoom: <em>카카오톡이나 이메일로 미리 시간을 정할 것</em></li>
-<li>LMS쪽지: <a href="https://ieilms.jbnu.ac.kr/" class="uri">https://ieilms.jbnu.ac.kr/</a></li>
-</ul>
-<p><strong>references</strong></p>
-<p><strong>강의노트</strong></p>
+<div id="8ab52561-d484-43c1-aeb8-06f6cd9b3010" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'KAGGLE_CONFIG_DIR'</span>] <span class="op">=</span> <span class="st">"/home/cgb2/Dropbox/07_lectures/2023-09-MP2023/posts"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="7d3dca12-88ba-4579-9bb1-b8d39939513a" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle competitions download <span class="op">-</span>c bike<span class="op">-</span>sharing<span class="op">-</span>demand</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Warning: Your Kaggle API key is readable by other users on this system! To fix this, you can run 'chmod 600 /home/cgb2/Dropbox/07_lectures/2023-09-MP2023/posts/kaggle.json'
+Downloading bike-sharing-demand.zip to /home/cgb2/Dropbox/07_lectures/2023-09-MP2023/posts
+100%|█████████████████████████████████████████| 189k/189k [00:00&lt;00:00, 366kB/s]
+100%|█████████████████████████████████████████| 189k/189k [00:00&lt;00:00, 366kB/s]</code></pre>
+</div>
+</div>
+<div id="b7b35936-013a-4dbe-bae2-3dd0c666faec" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip bike<span class="op">-</span>sharing<span class="op">-</span>demand.<span class="bu">zip</span> <span class="op">-</span>d .<span class="op">/</span>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Archive:  bike-sharing-demand.zip
+  inflating: ./data/sampleSubmission.csv  
+  inflating: ./data/test.csv         
+  inflating: ./data/train.csv        </code></pre>
+</div>
+</div>
+<div id="ed78625a-6efa-4d09-baf8-39e8233bbb75" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm bike<span class="op">-</span>sharing<span class="op">-</span>demand.<span class="bu">zip</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="fa1e20fd-4144-4e85-ab49-8ca02ac7f2e5" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls .<span class="op">/</span>data </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sampleSubmission.csv  test.csv  train.csv</code></pre>
+</div>
+</div>
+<div id="96f626bb-f84b-4d8b-bc87-62d6302b1aad" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bbe816de-a533-4e04-af84-72f18b739050" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">'./data/train.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
 
 
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
-<tr>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">datetime</th>
+<th data-quarto-table-cell-role="th">season</th>
+<th data-quarto-table-cell-role="th">holiday</th>
+<th data-quarto-table-cell-role="th">workingday</th>
+<th data-quarto-table-cell-role="th">weather</th>
+<th data-quarto-table-cell-role="th">temp</th>
+<th data-quarto-table-cell-role="th">atemp</th>
+<th data-quarto-table-cell-role="th">humidity</th>
+<th data-quarto-table-cell-role="th">windspeed</th>
+<th data-quarto-table-cell-role="th">casual</th>
+<th data-quarto-table-cell-role="th">registered</th>
+<th data-quarto-table-cell-role="th">count</th>
 </tr>
 </thead>
-<tbody class="list">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2011-01-01 00:00:00</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>9.84</td>
+<td>14.395</td>
+<td>81</td>
+<td>0.0000</td>
+<td>3</td>
+<td>13</td>
+<td>16</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2011-01-01 01:00:00</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>9.02</td>
+<td>13.635</td>
+<td>80</td>
+<td>0.0000</td>
+<td>8</td>
+<td>32</td>
+<td>40</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>2011-01-01 02:00:00</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>9.02</td>
+<td>13.635</td>
+<td>80</td>
+<td>0.0000</td>
+<td>5</td>
+<td>27</td>
+<td>32</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2011-01-01 03:00:00</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>9.84</td>
+<td>14.395</td>
+<td>75</td>
+<td>0.0000</td>
+<td>3</td>
+<td>10</td>
+<td>13</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>2011-01-01 04:00:00</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>9.84</td>
+<td>14.395</td>
+<td>75</td>
+<td>0.0000</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10881</td>
+<td>2012-12-19 19:00:00</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>15.58</td>
+<td>19.695</td>
+<td>50</td>
+<td>26.0027</td>
+<td>7</td>
+<td>329</td>
+<td>336</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10882</td>
+<td>2012-12-19 20:00:00</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>14.76</td>
+<td>17.425</td>
+<td>57</td>
+<td>15.0013</td>
+<td>10</td>
+<td>231</td>
+<td>241</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10883</td>
+<td>2012-12-19 21:00:00</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>13.94</td>
+<td>15.910</td>
+<td>61</td>
+<td>15.0013</td>
+<td>4</td>
+<td>164</td>
+<td>168</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">10884</td>
+<td>2012-12-19 22:00:00</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>13.94</td>
+<td>17.425</td>
+<td>61</td>
+<td>6.0032</td>
+<td>12</td>
+<td>117</td>
+<td>129</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10885</td>
+<td>2012-12-19 23:00:00</td>
+<td>4</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>13.12</td>
+<td>16.665</td>
+<td>66</td>
+<td>8.9981</td>
+<td>4</td>
+<td>84</td>
+<td>88</td>
+</tr>
 </tbody>
 </table>
-<div class="listing-no-matching d-none">
-No matching items
+
+<p>10886 rows × 12 columns</p>
 </div>
-</div></main> <!-- /main -->
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -534,6 +760,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
