@@ -76,9 +76,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      valueNames: [{ data: ['index'] },{ data: ['categories'] }],
       
-      searchColumns: ["listing-date","listing-title","listing-author"],
+      searchColumns: [],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -142,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -182,40 +182,9 @@ ul.task-list li input[type="checkbox"] {
 <table class="quarto-listing-table table">
 <thead>
 <tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-<th>
-Author
-</th>
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="1693753200000" data-listing-file-modified-sort="1693719122689" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="1" data-listing-title-sort="01wk-02: 캐글자료 다운로드" data-listing-filename-sort="01wk-2.ipynb">
-<td>
-<span class="listing-date">Sep 4, 2023</span>
-</td>
-<td>
-<a href="./posts/01wk-2.html" class="title listing-title">01wk-02: 캐글자료 다운로드</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="1693753200000" data-listing-file-modified-sort="1693706806573" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="33" data-listing-title-sort="01wk-01: 가상환경 설정 (코랩사용자는 필요없음)" data-listing-filename-sort="01wk-1.ipynb">
-<td>
-<span class="listing-date">Sep 4, 2023</span>
-</td>
-<td>
-<a href="./posts/01wk-1.html" class="title listing-title">01wk-01: 가상환경 설정 (코랩사용자는 필요없음)</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
 </tbody>
 </table>
 <div class="listing-no-matching d-none">
