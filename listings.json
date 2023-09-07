@@ -5,5 +5,11 @@
       "/posts/01wk-001.html",
       "/posts/01wk-002.html"
     ]
+  },
+  {
+    "listing": "/offline.html",
+    "items": [
+      "/offline/230907.html"
+    ]
   }
 ]

@@ -4,7 +4,14 @@
     "href": "index.html",
     "title": "기계학습활용 (2023)",
     "section": "",
-    "text": "질문하는 방법\n\n카카오톡: 질문하러 가기 // 학기종료이후 폐쇄함\n이메일: guebin@jbnu.ac.kr\n직접방문: 자연과학대학 본관 205호\nZoom: 카카오톡이나 이메일로 미리 시간을 정할 것\nLMS쪽지: https://ieilms.jbnu.ac.kr/\n\nreferences\n공지사항\n\n강의영상의 경우 시간이 지나면 고화질로 시청할 수 있습니다. (인코딩중에는 유튜브에서 저화질로 송출됩니다)\n9월7일 대면수업: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론\n\n강의노트\n\n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nSep 5, 2023\n\n\n01wk-001: 캐글소개\n\n\n최규빈 \n\n\n\n\nSep 5, 2023\n\n\n01wk-002: 타이타닉 데이터의 이해\n\n\n최규빈 \n\n\n\n\n\nNo matching items"
+    "text": "질문하는 방법\n\n카카오톡: 질문하러 가기 // 학기종료이후 폐쇄함\n이메일: guebin@jbnu.ac.kr\n직접방문: 자연과학대학 본관 205호\nZoom: 카카오톡이나 이메일로 미리 시간을 정할 것\nLMS쪽지: https://ieilms.jbnu.ac.kr/\n\nreferences\n공지사항\n\n강의영상의 경우 시간이 지나면 고화질로 시청할 수 있습니다. (인코딩중에는 유튜브에서 저화질로 송출됩니다)\n9월7일 대면수업: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론\n\n강의노트\n\n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nSep 5, 2023\n\n\n01wk-001: 캐글소개\n\n\n최규빈 \n\n\n\n\nSep 5, 2023\n\n\n01wk-002: 타이타닉 데이터의 이해 (hw 있음)\n\n\n최규빈 \n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "offline.html",
+    "href": "offline.html",
+    "title": "대면수업",
+    "section": "",
+    "text": "기계학습활용은 플립러닝을 시도하고 있으며, 비대면수업과 대면수업이 병행됩니다.\n공지사항\n\n대면수업은 학점과 무관한 수업입니다. (대면수업에 참여하지 않아도 학점에 불이익이 없습니다)\n9월12일 대면수업: 9월12일 대면수업은 Quarto를 이용한 기술블로그 만들기를 이어서 설명하겠습니다. 9월7일 대면수업 내용을 따라오신 상태이어야 합니다. (가능하면 지난시간에 실습했던 자리를 이어서 하는게 좋을거에요)\n\n강의노트\n\n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nSep 5, 2023\n\n\n2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github\n\n\n최규빈 \n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/01wk-001.html",
@@ -40,5 +47,40 @@
     "title": "01wk-002: 타이타닉 데이터의 이해 (hw 있음)",
     "section": "embarked와 class에 대한 피처엔지니어링의 아이디어",
     "text": "embarked와 class에 대한 피처엔지니어링의 아이디어\n- 경우에 따라서 두가지 범주를 하나도 합쳐서 만든 새로운 변수가 매우 의미있을 수 있음\n\n경우에 따라서 특정 국적 (프랑스)의 1등급 손님이 구명보트를 많이 얻었을 수도 있음.\n이럴경우 embarked와 class를 독립적으로 생각하는것보다 둘을 합친 변수가 훨씬 유의미한 변수임\n\n\n\n\n\n\n\nGPT 답변\n\n\n\n물론, 자세한 설명을 드리겠습니다. “항구와 클래스의 조합 특성 생성”이라는 개념은 ‘embarked’ (탑승 항구)와 ‘pclass’ (티켓 클래스) 두 변수를 활용하여 새로운 특성을 만들어 분석하는 것을 의미합니다.\n예를 들어, “embarked” 변수에는 ‘C’, ‘Q’, ‘S’와 같은 항구 정보가 있으며, “pclass” 변수에는 ’1’, ‘2’, ’3’과 같은 티켓 클래스 정보가 있습니다. 이 두 변수를 조합하여 새로운 변수를 만들어보겠습니다.\n생성할 새로운 변수의 예시:\n“embarked_pclass”: ‘C_1’, ‘C_2’, ‘C_3’, ‘Q_1’, ‘Q_2’, ‘Q_3’, ‘S_1’, ‘S_2’, ‘S_3’ 위와 같이 “embarked”와 “pclass”를 조합하여 새로운 변수 값을 만듭니다. 예를 들어 ’embarked’가 ’C’이고 ’pclass’가 ’1’인 경우, “embarked_pclass” 변수 값은 ’C_1’이 됩니다. 이렇게 조합된 변수는 해당 승객이 어떤 항구에서 탑승했고 어떤 티켓 클래스를 사용했는지를 동시에 나타내는 특성입니다.\n이렇게 생성된 “embarked_pclass” 변수를 사용하여 특정 항구와 클래스의 조합이 생존 여부에 어떤 영향을 미치는지를 분석할 수 있습니다. 예를 들어, ‘C_1’ 조합이 생존율과 관련이 있는지, ‘Q_3’ 조합이 생존 여부에 영향을 미치는지 등을 확인하여 해당 특성이 모델링에 유용한 정보를 제공하는지 알아볼 수 있습니다.\n\n\n\n\n\n\n\n\nGPT 답변 2 – 그냥 “embarked” 변수와 “pclass” 변수를 각각 넣고 분석하는 것과 무슨차이냐는 질문에 대한 답변\n\n\n\n네, “embarked” 변수와 “pclass” 변수를 각각 넣고 분석하는 것도 가능합니다. 그러나 새로운 변수를 만드는 것은 데이터를 조금 더 유용하게 활용하는 방법 중 하나입니다. 여기에 몇 가지 이유가 있습니다:\n상호작용 효과 강조: 새로운 변수를 만들면 “embarked”와 “pclass”의 조합이 생존 여부에 미치는 영향을 강조할 수 있습니다. 단순히 각각의 변수를 개별적으로 사용하는 것보다 조합된 변수를 통해 서로 간의 상호작용 효과를 쉽게 확인할 수 있습니다.\n더 풍부한 패턴 탐색: 새로운 변수를 만들면 서로 다른 항구와 클래스 조합들 간의 생존률 차이를 더 세부적으로 분석할 수 있습니다. 이를 통해 특정 항구와 클래스의 승객들이 생존 여부에 미치는 영향을 더 자세히 이해할 수 있습니다.\n다양한 조합 고려: 조합된 변수를 만들면 “embarked”와 “pclass”의 가능한 모든 조합을 커버할 수 있습니다. 이는 분석의 전체적인 시각을 확장하고, 어떤 조합이 중요한지를 더 효과적으로 파악할 수 있도록 도와줍니다.\n모델 학습에 더 적합한 데이터 생성: 몇몇 머신 러닝 알고리즘은 상호작용 변수를 활용하여 모델의 성능을 향상시킬 수 있습니다. 이러한 알고리즘들은 새로운 변수를 활용하여 더 복잡한 패턴을 학습할 수 있습니다.\n새로운 변수를 만들어 분석하는 것은 분석의 창의성과 도메인 지식을 활용하여 데이터로부터 더 많은 의미를 도출하려는 노력의 일부입니다. 분석의 목적에 따라 각 변수를 개별적으로 사용하거나 조합하여 새로운 변수를 만들 수 있습니다."
+  },
+  {
+    "objectID": "offline/230907.html",
+    "href": "offline/230907.html",
+    "title": "2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github",
+    "section": "",
+    "text": "- 윈도우 컴퓨터인 경우 새로운 계정을 만들어 준다.\n\n한글계정명일 경우는 필수\n영어계정이더라도 계정을 분리하는게 관리에 유리\n\n- 최종적으로는\n\ngithub 로그인 + repository 생성완료\nanaconda 설치완료\ngit 설치완료\nquarto 설치완료\n\n이어야 한다.\n\n\n\ngithub 로그인\nrepository 생성 (저는 asdf로 만들었어요)\n\n\n주의: repository 만들때 readme.md 파일을 생성 할 것. 그래야 이후의 작업이 편리.\n\n\n\n\n\n아나콘다 다운로드: https://www.anaconda.com/download\n아나콘다 설치\n그림1처럼 terminal을 열었을 경우 (base)로 표시되는지 확인\n그림2처럼 conda env list등의 명령어가 잘 동작하는지 확인\n\n\n그림1그림2\n\n\n\n\n\n그림1: 정상적으로 설치된 경우 (base)가 보임\n\n\n\n\n\n\n\n그림2: 정상적으로 설치된 경우 cond env list 등의 명령이 잘 동작함. 현재환경은 *로 표시됨\n\n\n\n\n\n\n\n\n\ngit 다운로드: https://git-scm.com/downloads\n설치\nterminal에서 git을 입력하여 정상적으로 설치되었는지 확인. 그림3 참고.\n\n\n본인이 편리한 경우 github desktop 혹은 sourcetree 등에서 작업해도 무방함. 하지만 수업에서는 다루지 않음.\n\n\n\n\n그림3: git이 정상적으로 설치된 경우 출력예시\n\n\n\n\n\n\nquarto 다운로드: https://quarto.org/docs/download/ 에서 pre-release 버전을 다운로드 할 것 (기능이 좀 더 많음)\n설치\n터미널에서 quarto help를 입력하여 정상적으로 설치되었는지 확인. 그림4 참고.\n\n\n\n\n그림4: quarto가 정상적으로 설치된 경우 출력예시"
+  },
+  {
+    "objectID": "offline/230907.html#a.-github",
+    "href": "offline/230907.html#a.-github",
+    "title": "2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github",
+    "section": "",
+    "text": "github 로그인\nrepository 생성 (저는 asdf로 만들었어요)\n\n\n주의: repository 만들때 readme.md 파일을 생성 할 것. 그래야 이후의 작업이 편리."
+  },
+  {
+    "objectID": "offline/230907.html#b.-anaconda",
+    "href": "offline/230907.html#b.-anaconda",
+    "title": "2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github",
+    "section": "",
+    "text": "아나콘다 다운로드: https://www.anaconda.com/download\n아나콘다 설치\n그림1처럼 terminal을 열었을 경우 (base)로 표시되는지 확인\n그림2처럼 conda env list등의 명령어가 잘 동작하는지 확인\n\n\n그림1그림2\n\n\n\n\n\n그림1: 정상적으로 설치된 경우 (base)가 보임\n\n\n\n\n\n\n\n그림2: 정상적으로 설치된 경우 cond env list 등의 명령이 잘 동작함. 현재환경은 *로 표시됨"
+  },
+  {
+    "objectID": "offline/230907.html#c.-git",
+    "href": "offline/230907.html#c.-git",
+    "title": "2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github",
+    "section": "",
+    "text": "git 다운로드: https://git-scm.com/downloads\n설치\nterminal에서 git을 입력하여 정상적으로 설치되었는지 확인. 그림3 참고.\n\n\n본인이 편리한 경우 github desktop 혹은 sourcetree 등에서 작업해도 무방함. 하지만 수업에서는 다루지 않음.\n\n\n\n\n그림3: git이 정상적으로 설치된 경우 출력예시"
+  },
+  {
+    "objectID": "offline/230907.html#d.-quarto",
+    "href": "offline/230907.html#d.-quarto",
+    "title": "2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github",
+    "section": "",
+    "text": "quarto 다운로드: https://quarto.org/docs/download/ 에서 pre-release 버전을 다운로드 할 것 (기능이 좀 더 많음)\n설치\n터미널에서 quarto help를 입력하여 정상적으로 설치되었는지 확인. 그림4 참고.\n\n\n\n\n그림4: quarto가 정상적으로 설치된 경우 출력예시"
   }
 ]
