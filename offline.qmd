@@ -1,0 +1,22 @@
+---
+title: "**대면수업**"
+listing:
+  contents: /offline
+  sort: "date desc"
+  type: table
+  categories: false
+  sort-ui: false
+  filter-ui: false
+  page-size: 9999
+page-layout: full
+title-block-banner: false
+---
+
+기계학습활용은 플립러닝을 시도하고 있으며, 비대면수업과 대면수업이 병행됩니다. 
+
+**공지사항** 
+
+- 대면수업은 학점과 무관한 수업입니다. (대면수업에 참여하지 않아도 학점에 불이익이 없습니다) 
+- **9월12일 대면수업**: 9월12일 대면수업은 Quarto를 이용한 기술블로그 만들기를 이어서 설명하겠습니다. 9월7일 대면수업 내용을 따라오신 상태이어야 합니다. (가능하면 지난시간에 실습했던 자리를 이어서 하는게 좋을거에요)
+
+**강의노트** 

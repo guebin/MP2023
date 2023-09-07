@@ -4,6 +4,8 @@ project:
 website:
   title: "MP2023"
   navbar:
+    left: 
+      - offline.qmd
     right:
       - icon: github    
         href: https://github.com/guebin/MP2023
