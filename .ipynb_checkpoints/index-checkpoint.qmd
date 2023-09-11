@@ -2,7 +2,7 @@
 title: "기계학습활용 (2023)"
 listing:
   contents: posts
-  sort: "date desc"
+  sort: "date"
   type: table
   categories: true
   sort-ui: false
