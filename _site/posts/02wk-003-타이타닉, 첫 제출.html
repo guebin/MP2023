@@ -215,16 +215,223 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="b.-train-스스로-풀어보고-채점할-수-있음" class="level2">
 <h2 class="anchored" data-anchor-id="b.-train-스스로-풀어보고-채점할-수-있음">B. train – 스스로 풀어보고 채점할 수 있음</h2>
+<p><code>-</code> 캐글에서 code <span class="math inline">\(\to\)</span> New Notebook 클릭</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This Python 3 environment comes with many helpful analytics libraries installed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, here's several helpful packages to load</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># linear algebra</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># data processing, CSV file I/O (e.g. pd.read_csv)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Input data files are available in the read-only "../input/" directory</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dirname, _, filenames <span class="kw">in</span> os.walk(<span class="st">'/kaggle/input'</span>):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(os.path.join(dirname, filename))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save &amp; Run All" </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/kaggle/input/titanic/train.csv
+/kaggle/input/titanic/test.csv
+/kaggle/input/titanic/gender_submission.csv</code></pre>
+<div id="ffd5c9ea-d747-4d49-b126-e34ec62aea37" class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2023-09-11T15:57:45.307129Z&quot;,&quot;iopub.status.busy&quot;:&quot;2023-09-11T15:57:45.306588Z&quot;,&quot;iopub.status.idle&quot;:&quot;2023-09-11T15:57:45.356828Z&quot;,&quot;shell.execute_reply&quot;:&quot;2023-09-11T15:57:45.355263Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2023-09-11T15:57:45.307089Z&quot;}" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tr<span class="op">=</span>pd.read_csv(<span class="st">"/kaggle/input/titanic/train.csv"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tst<span class="op">=</span>pd.read_csv(<span class="st">"/kaggle/input/titanic/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">PassengerId</th>
+<th data-quarto-table-cell-role="th">Pclass</th>
+<th data-quarto-table-cell-role="th">Name</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">SibSp</th>
+<th data-quarto-table-cell-role="th">Parch</th>
+<th data-quarto-table-cell-role="th">Ticket</th>
+<th data-quarto-table-cell-role="th">Fare</th>
+<th data-quarto-table-cell-role="th">Cabin</th>
+<th data-quarto-table-cell-role="th">Embarked</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>892</td>
+<td>3</td>
+<td>Kelly, Mr. James</td>
+<td>male</td>
+<td>34.5</td>
+<td>0</td>
+<td>0</td>
+<td>330911</td>
+<td>7.8292</td>
+<td>NaN</td>
+<td>Q</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>893</td>
+<td>3</td>
+<td>Wilkes, Mrs. James (Ellen Needs)</td>
+<td>female</td>
+<td>47.0</td>
+<td>1</td>
+<td>0</td>
+<td>363272</td>
+<td>7.0000</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>894</td>
+<td>2</td>
+<td>Myles, Mr. Thomas Francis</td>
+<td>male</td>
+<td>62.0</td>
+<td>0</td>
+<td>0</td>
+<td>240276</td>
+<td>9.6875</td>
+<td>NaN</td>
+<td>Q</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>895</td>
+<td>3</td>
+<td>Wirz, Mr. Albert</td>
+<td>male</td>
+<td>27.0</td>
+<td>0</td>
+<td>0</td>
+<td>315154</td>
+<td>8.6625</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>896</td>
+<td>3</td>
+<td>Hirvonen, Mrs. Alexander (Helga E Lindqvist)</td>
+<td>female</td>
+<td>22.0</td>
+<td>1</td>
+<td>1</td>
+<td>3101298</td>
+<td>12.2875</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">413</td>
+<td>1305</td>
+<td>3</td>
+<td>Spector, Mr. Woolf</td>
+<td>male</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>A.5. 3236</td>
+<td>8.0500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">414</td>
+<td>1306</td>
+<td>1</td>
+<td>Oliva y Ocana, Dona. Fermina</td>
+<td>female</td>
+<td>39.0</td>
+<td>0</td>
+<td>0</td>
+<td>PC 17758</td>
+<td>108.9000</td>
+<td>C105</td>
+<td>C</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">415</td>
+<td>1307</td>
+<td>3</td>
+<td>Saether, Mr. Simon Sivertsen</td>
+<td>male</td>
+<td>38.5</td>
+<td>0</td>
+<td>0</td>
+<td>SOTON/O.Q. 3101262</td>
+<td>7.2500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">416</td>
+<td>1308</td>
+<td>3</td>
+<td>Ware, Mr. Frederick</td>
+<td>male</td>
+<td>NaN</td>
+<td>0</td>
+<td>0</td>
+<td>359309</td>
+<td>8.0500</td>
+<td>NaN</td>
+<td>S</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">417</td>
+<td>1309</td>
+<td>3</td>
+<td>Peter, Master. Michael J</td>
+<td>male</td>
+<td>NaN</td>
+<td>1</td>
+<td>1</td>
+<td>2668</td>
+<td>22.3583</td>
+<td>NaN</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+
+<p>418 rows × 11 columns</p>
+</div>
+</div>
+</div>
 <p><code>#</code> 예비학습 – accuracy의 계산</p>
 <div id="838b552c-5ec7-4cd3-8702-51b9625ed536" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="4d2cee85-51bc-446a-8a03-644913818b62" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'Surv'</span>:[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>],<span class="st">'Sex'</span>:[<span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'m'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'Surv'</span>:[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>],<span class="st">'Sex'</span>:[<span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'m'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>-</code> Surv 열의 선택</p>
 <div id="6536357c-2939-4f15-822a-e3e4bb9f0cda" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.Surv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.Surv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>0    1
 1    0
@@ -236,7 +443,7 @@ Name: Surv, dtype: int64</code></pre>
 </div>
 <p><code>-</code> Sex 열의 선택</p>
 <div id="9f72546b-14c7-4dbf-ac49-642dc103666a" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.Sex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.Sex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>0    f
 1    m
@@ -248,7 +455,7 @@ Name: Sex, dtype: object</code></pre>
 </div>
 <p><code>-</code> <code>Sex == f</code>이면 생존(1), 그렇지 않으면 사망(0)이라고 예측</p>
 <div id="8ca835df-a89e-4372-9b36-0d4ec6a18d04" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>0    1
 1    0
@@ -260,7 +467,7 @@ Name: Sex, dtype: int64</code></pre>
 </div>
 <p><code>-</code> 결과를 정리하면 아래와 같음</p>
 <div id="6b7f721d-454c-4be7-8a2f-35cafefa72e6" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'real'</span>: df.Surv, <span class="st">'estimate'</span>: (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'real'</span>: df.Surv, <span class="st">'estimate'</span>: (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <div>
 
@@ -308,24 +515,21 @@ Name: Sex, dtype: int64</code></pre>
 <p><code>-</code> accuracy를 손으로 계산하면 <span class="math inline">\(\frac{4}{5}=0.8\)</span>.</p>
 <p><code>-</code> 컴퓨터로 accuracy를 계산한다면</p>
 <div id="c54e275e-6260-4e74-9b47-7c1f33ef4b66" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(df.Surv <span class="op">==</span> (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>).<span class="bu">sum</span>()<span class="op">/</span><span class="dv">5</span> <span class="co"># 방법1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(df.Surv <span class="op">==</span> (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>).<span class="bu">sum</span>()<span class="op">/</span><span class="dv">5</span> <span class="co"># 방법1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
 <pre><code>0.8</code></pre>
 </div>
 </div>
 <div id="c888d597-ab06-4056-a5ef-4dbcee789563" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(df.Surv <span class="op">==</span> (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>).mean() <span class="co"># 방법2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(df.Surv <span class="op">==</span> (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>).mean() <span class="co"># 방법2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="34">
 <pre><code>0.8</code></pre>
 </div>
 </div>
 <p><code>#</code></p>
 <p><code>-</code> 실제자료의 accuracy를 구해보자.</p>
-<div id="7b6eee3f-d94c-4912-bef1-4ca0db980cf1" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> pd.read_csv(<span class="st">'./titanic/train.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div id="712c3e52-fb01-4a19-8a61-a18965e551c7" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(tr.Survived <span class="op">==</span> (tr.Sex <span class="op">==</span> <span class="st">'female'</span>)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(tr.Survived <span class="op">==</span> (tr.Sex <span class="op">==</span> <span class="st">'female'</span>)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
 <pre><code>0.7867564534231201</code></pre>
 </div>
@@ -344,7 +548,7 @@ Name: Sex, dtype: int64</code></pre>
 </ul>
 <div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;물론 모든 대회가 이런건 아님, 시험도 수능같은 시험만 있는게 아닌 실기같은것도 있잖아요?</p></li></div><p><code>-</code> 타이타닉의 training set</p>
 <div id="a6dc0209-e416-47c5-a4db-aa9153ab1af8" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tr.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tr.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="39">
 <pre><code>PassengerId                          1
 Survived                             0
@@ -366,7 +570,7 @@ Name: 0, dtype: object</code></pre>
 <li><p>답1: 죽었습니다.</p></li>
 </ul>
 <div id="83d4b234-bec6-42c4-8c6a-65300ffee511" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tr.iloc[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tr.iloc[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="44">
 <pre><code>PassengerId                                                    2
 Survived                                                       1
@@ -389,10 +593,10 @@ Name: 1, dtype: object</code></pre>
 </ul>
 <p><code>-</code> 타이타닉의 test set</p>
 <div id="51c4c3d6-b7b3-4fcb-acfb-3795719654a2" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> pd.read_csv(<span class="st">'./titanic/test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> pd.read_csv(<span class="st">'./titanic/test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="c5233522-3740-4dfd-8038-ed1cc151fe3b" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tst.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tst.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <pre><code>PassengerId                 892
 Pclass                        3
