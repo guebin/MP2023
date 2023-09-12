@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-09-12">
 
-<title>MP2023 - 02wk-003: 타이타닉, 첫 제출</title>
+<title>MP2023 - 02wk-005: 타이타닉, Autogluon</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,22 +160,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
-  <li><a href="#제출방법" id="toc-제출방법" class="nav-link" data-scroll-target="#제출방법">2. 제출방법</a></li>
-  <li><a href="#결과확인" id="toc-결과확인" class="nav-link" data-scroll-target="#결과확인">3. 결과확인</a>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import">2. Import</a></li>
+  <li><a href="#분석의-절차" id="toc-분석의-절차" class="nav-link" data-scroll-target="#분석의-절차">3. 분석의 절차</a>
   <ul class="collapse">
-  <li><a href="#a.-test-답을-모름-제출해야-알-수-있음" id="toc-a.-test-답을-모름-제출해야-알-수-있음" class="nav-link" data-scroll-target="#a.-test-답을-모름-제출해야-알-수-있음">A. test – 답을 모름, 제출해야 알 수 있음</a></li>
-  <li><a href="#b.-train-스스로-풀어보고-채점할-수-있음" id="toc-b.-train-스스로-풀어보고-채점할-수-있음" class="nav-link" data-scroll-target="#b.-train-스스로-풀어보고-채점할-수-있음">B. train – 스스로 풀어보고 채점할 수 있음</a></li>
+  <li><a href="#a.-데이터" id="toc-a.-데이터" class="nav-link" data-scroll-target="#a.-데이터">A. 데이터</a></li>
+  <li><a href="#b.-predictor-생성" id="toc-b.-predictor-생성" class="nav-link" data-scroll-target="#b.-predictor-생성">B. Predictor 생성</a></li>
+  <li><a href="#c.-적합fit" id="toc-c.-적합fit" class="nav-link" data-scroll-target="#c.-적합fit">C. 적합(fit)</a></li>
+  <li><a href="#d.-예측-predict" id="toc-d.-예측-predict" class="nav-link" data-scroll-target="#d.-예측-predict">D. 예측 (predict)</a></li>
   </ul></li>
-  <li><a href="#개념" id="toc-개념" class="nav-link" data-scroll-target="#개념">4. 개념</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02wk-003-타이타닉, 첫 제출.out.ipynb" download="02wk-003-타이타닉, 첫 제출.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02wk-005-타이타닉, Autogluon.out.ipynb" download="02wk-005-타이타닉, Autogluon.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">02wk-003: 타이타닉, 첫 제출</h1>
+<h1 class="title">02wk-005: 타이타닉, Autogluon</h1>
 </div>
 
 
@@ -205,22 +206,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="강의영상" class="level1">
 <h1>1. 강의영상</h1>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zw88937ohvzYyltCjK-_mg&amp;si=gQE8ICf9c9TvFaxy" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zZrOGpLc8spPa9L39RiNhR&amp;si=TFl5m9-VohYT_47L" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
-<section id="제출방법" class="level1">
-<h1>2. 제출방법</h1>
-<p><code>-</code> 제출: Submit Predictions</p>
-<p><code>-</code> 결과확인: Leaderboard</p>
-</section>
-<section id="결과확인" class="level1">
-<h1>3. 결과확인</h1>
-<section id="a.-test-답을-모름-제출해야-알-수-있음" class="level2">
-<h2 class="anchored" data-anchor-id="a.-test-답을-모름-제출해야-알-수-있음">A. test – 답을 모름, 제출해야 알 수 있음</h2>
-<p><code>-</code> 제출결과는 리더보드에서 확인할 수 있음.</p>
-</section>
-<section id="b.-train-스스로-풀어보고-채점할-수-있음" class="level2">
-<h2 class="anchored" data-anchor-id="b.-train-스스로-풀어보고-채점할-수-있음">B. train – 스스로 풀어보고 채점할 수 있음</h2>
-<p><code>-</code> 캐글에서 code <span class="math inline">\(\to\)</span> New Notebook 클릭</p>
+<section id="import" class="level1">
+<h1>2. Import</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This Python 3 environment comes with many helpful analytics libraries installed</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, here's several helpful packages to load</span></span>
@@ -241,57 +230,207 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>/kaggle/input/titanic/train.csv
 /kaggle/input/titanic/test.csv
 /kaggle/input/titanic/gender_submission.csv</code></pre>
-<div id="d8ce487b-aad1-4ec5-bc90-bc254a0425f4" class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>tr<span class="op">=</span>pd.read_csv(<span class="st">"/kaggle/input/titanic/train.csv"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>tst<span class="op">=</span>pd.read_csv(<span class="st">"/kaggle/input/titanic/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="438db173-0810-4140-98cd-65314c5695af" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pip install autogluon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>#</code> 예비학습 – accuracy의 계산</p>
-<div id="838b552c-5ec7-4cd3-8702-51b9625ed536" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77a36c4a-ac65-4270-bb1e-bca688db2eb1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> autogluon.tabular <span class="im">import</span> TabularDataset, TabularPredictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="4d2cee85-51bc-446a-8a03-644913818b62" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'Surv'</span>:[<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>],<span class="st">'Sex'</span>:[<span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'f'</span>,<span class="st">'m'</span>,<span class="st">'m'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="분석의-절차" class="level1">
+<h1>3. 분석의 절차</h1>
+<section id="a.-데이터" class="level2">
+<h2 class="anchored" data-anchor-id="a.-데이터">A. 데이터</h2>
+<p><code>-</code> 비유: 문제를 받아오는 과정으로 비유할 수 있다.</p>
+<div id="7c66df28-7fe6-47de-ba1f-4d1c74976f0f" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> TabularDataset(<span class="st">"/kaggle/input/titanic/train.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> TabularDataset(<span class="st">"/kaggle/input/titanic/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>-</code> Surv 열의 선택</p>
-<div id="6536357c-2939-4f15-822a-e3e4bb9f0cda" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.Surv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<pre><code>0    1
-1    0
-2    1
-3    1
-4    0
-Name: Surv, dtype: int64</code></pre>
-</div>
-</div>
-<p><code>-</code> Sex 열의 선택</p>
-<div id="9f72546b-14c7-4dbf-ac49-642dc103666a" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.Sex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>0    f
-1    m
-2    f
-3    m
-4    m
-Name: Sex, dtype: object</code></pre>
+</section>
+<section id="b.-predictor-생성" class="level2">
+<h2 class="anchored" data-anchor-id="b.-predictor-생성">B. Predictor 생성</h2>
+<p><code>-</code> 비유: 문제를 풀 학생을 생성하는 과정으로 비유할 수 있다.</p>
+<div id="0ba98784-7f27-48dd-9b7f-6c0a738eb56c" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(<span class="st">"Survived"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20230910_162629/"</code></pre>
 </div>
 </div>
-<p><code>-</code> <code>Sex == f</code>이면 생존(1), 그렇지 않으면 사망(0)이라고 예측</p>
-<div id="8ca835df-a89e-4372-9b36-0d4ec6a18d04" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
-<pre><code>0    1
-1    0
-2    1
-3    0
-4    0
-Name: Sex, dtype: int64</code></pre>
+</section>
+<section id="c.-적합fit" class="level2">
+<h2 class="anchored" data-anchor-id="c.-적합fit">C. 적합(fit)</h2>
+<p><code>-</code> 비유: 학생이 공부를 하는 과정으로 비유할 수 있다.</p>
+<p><code>-</code> 학습</p>
+<div id="2ff440a6-2707-4849-8c16-efb51eb4f3b4" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(tr) </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 학생(predictr)에게 문제(tr)를 줘서 학습을 시킴(predictr.fit())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20230910_162629/"
+AutoGluon Version:  0.8.2
+Python Version:     3.10.12
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
+Disk Space Avail:   306.27 GB / 490.57 GB (62.4%)
+Train Data Rows:    891
+Train Data Columns: 11
+Label Column: Survived
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [0, 1]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    126262.11 MB
+    Train Data (Original)  Memory Usage: 0.31 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  result = pd.to_datetime(X, errors="coerce")
+/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  result = pd.to_datetime(X, errors="coerce")
+/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  result = pd.to_datetime(X, errors="coerce")
+/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  result = pd.to_datetime(X, errors="coerce")
+/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+  result = pd.to_datetime(X, errors="coerce")
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+            Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+        Fitting CategoryFeatureGenerator...
+            Fitting CategoryMemoryMinimizeFeatureGenerator...
+        Fitting TextSpecialFeatureGenerator...
+            Fitting BinnedFeatureGenerator...
+            Fitting DropDuplicatesFeatureGenerator...
+        Fitting TextNgramFeatureGenerator...
+            Fitting CountVectorizer for text features: ['Name']
+            CountVectorizer fit with vocabulary size = 8
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', [])        : 2 | ['Age', 'Fare']
+        ('int', [])          : 4 | ['PassengerId', 'Pclass', 'SibSp', 'Parch']
+        ('object', [])       : 4 | ['Sex', 'Ticket', 'Cabin', 'Embarked']
+        ('object', ['text']) : 1 | ['Name']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('category', [])                    : 3 | ['Ticket', 'Cabin', 'Embarked']
+        ('float', [])                       : 2 | ['Age', 'Fare']
+        ('int', [])                         : 4 | ['PassengerId', 'Pclass', 'SibSp', 'Parch']
+        ('int', ['binned', 'text_special']) : 9 | ['Name.char_count', 'Name.word_count', 'Name.capital_ratio', 'Name.lower_ratio', 'Name.special_ratio', ...]
+        ('int', ['bool'])                   : 1 | ['Sex']
+        ('int', ['text_ngram'])             : 9 | ['__nlp__.henry', '__nlp__.john', '__nlp__.master', '__nlp__.miss', '__nlp__.mr', ...]
+    0.2s = Fit runtime
+    11 features in original data used to generate 28 features in processed data.
+    Train Data (Processed) Memory Usage: 0.07 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.2s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+Automatically generating train/validation split with holdout_frac=0.2, Train Rows: 712, Val Rows: 179
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif ...
+    0.6536   = Validation score   (accuracy)
+    0.09s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: KNeighborsDist ...
+    0.6536   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: LightGBMXT ...
+    0.8156   = Validation score   (accuracy)
+    0.2s     = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: LightGBM ...
+    0.8212   = Validation score   (accuracy)
+    0.16s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: RandomForestGini ...
+    0.8156   = Validation score   (accuracy)
+    0.34s    = Training   runtime
+    0.16s    = Validation runtime
+Fitting model: RandomForestEntr ...
+    0.8156   = Validation score   (accuracy)
+    0.53s    = Training   runtime
+    0.09s    = Validation runtime
+Fitting model: CatBoost ...
+    0.8268   = Validation score   (accuracy)
+    0.53s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: ExtraTreesGini ...
+    0.8156   = Validation score   (accuracy)
+    0.85s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: ExtraTreesEntr ...
+    0.8101   = Validation score   (accuracy)
+    0.4s     = Training   runtime
+    0.06s    = Validation runtime
+Fitting model: NeuralNetFastAI ...
+No improvement since epoch 9: early stopping
+    0.8268   = Validation score   (accuracy)
+    1.33s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: XGBoost ...
+    0.8101   = Validation score   (accuracy)
+    0.14s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: NeuralNetTorch ...
+    0.8324   = Validation score   (accuracy)
+    1.49s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: LightGBMLarge ...
+    0.8324   = Validation score   (accuracy)
+    0.42s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.8603   = Validation score   (accuracy)
+    0.22s    = Training   runtime
+    0.0s     = Validation runtime
+AutoGluon training complete, total runtime = 7.58s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20230910_162629/")</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7fa18f4444f0&gt;</code></pre>
 </div>
 </div>
-<p><code>-</code> 결과를 정리하면 아래와 같음</p>
-<div id="6b7f721d-454c-4be7-8a2f-35cafefa72e6" class="cell" data-execution_count="27">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({<span class="st">'real'</span>: df.Surv, <span class="st">'estimate'</span>: (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<p><code>-</code> 리더보드확인 (모의고사 채점)</p>
+<div id="6e513eca-aed5-420d-afca-aca5ce499dc5" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  model  score_val  pred_time_val  fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
+0   WeightedEnsemble_L2   0.860335       0.193071  4.142821                0.000378           0.218161            2       True         14
+1         LightGBMLarge   0.832402       0.003180  0.422871                0.003180           0.422871            1       True         13
+2        NeuralNetTorch   0.832402       0.009243  1.488933                0.009243           1.488933            1       True         12
+3              CatBoost   0.826816       0.003432  0.526762                0.003432           0.526762            1       True          7
+4       NeuralNetFastAI   0.826816       0.007648  1.326021                0.007648           1.326021            1       True         10
+5              LightGBM   0.821229       0.003042  0.157547                0.003042           0.157547            1       True          4
+6            LightGBMXT   0.815642       0.003350  0.197612                0.003350           0.197612            1       True          3
+7        ExtraTreesGini   0.815642       0.050255  0.848478                0.050255           0.848478            1       True          8
+8      RandomForestEntr   0.815642       0.091255  0.525193                0.091255           0.525193            1       True          6
+9      RandomForestGini   0.815642       0.162890  0.340251                0.162890           0.340251            1       True          5
+10              XGBoost   0.810056       0.004424  0.141125                0.004424           0.141125            1       True         11
+11       ExtraTreesEntr   0.810056       0.060458  0.398653                0.060458           0.398653            1       True          9
+12       KNeighborsDist   0.653631       0.001958  0.007848                0.001958           0.007848            1       True          2
+13       KNeighborsUnif   0.653631       0.004457  0.087323                0.004457           0.087323            1       True          1</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -299,35 +438,185 @@ Name: Sex, dtype: int64</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">real</th>
-<th data-quarto-table-cell-role="th">estimate</th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">score_val</th>
+<th data-quarto-table-cell-role="th">pred_time_val</th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">pred_time_val_marginal</th>
+<th data-quarto-table-cell-role="th">fit_time_marginal</th>
+<th data-quarto-table-cell-role="th">stack_level</th>
+<th data-quarto-table-cell-role="th">can_infer</th>
+<th data-quarto-table-cell-role="th">fit_order</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>1</td>
-<td>1</td>
+<td>WeightedEnsemble_L2</td>
+<td>0.860335</td>
+<td>0.193071</td>
+<td>4.142821</td>
+<td>0.000378</td>
+<td>0.218161</td>
+<td>2</td>
+<td>True</td>
+<td>14</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>0</td>
-<td>0</td>
+<td>LightGBMLarge</td>
+<td>0.832402</td>
+<td>0.003180</td>
+<td>0.422871</td>
+<td>0.003180</td>
+<td>0.422871</td>
+<td>1</td>
+<td>True</td>
+<td>13</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
+<td>NeuralNetTorch</td>
+<td>0.832402</td>
+<td>0.009243</td>
+<td>1.488933</td>
+<td>0.009243</td>
+<td>1.488933</td>
 <td>1</td>
-<td>1</td>
+<td>True</td>
+<td>12</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
+<td>CatBoost</td>
+<td>0.826816</td>
+<td>0.003432</td>
+<td>0.526762</td>
+<td>0.003432</td>
+<td>0.526762</td>
 <td>1</td>
-<td>0</td>
+<td>True</td>
+<td>7</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>0</td>
-<td>0</td>
+<td>NeuralNetFastAI</td>
+<td>0.826816</td>
+<td>0.007648</td>
+<td>1.326021</td>
+<td>0.007648</td>
+<td>1.326021</td>
+<td>1</td>
+<td>True</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>LightGBM</td>
+<td>0.821229</td>
+<td>0.003042</td>
+<td>0.157547</td>
+<td>0.003042</td>
+<td>0.157547</td>
+<td>1</td>
+<td>True</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LightGBMXT</td>
+<td>0.815642</td>
+<td>0.003350</td>
+<td>0.197612</td>
+<td>0.003350</td>
+<td>0.197612</td>
+<td>1</td>
+<td>True</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>ExtraTreesGini</td>
+<td>0.815642</td>
+<td>0.050255</td>
+<td>0.848478</td>
+<td>0.050255</td>
+<td>0.848478</td>
+<td>1</td>
+<td>True</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>RandomForestEntr</td>
+<td>0.815642</td>
+<td>0.091255</td>
+<td>0.525193</td>
+<td>0.091255</td>
+<td>0.525193</td>
+<td>1</td>
+<td>True</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>RandomForestGini</td>
+<td>0.815642</td>
+<td>0.162890</td>
+<td>0.340251</td>
+<td>0.162890</td>
+<td>0.340251</td>
+<td>1</td>
+<td>True</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>0.810056</td>
+<td>0.004424</td>
+<td>0.141125</td>
+<td>0.004424</td>
+<td>0.141125</td>
+<td>1</td>
+<td>True</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>ExtraTreesEntr</td>
+<td>0.810056</td>
+<td>0.060458</td>
+<td>0.398653</td>
+<td>0.060458</td>
+<td>0.398653</td>
+<td>1</td>
+<td>True</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>KNeighborsDist</td>
+<td>0.653631</td>
+<td>0.001958</td>
+<td>0.007848</td>
+<td>0.001958</td>
+<td>0.007848</td>
+<td>1</td>
+<td>True</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>KNeighborsUnif</td>
+<td>0.653631</td>
+<td>0.004457</td>
+<td>0.087323</td>
+<td>0.004457</td>
+<td>0.087323</td>
+<td>1</td>
+<td>True</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -335,117 +624,32 @@ Name: Sex, dtype: int64</code></pre>
 </div>
 </div>
 </div>
-<p><code>-</code> accuracy를 손으로 계산하면 <span class="math inline">\(\frac{4}{5}=0.8\)</span>.</p>
-<p><code>-</code> 컴퓨터로 accuracy를 계산한다면</p>
-<div id="c54e275e-6260-4e74-9b47-7c1f33ef4b66" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(df.Surv <span class="op">==</span> (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>).<span class="bu">sum</span>()<span class="op">/</span><span class="dv">5</span> <span class="co"># 방법1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
-<pre><code>0.8</code></pre>
+</section>
+<section id="d.-예측-predict" class="level2">
+<h2 class="anchored" data-anchor-id="d.-예측-predict">D. 예측 (predict)</h2>
+<p><code>-</code> 비유: 학습이후에 문제를 푸는 과정으로 비유할 수 있다.</p>
+<p><code>-</code> training set 을 풀어봄 (predict) <span class="math inline">\(\to\)</span> 점수 확인</p>
+<div id="91daef3c-7a51-48b6-9692-3b68b04df6b9" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(tr.Survived <span class="op">==</span> predictr.predict(tr)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>0.9349046015712682</code></pre>
 </div>
 </div>
-<div id="c888d597-ab06-4056-a5ef-4dbcee789563" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(df.Surv <span class="op">==</span> (df.Sex <span class="op">==</span> <span class="st">'f'</span>)<span class="op">*</span><span class="dv">1</span>).mean() <span class="co"># 방법2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="34">
-<pre><code>0.8</code></pre>
-</div>
-</div>
-<p><code>#</code></p>
-<p><code>-</code> 실제자료의 accuracy를 구해보자.</p>
-<div id="7b6eee3f-d94c-4912-bef1-4ca0db980cf1" class="cell" data-execution_count="35">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> pd.read_csv(<span class="st">'./titanic/train.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="712c3e52-fb01-4a19-8a61-a18965e551c7" class="cell" data-execution_count="36">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(tr.Survived <span class="op">==</span> (tr.Sex <span class="op">==</span> <span class="st">'female'</span>)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="36">
+<div id="e521d63e-3e90-413b-8b3b-89e27bf38b26" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(tr.Survived <span class="op">==</span> (tr.Sex <span class="op">==</span> <span class="st">"female"</span>)).mean() <span class="co"># 예전점수와 비교</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>0.7867564534231201</code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="개념" class="level1 page-columns page-full">
-<h1>4. 개념</h1>
-<p><code>-</code> 캐글대회는 시험과 비슷하다.</p>
-<ul>
-<li>캐글대회를 여는 사람은 보통 (1) 모의고사문제+답 (training set) (2) 실제시험문제 (test set)를 준다.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
-<li>(1)의 자료에서는 문제(X,독립변수,설명변수)와 답(y,종속변수,반응변수)이 함께 주어진다.</li>
-<li>(2)의 자료에서는 문제(X,독립변수,설명변수)만 주어진다.</li>
-<li>우리는 (1)을 이용하여 문제(X,독립변수,설명변수)와 답(y,종속변수,반응변수)사이의 관계를 찾아내는 훈련을 한다.</li>
-<li>그리고 그 훈련이 잘 되었는지를 평가하기 위해서 (2)를 풀어보고 그 결과를 제출한다.</li>
-</ul>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;물론 모든 대회가 이런건 아님, 시험도 수능같은 시험만 있는게 아닌 실기같은것도 있잖아요?</p></li></div><p><code>-</code> 타이타닉의 training set</p>
-<div id="a6dc0209-e416-47c5-a4db-aa9153ab1af8" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>tr.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
-<pre><code>PassengerId                          1
-Survived                             0
-Pclass                               3
-Name           Braund, Mr. Owen Harris
-Sex                               male
-Age                               22.0
-SibSp                                1
-Parch                                0
-Ticket                       A/5 21171
-Fare                              7.25
-Cabin                              NaN
-Embarked                             S
-Name: 0, dtype: object</code></pre>
+<p><code>-</code> test set 을 풀어봄 (predict) <span class="math inline">\(\to\)</span> 점수 확인 하러 캐글에 결과제출</p>
+<div id="fb8b17e6-2738-4e8f-a792-e02cfb025ef2" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tst.assign(Survived <span class="op">=</span> predictr.predict(tst)).loc[:,[<span class="st">'PassengerId'</span>,<span class="st">'Survived'</span>]]<span class="op">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>.to_csv(<span class="st">"autogluon_submission.csv"</span>,index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<ul>
-<li><p>모의고사문제1: Pclass는 3이에요, 그리고 이름은 ‘Braund, Mr.&nbsp;Owen Harris’ 입니다. 성별은 ‘male’ 입니다. 그리고 …. 입니다. 이 사람은 죽었을까요? 살았을까요?</p></li>
-<li><p>답1: 죽었습니다.</p></li>
-</ul>
-<div id="83d4b234-bec6-42c4-8c6a-65300ffee511" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tr.iloc[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
-<pre><code>PassengerId                                                    2
-Survived                                                       1
-Pclass                                                         1
-Name           Cumings, Mrs. John Bradley (Florence Briggs Th...
-Sex                                                       female
-Age                                                         38.0
-SibSp                                                          1
-Parch                                                          0
-Ticket                                                  PC 17599
-Fare                                                     71.2833
-Cabin                                                        C85
-Embarked                                                       C
-Name: 1, dtype: object</code></pre>
-</div>
-</div>
-<ul>
-<li><p>모의고사문제2: Pclass는 1이에요, 그리고 이름은 ‘Cumings, Mrs.&nbsp;John Bradley (Florence Briggs Thayer)’ 입니다. 성별은 ‘female’ 입니다. 그리고 …. 입니다. 이 사람은 죽었을까요? 살았을까요?</p></li>
-<li><p>답2: 살았습니다.</p></li>
-</ul>
-<p><code>-</code> 타이타닉의 test set</p>
-<div id="51c4c3d6-b7b3-4fcb-acfb-3795719654a2" class="cell" data-execution_count="47">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> pd.read_csv(<span class="st">'./titanic/test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="c5233522-3740-4dfd-8038-ed1cc151fe3b" class="cell" data-execution_count="48">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>tst.iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="48">
-<pre><code>PassengerId                 892
-Pclass                        3
-Name           Kelly, Mr. James
-Sex                        male
-Age                        34.5
-SibSp                         0
-Parch                         0
-Ticket                   330911
-Fare                     7.8292
-Cabin                       NaN
-Embarked                      Q
-Name: 0, dtype: object</code></pre>
-</div>
-</div>
-<ul>
-<li><p>실전문제1: Pclass는 3이에요, 그리고 이름은 ‘Kelly, Mr.&nbsp;James’ 입니다. 성별은 ‘male’ 입니다. 그리고 …. 입니다. 이 사람은 죽었을까요? 살았을까요?</p></li>
-<li><p>답1: (속마음: 훈련집합에서 대부분 남자는 죽고 여자는 살았다고 푸니까 대충 78점 정도는 맞던데? 이 사람도 남자니까 죽었다고 하자) 죽었다고 예측하겠습니다.</p></li>
-</ul>
 
 
 </section>
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
