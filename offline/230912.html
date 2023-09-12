@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="최규빈">
+<meta name="dcterms.date" content="2023-09-12">
 
-<title>MP2023 - 기계학습활용 (2023)</title>
+<title>MP2023 - 2023-09-12 – Quarto Blog 만들기</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,40 +100,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -109,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">MP2023</span>
     </a>
   </div>
@@ -120,7 +123,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./offline.html"> 
+    <a class="nav-link" href="../offline.html"> 
 <span class="menu-text"><strong>대면수업</strong></span></a>
   </li>  
 </ul>
@@ -143,25 +146,48 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#꼭-해야할까" id="toc-꼭-해야할까" class="nav-link active" data-scroll-target="#꼭-해야할까">0. 꼭 해야할까?</a></li>
+  <li><a href="#블로그-생성" id="toc-블로그-생성" class="nav-link" data-scroll-target="#블로그-생성">1. 블로그 생성</a></li>
+  <li><a href="#새로운-포스트-생성" id="toc-새로운-포스트-생성" class="nav-link" data-scroll-target="#새로운-포스트-생성">2. 새로운 포스트 생성</a></li>
+  <li><a href="#블로그-설정변경" id="toc-블로그-설정변경" class="nav-link" data-scroll-target="#블로그-설정변경">3. 블로그 설정변경</a></li>
+  <li><a href="#이해" id="toc-이해" class="nav-link" data-scroll-target="#이해">4. 이해</a></li>
+  <li><a href="#추천하는-루틴" id="toc-추천하는-루틴" class="nav-link" data-scroll-target="#추천하는-루틴">5. 추천하는 루틴</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="230912.out.ipynb" download="230912.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">기계학습활용 (2023)</h1>
+<h1 class="title">2023-09-12 – Quarto Blog 만들기</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>최규빈 </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 12, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -170,80 +196,176 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><strong>질문하는 방법</strong></p>
+<section id="꼭-해야할까" class="level1">
+<h1>0. 꼭 해야할까?</h1>
+<p><code>1</code>. <a href="https://www.youtube.com/watch?v=SZcjvjrdomE" class="uri">https://www.youtube.com/watch?v=SZcjvjrdomE</a></p>
 <ul>
-<li>카카오톡: <a href="http://pf.kakao.com/_skxnxdG/chat">질문하러 가기</a> // 학기종료이후 폐쇄함</li>
-<li>이메일: <a href="mailto:guebin@jbnu.ac.kr" class="email">guebin@jbnu.ac.kr</a></li>
-<li>직접방문: 자연과학대학 본관 205호</li>
-<li>Zoom: <em>카카오톡이나 이메일로 미리 시간을 정할 것</em></li>
-<li>LMS쪽지: <a href="https://ieilms.jbnu.ac.kr/" class="uri">https://ieilms.jbnu.ac.kr/</a></li>
+<li>repo도 확인함</li>
+<li>commit 은 거의 기본임</li>
 </ul>
-<p><strong>references</strong></p>
-<p><strong>공지사항</strong></p>
+<p><code>2</code>. <a href="https://www.youtube.com/watch?v=Yc56NpYW1DM&amp;t=23s" class="uri">https://www.youtube.com/watch?v=Yc56NpYW1DM&amp;t=23s</a></p>
 <ul>
-<li>강의영상의 경우 시간이 지나면 고화질로 시청할 수 있습니다. (인코딩중에는 유튜브에서 저화질로 송출됩니다)</li>
-<li><strong>9월7일 대면수업</strong>: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론</li>
+<li>3:00 - 3:40: 깃헙과 블로그가 중요함 / commit 을 빼곡하게, repo 확인</li>
+<li>3:40 - : 블로그</li>
+<li>4:00 - : commit 링크가 없으면 X, 필수라고 해서 넣은 느낌 (영상에서는 필수 아니라고 하지만 반 필수임)</li>
 </ul>
-<p><strong>강의노트</strong></p>
+</section>
+<section id="블로그-생성" class="level1">
+<h1>1. 블로그 생성</h1>
+<p><code>-</code> 깃헙레포지토리로 이동한뒤에 아래의 명령어를 입력:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project <span class="at">--type</span> website <span class="at">--template</span> blog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>위의 명령어를 실행하면 여러가지 설정파일들이 생성된다.</p>
+<p><code>-</code> 블로그 publish</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>-</code> 깃헙으로 이동하여 확인</p>
+<ul>
+<li>window는 자동으로 퍼블리쉬 된다.</li>
+<li>mac에서는 수동으로 gh-pages로 바꿔야함.</li>
+</ul>
+</section>
+<section id="새로운-포스트-생성" class="level1">
+<h1>2. 새로운 포스트 생성</h1>
+<p><code>-</code> 아무 노트북이나 만들어본다. (혹은 이미 만들어진 노트북을 넣어본다.)</p>
+<ul>
+<li>예시1: <a href="https://guebin.github.io/PP2023/" class="uri">https://guebin.github.io/PP2023/</a> 에서 아무거나 다운로드</li>
+<li>예시2: <code>git clone https://github.com/guebin/PP2023.git</code></li>
+</ul>
+<p><code>-</code> 노트북을 posts 폴더에 넣는다.</p>
+<p><code>-</code> 아래를 통하여 preview 이미지를 확인.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>-</code> 퍼블리쉬</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="블로그-설정변경" class="level1">
+<h1>3. 블로그 설정변경</h1>
+<p><code>-</code> <code>index.qmd</code> 메인에 보이는 화면</p>
+<pre><code>---
+title: "기계학습활용 (2023)"
+listing:
+  contents: posts
+  sort: "date"
+  type: table
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: false
+---
+
+**질문하는 방법**
+
+- 카카오톡: [질문하러 가기](http://pf.kakao.com/_skxnxdG/chat) // 학기종료이후 폐쇄함
+- 이메일: &lt;guebin@jbnu.ac.kr&gt;
+- 직접방문: 자연과학대학 본관 205호 
+- Zoom: *카카오톡이나 이메일로 미리 시간을 정할 것*
+- LMS쪽지: &lt;https://ieilms.jbnu.ac.kr/&gt;
+
+**references**
+
+**공지사항** 
+
+- 강의영상의 경우 시간이 지나면 고화질로 시청할 수 있습니다. (인코딩중에는 유튜브에서 저화질로 송출됩니다)
+- **9월7일 대면수업**: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론 
+
+**강의노트** </code></pre>
+<p><code>-</code> <code>_quarto.yml</code></p>
+<pre><code>project:
+  type: website
+
+website:
+  title: "MP2023"
+  navbar:
+    right:
+      - icon: github    
+        href: https://github.com/guebin/MP2023
+      - icon: youtube
+        href: https://www.youtube.com/channel/UCQk9RyBNgXc7ORIsYlOfQrg/playlists?view=50&amp;sort=dd&amp;shelf_id=2
+format:
+  html:
+    theme: cosmo
+    css: styles.css</code></pre>
+<p><code>-</code> posts 폴더에서 <code>_metadata.yml</code></p>
+<pre><code># options specified here will apply to all posts in this folder
+
+# freeze computational output
+# (see https://quarto.org/docs/projects/code-execution.html#freeze)
+execute:
+  freeze: auto  # re-render only when source changes
+
+# Enable banner style title blocks
+title-block-banner: false
+
+notebook-links: true
+cap-location: margin
+reference-location: margin
+citation-location: margin
+
+format:
+  html:
+    toc: true
+    code-fold: false
+    code-line-numbers: false
+    code-copy: true
+  ipynb: default</code></pre>
+<p><code>-</code> 기타 자세한 옵션은 아래에서 뒤져볼 것</p>
+<ul>
+<li>ref: <a href="https://quarto.org/" class="uri">https://quarto.org/</a></li>
+</ul>
+<p><code>-</code> 다른 사람들의 블로그 소개 (설정파일 구경용)</p>
+<ul>
+<li><a href="https://seoyeonc.github.io/sy_hub/" class="uri">https://seoyeonc.github.io/sy_hub/</a></li>
+<li><a href="https://boram-coco.github.io/coco/" class="uri">https://boram-coco.github.io/coco/</a></li>
+<li><a href="https://pinkocto.github.io/Quarto-Blog/" class="uri">https://pinkocto.github.io/Quarto-Blog/</a></li>
+<li><a href="https://pinkocto.github.io/noteda/" class="uri">https://pinkocto.github.io/noteda/</a></li>
+</ul>
+</section>
+<section id="이해" class="level1">
+<h1>4. 이해</h1>
+<p><code>-</code> 아래를 입력</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>폴더내용 확인</li>
+</ul>
+<p><code>-</code> 다시 원래대로 돌아오기</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>-</code> quarto publish 의 역할</p>
+<ul>
+<li><code>.ipynb</code> 파일을 어떠한 규칙에 따라 변환하여 <code>.html</code>파일로 바꿈</li>
+<li>바꾼 파일들을 <code>gh-pages</code>라는 이름의 브랜치로 옮김</li>
+<li><code>gh-pages</code> 브랜치를 github 으로 push</li>
+<li>이후에는 github이 알아서 <code>gh-pages</code>의 내용을 웹이 뿌려줌.</li>
+</ul>
+<p><code>-</code> 블로그가 깨졌을때 대응하는 방법</p>
+<ul>
+<li>gh-pages로 이동하여 모든 파일 및 폴더 삭제</li>
+<li><code>git add .</code>, <code>git commit -m .</code> <code>git push</code>를 순서대로 입력</li>
+<li>다시 main으로 돌아와서 <code>quarto publish --no-prompt</code> 입력</li>
+</ul>
+</section>
+<section id="추천하는-루틴" class="level1">
+<h1>5. 추천하는 루틴</h1>
+<p><code>-</code> 정상적인 상황</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>-</code> 포스트 제목 등, 블로그의 수정사항이 바르게 반영되지 않는 상황</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch gh-pages</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> <span class="pp">*</span> <span class="co"># 윈도우의 경우 수동으로 모든 파일 삭제</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-<th>
-Author
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-listing-date-sort="1693839600000" data-listing-file-modified-sort="1694479627076" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="262" data-listing-title-sort="01wk-001: 캐글소개" data-listing-filename-sort="01wk-001-캐글소개.ipynb">
-<td>
-<span class="listing-date">Sep 5, 2023</span>
-</td>
-<td>
-<a href="./posts/01wk-001-캐글소개.html" class="title listing-title">01wk-001: 캐글소개</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="1693839600000" data-listing-file-modified-sort="1694479627076" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="938" data-listing-title-sort="01wk-002: 타이타닉, 데이터의 이해 (hw 있음)" data-listing-filename-sort="01wk-002-타이타닉, 데이터의 이해.ipynb">
-<td>
-<span class="listing-date">Sep 5, 2023</span>
-</td>
-<td>
-<a href="./posts/01wk-002-타이타닉, 데이터의 이해.html" class="title listing-title">01wk-002: 타이타닉, 데이터의 이해 (hw 있음)</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-<tr data-index="2" data-listing-date-sort="1694444400000" data-listing-file-modified-sort="1694479627076" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="375" data-listing-title-sort="02wk-003: 타이타닉, 첫 제출" data-listing-filename-sort="02wk-003-타이타닉, 첫 제출.ipynb">
-<td>
-<span class="listing-date">Sep 12, 2023</span>
-</td>
-<td>
-<a href="./posts/02wk-003-타이타닉, 첫 제출.html" class="title listing-title">02wk-003: 타이타닉, 첫 제출</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -587,6 +709,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 

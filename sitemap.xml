@@ -2,26 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://guebin.github.io/MP2023/index.html</loc>
-    <lastmod>2023-09-11T23:38:36.593Z</lastmod>
+    <lastmod>2023-09-12T00:47:07.060Z</lastmod>
   </url>
   <url>
-    <loc>https://guebin.github.io/MP2023/offline.html</loc>
-    <lastmod>2023-09-11T23:38:36.593Z</lastmod>
-  </url>
-  <url>
-    <loc>https://guebin.github.io/MP2023/posts/02wk-003-타이타닉, 첫 제출.html</loc>
-    <lastmod>2023-09-11T23:38:36.609Z</lastmod>
-  </url>
-  <url>
-    <loc>https://guebin.github.io/MP2023/posts/01wk-001-캐글소개.html</loc>
-    <lastmod>2023-09-11T23:38:36.609Z</lastmod>
+    <loc>https://guebin.github.io/MP2023/offline/230912.html</loc>
+    <lastmod>2023-09-12T00:47:07.072Z</lastmod>
   </url>
   <url>
     <loc>https://guebin.github.io/MP2023/posts/01wk-002-타이타닉, 데이터의 이해.html</loc>
-    <lastmod>2023-09-11T23:38:36.609Z</lastmod>
+    <lastmod>2023-09-12T00:47:07.076Z</lastmod>
+  </url>
+  <url>
+    <loc>https://guebin.github.io/MP2023/posts/01wk-001-캐글소개.html</loc>
+    <lastmod>2023-09-12T00:47:07.076Z</lastmod>
+  </url>
+  <url>
+    <loc>https://guebin.github.io/MP2023/posts/02wk-003-타이타닉, 첫 제출.html</loc>
+    <lastmod>2023-09-12T00:47:07.076Z</lastmod>
+  </url>
+  <url>
+    <loc>https://guebin.github.io/MP2023/offline.html</loc>
+    <lastmod>2023-09-12T00:47:07.060Z</lastmod>
   </url>
   <url>
     <loc>https://guebin.github.io/MP2023/offline/230907.html</loc>
-    <lastmod>2023-09-11T23:38:36.605Z</lastmod>
+    <lastmod>2023-09-12T00:47:07.072Z</lastmod>
   </url>
 </urlset>
