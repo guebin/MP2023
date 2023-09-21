@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-09-12">
 
-<title>MP2023 - 2023-09-12 – Quarto Blog 만들기</title>
+<title>MP2023 - 2023-09-12 – Anaconda를 이용하여 autogluon 설치하기</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -154,21 +154,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#꼭-해야할까" id="toc-꼭-해야할까" class="nav-link active" data-scroll-target="#꼭-해야할까">0. 꼭 해야할까?</a></li>
-  <li><a href="#블로그-생성" id="toc-블로그-생성" class="nav-link" data-scroll-target="#블로그-생성">1. 블로그 생성</a></li>
-  <li><a href="#새로운-포스트-생성" id="toc-새로운-포스트-생성" class="nav-link" data-scroll-target="#새로운-포스트-생성">2. 새로운 포스트 생성</a></li>
-  <li><a href="#블로그-설정변경" id="toc-블로그-설정변경" class="nav-link" data-scroll-target="#블로그-설정변경">3. 블로그 설정변경</a></li>
-  <li><a href="#이해" id="toc-이해" class="nav-link" data-scroll-target="#이해">4. 이해</a></li>
-  <li><a href="#추천하는-루틴" id="toc-추천하는-루틴" class="nav-link" data-scroll-target="#추천하는-루틴">5. 추천하는 루틴</a></li>
+  <li><a href="#아나콘다-설치" id="toc-아나콘다-설치" class="nav-link active" data-scroll-target="#아나콘다-설치">1. 아나콘다 설치</a></li>
+  <li><a href="#가상환경-mp-생성-activate" id="toc-가상환경-mp-생성-activate" class="nav-link" data-scroll-target="#가상환경-mp-생성-activate">2. 가상환경 <code>mp</code> 생성 + activate</a></li>
+  <li><a href="#autogluon-설치" id="toc-autogluon-설치" class="nav-link" data-scroll-target="#autogluon-설치">3. autogluon 설치</a></li>
+  <li><a href="#jupyterlab-설치-실행" id="toc-jupyterlab-설치-실행" class="nav-link" data-scroll-target="#jupyterlab-설치-실행">4. jupyterlab 설치 + 실행</a></li>
+  <li><a href="#pip-install-vs-conda-install" id="toc-pip-install-vs-conda-install" class="nav-link" data-scroll-target="#pip-install-vs-conda-install">5. <code>pip install</code> vs <code>conda install</code></a></li>
+  <li><a href="#가상환경" id="toc-가상환경" class="nav-link" data-scroll-target="#가상환경">6. 가상환경</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="230912.out.ipynb" download="230912.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="230921.out.ipynb" download="230921.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">2023-09-12 – Quarto Blog 만들기</h1>
+<h1 class="title">2023-09-12 – Anaconda를 이용하여 autogluon 설치하기</h1>
 </div>
 
 
@@ -196,163 +196,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="꼭-해야할까" class="level1">
-<h1>0. 꼭 해야할까?</h1>
-<p><code>1</code>. <a href="https://www.youtube.com/watch?v=SZcjvjrdomE" class="uri">https://www.youtube.com/watch?v=SZcjvjrdomE</a></p>
+<section id="아나콘다-설치" class="level1">
+<h1>1. 아나콘다 설치</h1>
 <ul>
-<li>repo도 확인함</li>
-<li>commit 은 거의 기본임</li>
-</ul>
-<p><code>2</code>. <a href="https://www.youtube.com/watch?v=Yc56NpYW1DM&amp;t=23s" class="uri">https://www.youtube.com/watch?v=Yc56NpYW1DM&amp;t=23s</a></p>
-<ul>
-<li>3:00 - 3:40: 깃헙과 블로그가 중요함 / commit 을 빼곡하게, repo 확인</li>
-<li>3:40 - : 블로그</li>
-<li>4:00 - : commit 링크가 없으면 X, 필수라고 해서 넣은 느낌 (영상에서는 필수 아니라고 하지만 반 필수임)</li>
+<li>아나콘다 설치: <a href="https://www.anaconda.com/download" class="uri">https://www.anaconda.com/download</a></li>
 </ul>
 </section>
-<section id="블로그-생성" class="level1">
-<h1>1. 블로그 생성</h1>
-<p><code>-</code> 깃헙레포지토리로 이동한뒤에 아래의 명령어를 입력:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project <span class="at">--type</span> website <span class="at">--template</span> blog</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>위의 명령어를 실행하면 여러가지 설정파일들이 생성된다.</p>
-<p><code>-</code> 블로그 publish</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> 깃헙으로 이동하여 확인</p>
-<ul>
-<li>window는 자동으로 퍼블리쉬 된다.</li>
-<li>mac에서는 수동으로 gh-pages로 바꿔야함.</li>
-</ul>
+<section id="가상환경-mp-생성-activate" class="level1">
+<h1>2. 가상환경 <code>mp</code> 생성 + activate</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-n</span> mp python=3.10 </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate mp </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="새로운-포스트-생성" class="level1">
-<h1>2. 새로운 포스트 생성</h1>
-<p><code>-</code> 아무 노트북이나 만들어본다. (혹은 이미 만들어진 노트북을 넣어본다.)</p>
-<ul>
-<li>예시1: <a href="https://guebin.github.io/PP2023/" class="uri">https://guebin.github.io/PP2023/</a> 에서 아무거나 다운로드</li>
-<li>예시2: <code>git clone https://github.com/guebin/PP2023.git</code></li>
-</ul>
-<p><code>-</code> 노트북을 posts 폴더에 넣는다.</p>
-<p><code>-</code> 아래를 통하여 preview 이미지를 확인.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> preview </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> 퍼블리쉬</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="autogluon-설치" class="level1">
+<h1>3. autogluon 설치</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge mamba</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge autogluon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="블로그-설정변경" class="level1">
-<h1>3. 블로그 설정변경</h1>
-<p><code>-</code> <code>index.qmd</code> 메인에 보이는 화면</p>
-<pre><code>---
-title: "기계학습활용 (2023)"
-listing:
-  contents: posts
-  sort: "date"
-  type: table
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: false
----
-
-**질문하는 방법**
-
-- 카카오톡: [질문하러 가기](http://pf.kakao.com/_skxnxdG/chat) // 학기종료이후 폐쇄함
-- 이메일: &lt;guebin@jbnu.ac.kr&gt;
-- 직접방문: 자연과학대학 본관 205호 
-- Zoom: *카카오톡이나 이메일로 미리 시간을 정할 것*
-- LMS쪽지: &lt;https://ieilms.jbnu.ac.kr/&gt;
-
-**references**
-
-**공지사항** 
-
-- 강의영상의 경우 시간이 지나면 고화질로 시청할 수 있습니다. (인코딩중에는 유튜브에서 저화질로 송출됩니다)
-- **9월7일 대면수업**: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론 
-
-**강의노트** </code></pre>
-<p><code>-</code> <code>_quarto.yml</code></p>
-<pre><code>project:
-  type: website
-
-website:
-  title: "MP2023"
-  navbar:
-    right:
-      - icon: github    
-        href: https://github.com/guebin/MP2023
-      - icon: youtube
-        href: https://www.youtube.com/channel/UCQk9RyBNgXc7ORIsYlOfQrg/playlists?view=50&amp;sort=dd&amp;shelf_id=2
-format:
-  html:
-    theme: cosmo
-    css: styles.css</code></pre>
-<p><code>-</code> posts 폴더에서 <code>_metadata.yml</code></p>
-<pre><code># options specified here will apply to all posts in this folder
-
-# freeze computational output
-# (see https://quarto.org/docs/projects/code-execution.html#freeze)
-execute:
-  freeze: auto  # re-render only when source changes
-
-# Enable banner style title blocks
-title-block-banner: false
-
-notebook-links: true
-cap-location: margin
-reference-location: margin
-citation-location: margin
-
-format:
-  html:
-    toc: true
-    code-fold: false
-    code-line-numbers: false
-    code-copy: true
-  ipynb: default</code></pre>
-<p><code>-</code> 기타 자세한 옵션은 아래에서 뒤져볼 것</p>
-<ul>
-<li>ref: <a href="https://quarto.org/" class="uri">https://quarto.org/</a></li>
-</ul>
-<p><code>-</code> 다른 사람들의 블로그 소개 (설정파일 구경용)</p>
-<ul>
-<li><a href="https://seoyeonc.github.io/sy_hub/" class="uri">https://seoyeonc.github.io/sy_hub/</a></li>
-<li><a href="https://boram-coco.github.io/coco/" class="uri">https://boram-coco.github.io/coco/</a></li>
-<li><a href="https://pinkocto.github.io/Quarto-Blog/" class="uri">https://pinkocto.github.io/Quarto-Blog/</a></li>
-<li><a href="https://pinkocto.github.io/noteda/" class="uri">https://pinkocto.github.io/noteda/</a></li>
-</ul>
+<section id="jupyterlab-설치-실행" class="level1">
+<h1>4. jupyterlab 설치 + 실행</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge jupyterlab </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">jupyter</span> lab </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="이해" class="level1">
-<h1>4. 이해</h1>
-<p><code>-</code> 아래를 입력</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch gh-pages</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>폴더내용 확인</li>
-</ul>
-<p><code>-</code> 다시 원래대로 돌아오기</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> quarto publish 의 역할</p>
-<ul>
-<li><code>.ipynb</code> 파일을 어떠한 규칙에 따라 변환하여 <code>.html</code>파일로 바꿈</li>
-<li>바꾼 파일들을 <code>gh-pages</code>라는 이름의 브랜치로 옮김</li>
-<li><code>gh-pages</code> 브랜치를 github 으로 push</li>
-<li>이후에는 github이 알아서 <code>gh-pages</code>의 내용을 웹이 뿌려줌.</li>
-</ul>
-<p><code>-</code> 블로그가 깨졌을때 대응하는 방법</p>
-<ul>
-<li>gh-pages로 이동하여 모든 파일 및 폴더 삭제</li>
-<li><code>git add .</code>, <code>git commit -m .</code> <code>git push</code>를 순서대로 입력</li>
-<li>다시 main으로 돌아와서 <code>quarto publish --no-prompt</code> 입력</li>
-</ul>
+<section id="pip-install-vs-conda-install" class="level1">
+<h1>5. <code>pip install</code> vs <code>conda install</code></h1>
+<p><code>-</code> <code>pip</code> vs <code>conda</code></p>
+<ol type="1">
+<li><code>pip</code>은 특정 패키지만 설치, <code>conda</code>는 관련된 패키지를 모두 설치.</li>
+<li><code>pip</code>은 패키지간의 충돌이 발생할 수 있으며 <code>conda</code>는 이러한 충돌이 발생하지 않음.</li>
+<li><code>pip</code>은 최신버전을 설치하는 경향이 있으며 <code>conda</code>는 최신버전보다 약간 낮은 버전이 설치되는 경향이 있음 (최신버전의 경우 호환성여부가 조사되지 않았으므로).</li>
+<li>공식문서에는 <code>pip</code>과 <code>conda</code>를 이용한 설치가 모두 나와있으며, 보통은 <code>conda</code>를 이용하여 설치하는게 좋다. (<a href="https://scikit-learn.org/stable/install.html">scikit-learn</a>, <a href="https://auto.gluon.ai/stable/install.html">autogluon</a>)</li>
+</ol>
 </section>
-<section id="추천하는-루틴" class="level1">
-<h1>5. 추천하는 루틴</h1>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push </span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="가상환경" class="level1 page-columns page-full">
+<h1>6. 가상환경</h1>
+<p><code>-</code> 보통은 가상환경을 따로 만들고 패키지를 설치하는게 좋다.</p>
+<ul>
+<li>하나의 환경에 여러가지 패키지를 동시에 까는 경우, 패키지 숫자가 많아질수록 결국에는 충돌이 일어남.</li>
+<li>따라서 프로젝트별로 가상환경을 분리하여 관련 패키지를 설치하는 것이 좋다.</li>
+</ul>
+<p><code>-</code> 요약</p>
+<ul>
+<li>본인컴퓨터로 작업하는 경우: 아나콘다 or 도커<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>를 이용하여 가상환경에서 작업할 것! 그렇지 않으면 컴퓨터가 더러워짐.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a><br>
+</li>
+<li>아나콘다나 도커를 사용하고 싶지 않다면, 코랩이나 캐글노트북 등 클라우드 컴퓨터에서 작업하는걸 추천</li>
+<li>클라우드 컴퓨터에서 작업하면 본인의 컴퓨터를 정리된 상태로 유지될 수 있다는 장점이 있지만, 새로운 컴퓨터를 할당받을때 마다 <code>autogluon</code>같은 패키지를 계속 설치해야하는 불편함이 있음.</li>
+</ul>
 
 
-</section>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;이건 아직 설명안했어요</p></li><li id="fn2"><p><sup>2</sup>&nbsp;패키지 간의 종속성때문에 결국 고장남</p></li></div></section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
