@@ -135,28 +135,28 @@
   {
     "objectID": "posts/03wk-010.html#a.-데이터",
     "href": "posts/03wk-010.html#a.-데이터",
-    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 회귀분석",
     "section": "A. 데이터",
     "text": "A. 데이터\n\nX = df[['temp','type']] # 독립변수, 설명변수, 피쳐\ny = df[['sales']] # 종속변수, 반응변수, 타겟 \n\n\nX = X.assign(type = [type == 'choco' for type in X.type])"
   },
   {
     "objectID": "posts/03wk-010.html#b.-predictor-생성",
     "href": "posts/03wk-010.html#b.-predictor-생성",
-    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 회귀분석",
     "section": "B. Predictor 생성",
     "text": "B. Predictor 생성\n\npredictr = sklearn.linear_model.LinearRegression() \npredictr \n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegressionLinearRegression()"
   },
   {
     "objectID": "posts/03wk-010.html#c.-학습-fit-learn",
     "href": "posts/03wk-010.html#c.-학습-fit-learn",
-    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 회귀분석",
     "section": "C. 학습 (fit, learn)",
     "text": "C. 학습 (fit, learn)\n\npredictr.fit(X,y)\n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegressionLinearRegression()"
   },
   {
     "objectID": "posts/03wk-010.html#d.-예측-predict",
     "href": "posts/03wk-010.html#d.-예측-predict",
-    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 회귀분석",
     "section": "D. 예측 (predict)",
     "text": "D. 예측 (predict)\n\nyhat = predictr.predict(X)\n\n\nplt.plot(df.temp,df.sales,'o',alpha=0.5)\nplt.plot(df.temp,yhat, 'x',alpha=0.5)\n\n\n\n\n- 어떻게 맞춘거지?\n\\[\\textup{아이스크림 판매량} = 40 + \\textup{아이스크림종류} \\times (-20) + \\textup{온도} \\times 2.5 + \\textup{오차(운)}\\]\n\npredictr.coef_, predictr.intercept_\n\n(array([[  2.52239574, -20.54021854]]), array([40.16877158]))\n\n\n- 온도가 -2이고, type이 초코라면? 예측값은?\n\nXnew = pd.DataFrame({'temp':[-2.0],'type':[1]})\nXnew\n\n\n\n\n\n\n\n\ntemp\ntype\n\n\n\n\n0\n-2.0\n1\n\n\n\n\n\n\n\n\npredictr.predict(Xnew)\n\narray([[14.58376156]])\n\n\n- 온도가 -2이고, type이 바닐라라면? 예측값은?\n\nXnew = pd.DataFrame({'temp':[-2.0],'type':[0]})\nXnew\n\n\n\n\n\n\n\n\ntemp\ntype\n\n\n\n\n0\n-2.0\n0\n\n\n\n\n\n\n\n\npredictr.predict(Xnew)\n\narray([[35.1239801]])"
   },
@@ -331,56 +331,56 @@
   {
     "objectID": "posts/03wk-009.html#a.-질문",
     "href": "posts/03wk-009.html#a.-질문",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "A. 질문",
     "text": "A. 질문\n- 질문: 기온이 \\(x=-2.0\\) 일 때 아이스크림을 얼마정도 판다고 보는게 타당할까?"
   },
   {
     "objectID": "posts/03wk-009.html#b.-답1",
     "href": "posts/03wk-009.html#b.-답1",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "B. 답1",
     "text": "B. 답1\n- \\(x=-2.0\\) 근처의 데이터를 살펴보자.\n\ndf[(-3.0 &lt; df.temp) & (df.temp &lt; -1.0)]\n\n\n\n\n\n\n\n\ntemp\nsales\n\n\n\n\n3\n-1.3\n17.673681\n\n\n\n\n\n\n\n대충 17.67 근처이지 않을까?.."
   },
   {
     "objectID": "posts/03wk-009.html#c.-답2",
     "href": "posts/03wk-009.html#c.-답2",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "C. 답2",
     "text": "C. 답2\n- 자료를 바탕으로 그림을 그려보자.\n\nplt.plot(df.temp,df.sales,'o')\nplt.plot([-2.0],[17.67],'x')\n\n\n\n\n\n저거 보다 못팔 것 같은데?"
   },
   {
     "objectID": "posts/03wk-009.html#d.-아이디어",
     "href": "posts/03wk-009.html#d.-아이디어",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "D. 아이디어",
     "text": "D. 아이디어\n- 선을 기가 막히게 그어서 추세선을 만들고, 그 추세선 위의 점으로 예측하자.\n- 속마음: 사실 추세선을 알고 있긴함\n\nplt.plot(df.temp,df.sales,'o')\nplt.plot(df.temp,20+df.temp*2.5,'--')\n\n\n\n\n- 사실 \\(y=20+2.5x\\) 라는 추세선을 그으면 된다는 것을 알고 있다.\n- 그래서 \\(x=-2\\) 이라면 \\(y=20-2.5\\times 2=15\\) 라고 보는게 합리적임. (물론 오차가 있을 수 있지만 그건 운이므로 어쩔수 없는것임, 랜덤으로 뭐가 나올지까지 맞출 수는 없음1)\n1 만약 그렇다면 랜덤이 아니겠지?- 그렇지만 우리는 사실 \\(20, 2.5\\) 라는 숫자를 모른다. (이 숫자만 안다면 임의의 \\(x\\)에 대한 \\(y\\)값을 알 수 있을 텐데…)\n- 게임셋팅\n\n원래게임: 임의의 \\(x\\)에 대하여 합리적인 \\(y\\)를 잘 찾는 게임\n변형된게임: \\(20,2.5\\) 라는 숫자를 잘 찾는 게임, 즉 데이터를 보고 최대한 \\(y_i \\approx ax_i+b\\) 이 되도록 \\(a,b\\)를 잘 선택하는 게임"
   },
   {
     "objectID": "posts/03wk-009.html#a.-데이터",
     "href": "posts/03wk-009.html#a.-데이터",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "A. 데이터",
     "text": "A. 데이터\n- 변수 설정\n\nX = df[['temp']] # 독립변수, 설명변수, 피쳐\ny = df[['sales']] # 종속변수, 반응변수, 타겟 \n\n\nplt.plot(X,y,'o')\n\n\n\n\n- 질문: 기온이 \\(x=-2.0\\) 일 때 아이스크림을 얼마정도 판다고 보는게 타당할까?\n\ndf[(-3.0 &lt; df.temp) & (df.temp &lt; -1.0)]\n\n\n\n\n\n\n\n\ntemp\nsales\n\n\n\n\n3\n-1.3\n17.673681\n\n\n\n\n\n\n\n- 답1: 대충 17.67 근처이지 않을까?..\n- 답2: 17.67 보다 작지 않을까?\n- 아이디어: 추세선을 그리고 거기서 예측해보면 어떨까?\n- 데이터를 학습하여 추세선을 적절히 그릴 수 있고, 그려진 추세선으로 예측까지 해줄수 있는 아이(predictor)를 만들자."
   },
   {
     "objectID": "posts/03wk-009.html#b.-predictor-생성",
     "href": "posts/03wk-009.html#b.-predictor-생성",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "B. Predictor 생성",
     "text": "B. Predictor 생성\n\npredictr = sklearn.linear_model.LinearRegression() \npredictr \n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegressionLinearRegression()\n\n\n\nlinear regression 이라는 방법으로 추세선을 만들고 예측하는 아이(predictor)를 만드는 코드"
   },
   {
     "objectID": "posts/03wk-009.html#c.-학습-fit-learn",
     "href": "posts/03wk-009.html#c.-학습-fit-learn",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "C. 학습 (fit, learn)",
     "text": "C. 학습 (fit, learn)\n\npredictr.fit(X,y)\n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegressionLinearRegression()"
   },
   {
     "objectID": "posts/03wk-009.html#d.-예측-predict",
     "href": "posts/03wk-009.html#d.-예측-predict",
-    "title": "03wk-009: 아이스크림, 선형회귀",
+    "title": "03wk-009: 아이스크림, 회귀분석",
     "section": "D. 예측 (predict)",
     "text": "D. 예측 (predict)\n- Predictor: 데이터를 살펴보니 원래 true는 이럴것 같아요\n\nyhat = predictr.predict(X)\n\n\nplt.plot(X,y,'o',alpha=0.5)\nplt.plot(X,yhat, 'o--',alpha=0.5)\n\n\n\n\n- 최규빈: 저런 추세선을 그었다면, \\(y=ax+b\\) 꼴의 식에서 \\(a\\), \\(b\\)를 적당한 값으로 찾았다는 의미인데, 그 값은 어디있지?\n- Predictor: 아래에 있어요\n\na = predictr.coef_,\nb = predictr.intercept_\n\n\na,b\n\n((array([[2.51561216]]),), array([19.66713127]))\n\n\n- 최규빈: 확인해보자..\n\n(df.temp * 2.51561216 + 19.66713127)[:5], yhat[:5]\n\n(0     9.353121\n 1    10.359366\n 2    12.120295\n 3    16.396835\n 4    18.409325\n Name: temp, dtype: float64,\n array([[ 9.35312141],\n        [10.35936628],\n        [12.12029479],\n        [16.39683546],\n        [18.40932519]]))\n\n\n- 새로운 데이터 \\(x=-2\\) 에 대한 예측 (1) – 수식위주로\n\n2.51561216*(-2) + 19.66713127\n\n14.635906949999999\n\n\n\nplt.plot(X,y,'o',alpha=0.5)\nplt.plot(X,yhat,'--',alpha=0.5)\nplt.plot([-2],[14.635906949999999],'xr')\n\n\n\n\n- 새로운 데이터 \\(x=-2\\) 에 대한 예측 (2) – 코드위주로 (\\(\\star\\))\n\nXnew = pd.DataFrame({'temp':[-2.0]})\n\n\npredictr.predict(Xnew)\n\narray([[14.63590695]])\n\n\n\nplt.plot(X,y,'o',alpha=0.5)\nplt.plot(X,yhat,'--',alpha=0.5)\nplt.plot(Xnew, predictr.predict(Xnew),'xr')"
   },
