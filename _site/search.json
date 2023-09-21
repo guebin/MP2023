@@ -135,28 +135,28 @@
   {
     "objectID": "posts/03wk-010.html#a.-데이터",
     "href": "posts/03wk-010.html#a.-데이터",
-    "title": "03wk-010: 아이스크림2, 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
     "section": "A. 데이터",
     "text": "A. 데이터\n\nX = df[['temp','type']] # 독립변수, 설명변수, 피쳐\ny = df[['sales']] # 종속변수, 반응변수, 타겟 \n\n\nX = X.assign(type = [type == 'choco' for type in X.type])"
   },
   {
     "objectID": "posts/03wk-010.html#b.-predictor-생성",
     "href": "posts/03wk-010.html#b.-predictor-생성",
-    "title": "03wk-010: 아이스크림2, 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
     "section": "B. Predictor 생성",
     "text": "B. Predictor 생성\n\npredictr = sklearn.linear_model.LinearRegression() \npredictr \n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegressionLinearRegression()"
   },
   {
     "objectID": "posts/03wk-010.html#c.-학습-fit-learn",
     "href": "posts/03wk-010.html#c.-학습-fit-learn",
-    "title": "03wk-010: 아이스크림2, 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
     "section": "C. 학습 (fit, learn)",
     "text": "C. 학습 (fit, learn)\n\npredictr.fit(X,y)\n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.LinearRegressionLinearRegression()"
   },
   {
     "objectID": "posts/03wk-010.html#d.-예측-predict",
     "href": "posts/03wk-010.html#d.-예측-predict",
-    "title": "03wk-010: 아이스크림2, 선형회귀",
+    "title": "03wk-010: 아이스크림(초코/바닐라), 선형회귀",
     "section": "D. 예측 (predict)",
     "text": "D. 예측 (predict)\n\nyhat = predictr.predict(X)\n\n\nplt.plot(df.temp,df.sales,'o',alpha=0.5)\nplt.plot(df.temp,yhat, 'x',alpha=0.5)\n\n\n\n\n- 어떻게 맞춘거지?\n\\[\\textup{아이스크림 판매량} = 40 + \\textup{아이스크림종류} \\times (-20) + \\textup{온도} \\times 2.5 + \\textup{오차(운)}\\]\n\npredictr.coef_, predictr.intercept_\n\n(array([[  2.52239574, -20.54021854]]), array([40.16877158]))\n\n\n- 온도가 -2이고, type이 초코라면? 예측값은?\n\nXnew = pd.DataFrame({'temp':[-2.0],'type':[1]})\nXnew\n\n\n\n\n\n\n\n\ntemp\ntype\n\n\n\n\n0\n-2.0\n1\n\n\n\n\n\n\n\n\npredictr.predict(Xnew)\n\narray([[14.58376156]])\n\n\n- 온도가 -2이고, type이 바닐라라면? 예측값은?\n\nXnew = pd.DataFrame({'temp':[-2.0],'type':[0]})\nXnew\n\n\n\n\n\n\n\n\ntemp\ntype\n\n\n\n\n0\n-2.0\n0\n\n\n\n\n\n\n\n\npredictr.predict(Xnew)\n\narray([[35.1239801]])"
   },
