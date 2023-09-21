@@ -474,12 +474,5 @@
     "title": "2023-09-12 – Anaconda를 이용하여 autogluon 설치하기",
     "section": "",
     "text": "1. 아나콘다 설치\n\n아나콘다 설치: https://www.anaconda.com/download\n\n\n\n2. 가상환경 mp 생성 + activate\nconda create -n mp python=3.10 \nconda activate mp \n\n\n3. autogluon 설치\nconda install -c conda-forge mamba\nmamba install -c conda-forge autogluon\n\n\n4. jupyterlab 설치 + 실행\nconda install -c conda-forge jupyterlab \njupyter lab \n\n\n5. pip install vs conda install\n- pip vs conda\n\npip은 특정 패키지만 설치, conda는 관련된 패키지를 모두 설치.\npip은 패키지간의 충돌이 발생할 수 있으며 conda는 이러한 충돌이 발생하지 않음.\npip은 최신버전을 설치하는 경향이 있으며 conda는 최신버전보다 약간 낮은 버전이 설치되는 경향이 있음 (최신버전의 경우 호환성여부가 조사되지 않았으므로).\n공식문서에는 pip과 conda를 이용한 설치가 모두 나와있으며, 보통은 conda를 이용하여 설치하는게 좋다. (scikit-learn, autogluon)\n\n\n\n6. 가상환경\n- 보통은 가상환경을 따로 만들고 패키지를 설치하는게 좋다.\n\n하나의 환경에 여러가지 패키지를 동시에 까는 경우, 패키지 숫자가 많아질수록 결국에는 충돌이 일어남.\n따라서 프로젝트별로 가상환경을 분리하여 관련 패키지를 설치하는 것이 좋다.\n\n- 요약\n\n본인컴퓨터로 작업하는 경우: 아나콘다 or 도커1를 이용하여 가상환경에서 작업할 것! 그렇지 않으면 컴퓨터가 더러워짐.2\n\n아나콘다나 도커를 사용하고 싶지 않다면, 코랩이나 캐글노트북 등 클라우드 컴퓨터에서 작업하는걸 추천\n클라우드 컴퓨터에서 작업하면 본인의 컴퓨터를 정리된 상태로 유지될 수 있다는 장점이 있지만, 새로운 컴퓨터를 할당받을때 마다 autogluon같은 패키지를 계속 설치해야하는 불편함이 있음.\n\n\n\n1 이건 아직 설명안했어요2 패키지 간의 종속성때문에 결국 고장남"
-  },
-  {
-    "objectID": "posts/03wk-009.html",
-    "href": "posts/03wk-009.html",
-    "title": "03wk-009: 아이스크림, 선형회귀",
-    "section": "",
-    "text": "{{video: https://youtu.be/playlist?list=PLQqh36zP38-zXz97SY6e8rSowprIvDS2a&si=Y8pI1Dyw2VaYeayc }}"
   }
 ]
