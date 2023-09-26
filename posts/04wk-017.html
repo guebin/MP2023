@@ -400,7 +400,7 @@ dtype: float64</code></pre>
 </div>
 </div>
 <div id="bfb9c298-553e-40aa-9b18-223fc99f63f6" class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>predictr.predict_proba(X)[:<span class="dv">5</span>].<span class="bu">round</span>(<span class="dv">3</span>) <span class="co"># 왼쪽이 죽을확률, 오른쪽이 생존할확률</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>predictr.predict_proba(X)[:<span class="dv">5</span>].<span class="bu">round</span>(<span class="dv">3</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="50">
 <pre><code>array([[0.999, 0.001],
        [0.903, 0.097],
@@ -409,9 +409,6 @@ dtype: float64</code></pre>
        [0.021, 0.979]])</code></pre>
 </div>
 </div>
-<ul>
-<li>죽거나 살기 때문에 한쪽만 알아도 무방</li>
-</ul>
 
 
 </section>
