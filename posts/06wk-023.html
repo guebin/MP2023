@@ -215,10 +215,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="강의영상" class="level1">
 <h1>1. 강의영상</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zGKU5F7QCeZKr1JwxH9kaA&amp;si=b3K7BTRNt8xd0olh" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="cell-3" class="cell" data-execution_count="2">
+<div id="cell-4" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
@@ -227,12 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data" class="level1">
 <h1>3. Data</h1>
-<div id="cell-5" class="cell" data-execution_count="6">
+<div id="cell-6" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/guebin/MP2023/main/posts/employment_multicollinearity.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'employment_score'</span>] <span class="op">=</span> df.gpa <span class="op">*</span> <span class="fl">1.0</span> <span class="op">+</span> df.toeic<span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100</span> <span class="op">+</span> np.random.randn(<span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cell-6" class="cell" data-execution_count="7">
+<div id="cell-7" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -541,7 +542,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="true" class="level1">
 <h1>4. True</h1>
 <p><code>-</code> 신이라면 (=데이터가 만들어진 비밀을 알고 있다면) 아래와 같이 했을 것</p>
-<div id="cell-9" class="cell" data-execution_count="15">
+<div id="cell-10" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic'</span>]</span>
@@ -558,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>-</code> 평가</p>
-<div id="cell-11" class="cell" data-execution_count="19">
+<div id="cell-12" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train_score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test_score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -570,7 +571,7 @@ test_score: 0.9127</code></pre>
 <section id="baseline" class="level1">
 <h1>5. Baseline</h1>
 <p><code>-</code> 모든 변수를 활용하여 회귀모형으로 적합 <span class="math inline">\(\to\)</span> 최악의 결과</p>
-<div id="cell-14" class="cell" data-execution_count="20">
+<div id="cell-15" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -587,7 +588,7 @@ test_score: 0.9127</code></pre>
 </div>
 </div>
 <p><code>-</code> 평가</p>
-<div id="cell-16" class="cell" data-execution_count="21">
+<div id="cell-17" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train_score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test_score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -599,7 +600,7 @@ test_score: 0.1171</code></pre>
 <section id="ridge" class="level1">
 <h1>6. Ridge</h1>
 <p><code>-</code> 통계학자에게 자문: 이럴 경우 Ridge를 사용하면 됩니다..</p>
-<div id="cell-19" class="cell" data-execution_count="28">
+<div id="cell-20" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -616,7 +617,7 @@ test_score: 0.1171</code></pre>
 </div>
 </div>
 <p><code>-</code> 평가: 안되는데요..??</p>
-<div id="cell-21" class="cell" data-execution_count="27">
+<div id="cell-22" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train_score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test_score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -625,7 +626,7 @@ test_score: 0.1173</code></pre>
 </div>
 </div>
 <p><code>-</code> 하이퍼 파라메터 튜닝 <span class="math inline">\(\alpha=1.5\)</span></p>
-<div id="cell-23" class="cell" data-execution_count="29">
+<div id="cell-24" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -649,7 +650,7 @@ test_score: 0.1174</code></pre>
 <li>조금 나아진것 같기도?</li>
 </ul>
 <p><code>-</code> 하이퍼 파라메터 튜닝 <span class="math inline">\(\alpha=5e8\)</span></p>
-<div id="cell-26" class="cell" data-execution_count="36">
+<div id="cell-27" class="cell" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -686,7 +687,7 @@ test_score: 0.7438</code></pre>
 <li><code>toeic_coef</code> + … + <code>toeic499_coef</code> <span class="math inline">\(\approx\)</span> 0.01 이라면</li>
 </ul>
 <p>대충 맞는 답이다.</p>
-<div id="cell-34" class="cell" data-execution_count="38">
+<div id="cell-35" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -706,7 +707,7 @@ test_score: 0.7438</code></pre>
 test_score: 0.1171</code></pre>
 </div>
 </div>
-<div id="cell-35" class="cell" data-execution_count="45">
+<div id="cell-36" class="cell" data-execution_count="45">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>s<span class="op">=</span> pd.Series(predictr.coef_)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>s.index <span class="op">=</span> X.columns</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>s[<span class="dv">1</span>:].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -715,7 +716,7 @@ test_score: 0.1171</code></pre>
 </div>
 </div>
 <p><code>-</code> 그런데 사실 저 <code>0.01</code>이라는 값은 몇개의 계수만 있어도 만들 수 있다. (toeic2와 toeic3에 해당하는 계수)</p>
-<div id="cell-37" class="cell" data-execution_count="55">
+<div id="cell-38" class="cell" data-execution_count="55">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>s[<span class="st">'toeic2'</span>]<span class="op">+</span>s[<span class="st">'toeic3'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="55">
 <pre><code>0.010142832986793252</code></pre>
@@ -731,7 +732,7 @@ test_score: 0.1171</code></pre>
 <li>이러한 패널티를 줄 경우 결과적으로 0.01의 값이 “동일하게 나누어져서” 나오는 값(=<span class="math inline">\(\frac{1}{100}\frac{1}{501}\)</span>)이 계수값으로 추정된다. (왜? – 요건 정확하게 이해하는게 사실 지금은 힘듬)</li>
 </ul>
 <p><code>-</code> 잘 적용된 Ridge의 결과를 보면 아래와 같이 계수값이 저장되어 있음.</p>
-<div id="cell-43" class="cell" data-execution_count="57">
+<div id="cell-44" class="cell" data-execution_count="57">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -751,7 +752,7 @@ test_score: 0.1171</code></pre>
 test_score: 0.7438</code></pre>
 </div>
 </div>
-<div id="cell-44" class="cell" data-execution_count="69">
+<div id="cell-45" class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series(predictr.coef_)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>s.index <span class="op">=</span> X.columns</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -770,7 +771,7 @@ toeic499    0.000019
 Length: 502, dtype: float64</code></pre>
 </div>
 </div>
-<div id="cell-45" class="cell" data-execution_count="64">
+<div id="cell-46" class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.01</span><span class="op">/</span><span class="dv">501</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>1.9960079840319362e-05</code></pre>
@@ -783,7 +784,7 @@ Length: 502, dtype: float64</code></pre>
 <section id="c.-alpha에-따른-계수값-변화" class="level2">
 <h2 class="anchored" data-anchor-id="c.-alpha에-따른-계수값-변화">C. <span class="math inline">\(\alpha\)</span>에 따른 계수값 변화</h2>
 <p><code>-</code> 여러개의 predictor 학습</p>
-<div id="cell-51" class="cell" data-execution_count="74">
+<div id="cell-52" class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -799,13 +800,13 @@ Length: 502, dtype: float64</code></pre>
 <span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">## step4 -- pass </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>-</code> 계수값 시각화</p>
-<div id="cell-53" class="cell" data-execution_count="88">
+<div id="cell-54" class="cell" data-execution_count="88">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>predictrs[<span class="dv">0</span>].alpha</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="88">
 <pre><code>500.0</code></pre>
 </div>
 </div>
-<div id="cell-54" class="cell" data-execution_count="94">
+<div id="cell-55" class="cell" data-execution_count="94">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt.plot(predictrs[<span class="dv">0</span>].coef_[<span class="dv">1</span>:],label<span class="op">=</span><span class="vs">r'$\alpha$=</span><span class="sc">{}</span><span class="vs">'</span>.<span class="bu">format</span>(predictrs[<span class="dv">0</span>].alpha))</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>plt.plot(predictrs[<span class="dv">3</span>].coef_[<span class="dv">1</span>:],label<span class="op">=</span><span class="vs">r'$\alpha$=</span><span class="sc">{}</span><span class="vs">'</span>.<span class="bu">format</span>(predictrs[<span class="dv">1</span>].alpha))</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -816,7 +817,7 @@ Length: 502, dtype: float64</code></pre>
 <p><img src="06wk-023_files/figure-html/cell-22-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div id="cell-55" class="cell" data-execution_count="95">
+<div id="cell-56" class="cell" data-execution_count="95">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.plot(predictrs[<span class="dv">3</span>].coef_[<span class="dv">1</span>:],label<span class="op">=</span><span class="vs">r'$\alpha$=</span><span class="sc">{}</span><span class="vs">'</span>.<span class="bu">format</span>(predictrs[<span class="dv">3</span>].alpha))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>plt.plot(predictrs[<span class="dv">5</span>].coef_[<span class="dv">1</span>:],label<span class="op">=</span><span class="vs">r'$\alpha$=</span><span class="sc">{}</span><span class="vs">'</span>.<span class="bu">format</span>(predictrs[<span class="dv">5</span>].alpha))</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -827,7 +828,7 @@ Length: 502, dtype: float64</code></pre>
 <p><img src="06wk-023_files/figure-html/cell-23-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div id="cell-56" class="cell" data-execution_count="96">
+<div id="cell-57" class="cell" data-execution_count="96">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt.plot(predictrs[<span class="dv">5</span>].coef_[<span class="dv">1</span>:],label<span class="op">=</span><span class="vs">r'$\alpha$=</span><span class="sc">{}</span><span class="vs">'</span>.<span class="bu">format</span>(predictrs[<span class="dv">5</span>].alpha))</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plt.plot(predictrs[<span class="op">-</span><span class="dv">1</span>].coef_[<span class="dv">1</span>:],label<span class="op">=</span><span class="vs">r'$\alpha$=</span><span class="sc">{}</span><span class="vs">'</span>.<span class="bu">format</span>(predictrs[<span class="op">-</span><span class="dv">1</span>].alpha))</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -839,7 +840,7 @@ Length: 502, dtype: float64</code></pre>
 </div>
 </div>
 <p><code>-</code> 직관: 마지막 predictor의 계수값을 살펴보자.</p>
-<div id="cell-58" class="cell" data-execution_count="105">
+<div id="cell-59" class="cell" data-execution_count="105">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>predictrs[<span class="op">-</span><span class="dv">1</span>].coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="105">
 <pre><code>array([1.10421248e-06, 1.89938091e-05, 1.77768343e-05, 1.82118332e-05,
@@ -975,7 +976,7 @@ Length: 502, dtype: float64</code></pre>
 <li>모든 변수는 대략 2e-5(<span class="math inline">\(\approx \frac{1}{100}\frac{1}{501}\)</span>)정도 만큼 똑같이 중요하다고 생각된다.</li>
 <li>고급: 살짝 1/(100*501)보다 전체적으로 값이 작아보이는데, 이는 기분탓이 아님 (Ridge 특징)</li>
 </ul>
-<div id="cell-60" class="cell" data-execution_count="107">
+<div id="cell-61" class="cell" data-execution_count="107">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="op">/</span><span class="dv">100</span><span class="op">*</span><span class="dv">1</span><span class="op">/</span><span class="dv">501</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="107">
 <pre><code>1.9960079840319362e-05</code></pre>
@@ -985,7 +986,7 @@ Length: 502, dtype: float64</code></pre>
 <section id="d.-alpha에-따른-실험내용-정리" class="level2">
 <h2 class="anchored" data-anchor-id="d.-alpha에-따른-실험내용-정리">D. <span class="math inline">\(\alpha\)</span>에 따른 실험내용 정리</h2>
 <p><code>-</code> 예비개념: L2-penalty는 그냥 대충 분산같은것..</p>
-<div id="cell-63" class="cell" data-execution_count="278">
+<div id="cell-64" class="cell" data-execution_count="278">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.randn(<span class="dv">5</span>)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>l2_penalty <span class="op">=</span> (x<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>l2_penalty, <span class="dv">5</span><span class="op">*</span>(x.var()<span class="op">+</span>(x.mean()<span class="op">**</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -998,7 +999,7 @@ Length: 502, dtype: float64</code></pre>
 <li>크게 느낀것: 계수들의 값이 점점 비슷해짐 –&gt; 계수들의 값들을 모아서 분산을 구하면 작아진다는 의미 –&gt; L2-penalty 가 작아진다는 의미</li>
 <li>미묘하게 느껴지는 점: <code>toeic</code>, 그리고 <code>toeic0~toeic499</code> 까지의 계수총합은 0.01이 되어야 하는데, 그 총합이 미묘하게 작어지는 느낌.</li>
 </ul>
-<div id="cell-65" class="cell" data-execution_count="304">
+<div id="cell-66" class="cell" data-execution_count="304">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> predictr <span class="kw">in</span> predictrs: </span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'alpha=</span><span class="sc">{</span>predictr<span class="sc">.</span>alpha<span class="sc">:.2e}</span><span class="ch">\t</span><span class="ss">'</span></span>
@@ -1017,7 +1018,7 @@ alpha=5.00e+08  l2_penalty=0.000000 sum(toeic_coefs)=0.0095 test_score=0.7438</c
 </div>
 </div>
 <p><code>-</code> L2-penalty의 느낌은 대충 아래와 같이 분산으로 이해해도 무방</p>
-<div id="cell-67" class="cell" data-execution_count="308">
+<div id="cell-68" class="cell" data-execution_count="308">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> predictr <span class="kw">in</span> predictrs: </span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'alpha=</span><span class="sc">{</span>predictr<span class="sc">.</span>alpha<span class="sc">:.2e}</span><span class="ch">\t</span><span class="ss">'</span></span>
@@ -1038,7 +1039,7 @@ alpha=5.00e+08  var(coefs)=0.000000 sum(toeic_coefs)=0.0095 test_score=0.7438</c
 </section>
 <section id="e.-alpha가-크다고-무조건-좋은건-아니다." class="level2">
 <h2 class="anchored" data-anchor-id="e.-alpha가-크다고-무조건-좋은건-아니다.">E. <span class="math inline">\(\alpha\)</span>가 크다고 무조건 좋은건 아니다.</h2>
-<div id="cell-69" class="cell" data-execution_count="316">
+<div id="cell-70" class="cell" data-execution_count="316">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
@@ -1054,7 +1055,7 @@ alpha=5.00e+08  var(coefs)=0.000000 sum(toeic_coefs)=0.0095 test_score=0.7438</c
 <style>#sk-container-id-17 {color: black;}#sk-container-id-17 pre{padding: 0;}#sk-container-id-17 div.sk-toggleable {background-color: white;}#sk-container-id-17 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-17 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-17 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-17 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-17 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-17 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-17 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-17 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-17 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-17 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-17 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-17 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-17 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-17 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-17 div.sk-item {position: relative;z-index: 1;}#sk-container-id-17 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-17 div.sk-item::before, #sk-container-id-17 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-17 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-17 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-17 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-17 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-17 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-17 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-17 div.sk-label-container {text-align: center;}#sk-container-id-17 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-17 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-17" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Ridge(alpha=1000000000000.0)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" checked=""><label for="sk-estimator-id-17" class="sk-toggleable__label sk-toggleable__label-arrow">Ridge</label><div class="sk-toggleable__content"><pre>Ridge(alpha=1000000000000.0)</pre></div></div></div></div></div>
 </div>
 </div>
-<div id="cell-70" class="cell" data-execution_count="317">
+<div id="cell-71" class="cell" data-execution_count="317">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train_score=</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test_score=</span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1062,7 +1063,7 @@ alpha=5.00e+08  var(coefs)=0.000000 sum(toeic_coefs)=0.0095 test_score=0.7438</c
 test_score=0.0140</code></pre>
 </div>
 </div>
-<div id="cell-71" class="cell" data-execution_count="322">
+<div id="cell-72" class="cell" data-execution_count="322">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>predictr.coef_[<span class="dv">1</span>:].<span class="bu">sum</span>() <span class="co"># 이 값이 0.01이어야 하는데, 많이 작아짐</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="322">
 <pre><code>0.00012585319204891574</code></pre>
