@@ -984,55 +984,90 @@ Length: 502, dtype: float64</code></pre>
 </section>
 <section id="d.-alpha에-따른-실험내용-정리" class="level2">
 <h2 class="anchored" data-anchor-id="d.-alpha에-따른-실험내용-정리">D. <span class="math inline">\(\alpha\)</span>에 따른 실험내용 정리</h2>
-<p><code>-</code> 예비개념:</p>
-<div id="cell-63" class="cell" data-execution_count="256">
+<p><code>-</code> 예비개념: L2-penalty는 그냥 대충 분산같은것..</p>
+<div id="cell-63" class="cell" data-execution_count="278">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.randn(<span class="dv">5</span>)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>l2_penalty <span class="op">=</span> (x<span class="op">**</span><span class="dv">2</span>).<span class="bu">sum</span>()</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>l2_penalty, <span class="dv">5</span><span class="op">*</span>(x.var()<span class="op">+</span>(x.mean()<span class="op">**</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="256">
-<pre><code>(4.1587176408305195, 4.1587176408305195)</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="278">
+<pre><code>(7.084638326878741, 7.084638326878739)</code></pre>
 </div>
 </div>
-<p><code>-</code> <span class="math inline">\(\alpha\)</span>에 대한 실험결과</p>
-<div id="cell-65" class="cell" data-execution_count="259">
+<p><code>-</code> <span class="math inline">\(\alpha\)</span>가 커질수록 생기는 일</p>
+<ul>
+<li>크게 느낀것: 계수들의 값이 점점 비슷해짐 –&gt; 계수들의 값들을 모아서 분산을 구하면 작아진다는 의미 –&gt; L2-penalty 가 작아진다는 의미</li>
+<li>미묘하게 느껴지는 점: <code>toeic</code>, 그리고 <code>toeic0~toeic499</code> 까지의 계수총합은 0.01이 되어야 하는데, 그 총합이 미묘하게 작어지는 느낌.</li>
+</ul>
+<div id="cell-65" class="cell" data-execution_count="304">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> predictr <span class="kw">in</span> predictrs: </span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'alpha = </span><span class="sc">{</span>predictr<span class="sc">.</span>alpha<span class="sc">:.2e}</span><span class="ch">\t</span><span class="ss">'</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'L2-panelty= </span><span class="sc">{</span>(predictr.coef_<span class="op">**</span><span class="dv">2</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">'</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'sum(toeic_coefs) = </span><span class="sc">{</span>predictr<span class="sc">.</span>coef_[<span class="dv">1</span>:]<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">'</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'test_score = </span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'alpha=</span><span class="sc">{</span>predictr<span class="sc">.</span>alpha<span class="sc">:.2e}</span><span class="ch">\t</span><span class="ss">'</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'l2_penalty=</span><span class="sc">{</span>((predictr.coef_)<span class="op">**</span><span class="dv">2</span>)<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.6f}</span><span class="ch">\t</span><span class="ss">'</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'sum(toeic_coefs)=</span><span class="sc">{</span>((predictr.coef_[<span class="dv">1</span>:]))<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">'</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'test_score=</span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span></span>
 <span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>alpha = 5.00e+02    L2-panelty= 0.0467  sum(toeic_coefs) = 0.0103   test_score = 0.2026
-alpha = 5.00e+03    L2-panelty= 0.0217  sum(toeic_coefs) = 0.0102   test_score = 0.4638
-alpha = 5.00e+04    L2-panelty= 0.0033  sum(toeic_coefs) = 0.0099   test_score = 0.6889
-alpha = 5.00e+05    L2-panelty= 0.0001  sum(toeic_coefs) = 0.0099   test_score = 0.7407
-alpha = 5.00e+06    L2-panelty= 0.0000  sum(toeic_coefs) = 0.0099   test_score = 0.7447
-alpha = 5.00e+07    L2-panelty= 0.0000  sum(toeic_coefs) = 0.0098   test_score = 0.7450
-alpha = 5.00e+08    L2-panelty= 0.0000  sum(toeic_coefs) = 0.0095   test_score = 0.7438</code></pre>
+<pre><code>alpha=5.00e+02  l2_penalty=0.046715 sum(toeic_coefs)=0.0103 test_score=0.2026
+alpha=5.00e+03  l2_penalty=0.021683 sum(toeic_coefs)=0.0102 test_score=0.4638
+alpha=5.00e+04  l2_penalty=0.003263 sum(toeic_coefs)=0.0099 test_score=0.6889
+alpha=5.00e+05  l2_penalty=0.000109 sum(toeic_coefs)=0.0099 test_score=0.7407
+alpha=5.00e+06  l2_penalty=0.000002 sum(toeic_coefs)=0.0099 test_score=0.7447
+alpha=5.00e+07  l2_penalty=0.000000 sum(toeic_coefs)=0.0098 test_score=0.7450
+alpha=5.00e+08  l2_penalty=0.000000 sum(toeic_coefs)=0.0095 test_score=0.7438</code></pre>
 </div>
 </div>
-<div id="cell-66" class="cell" data-execution_count="260">
+<p><code>-</code> L2-penalty의 느낌은 대충 아래와 같이 분산으로 이해해도 무방</p>
+<div id="cell-67" class="cell" data-execution_count="308">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> predictr <span class="kw">in</span> predictrs: </span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'alpha = </span><span class="sc">{</span>predictr<span class="sc">.</span>alpha<span class="sc">:.2e}</span><span class="ch">\t</span><span class="ss">'</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'501*var(toeic_coefs)= </span><span class="sc">{</span><span class="dv">501</span><span class="op">*</span>(predictr.coef_.var()) <span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">'</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'sum(toeic_coefs) = </span><span class="sc">{</span>predictr<span class="sc">.</span>coef_[<span class="dv">1</span>:]<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">'</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'test_score = </span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'alpha=</span><span class="sc">{</span>predictr<span class="sc">.</span>alpha<span class="sc">:.2e}</span><span class="ch">\t</span><span class="ss">'</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'var(coefs)=</span><span class="sc">{</span>(predictr.coef_)<span class="sc">.</span>var()<span class="op">*</span><span class="dv">501</span><span class="sc">:.6f}</span><span class="ch">\t</span><span class="ss">'</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'sum(toeic_coefs)=</span><span class="sc">{</span>((predictr.coef_[<span class="dv">1</span>:]))<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.4f}</span><span class="ch">\t</span><span class="ss">'</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f'test_score=</span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span></span>
 <span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>alpha = 5.00e+02    501*var(toeic_coefs)= 0.0466    sum(toeic_coefs) = 0.0103   test_score = 0.2026
-alpha = 5.00e+03    501*var(toeic_coefs)= 0.0216    sum(toeic_coefs) = 0.0102   test_score = 0.4638
-alpha = 5.00e+04    501*var(toeic_coefs)= 0.0033    sum(toeic_coefs) = 0.0099   test_score = 0.6889
-alpha = 5.00e+05    501*var(toeic_coefs)= 0.0001    sum(toeic_coefs) = 0.0099   test_score = 0.7407
-alpha = 5.00e+06    501*var(toeic_coefs)= 0.0000    sum(toeic_coefs) = 0.0099   test_score = 0.7447
-alpha = 5.00e+07    501*var(toeic_coefs)= 0.0000    sum(toeic_coefs) = 0.0098   test_score = 0.7450
-alpha = 5.00e+08    501*var(toeic_coefs)= 0.0000    sum(toeic_coefs) = 0.0095   test_score = 0.7438</code></pre>
+<pre><code>alpha=5.00e+02  var(coefs)=0.046618 sum(toeic_coefs)=0.0103 test_score=0.2026
+alpha=5.00e+03  var(coefs)=0.021638 sum(toeic_coefs)=0.0102 test_score=0.4638
+alpha=5.00e+04  var(coefs)=0.003256 sum(toeic_coefs)=0.0099 test_score=0.6889
+alpha=5.00e+05  var(coefs)=0.000109 sum(toeic_coefs)=0.0099 test_score=0.7407
+alpha=5.00e+06  var(coefs)=0.000001 sum(toeic_coefs)=0.0099 test_score=0.7447
+alpha=5.00e+07  var(coefs)=0.000000 sum(toeic_coefs)=0.0098 test_score=0.7450
+alpha=5.00e+08  var(coefs)=0.000000 sum(toeic_coefs)=0.0095 test_score=0.7438</code></pre>
 </div>
 </div>
 </section>
 <section id="e.-alpha가-크다고-무조건-좋은건-아니다." class="level2">
 <h2 class="anchored" data-anchor-id="e.-alpha가-크다고-무조건-좋은건-아니다.">E. <span class="math inline">\(\alpha\)</span>가 크다고 무조건 좋은건 아니다.</h2>
+<div id="cell-69" class="cell" data-execution_count="316">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 --- toeic, gpa 만 남기고 나머지 변수를 삭제</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train.loc[:,<span class="st">'employment_score'</span>]</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test.loc[:,<span class="st">'gpa'</span>:<span class="st">'toeic499'</span>]</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>yy <span class="op">=</span> df_test.loc[:,<span class="st">'employment_score'</span>]</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co">## step2</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.Ridge(alpha<span class="op">=</span><span class="fl">1e12</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="co">## step3 </span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="co">## step4 -- pass </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="316">
+<style>#sk-container-id-17 {color: black;}#sk-container-id-17 pre{padding: 0;}#sk-container-id-17 div.sk-toggleable {background-color: white;}#sk-container-id-17 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-17 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-17 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-17 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-17 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-17 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-17 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-17 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-17 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-17 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-17 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-17 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-17 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-17 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-17 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-17 div.sk-item {position: relative;z-index: 1;}#sk-container-id-17 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-17 div.sk-item::before, #sk-container-id-17 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-17 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-17 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-17 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-17 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-17 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-17 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-17 div.sk-label-container {text-align: center;}#sk-container-id-17 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-17 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-17" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>Ridge(alpha=1000000000000.0)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-17" type="checkbox" checked=""><label for="sk-estimator-id-17" class="sk-toggleable__label sk-toggleable__label-arrow">Ridge</label><div class="sk-toggleable__content"><pre>Ridge(alpha=1000000000000.0)</pre></div></div></div></div></div>
+</div>
+</div>
+<div id="cell-70" class="cell" data-execution_count="317">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train_score=</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test_score=</span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>train_score=0.0191
+test_score=0.0140</code></pre>
+</div>
+</div>
+<div id="cell-71" class="cell" data-execution_count="322">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>predictr.coef_[<span class="dv">1</span>:].<span class="bu">sum</span>() <span class="co"># 이 값이 0.01이어야 하는데, 많이 작아짐</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="322">
+<pre><code>0.00012585319204891574</code></pre>
+</div>
+</div>
 
 
 </section>
