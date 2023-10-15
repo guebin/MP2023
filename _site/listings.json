@@ -1,0 +1,42 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/06wk-026.html",
+      "/posts/06wk-025.html",
+      "/posts/06wk-024.html",
+      "/posts/06wk-023.html",
+      "/posts/06wk-022.html",
+      "/posts/05wk-021.html",
+      "/posts/05wk-020.html",
+      "/posts/05wk-019.html",
+      "/posts/04wk-018.html",
+      "/posts/04wk-017.html",
+      "/posts/04wk-016.html",
+      "/posts/04wk-015.html",
+      "/posts/04wk-014.html",
+      "/posts/03wk-013.html",
+      "/posts/03wk-012.html",
+      "/posts/03wk-011.html",
+      "/posts/03wk-010.html",
+      "/posts/03wk-009.html",
+      "/posts/02wk-008.html",
+      "/posts/02wk-007.html",
+      "/posts/02wk-006.html",
+      "/posts/02wk-005.html",
+      "/posts/02wk-004.html",
+      "/posts/02wk-003.html",
+      "/posts/01wk-002.html",
+      "/posts/01wk-001.html"
+    ]
+  },
+  {
+    "listing": "/offline.html",
+    "items": [
+      "/offline/230926.html",
+      "/offline/230921.html",
+      "/offline/230912.html",
+      "/offline/230907.html"
+    ]
+  }
+]
