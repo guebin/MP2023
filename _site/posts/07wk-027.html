@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="최규빈">
-<meta name="dcterms.date" content="2023-10-16">
+<meta name="dcterms.date" content="2023-10-17">
 
-<title>MP2023 - 07wk-027: 체중감량, 교호작용</title>
+<title>MP2023 - 07wk-027: 아이스크림(이상치) / 회귀분석</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -75,8 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,8 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -164,8 +160,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
   <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports">2. Imports</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">3. Data</a></li>
-  <li><a href="#분석1" id="toc-분석1" class="nav-link" data-scroll-target="#분석1">4. 분석1</a></li>
-  <li><a href="#분석2" id="toc-분석2" class="nav-link" data-scroll-target="#분석2">5. 분석2</a></li>
+  <li><a href="#분석" id="toc-분석" class="nav-link" data-scroll-target="#분석">4. 분석</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">5. Discussion</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="07wk-027.out.ipynb" download="07wk-027.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -174,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">07wk-027: 체중감량, 교호작용</h1>
+<h1 class="title">07wk-027: 아이스크림(이상치) / 회귀분석</h1>
 </div>
 
 
@@ -191,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 16, 2023</p>
+      <p class="date">October 17, 2023</p>
     </div>
   </div>
   
@@ -204,113 +200,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="강의영상" class="level1">
 <h1>1. 강의영상</h1>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="????"></video></div>
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="183d0665-f3a8-4945-9454-75da15083048" class="cell" data-tags="[]" data-execution_count="5">
+<div id="7c609bde-2e0a-4dd6-b155-4516b4a03e95" class="cell" data-tags="[]" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.linear_model </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.tree</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.model_selection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.linear_model</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data" class="level1">
 <h1>3. Data</h1>
-<div id="683edec5-6a74-4085-a650-9764c9aa9b17" class="cell" data-tags="[]" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># # 데이터 크기 설정</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># n = 10000</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># # 무작위로 복용 여부와 운동량을 생성</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Supplement = np.random.choice([True, False], n)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercise = np.random.choice([False, True], n)</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># # 체중 감량 여부를 계산 (이 부분은 수정하지 않습니다)</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># # 연속형 변수 생성</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Weight_Loss = np.where(</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#     (~Supplement &amp; (~Exercise)),</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#     np.random.normal(loc=0, scale=1, size=n),  # 낮은 운동량에서 체중 감량</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     np.where(</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#         (Supplement &amp; (Exercise)),</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#         np.random.normal(loc=15.00, scale=1, size=n),  # 높은 운동량에서 체중 감량</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#         np.where(</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co">#             (~Supplement &amp; (Exercise)),</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co">#             np.random.normal(loc=5.00, scale=1, size=n),  # 낮은 운동량에서 체중 증가</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co">#             np.random.normal(loc=0.5, scale=1, size=n)   # 높은 운동량에서 체중 증가</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#         )</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co"># )</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># # 데이터프레임 생성</span></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># df = pd.DataFrame({</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Supplement': Supplement,</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Exercise': Exercise,</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co">#     'Weight_Loss': Weight_Loss</span></span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="co"># })</span></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/main/posts/weightloss.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="5dff8ead-e270-4c83-8429-3ca06296f184" class="cell" data-tags="[]" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.pivot_table(index<span class="op">=</span><span class="st">'Supplement'</span>,columns<span class="op">=</span><span class="st">'Exercise'</span>,values<span class="op">=</span><span class="st">'Weight_Loss'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Exercise</th>
-<th data-quarto-table-cell-role="th">False</th>
-<th data-quarto-table-cell-role="th">True</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Supplement</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">False</td>
-<td>0.021673</td>
-<td>4.991314</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">True</td>
-<td>0.497573</td>
-<td>14.966363</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p><code>-</code> 운동과 체중감량보조제를 병행하면 시너지가 나는 것 같음</p>
-</section>
-<section id="분석1" class="level1">
-<h1>4. 분석1</h1>
-<p><code>-</code> 분석1: 모형을 아래와 같이 본다.</p>
-<ul>
-<li><span class="math inline">\({\bf X}\)</span>: <code>Supplement</code>, <code>Exercise</code></li>
-<li><span class="math inline">\({\bf y}\)</span>: <code>Weight_Loss</code></li>
-</ul>
-<div id="20f4811e-feaa-423d-a936-3de0e8df88fe" class="cell" data-tags="[]" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'Supplement'</span>,<span class="st">'Exercise'</span>]]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Weight_Loss'</span>]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step3</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="aa6af09f-9aba-4568-9659-7c3a9532f25d" class="cell" data-tags="[]" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df.assign(yhat <span class="op">=</span> yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="790d4112-d91e-4e27-a7c8-4d4b1d7df6d4" class="cell" data-tags="[]" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:<span class="dv">100</span>,<span class="dv">3</span>].to_numpy()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>temp.sort()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ice_sales <span class="op">=</span> <span class="dv">10</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">0.5</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ice_sales[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'ice_sales'</span>:ice_sales})</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
 <div>
 
 
@@ -318,305 +228,214 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Supplement</th>
-<th data-quarto-table-cell-role="th">Exercise</th>
-<th data-quarto-table-cell-role="th">Weight_Loss</th>
-<th data-quarto-table-cell-role="th">yhat</th>
+<th data-quarto-table-cell-role="th">temp</th>
+<th data-quarto-table-cell-role="th">ice_sales</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>False</td>
-<td>False</td>
-<td>-0.877103</td>
-<td>-2.373106</td>
+<td>-4.1</td>
+<td>200.000000</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>True</td>
-<td>False</td>
-<td>1.604542</td>
-<td>2.845934</td>
+<td>-3.7</td>
+<td>9.234175</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>True</td>
-<td>True</td>
-<td>13.824148</td>
-<td>12.593598</td>
+<td>-3.0</td>
+<td>9.642778</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>True</td>
-<td>True</td>
-<td>13.004505</td>
-<td>12.593598</td>
+<td>-1.3</td>
+<td>9.657894</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>True</td>
-<td>True</td>
-<td>13.701128</td>
-<td>12.593598</td>
+<td>-0.5</td>
+<td>9.987787</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">95</td>
+<td>12.4</td>
+<td>17.508688</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">96</td>
+<td>13.4</td>
+<td>17.105376</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">97</td>
+<td>14.7</td>
+<td>17.164930</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>15.0</td>
+<td>18.555388</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">99</td>
+<td>15.2</td>
+<td>18.787014</td>
+</tr>
+</tbody>
+</table>
+
+<p>100 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="70b2b626-48a7-4283-b1a3-df18c635d6b8" class="cell" data-tags="[]" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp,df_train.ice_sales,<span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="07wk-027_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>상상: 온도가 -4.1인 지점에서 “썰매축제”가 열렸다고 가정하자. 그래서 사람이 갑자기 많이 왔음. 그래서 아이스크림이 많이 팔렸음.</li>
+</ul>
+</section>
+<section id="분석" class="level1">
+<h1>4. 분석</h1>
+<p><code>-</code> 선형회귀로 적합</p>
+<div id="39ef575f" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>X,y <span class="op">=</span> df_train[[<span class="st">'temp'</span>]], df_train[<span class="st">'ice_sales'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>df_train[<span class="st">'ice_sales_hat'</span>] <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>-</code> 시각화</p>
+<div id="47ca9790" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(df_train.temp,df_train.ice_sales,'o')</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># plt.plot(df_train.temp,df_train.ice_sales_hat,'--')</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp[<span class="dv">1</span>:],df_train.ice_sales[<span class="dv">1</span>:],<span class="st">'o'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp[<span class="dv">1</span>:],df_train.ice_sales_hat[<span class="dv">1</span>:],<span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="07wk-027_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p><code>-</code> 새로운 unseen data를 가정, 데이터는 온도가 12.5~18 에 걸쳐있다고 가정한다.</p>
+<div id="df894368" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">temp</th>
+<th data-quarto-table-cell-role="th">ice_sales</th>
+<th data-quarto-table-cell-role="th">ice_sales_hat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-4.1</td>
+<td>200.000000</td>
+<td>20.989373</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-3.7</td>
+<td>9.234175</td>
+<td>20.731457</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-3.0</td>
+<td>9.642778</td>
+<td>20.280103</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-1.3</td>
+<td>9.657894</td>
+<td>19.183959</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-0.5</td>
+<td>9.987787</td>
+<td>18.668126</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
 <td>...</td>
 <td>...</td>
 <td>...</td>
-<td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">9995</td>
-<td>True</td>
-<td>False</td>
-<td>1.558841</td>
-<td>2.845934</td>
+<td data-quarto-table-cell-role="th">95</td>
+<td>12.4</td>
+<td>17.508688</td>
+<td>10.350324</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9996</td>
-<td>False</td>
-<td>False</td>
-<td>-0.217816</td>
-<td>-2.373106</td>
+<td data-quarto-table-cell-role="th">96</td>
+<td>13.4</td>
+<td>17.105376</td>
+<td>9.705533</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">9997</td>
-<td>False</td>
-<td>True</td>
-<td>4.072701</td>
-<td>7.374557</td>
+<td data-quarto-table-cell-role="th">97</td>
+<td>14.7</td>
+<td>17.164930</td>
+<td>8.867305</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9998</td>
-<td>True</td>
-<td>False</td>
-<td>-0.253796</td>
-<td>2.845934</td>
+<td data-quarto-table-cell-role="th">98</td>
+<td>15.0</td>
+<td>18.555388</td>
+<td>8.673867</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">9999</td>
-<td>False</td>
-<td>False</td>
-<td>-1.399092</td>
-<td>-2.373106</td>
+<td data-quarto-table-cell-role="th">99</td>
+<td>15.2</td>
+<td>18.787014</td>
+<td>8.544909</td>
 </tr>
 </tbody>
 </table>
 
-<p>10000 rows × 4 columns</p>
+<p>100 rows × 3 columns</p>
 </div>
 </div>
 </div>
-<div id="5ea6e8b9-253f-4822-b1dc-9a6bbdba8a44" class="cell" data-tags="[]" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.assign(yhat <span class="op">=</span> yhat).pivot_table(index<span class="op">=</span><span class="st">'Supplement'</span>,columns<span class="op">=</span><span class="st">'Exercise'</span>,values<span class="op">=</span><span class="st">'yhat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Exercise</th>
-<th data-quarto-table-cell-role="th">False</th>
-<th data-quarto-table-cell-role="th">True</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Supplement</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">False</td>
-<td>-2.373106</td>
-<td>7.374557</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">True</td>
-<td>2.845934</td>
-<td>12.593598</td>
-</tr>
-</tbody>
-</table>
-
+<div id="1125c38f" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:np.linspace(<span class="fl">12.5</span>,<span class="dv">18</span>,<span class="dv">50</span>)})</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'ice_sales_hat'</span>] <span class="op">=</span> predictr.predict(XX)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp[<span class="dv">1</span>:],df_train.ice_sales[<span class="dv">1</span>:],<span class="st">'o'</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp[<span class="dv">1</span>:],df_train.ice_sales_hat[<span class="dv">1</span>:],<span class="st">'--'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.temp,df_test.ice_sales_hat,<span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="07wk-027_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-</div>
-<div id="3b79e844-8262-40b5-8b7c-2690a8752a1b" class="cell" data-tags="[]" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>predictr.score(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>0.8208414124769221</code></pre>
-</div>
-</div>
-</section>
-<section id="분석2" class="level1">
-<h1>5. 분석2</h1>
-<p><code>-</code> 모형을 아래와 같이 본다.</p>
 <ul>
-<li><span class="math inline">\({\bf X}\)</span>: <code>Supplement</code>, <code>Exercise</code>, <code>Supplement</code> <span class="math inline">\(\times\)</span> <code>Exercise</code></li>
-<li><span class="math inline">\({\bf y}\)</span>: <code>Weight_Loss</code></li>
+<li>온도가 올라갈수록 아이스크림 판매량은 줄어든다는 해석 (더 온도가 올라간다면 판매량이 음수가 나올 수도 있겠음 )</li>
+<li>저 정도의 아웃라이어는 모형에서 제외하는게 타당하지 않나? (하지만 저러한 아웃라이어가 데이터의 가치가 있을 수도 있음. 그런데 또 데이터의 가치가 있는지 얺는지는 어떻게 판단하지?)</li>
 </ul>
-<blockquote class="blockquote">
-<p>Note: 기본적인 운동의 효과 및 보조제의 효과는 각각 <code>Supplement</code>, <code>Exercise</code> 로 적합하고 운동과 보조제의 시너지는 <code>Supplement</code><span class="math inline">\(\times\)</span><code>Exercise</code> 로 적합한다.</p>
-</blockquote>
-<div id="05bd377e-7ff4-4069-8993-2b667e12b157" class="cell" data-tags="[]" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.assign(Supp_Exer <span class="op">=</span> df.Supplement <span class="op">*</span> df.Exercise).drop([<span class="st">'Weight_Loss'</span>],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'Weight_Loss'</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 -- pass </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#---# </span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="a8bc2507-3219-4fd4-aebd-c40ed13fcbe4" class="cell" data-tags="[]" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.assign(yhat <span class="op">=</span> yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Supplement</th>
-<th data-quarto-table-cell-role="th">Exercise</th>
-<th data-quarto-table-cell-role="th">Weight_Loss</th>
-<th data-quarto-table-cell-role="th">yhat</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>False</td>
-<td>False</td>
-<td>-0.877103</td>
-<td>0.021673</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>True</td>
-<td>False</td>
-<td>1.604542</td>
-<td>0.497573</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>True</td>
-<td>True</td>
-<td>13.824148</td>
-<td>14.966363</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>True</td>
-<td>True</td>
-<td>13.004505</td>
-<td>14.966363</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>True</td>
-<td>True</td>
-<td>13.701128</td>
-<td>14.966363</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9995</td>
-<td>True</td>
-<td>False</td>
-<td>1.558841</td>
-<td>0.497573</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9996</td>
-<td>False</td>
-<td>False</td>
-<td>-0.217816</td>
-<td>0.021673</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9997</td>
-<td>False</td>
-<td>True</td>
-<td>4.072701</td>
-<td>4.991314</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9998</td>
-<td>True</td>
-<td>False</td>
-<td>-0.253796</td>
-<td>0.497573</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">9999</td>
-<td>False</td>
-<td>False</td>
-<td>-1.399092</td>
-<td>0.021673</td>
-</tr>
-</tbody>
-</table>
-
-<p>10000 rows × 4 columns</p>
-</div>
-</div>
-</div>
-<div id="67db7f47-ee0d-429a-b7eb-c475b0f71c6a" class="cell" data-tags="[]" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df.assign(yhat <span class="op">=</span> yhat).pivot_table(index<span class="op">=</span><span class="st">'Supplement'</span>,columns<span class="op">=</span><span class="st">'Exercise'</span>,values<span class="op">=</span><span class="st">'yhat'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Exercise</th>
-<th data-quarto-table-cell-role="th">False</th>
-<th data-quarto-table-cell-role="th">True</th>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">Supplement</th>
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">False</td>
-<td>0.021673</td>
-<td>4.991314</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">True</td>
-<td>0.497573</td>
-<td>14.966363</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div id="3688ed66-2879-4dcd-bd0e-bd0d0f8e4196" class="cell" data-tags="[]" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>predictr.score(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>0.9727754257714795</code></pre>
-</div>
-</div>
+</section>
+<section id="discussion" class="level1">
+<h1>5. Discussion</h1>
+<p><code>-</code> 딱히 정답이 없음..</p>
 
 
 </section>
@@ -969,7 +788,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
-<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
