@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="최규빈">
-<meta name="dcterms.date" content="2023-10-16">
+<meta name="dcterms.date" content="2023-10-17">
 
-<title>MP2023 - 07wk-030: 아이스크림(교호작용), 선형회귀</title>
+<title>MP2023 - 07wk-030: 아이스크림(교호작용) / 선형회귀</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,9 +163,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
   <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports">2. Imports</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">3. Data</a></li>
-  <li><a href="#분석1" id="toc-분석1" class="nav-link" data-scroll-target="#분석1">4. 분석1</a></li>
-  <li><a href="#분석2" id="toc-분석2" class="nav-link" data-scroll-target="#분석2">5. 분석2</a></li>
+  <li><a href="#예비학습" id="toc-예비학습" class="nav-link" data-scroll-target="#예비학습">3. 예비학습</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">4. Data</a></li>
+  <li><a href="#분석1" id="toc-분석1" class="nav-link" data-scroll-target="#분석1">5. 분석1</a></li>
+  <li><a href="#분석2" id="toc-분석2" class="nav-link" data-scroll-target="#분석2">6. 분석2</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="07wk-030.out.ipynb" download="07wk-030.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -174,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">07wk-030: 아이스크림(교호작용), 선형회귀</h1>
+<h1 class="title">07wk-030: 아이스크림(교호작용) / 선형회귀</h1>
 </div>
 
 
@@ -191,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 16, 2023</p>
+      <p class="date">October 17, 2023</p>
     </div>
   </div>
   
@@ -208,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="183d0665-f3a8-4945-9454-75da15083048" class="cell" data-tags="[]" data-execution_count="3">
+<div id="183d0665-f3a8-4945-9454-75da15083048" class="cell" data-tags="[]" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
@@ -217,36 +218,165 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.model_selection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="data" class="level1">
-<h1>3. Data</h1>
-<div id="683edec5-6a74-4085-a650-9764c9aa9b17" class="cell" data-tags="[]" data-execution_count="60">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">3</span>].to_numpy()[:<span class="dv">100</span>]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>temp.sort()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>choco <span class="op">=</span> <span class="dv">40</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">2.0</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>)<span class="op">*</span><span class="dv">3</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>vanilla <span class="op">=</span> <span class="dv">60</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">5.0</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>)<span class="op">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="예비학습" class="level1">
+<h1>3. 예비학습</h1>
+<div id="d6d785a8-3f05-496a-be9e-776f107e3fd6" class="cell" data-tags="[]" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'X1'</span>:[<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>],<span class="st">'X2'</span>:[<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'A'</span>,<span class="st">'C'</span>]})</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">X1</th>
+<th data-quarto-table-cell-role="th">X2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>B</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4</td>
+<td>A</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>C</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<div id="5dff8ead-e270-4c83-8429-3ca06296f184" class="cell" data-tags="[]" data-execution_count="61">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.plot(temp,choco,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'choco'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.plot(temp,vanilla,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'vanilla'</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="61">
-<pre><code>&lt;matplotlib.legend.Legend at 0x7fd05e5ded40&gt;</code></pre>
 </div>
-<div class="cell-output cell-output-display">
-<p><img src="07wk-030_files/figure-html/cell-4-output-2.png" class="img-fluid"></p>
+</div>
+<div id="748d15ad" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.get_dummies(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">X1</th>
+<th data-quarto-table-cell-role="th">X2_A</th>
+<th data-quarto-table-cell-role="th">X2_B</th>
+<th data-quarto-table-cell-role="th">X2_C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 <ul>
-<li>온도에 따른 아이스크림 판매량이 아이스크림의 tpye에 따라 동일하다면 기울기가 동일하고 절편이 다른 두 직선이 나올것임.</li>
-<li>하지만 현재는 초코보다 바닐라맛이 기온의 영향을 많이 받아보임 <span class="math inline">\(\to\)</span> (바닐라아이스크림,온도)는 (초코아이스크림,온도)보다 궁합이 좋다. <span class="math inline">\(\to\)</span> 아이스크림 type과 온도사이에는 교호작용이 존재한다.</li>
+<li>X2_A, X2_B, X2_C는 셋다 있을 필요는 없지 않나? –&gt; 공선성문제가 생길수도 있음.</li>
 </ul>
-<div id="64d3ac72-cc6f-4b53-b453-5d0e631340d9" class="cell" data-tags="[]" data-execution_count="62">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:choco}).assign(<span class="bu">type</span><span class="op">=</span><span class="st">'choco'</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:vanilla}).assign(<span class="bu">type</span><span class="op">=</span><span class="st">'vanilla'</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df1,df2])</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="62">
+<div id="0a8f13c0" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.get_dummies(df,drop_first<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">X1</th>
+<th data-quarto-table-cell-role="th">X2_B</th>
+<th data-quarto-table-cell-role="th">X2_C</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>2</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3</td>
+<td>True</td>
+<td>False</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>4</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="data" class="level1">
+<h1>4. Data</h1>
+<p><code>-</code> load</p>
+<div id="683edec5-6a74-4085-a650-9764c9aa9b17" class="cell" data-tags="[]" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">3</span>].to_numpy()[:<span class="dv">100</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>temp.sort()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>choco <span class="op">=</span> <span class="dv">40</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">2.0</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>)<span class="op">*</span><span class="dv">3</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>vanilla <span class="op">=</span> <span class="dv">60</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">5.0</span> <span class="op">+</span> np.random.randn(<span class="dv">100</span>)<span class="op">*</span><span class="dv">3</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:choco}).assign(<span class="bu">type</span><span class="op">=</span><span class="st">'choco'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:vanilla}).assign(<span class="bu">type</span><span class="op">=</span><span class="st">'vanilla'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.concat([df1,df2])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
@@ -333,132 +463,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><code>-</code> 시각화 및 해석</p>
+<div id="49b5a761" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].sales,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'choco'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].sales,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'vanilla'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f7fa2047e20&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="07wk-030_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>온도에 따른 아이스크림 판매량이 아이스크림의 tpye에 따라 동일하다면 기울기가 동일하고 절편이 다른 두 직선이 나올것임.</li>
+<li>하지만 현재는 초코보다 바닐라맛이 기온의 영향을 많이 받아보임 <span class="math inline">\(\to\)</span> (바닐라아이스크림,온도)는 (초코아이스크림,온도)보다 궁합이 좋다. <span class="math inline">\(\to\)</span> 아이스크림 type과 온도사이에는 교호작용이 존재한다.</li>
+</ul>
 </section>
 <section id="분석1" class="level1">
-<h1>4. 분석1</h1>
+<h1>5. 분석1</h1>
 <p><code>-</code> 분석1: 모형을 아래와 같이 본다.</p>
 <ul>
 <li><span class="math inline">\({\bf X}\)</span>: <code>temp</code>, <code>type</code></li>
 <li><span class="math inline">\({\bf y}\)</span>: <code>sales</code></li>
 </ul>
-<div id="20f4811e-feaa-423d-a936-3de0e8df88fe" class="cell" data-tags="[]" data-execution_count="63">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df[[<span class="st">'temp'</span>,<span class="st">'type'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'sales'</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step3</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f4d66a59" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X,y <span class="op">=</span> pd.get_dummies(df_train[[<span class="st">'temp'</span>,<span class="st">'type'</span>]],drop_first<span class="op">=</span><span class="va">True</span>), df[<span class="st">'sales'</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># step2</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step3</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>df_train[<span class="st">'sales_hat'</span>] <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="aa6af09f-9aba-4568-9659-7c3a9532f25d" class="cell" data-tags="[]" data-execution_count="64">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sales_hat'</span>] <span class="op">=</span> yhat</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="64">
-<div>
-
-
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">temp</th>
-<th data-quarto-table-cell-role="th">sales</th>
-<th data-quarto-table-cell-role="th">type</th>
-<th data-quarto-table-cell-role="th">sales_hat</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>-4.1</td>
-<td>32.950261</td>
-<td>choco</td>
-<td>16.656231</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>-3.7</td>
-<td>35.852524</td>
-<td>choco</td>
-<td>18.065189</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>-3.0</td>
-<td>37.428335</td>
-<td>choco</td>
-<td>20.530866</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>-1.3</td>
-<td>38.323681</td>
-<td>choco</td>
-<td>26.518939</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>-0.5</td>
-<td>39.713362</td>
-<td>choco</td>
-<td>29.336855</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">95</td>
-<td>12.4</td>
-<td>119.708075</td>
-<td>vanilla</td>
-<td>112.376979</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">96</td>
-<td>13.4</td>
-<td>129.300464</td>
-<td>vanilla</td>
-<td>115.899375</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">97</td>
-<td>14.7</td>
-<td>136.596568</td>
-<td>vanilla</td>
-<td>120.478489</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">98</td>
-<td>15.0</td>
-<td>136.213140</td>
-<td>vanilla</td>
-<td>121.535208</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">99</td>
-<td>15.2</td>
-<td>135.595252</td>
-<td>vanilla</td>
-<td>122.239687</td>
-</tr>
-</tbody>
-</table>
-
-<p>200 rows × 4 columns</p>
+<div id="9d687b6e" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>predictr.score(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<pre><code>0.9249530603100549</code></pre>
 </div>
 </div>
+<ul>
+<li>점수가 잘나왔다고 너무 좋아하지 마세요.</li>
+<li>시각화를 반드시 해보고 더 맞출수 있는 여지가 있는지 항상 확인할 것</li>
+</ul>
+<div id="37ef5b36" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].sales,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'choco'</span>,color<span class="op">=</span><span class="st">'C0'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].sales_hat,<span class="st">'--'</span>,color<span class="op">=</span><span class="st">'C0'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].sales,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'vanilla'</span>,color<span class="op">=</span><span class="st">'C1'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].sales_hat,<span class="st">'--'</span>,color<span class="op">=</span><span class="st">'C1'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f7fa2199ab0&gt;</code></pre>
 </div>
-<div id="b5977c56-dd5d-45e0-b1f7-dd9e948d9912" class="cell" data-tags="[]" data-execution_count="65">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,df.sales,<span class="st">'o'</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,df.sales_hat,<span class="st">'x'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="07wk-030_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+<p><img src="07wk-030_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -466,30 +525,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 </section>
 <section id="분석2" class="level1">
-<h1>5. 분석2</h1>
+<h1>6. 분석2</h1>
 <p><code>-</code> 모형을 아래와 같이 본다.</p>
 <ul>
 <li><span class="math inline">\({\bf X}\)</span>: <code>temp</code>, <code>type</code>, <code>temp</code> <span class="math inline">\(\times\)</span> <code>type</code></li>
 <li><span class="math inline">\({\bf y}\)</span>: <code>sales</code></li>
 </ul>
-<blockquote class="blockquote">
-<p>Note: 초코/바닐라에 대한 절편차이는 <code>type</code>로, 초코/바닐라에 대한 기울기 차이는 <code>temp</code><span class="math inline">\(\times\)</span><code>type</code>로 표현한다.</p>
-</blockquote>
-<div id="2e67dd25-bf9e-4953-8acb-35f1f9903640" class="cell" data-tags="[]" data-execution_count="66">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df[[<span class="st">'temp'</span>,<span class="st">'type'</span>]],drop_first<span class="op">=</span><span class="va">True</span>).<span class="bu">eval</span>(<span class="st">'temp_type = temp*type_vanilla'</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'sales'</span>]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step3</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="9628f103-c5f6-4cd3-a0a3-121a27ab99a8" class="cell" data-tags="[]" data-execution_count="67">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'sales_hat'</span>] <span class="op">=</span> yhat</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<div id="cc83d55b" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pd.get_dummies(df_train[[<span class="st">'temp'</span>,<span class="st">'type'</span>]],drop_first<span class="op">=</span><span class="va">True</span>).<span class="bu">eval</span>(<span class="st">'interaction = temp*type_vanilla'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
 <div>
 
 
@@ -498,50 +542,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">temp</th>
-<th data-quarto-table-cell-role="th">sales</th>
-<th data-quarto-table-cell-role="th">type</th>
-<th data-quarto-table-cell-role="th">sales_hat</th>
+<th data-quarto-table-cell-role="th">type_vanilla</th>
+<th data-quarto-table-cell-role="th">interaction</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>-4.1</td>
-<td>32.950261</td>
-<td>choco</td>
-<td>31.403121</td>
+<td>False</td>
+<td>-0.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>-3.7</td>
-<td>35.852524</td>
-<td>choco</td>
-<td>32.209366</td>
+<td>False</td>
+<td>-0.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>-3.0</td>
-<td>37.428335</td>
-<td>choco</td>
-<td>33.620295</td>
+<td>False</td>
+<td>-0.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
 <td>-1.3</td>
-<td>38.323681</td>
-<td>choco</td>
-<td>37.046835</td>
+<td>False</td>
+<td>-0.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
 <td>-0.5</td>
-<td>39.713362</td>
-<td>choco</td>
-<td>38.659325</td>
+<td>False</td>
+<td>-0.0</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
 <td>...</td>
 <td>...</td>
 <td>...</td>
@@ -549,52 +586,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td data-quarto-table-cell-role="th">95</td>
 <td>12.4</td>
-<td>119.708075</td>
-<td>vanilla</td>
-<td>122.492017</td>
+<td>True</td>
+<td>12.4</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">96</td>
 <td>13.4</td>
-<td>129.300464</td>
-<td>vanilla</td>
-<td>127.521196</td>
+<td>True</td>
+<td>13.4</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">97</td>
 <td>14.7</td>
-<td>136.596568</td>
-<td>vanilla</td>
-<td>134.059129</td>
+<td>True</td>
+<td>14.7</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">98</td>
 <td>15.0</td>
-<td>136.213140</td>
-<td>vanilla</td>
-<td>135.567883</td>
+<td>True</td>
+<td>15.0</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">99</td>
 <td>15.2</td>
-<td>135.595252</td>
-<td>vanilla</td>
-<td>136.573719</td>
+<td>True</td>
+<td>15.2</td>
 </tr>
 </tbody>
 </table>
 
-<p>200 rows × 4 columns</p>
+<p>200 rows × 3 columns</p>
 </div>
 </div>
 </div>
-<div id="b10111e7-59c1-4cdb-960c-24e54a22b941" class="cell" data-tags="[]" data-execution_count="68">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,df.sales,<span class="st">'o'</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,df.sales_hat,<span class="st">'x'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e8700cfd" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train[[<span class="st">'temp'</span>,<span class="st">'type'</span>]],drop_first<span class="op">=</span><span class="va">True</span>).<span class="bu">eval</span>(<span class="st">'interaction = temp*type_vanilla'</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[<span class="st">'sales'</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step2</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step3</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>df_train[<span class="st">'sales_hat'</span>] <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1de44480" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>predictr.score(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<pre><code>0.9865793819066231</code></pre>
+</div>
+</div>
+<div id="41f1cb35" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].sales,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'choco'</span>,color<span class="op">=</span><span class="st">'C0'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'choco'</span>].sales_hat,<span class="st">'--'</span>,color<span class="op">=</span><span class="st">'C0'</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].sales,<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'vanilla'</span>,color<span class="op">=</span><span class="st">'C1'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].temp,df_train[df.<span class="bu">type</span><span class="op">==</span><span class="st">'vanilla'</span>].sales_hat,<span class="st">'--'</span>,color<span class="op">=</span><span class="st">'C1'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>&lt;matplotlib.legend.Legend at 0x7f7fa1925690&gt;</code></pre>
+</div>
 <div class="cell-output cell-output-display">
-<p><img src="07wk-030_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+<p><img src="07wk-030_files/figure-html/cell-14-output-2.png" class="img-fluid"></p>
 </div>
 </div>
+<blockquote class="blockquote">
+<p>Note: 초코/바닐라에 대한 절편차이는 <code>type</code>로, 초코/바닐라에 대한 기울기 차이는 <code>temp</code><span class="math inline">\(\times\)</span><code>type</code>로 표현한다.</p>
+</blockquote>
 
 
 </section>
