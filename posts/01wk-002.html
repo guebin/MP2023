@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-09-05">
 
-<title>MP2023 - 01wk-002: 타이타닉 데이터의 이해</title>
+<title>MP2023 - 01wk-002: 타이타닉 데이터의 이해 – 추가해설</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -138,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">01wk-002: 타이타닉 데이터의 이해</h1>
+<h1 class="title">01wk-002: 타이타닉 데이터의 이해 – 추가해설</h1>
 </div>
 
 
@@ -250,6 +250,19 @@ GPT 답변
 <p>가족 규모 특성 생성: ‘sibsp’와 ’parch’ 변수를 활용하여 승객의 가족 규모를 나타내는 새로운 변수를 만들 수 있습니다. 예를 들어, ‘sibsp’와 ’parch’ 값을 더한 후 1을 더해 ‘family_size’ 변수로 만들 수 있습니다. 이를 통해 가족 규모가 큰 승객이 생존 여부에 영향을 미칠 수 있는지 확인할 수 있습니다.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>다중공선성</strong>: ‘sibsp’ 와 ‘parch’ 를 더하여 새로운 변수를 만든다면, 이후에는 ‘sibsp’와 ’parch’ 둘중 하나를 제거하나 둘다 제거하는 방법을 고려해야 한다.</p>
+</div>
+</div>
 </section>
 <section id="d.-embarked와-class에-대한-피처엔지니어링의-아이디어" class="level2">
 <h2 class="anchored" data-anchor-id="d.-embarked와-class에-대한-피처엔지니어링의-아이디어">D. embarked와 class에 대한 피처엔지니어링의 아이디어</h2>
@@ -275,6 +288,19 @@ GPT 답변
 <p>이렇게 생성된 “embarked_pclass” 변수를 사용하여 특정 항구와 클래스의 조합이 생존 여부에 어떤 영향을 미치는지를 분석할 수 있습니다. 예를 들어, ‘C_1’ 조합이 생존율과 관련이 있는지, ‘Q_3’ 조합이 생존 여부에 영향을 미치는지 등을 확인하여 해당 특성이 모델링에 유용한 정보를 제공하는지 알아볼 수 있습니다.</p>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>교호작용</strong>: 그냥 교호작용 고려한다는 소리죠? –&gt; 트리계열은 결과가 크게 좋아질 것이라 기대하기 어렵겠고, 선형모형계열로 적합한다면 결과가 좋아질 수도 있겠음.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -291,6 +317,19 @@ GPT 답변 2 – 그냥 “embarked” 변수와 “pclass” 변수를 각각 �
 <p>다양한 조합 고려: 조합된 변수를 만들면 “embarked”와 “pclass”의 가능한 모든 조합을 커버할 수 있습니다. 이는 분석의 전체적인 시각을 확장하고, 어떤 조합이 중요한지를 더 효과적으로 파악할 수 있도록 도와줍니다.</p>
 <p>모델 학습에 더 적합한 데이터 생성: 몇몇 머신 러닝 알고리즘은 상호작용 변수를 활용하여 모델의 성능을 향상시킬 수 있습니다. 이러한 알고리즘들은 새로운 변수를 활용하여 더 복잡한 패턴을 학습할 수 있습니다.</p>
 <p>새로운 변수를 만들어 분석하는 것은 분석의 창의성과 도메인 지식을 활용하여 데이터로부터 더 많은 의미를 도출하려는 노력의 일부입니다. 분석의 목적에 따라 각 변수를 개별적으로 사용하거나 조합하여 새로운 변수를 만들 수 있습니다.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>교호작용</strong>: 선형모델을 적합하는 상황을 가정하자. 교호작용의 효과가 있는 자료에서, 이를 무시하고 적합한다면 (“embarked” 변수와 “pclass” 변수만 넣고 적합한다면) 언더핏이 생김.</p>
 </div>
 </div>
 </section>

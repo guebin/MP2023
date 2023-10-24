@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-09-26">
 
-<title>MP2023 - 04wk-016: 타이타닉 / 결측치처리+로지스틱</title>
+<title>MP2023 - 04wk-016: 타이타닉 / 결측치처리+로지스틱 – 추가해설</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">04wk-016: 타이타닉 / 결측치처리+로지스틱</h1>
+<h1 class="title">04wk-016: 타이타닉 / 결측치처리+로지스틱 – 추가해설</h1>
 </div>
 
 
@@ -625,6 +625,19 @@ memory usage: 83.7+ KB</code></pre>
 </div>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>결측치 처리가 별로임</strong>: 사실 타이타닉 자료의 경우 위와 같이 train/test를 독립된 데이터세트로 보고 결측치를 처리하는 것 보다 <code>모듈19-MinMaxScaler</code>에서 소개한 것 처럼 train에서 fit한 <code>imputer</code>를 test에서 <code>.transform()</code>하는 것이 훨씬 자연스럽다. 다만 이 예제를 설명하는 단계에서는 train/test를 독립된 데이터세트로 보고 전처리를 할 경우 생기는 비상식을 이해하기 어려워 위와 같은 방식으로 진행했음.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="분석" class="level1">
@@ -640,6 +653,37 @@ memory usage: 83.7+ KB</code></pre>
 <div id="e78a2bd4-0c04-484c-8df1-99622bcd037c" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(impute_missing(df_train).drop([<span class="st">'Survived'</span>,<span class="st">'Name'</span>,<span class="st">'Ticket'</span>,<span class="st">'Cabin'</span>],axis<span class="op">=</span><span class="dv">1</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> impute_missing(df_train)[[<span class="st">'Survived'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>너무 많은 범주</strong>: Name, Ticket, Cabin은 너무 많은 범주를 포함하고 있으므로 제외한다고 설명했다. 그런데 사실</p>
+<ol type="1">
+<li>이름에는 혼인여부에 대한 정보가 포함될 수도 있어서 버리기 아깝다.</li>
+<li>범주가 너무 많다면 통째로 변수를 제거하는 것 보다, 공통범주로 묶어서 처리하는 방법도 고려할 수 있다.</li>
+</ol>
+<p>는 점에서 다른 분석방법을 고려할 수도 있다.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>PassengerId</strong>: 사실 <code>PassengerId</code>불필요한 정보이고 (<code>PassengerId</code> 와 y는 corr이 없음) 있어봤자 오버핏만 유발하므로 제외하는게 좋다. 단지 이 시점에서는 “불필요한 변수를 제거하지 않으면 왜 오버피팅 현상이 발생하는가?” 를 설명할 수 없어서 남겨두었던 것.</p>
+</div>
 </div>
 </section>
 <section id="b.-predictor-생성" class="level2">

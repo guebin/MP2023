@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-09-21">
 
-<title>MP2023 - 03wk-009: 아이스크림 / 회귀분석</title>
+<title>MP2023 - 03wk-009: 아이스크림 / 회귀분석 – 추가해설</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -184,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">03wk-009: 아이스크림 / 회귀분석</h1>
+<h1 class="title">03wk-009: 아이스크림 / 회귀분석 – 추가해설</h1>
 </div>
 
 
@@ -218,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="070c4459-073e-4ba2-843b-976dd4d99ab2" class="cell" data-execution_count="15">
+<div id="070c4459-073e-4ba2-843b-976dd4d99ab2" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -228,13 +228,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data" class="level1">
 <h1>3. Data</h1>
 <p><code>-</code> 전주시의 기온 불러오기</p>
-<div id="e972d778-739b-417f-a6ab-7465486eaff0" class="cell" data-execution_count="16">
+<div id="e972d778-739b-417f-a6ab-7465486eaff0" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">3</span>].to_numpy()[:<span class="dv">100</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>temp.sort()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="89c53a10-080e-4aab-918e-787f9ad05b4c" class="cell" data-execution_count="17">
+<div id="89c53a10-080e-4aab-918e-787f9ad05b4c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>temp <span class="co"># 전주시의 기온, 100개</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>array([-4.1, -3.7, -3. , -1.3, -0.5, -0.3,  0.3,  0.4,  0.4,  0.7,  0.7,
         0.9,  0.9,  1. ,  1.2,  1.4,  1.4,  1.5,  1.5,  2. ,  2. ,  2. ,
         2.3,  2.5,  2.5,  2.5,  2.6,  2.6,  2.9,  3.2,  3.5,  3.5,  3.6,
@@ -249,12 +249,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><code>-</code> 아래와 같은 모형을 가정하자.</p>
 <p><span class="math display">\[\textup{아이스크림 판매량} = 20 + \textup{온도} \times 2.5 + \textup{오차(운)}\]</span></p>
-<div id="5f88b358-4a42-4cfb-851d-84c716681a96" class="cell" data-execution_count="18">
+<div id="5f88b358-4a42-4cfb-851d-84c716681a96" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> np.random.randn(<span class="dv">100</span>)<span class="op">*</span><span class="dv">3</span> <span class="co"># 오차</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>icecream_sales <span class="op">=</span> <span class="dv">20</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">2.5</span> <span class="op">+</span> eps </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a5048834-319d-402a-b497-bee57547c6e7" class="cell" data-execution_count="19">
+<div id="a5048834-319d-402a-b497-bee57547c6e7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.plot(temp,icecream_sales,<span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="03wk-009_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
@@ -264,10 +264,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>실제로 저런 모형이 맞느냐? 모름.. (실제모형은 알게뭐임? 그렇게 가정하면 된다.)</p>
 </blockquote>
 <p><code>-</code> 주어진 자료: 우리는 아래를 관측했다고 생각하자.</p>
-<div id="0ecedd6e-680f-4c48-8243-c5b1cf16a307" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:icecream_sales})</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div id="0ecedd6e-680f-4c48-8243-c5b1cf16a307" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:icecream_sales})</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -346,9 +346,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="게임셋팅" class="level1 page-columns page-full">
 <h1>4. 게임셋팅</h1>
 <p><code>-</code> 주어진 자료는 아래와 같다.</p>
-<div id="b1bf0e44-5ba6-49ae-91b3-898ee1106bcf" class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div id="b1bf0e44-5ba6-49ae-91b3-898ee1106bcf" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -425,8 +425,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><code>-</code> 편의상 아래와 같은 기호를 도입하자.</p>
 <ul>
-<li>(<code>df.temp[0]</code>, <code>df.temp[1]</code>, … , <code>df.temp[99]</code>) = <span class="math inline">\((x_1,x_2,\dots,x_{100})=(-4.1,-3.7,\dots,15.2)\)</span></li>
-<li>(<code>df.sales[0]</code>, <code>df.sales[1]</code>, … , <code>df.sales[99]</code>) = <span class="math inline">\((y_1,y_2,\dots,y_{100})=(10.90,14.00, \dots,61.56)\)</span></li>
+<li>(<code>df_train.temp[0]</code>, <code>df_train.temp[1]</code>, … , <code>df_train.temp[99]</code>) = <span class="math inline">\((x_1,x_2,\dots,x_{100})=(-4.1,-3.7,\dots,15.2)\)</span></li>
+<li>(<code>df_train.sales[0]</code>, <code>df_train.sales[1]</code>, … , <code>df_train.sales[99]</code>) = <span class="math inline">\((y_1,y_2,\dots,y_{100})=(10.90,14.00, \dots,61.56)\)</span></li>
 </ul>
 <p><code>-</code> 우리는 이 자료 <span class="math inline">\(\big\{(x_i,y_i)\big\}_{i=1}^{100}\)</span> 를 바탕으로 어떠한 “패턴”을 발견하여 새로운 <span class="math inline">\(x\)</span>에 대한 예측값을 알고 싶다.</p>
 <section id="a.-질문" class="level2">
@@ -436,9 +436,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="b.-답1" class="level2">
 <h2 class="anchored" data-anchor-id="b.-답1">B. 답1</h2>
 <p><code>-</code> <span class="math inline">\(x=-2.0\)</span> 근처의 데이터를 살펴보자.</p>
-<div id="aeb5adad-3d17-4b57-8058-68e19abc0acc" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df[(<span class="op">-</span><span class="fl">3.0</span> <span class="op">&lt;</span> df.temp) <span class="op">&amp;</span> (df.temp <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.0</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div id="aeb5adad-3d17-4b57-8058-68e19abc0acc" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_train[(<span class="op">-</span><span class="fl">3.0</span> <span class="op">&lt;</span> df_train.temp) <span class="op">&amp;</span> (df_train.temp <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.0</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -467,8 +467,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="c.-답2" class="level2">
 <h2 class="anchored" data-anchor-id="c.-답2">C. 답2</h2>
 <p><code>-</code> 자료를 바탕으로 그림을 그려보자.</p>
-<div id="d2e84aae-6d17-4dcd-8251-65e5d192ae96" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,df.sales,<span class="st">'o'</span>)</span>
+<div id="d2e84aae-6d17-4dcd-8251-65e5d192ae96" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp,df_train.sales,<span class="st">'o'</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="op">-</span><span class="fl">2.0</span>],[<span class="fl">17.67</span>],<span class="st">'x'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="03wk-009_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
@@ -482,16 +482,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="d.-아이디어">D. 아이디어</h2>
 <p><code>-</code> 선을 기가 막히게 그어서 추세선을 만들고, 그 추세선 위의 점으로 예측하자.</p>
 <p><code>-</code> 속마음: 사실 추세선을 알고 있긴함</p>
-<div id="f1074b95-71d1-466a-bbdd-55540c12beb5" class="cell" data-execution_count="24">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,df.sales,<span class="st">'o'</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df.temp,<span class="dv">20</span><span class="op">+</span>df.temp<span class="op">*</span><span class="fl">2.5</span>,<span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f1074b95-71d1-466a-bbdd-55540c12beb5" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp,df_train.sales,<span class="st">'o'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.temp,<span class="dv">20</span><span class="op">+</span>df_train.temp<span class="op">*</span><span class="fl">2.5</span>,<span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="03wk-009_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p><code>-</code> 사실 <span class="math inline">\(y=20+2.5x\)</span> 라는 추세선을 그으면 된다는 것을 알고 있다.</p>
 <p><code>-</code> 그래서 <span class="math inline">\(x=-2\)</span> 이라면 <span class="math inline">\(y=20-2.5\times 2=15\)</span> 라고 보는게 합리적임. (물론 오차가 있을 수 있지만 그건 운이므로 어쩔수 없는것임, 랜덤으로 뭐가 나올지까지 맞출 수는 없음<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>)</p>
-<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;만약 그렇다면 랜덤이 아니겠지?</p></li></div><p><code>-</code> 그렇지만 우리는 사실 <span class="math inline">\(20, 2.5\)</span> 라는 숫자를 모른다. (이 숫자만 안다면 임의의 <span class="math inline">\(x\)</span>에 대한 <span class="math inline">\(y\)</span>값을 알 수 있을 텐데…)</p>
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;만약 그렇다면 랜덤이 아니겠지?</p></li></div><div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>오버피팅</strong>: 랜덤으로 뭐가 나올지 맞춘다는 것은 오차항을 적합하겠다는 의미임.</p>
+</div>
+</div>
+<p><code>-</code> 그렇지만 우리는 사실 <span class="math inline">\(20, 2.5\)</span> 라는 숫자를 모른다. (이 숫자만 안다면 임의의 <span class="math inline">\(x\)</span>에 대한 <span class="math inline">\(y\)</span>값을 알 수 있을 텐데…)</p>
 <p><code>-</code> 게임셋팅</p>
 <ul>
 <li>원래게임: 임의의 <span class="math inline">\(x\)</span>에 대하여 합리적인 <span class="math inline">\(y\)</span>를 잘 찾는 게임</li>
@@ -504,20 +517,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a.-데이터" class="level2">
 <h2 class="anchored" data-anchor-id="a.-데이터">A. 데이터</h2>
 <p><code>-</code> 변수 설정</p>
-<div id="2db86951-040c-40b3-bcc0-9bc6ae3a971f" class="cell" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df[[<span class="st">'temp'</span>]] <span class="co"># 독립변수, 설명변수, 피쳐</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[[<span class="st">'sales'</span>]] <span class="co"># 종속변수, 반응변수, 타겟 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2db86951-040c-40b3-bcc0-9bc6ae3a971f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'temp'</span>]] <span class="co"># 독립변수, 설명변수, 피쳐</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[[<span class="st">'sales'</span>]] <span class="co"># 종속변수, 반응변수, 타겟 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2ee009bc-977b-473d-8a80-4c35c31c3143" class="cell" data-execution_count="29">
+<div id="2ee009bc-977b-473d-8a80-4c35c31c3143" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X,y,<span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="03wk-009_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 <p><code>-</code> 질문: 기온이 <span class="math inline">\(x=-2.0\)</span> 일 때 아이스크림을 얼마정도 판다고 보는게 타당할까?</p>
-<div id="78e043c1-173a-47a5-afb3-56a43bee8d4a" class="cell" data-execution_count="31">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df[(<span class="op">-</span><span class="fl">3.0</span> <span class="op">&lt;</span> df.temp) <span class="op">&amp;</span> (df.temp <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.0</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="31">
+<div id="78e043c1-173a-47a5-afb3-56a43bee8d4a" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_train[(<span class="op">-</span><span class="fl">3.0</span> <span class="op">&lt;</span> df_train.temp) <span class="op">&amp;</span> (df_train.temp <span class="op">&lt;</span> <span class="op">-</span><span class="fl">1.0</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
 <div>
 
 
@@ -548,10 +561,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="b.-predictor-생성" class="level2">
 <h2 class="anchored" data-anchor-id="b.-predictor-생성">B. Predictor 생성</h2>
-<div id="cd5b823f-9387-49ef-aac0-869e80292e9c" class="cell" data-execution_count="32">
+<div id="cd5b823f-9387-49ef-aac0-869e80292e9c" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression() </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>predictr </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="16">
 <style>#sk-container-id-1 {color: black;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked=""><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
 </div>
 </div>
@@ -561,9 +574,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="c.-학습-fit-learn" class="level2">
 <h2 class="anchored" data-anchor-id="c.-학습-fit-learn">C. 학습 (fit, learn)</h2>
-<div id="f57be0b0-fb06-4314-bfff-4610586408fb" class="cell" data-execution_count="33">
+<div id="f57be0b0-fb06-4314-bfff-4610586408fb" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
+<div class="cell-output cell-output-display" data-execution_count="17">
 <style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>LinearRegression()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">LinearRegression</label><div class="sk-toggleable__content"><pre>LinearRegression()</pre></div></div></div></div></div>
 </div>
 </div>
@@ -571,10 +584,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="d.-예측-predict" class="level2">
 <h2 class="anchored" data-anchor-id="d.-예측-predict">D. 예측 (predict)</h2>
 <p><code>-</code> Predictor: 데이터를 살펴보니 원래 true는 이럴것 같아요</p>
-<div id="7bfc77e2-2061-405c-92b6-69bcd309ddc1" class="cell" data-execution_count="34">
+<div id="7bfc77e2-2061-405c-92b6-69bcd309ddc1" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="3433b0f2-b5cf-493c-bbdc-d0eb73fb368a" class="cell" data-execution_count="35">
+<div id="3433b0f2-b5cf-493c-bbdc-d0eb73fb368a" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X,y,<span class="st">'o'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>plt.plot(X,yhat, <span class="st">'o--'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -583,20 +596,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p><code>-</code> 최규빈: 저런 추세선을 그었다면, <span class="math inline">\(y=ax+b\)</span> 꼴의 식에서 <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>를 적당한 값으로 찾았다는 의미인데, 그 값은 어디있지?</p>
 <p><code>-</code> Predictor: 아래에 있어요</p>
-<div id="08e9a4c2-8404-4207-8d1c-5d9ba7d84716" class="cell" data-execution_count="36">
+<div id="08e9a4c2-8404-4207-8d1c-5d9ba7d84716" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> predictr.coef_,</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> predictr.intercept_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="cfc0eab4-bbd5-46a5-ad23-c056a44a9de6" class="cell" data-execution_count="37">
+<div id="cfc0eab4-bbd5-46a5-ad23-c056a44a9de6" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a,b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="37">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <pre><code>((array([[2.51561216]]),), array([19.66713127]))</code></pre>
 </div>
 </div>
 <p><code>-</code> 최규빈: 확인해보자..</p>
-<div id="254520a2-25c2-4374-93cd-6f91231d33b7" class="cell" data-execution_count="39">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(df.temp <span class="op">*</span> <span class="fl">2.51561216</span> <span class="op">+</span> <span class="fl">19.66713127</span>)[:<span class="dv">5</span>], yhat[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="39">
+<div id="254520a2-25c2-4374-93cd-6f91231d33b7" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(df_train.temp <span class="op">*</span> <span class="fl">2.51561216</span> <span class="op">+</span> <span class="fl">19.66713127</span>)[:<span class="dv">5</span>], yhat[:<span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>(0     9.353121
  1    10.359366
  2    12.120295
@@ -611,13 +624,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>-</code> 새로운 데이터 <span class="math inline">\(x=-2\)</span> 에 대한 예측 (1) – 수식위주로</p>
-<div id="eee59833-cc97-4fd1-99b6-79cca720a67a" class="cell" data-execution_count="40">
+<div id="eee59833-cc97-4fd1-99b6-79cca720a67a" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fl">2.51561216</span><span class="op">*</span>(<span class="op">-</span><span class="dv">2</span>) <span class="op">+</span> <span class="fl">19.66713127</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="40">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <pre><code>14.635906949999999</code></pre>
 </div>
 </div>
-<div id="65ab5173-e47a-4e0d-a790-7add0a11027f" class="cell" data-execution_count="42">
+<div id="65ab5173-e47a-4e0d-a790-7add0a11027f" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X,y,<span class="st">'o'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>plt.plot(X,yhat,<span class="st">'--'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="op">-</span><span class="dv">2</span>],[<span class="fl">14.635906949999999</span>],<span class="st">'xr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -626,19 +639,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><code>-</code> 새로운 데이터 <span class="math inline">\(x=-2\)</span> 에 대한 예측 (2) – 코드위주로 (<span class="math inline">\(\star\)</span>)</p>
-<div id="3887c058-d300-4742-8b6c-b757bf248c91" class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>Xnew <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:[<span class="op">-</span><span class="fl">2.0</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3887c058-d300-4742-8b6c-b757bf248c91" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:[<span class="op">-</span><span class="fl">2.0</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="73b2c1bc-9ddd-4f35-aa18-31d7217935db" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(Xnew)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<div id="73b2c1bc-9ddd-4f35-aa18-31d7217935db" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>array([[14.63590695]])</code></pre>
 </div>
 </div>
-<div id="1c4aebb0-9914-428f-af50-81b410da31dd" class="cell" data-execution_count="46">
+<div id="1c4aebb0-9914-428f-af50-81b410da31dd" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X,y,<span class="st">'o'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plt.plot(X,yhat,<span class="st">'--'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plt.plot(Xnew, predictr.predict(Xnew),<span class="st">'xr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plt.plot(XX, predictr.predict(XX),<span class="st">'xr'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="03wk-009_files/figure-html/cell-26-output-1.png" class="img-fluid"></p>
 </div>
