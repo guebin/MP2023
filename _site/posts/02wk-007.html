@@ -233,8 +233,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="7df920d4-ec5e-4342-b087-fc3c3666c3a5" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pip install autogluon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="773d010f-fcd9-496e-8706-b9ca032f33c0" class="cell" data-execution_count="12">
+<div id="773d010f-fcd9-496e-8706-b9ca032f33c0" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> autogluon.tabular <span class="im">import</span> TabularDataset, TabularPredictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm</code></pre>
+</div>
 </div>
 </section>
 <section id="분석의-절차" class="level1">
@@ -242,27 +246,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="a.-데이터" class="level2">
 <h2 class="anchored" data-anchor-id="a.-데이터">A. 데이터</h2>
 <p><code>-</code> 비유: 문제를 받아오는 과정으로 비유할 수 있다.</p>
-<div id="561744ad-05bb-48e1-a58d-82429da18171" class="cell" data-execution_count="25">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tr <span class="op">=</span> TabularDataset(<span class="st">"/kaggle/input/titanic/train.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tst <span class="op">=</span> TabularDataset(<span class="st">"/kaggle/input/titanic/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loaded data from: ./titanic/train.csv | Columns = 12 / 12 | Rows = 891 -&gt; 891
-Loaded data from: ./titanic/test.csv | Columns = 11 / 11 | Rows = 418 -&gt; 418</code></pre>
+<div id="561744ad-05bb-48e1-a58d-82429da18171" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle competitions download <span class="op">-</span>c titanic</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip titanic.<span class="bu">zip</span> <span class="op">-</span>d .<span class="op">/</span>titanic</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> TabularDataset(<span class="st">'titanic/train.csv'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> TabularDataset(<span class="st">'titanic/test.csv'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm titanic.<span class="bu">zip</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm <span class="op">-</span>rf titanic<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading titanic.zip to /home/cgb2/Dropbox/07_lectures/2023-09-MP2023/posts
+  0%|                                               | 0.00/34.1k [00:00&lt;?, ?B/s]
+100%|██████████████████████████████████████| 34.1k/34.1k [00:00&lt;00:00, 21.5MB/s]
+Archive:  titanic.zip
+  inflating: ./titanic/gender_submission.csv  
+  inflating: ./titanic/test.csv      
+  inflating: ./titanic/train.csv     </code></pre>
 </div>
 </div>
 <p><code>-</code> 피처엔지니어링</p>
-<div id="13fb6de0-a801-4b0c-a8da-04d4ea5e0537" class="cell" data-execution_count="26">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>_tr <span class="op">=</span> tr.<span class="bu">eval</span>(<span class="st">'Fsize = SibSp + Parch'</span>).drop([<span class="st">'SibSp'</span>,<span class="st">'Parch'</span>],axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>_tst <span class="op">=</span> tst.<span class="bu">eval</span>(<span class="st">'Fsize = SibSp + Parch'</span>).drop([<span class="st">'SibSp'</span>,<span class="st">'Parch'</span>],axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="13fb6de0-a801-4b0c-a8da-04d4ea5e0537" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>_df_train <span class="op">=</span> df_train.<span class="bu">eval</span>(<span class="st">'Fsize = SibSp + Parch'</span>).drop([<span class="st">'SibSp'</span>,<span class="st">'Parch'</span>],axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>_df_test <span class="op">=</span> df_test.<span class="bu">eval</span>(<span class="st">'Fsize = SibSp + Parch'</span>).drop([<span class="st">'SibSp'</span>,<span class="st">'Parch'</span>],axis<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="b.-predictor-생성" class="level2">
 <h2 class="anchored" data-anchor-id="b.-predictor-생성">B. Predictor 생성</h2>
 <p><code>-</code> 비유: 문제를 풀 학생을 생성하는 과정으로 비유할 수 있다.</p>
-<div id="e8a5f51d-726c-4059-97e2-c9e81b05d08e" class="cell" data-execution_count="29">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(<span class="st">"Survived"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e8a5f51d-726c-4059-97e2-c9e81b05d08e" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(<span class="st">"Survived"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20230912_120900/"</code></pre>
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231024_084434"</code></pre>
 </div>
 </div>
 </section>
@@ -270,45 +283,43 @@ Loaded data from: ./titanic/test.csv | Columns = 11 / 11 | Rows = 418 -&gt; 418<
 <h2 class="anchored" data-anchor-id="c.-적합fit">C. 적합(fit)</h2>
 <p><code>-</code> 비유: 학생이 공부를 하는 과정으로 비유할 수 있다.</p>
 <p><code>-</code> 학습</p>
-<div id="41979ff5-73f7-458a-9fc7-de56d1690a54" class="cell" data-execution_count="30">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(_tr) <span class="co"># 학생(predictr)에게 문제(tr)를 줘서 학습을 시킴(predictr.fit())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="41979ff5-73f7-458a-9fc7-de56d1690a54" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(_df_train) <span class="co"># 학생(predictr)에게 문제(tr)를 줘서 학습을 시킴(predictr.fit())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Beginning AutoGluon training ...
-AutoGluon will save models to "AutogluonModels/ag-20230912_120900/"
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/core/utils/utils.py:564: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context("mode.use_inf_as_na", True):  # treat None, NaN, INF, NINF as NA
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20231024_084434"
 AutoGluon Version:  0.8.2
-Python Version:     3.10.12
+Python Version:     3.10.13
 Operating System:   Linux
 Platform Machine:   x86_64
 Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
-Disk Space Avail:   293.85 GB / 490.57 GB (59.9%)
+Disk Space Avail:   265.23 GB / 490.57 GB (54.1%)
 Train Data Rows:    891
 Train Data Columns: 10
 Label Column: Survived
 Preprocessing data ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/core/utils/utils.py:564: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context("mode.use_inf_as_na", True):  # treat None, NaN, INF, NINF as NA
 AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
     2 unique label values:  [0, 1]
     If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/learner/default_learner.py:215: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context("mode.use_inf_as_na", True):  # treat None, NaN, INF, NINF as NA
 Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-    Available Memory:                    124991.67 MB
+    Available Memory:                    123682.78 MB
     Train Data (Original)  Memory Usage: 0.31 MB (0.0% of available memory)
     Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
-/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
-  result = pd.to_datetime(X, errors="coerce")
-/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
-  result = pd.to_datetime(X, errors="coerce")
-/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
-  result = pd.to_datetime(X, errors="coerce")
-/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
-  result = pd.to_datetime(X, errors="coerce")
-/home/cgb2/anaconda3/envs/mp/lib/python3.10/site-packages/autogluon/common/features/infer_types.py:118: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
-  result = pd.to_datetime(X, errors="coerce")
     Stage 1 Generators:
         Fitting AsTypeFeatureGenerator...
             Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
     Stage 2 Generators:
         Fitting FillNaFeatureGenerator...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/features/generators/fillna.py:58: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  X.fillna(self._fillna_feature_map, inplace=True, downcast=False)
     Stage 3 Generators:
         Fitting IdentityFeatureGenerator...
         Fitting CategoryFeatureGenerator...
@@ -337,8 +348,10 @@ Fitting AutoMLPipelineFeatureGenerator...
         ('int', ['text_ngram'])             : 9 | ['__nlp__.henry', '__nlp__.john', '__nlp__.master', '__nlp__.miss', '__nlp__.mr', ...]
     0.2s = Fit runtime
     10 features in original data used to generate 27 features in processed data.
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2417.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
     Train Data (Processed) Memory Usage: 0.07 MB (0.0% of available memory)
-Data preprocessing and feature engineering runtime = 0.19s ...
+Data preprocessing and feature engineering runtime = 0.18s ...
 AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
     To change this, specify the eval_metric parameter of Predictor()
 Automatically generating train/validation split with holdout_frac=0.2, Train Rows: 712, Val Rows: 179
@@ -357,87 +370,128 @@ Fitting 13 L1 models ...
 Fitting model: KNeighborsUnif ...
     0.6536   = Validation score   (accuracy)
     0.01s    = Training   runtime
-    0.0s     = Validation runtime
+    0.03s    = Validation runtime
 Fitting model: KNeighborsDist ...
     0.6536   = Validation score   (accuracy)
     0.01s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: LightGBMXT ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
     0.8101   = Validation score   (accuracy)
-    0.2s     = Training   runtime
+    0.45s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: LightGBM ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
     0.8268   = Validation score   (accuracy)
-    0.28s    = Training   runtime
+    0.23s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: RandomForestGini ...
     0.8156   = Validation score   (accuracy)
-    0.33s    = Training   runtime
-    0.09s    = Validation runtime
+    0.47s    = Training   runtime
+    0.1s     = Validation runtime
 Fitting model: RandomForestEntr ...
     0.8212   = Validation score   (accuracy)
-    0.38s    = Training   runtime
-    0.21s    = Validation runtime
+    0.33s    = Training   runtime
+    0.05s    = Validation runtime
 Fitting model: CatBoost ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
     0.8268   = Validation score   (accuracy)
-    0.66s    = Training   runtime
+    0.69s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: ExtraTreesGini ...
     0.8045   = Validation score   (accuracy)
-    0.52s    = Training   runtime
-    0.18s    = Validation runtime
+    0.78s    = Training   runtime
+    0.1s     = Validation runtime
 Fitting model: ExtraTreesEntr ...
     0.7989   = Validation score   (accuracy)
-    0.35s    = Training   runtime
-    0.18s    = Validation runtime
+    0.78s    = Training   runtime
+    0.04s    = Validation runtime
 Fitting model: NeuralNetFastAI ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/data/transforms.py:225: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if is_categorical_dtype(col):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/data/transforms.py:225: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if is_categorical_dtype(col):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+No improvement since epoch 9: early stopping
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
     0.8268   = Validation score   (accuracy)
-    0.46s    = Training   runtime
+    1.92s    = Training   runtime
     0.01s    = Validation runtime
 Fitting model: XGBoost ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/xgboost/data.py:440: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(data):
     0.8212   = Validation score   (accuracy)
-    0.15s    = Training   runtime
+    0.21s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: NeuralNetTorch ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
     0.838    = Validation score   (accuracy)
-    1.55s    = Training   runtime
-    0.01s    = Validation runtime
+    5.24s    = Training   runtime
+    0.02s    = Validation runtime
 Fitting model: LightGBMLarge ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
     0.8268   = Validation score   (accuracy)
-    0.44s    = Training   runtime
+    0.4s     = Training   runtime
     0.0s     = Validation runtime
 Fitting model: WeightedEnsemble_L2 ...
     0.8603   = Validation score   (accuracy)
-    0.25s    = Training   runtime
+    0.46s    = Training   runtime
     0.0s     = Validation runtime
-AutoGluon training complete, total runtime = 6.75s ... Best model: "WeightedEnsemble_L2"
-TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20230912_120900/")</code></pre>
+AutoGluon training complete, total runtime = 12.83s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231024_084434")</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="30">
-<pre><code>&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7f463532b730&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7ff0efb17a00&gt;</code></pre>
 </div>
 </div>
 <p><code>-</code> 리더보드확인 (모의고사 채점)</p>
-<div id="bfacfa9a-7bad-47f9-8cde-29bac3c07f79" class="cell" data-execution_count="32">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="bfacfa9a-7bad-47f9-8cde-29bac3c07f79" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                  model  score_val  pred_time_val  fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
-0   WeightedEnsemble_L2   0.860335       0.210158  3.510778                0.000527           0.246271            2       True         14
-1        NeuralNetTorch   0.837989       0.008443  1.547239                0.008443           1.547239            1       True         12
-2         LightGBMLarge   0.826816       0.003162  0.443558                0.003162           0.443558            1       True         13
-3              CatBoost   0.826816       0.003559  0.661513                0.003559           0.661513            1       True          7
-4              LightGBM   0.826816       0.003659  0.283715                0.003659           0.283715            1       True          4
-5       NeuralNetFastAI   0.826816       0.007515  0.462052                0.007515           0.462052            1       True         10
-6               XGBoost   0.821229       0.004702  0.148207                0.004702           0.148207            1       True         11
-7      RandomForestEntr   0.821229       0.214481  0.381199                0.214481           0.381199            1       True          6
-8      RandomForestGini   0.815642       0.091963  0.328555                0.091963           0.328555            1       True          5
-9            LightGBMXT   0.810056       0.003035  0.204797                0.003035           0.204797            1       True          3
-10       ExtraTreesGini   0.804469       0.184527  0.518099                0.184527           0.518099            1       True          8
-11       ExtraTreesEntr   0.798883       0.179535  0.353106                0.179535           0.353106            1       True          9
-12       KNeighborsUnif   0.653631       0.002189  0.009097                0.002189           0.009097            1       True          1
-13       KNeighborsDist   0.653631       0.002325  0.009845                0.002325           0.009845            1       True          2</code></pre>
+0   WeightedEnsemble_L2   0.860335       0.069945  7.157853                0.000595           0.459994            2       True         14
+1        NeuralNetTorch   0.837989       0.021271  5.238818                0.021271           5.238818            1       True         12
+2         LightGBMLarge   0.826816       0.003424  0.397473                0.003424           0.397473            1       True         13
+3              CatBoost   0.826816       0.004246  0.686450                0.004246           0.686450            1       True          7
+4              LightGBM   0.826816       0.004521  0.231312                0.004521           0.231312            1       True          4
+5       NeuralNetFastAI   0.826816       0.010309  1.919406                0.010309           1.919406            1       True         10
+6               XGBoost   0.821229       0.004762  0.214719                0.004762           0.214719            1       True         11
+7      RandomForestEntr   0.821229       0.052209  0.334242                0.052209           0.334242            1       True          6
+8      RandomForestGini   0.815642       0.099201  0.473848                0.099201           0.473848            1       True          5
+9            LightGBMXT   0.810056       0.003292  0.445553                0.003292           0.445553            1       True          3
+10       ExtraTreesGini   0.804469       0.100738  0.783195                0.100738           0.783195            1       True          8
+11       ExtraTreesEntr   0.798883       0.040266  0.782176                0.040266           0.782176            1       True          9
+12       KNeighborsDist   0.653631       0.002721  0.008844                0.002721           0.008844            1       True          2
+13       KNeighborsUnif   0.653631       0.028206  0.010227                0.028206           0.010227            1       True          1</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -461,10 +515,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">0</td>
 <td>WeightedEnsemble_L2</td>
 <td>0.860335</td>
-<td>0.210158</td>
-<td>3.510778</td>
-<td>0.000527</td>
-<td>0.246271</td>
+<td>0.069945</td>
+<td>7.157853</td>
+<td>0.000595</td>
+<td>0.459994</td>
 <td>2</td>
 <td>True</td>
 <td>14</td>
@@ -473,10 +527,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">1</td>
 <td>NeuralNetTorch</td>
 <td>0.837989</td>
-<td>0.008443</td>
-<td>1.547239</td>
-<td>0.008443</td>
-<td>1.547239</td>
+<td>0.021271</td>
+<td>5.238818</td>
+<td>0.021271</td>
+<td>5.238818</td>
 <td>1</td>
 <td>True</td>
 <td>12</td>
@@ -485,10 +539,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">2</td>
 <td>LightGBMLarge</td>
 <td>0.826816</td>
-<td>0.003162</td>
-<td>0.443558</td>
-<td>0.003162</td>
-<td>0.443558</td>
+<td>0.003424</td>
+<td>0.397473</td>
+<td>0.003424</td>
+<td>0.397473</td>
 <td>1</td>
 <td>True</td>
 <td>13</td>
@@ -497,10 +551,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">3</td>
 <td>CatBoost</td>
 <td>0.826816</td>
-<td>0.003559</td>
-<td>0.661513</td>
-<td>0.003559</td>
-<td>0.661513</td>
+<td>0.004246</td>
+<td>0.686450</td>
+<td>0.004246</td>
+<td>0.686450</td>
 <td>1</td>
 <td>True</td>
 <td>7</td>
@@ -509,10 +563,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">4</td>
 <td>LightGBM</td>
 <td>0.826816</td>
-<td>0.003659</td>
-<td>0.283715</td>
-<td>0.003659</td>
-<td>0.283715</td>
+<td>0.004521</td>
+<td>0.231312</td>
+<td>0.004521</td>
+<td>0.231312</td>
 <td>1</td>
 <td>True</td>
 <td>4</td>
@@ -521,10 +575,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">5</td>
 <td>NeuralNetFastAI</td>
 <td>0.826816</td>
-<td>0.007515</td>
-<td>0.462052</td>
-<td>0.007515</td>
-<td>0.462052</td>
+<td>0.010309</td>
+<td>1.919406</td>
+<td>0.010309</td>
+<td>1.919406</td>
 <td>1</td>
 <td>True</td>
 <td>10</td>
@@ -533,10 +587,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">6</td>
 <td>XGBoost</td>
 <td>0.821229</td>
-<td>0.004702</td>
-<td>0.148207</td>
-<td>0.004702</td>
-<td>0.148207</td>
+<td>0.004762</td>
+<td>0.214719</td>
+<td>0.004762</td>
+<td>0.214719</td>
 <td>1</td>
 <td>True</td>
 <td>11</td>
@@ -545,10 +599,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">7</td>
 <td>RandomForestEntr</td>
 <td>0.821229</td>
-<td>0.214481</td>
-<td>0.381199</td>
-<td>0.214481</td>
-<td>0.381199</td>
+<td>0.052209</td>
+<td>0.334242</td>
+<td>0.052209</td>
+<td>0.334242</td>
 <td>1</td>
 <td>True</td>
 <td>6</td>
@@ -557,10 +611,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">8</td>
 <td>RandomForestGini</td>
 <td>0.815642</td>
-<td>0.091963</td>
-<td>0.328555</td>
-<td>0.091963</td>
-<td>0.328555</td>
+<td>0.099201</td>
+<td>0.473848</td>
+<td>0.099201</td>
+<td>0.473848</td>
 <td>1</td>
 <td>True</td>
 <td>5</td>
@@ -569,10 +623,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">9</td>
 <td>LightGBMXT</td>
 <td>0.810056</td>
-<td>0.003035</td>
-<td>0.204797</td>
-<td>0.003035</td>
-<td>0.204797</td>
+<td>0.003292</td>
+<td>0.445553</td>
+<td>0.003292</td>
+<td>0.445553</td>
 <td>1</td>
 <td>True</td>
 <td>3</td>
@@ -581,10 +635,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">10</td>
 <td>ExtraTreesGini</td>
 <td>0.804469</td>
-<td>0.184527</td>
-<td>0.518099</td>
-<td>0.184527</td>
-<td>0.518099</td>
+<td>0.100738</td>
+<td>0.783195</td>
+<td>0.100738</td>
+<td>0.783195</td>
 <td>1</td>
 <td>True</td>
 <td>8</td>
@@ -593,37 +647,37 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">11</td>
 <td>ExtraTreesEntr</td>
 <td>0.798883</td>
-<td>0.179535</td>
-<td>0.353106</td>
-<td>0.179535</td>
-<td>0.353106</td>
+<td>0.040266</td>
+<td>0.782176</td>
+<td>0.040266</td>
+<td>0.782176</td>
 <td>1</td>
 <td>True</td>
 <td>9</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
-<td>KNeighborsUnif</td>
-<td>0.653631</td>
-<td>0.002189</td>
-<td>0.009097</td>
-<td>0.002189</td>
-<td>0.009097</td>
-<td>1</td>
-<td>True</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">13</td>
 <td>KNeighborsDist</td>
 <td>0.653631</td>
-<td>0.002325</td>
-<td>0.009845</td>
-<td>0.002325</td>
-<td>0.009845</td>
+<td>0.002721</td>
+<td>0.008844</td>
+<td>0.002721</td>
+<td>0.008844</td>
 <td>1</td>
 <td>True</td>
 <td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>KNeighborsUnif</td>
+<td>0.653631</td>
+<td>0.028206</td>
+<td>0.010227</td>
+<td>0.028206</td>
+<td>0.010227</td>
+<td>1</td>
+<td>True</td>
+<td>1</td>
 </tr>
 </tbody>
 </table>
@@ -637,16 +691,20 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <h2 class="anchored" data-anchor-id="d.-예측-predict">D. 예측 (predict)</h2>
 <p><code>-</code> 비유: 학습이후에 문제를 푸는 과정으로 비유할 수 있다.</p>
 <p><code>-</code> training set 을 풀어봄 (predict) <span class="math inline">\(\to\)</span> 점수 확인</p>
-<div id="36e5d9fc-069b-46c8-8c2f-b75c06e9c19a" class="cell" data-execution_count="33">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(tr.Survived <span class="op">==</span> predictr.predict(_tr)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="33">
-<pre><code>0.9539842873176206</code></pre>
+<div id="36e5d9fc-069b-46c8-8c2f-b75c06e9c19a" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(df_train.Survived <span class="op">==</span> predictr.predict(_df_train)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/features/generators/fillna.py:58: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  X.fillna(self._fillna_feature_map, inplace=True, downcast=False)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>0.9438832772166106</code></pre>
 </div>
 </div>
 <p><code>-</code> test set 을 풀어봄 (predict) <span class="math inline">\(\to\)</span> 점수 확인 하러 캐글에 결과제출</p>
-<div id="a059e8ec-d555-4e8d-aa09-32fd909d497a" class="cell" data-execution_count="34">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>tst.assign(Survived <span class="op">=</span> predictr.predict(_tst)).loc[:,[<span class="st">'PassengerId'</span>,<span class="st">'Survived'</span>]]<span class="op">\</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>.to_csv(<span class="st">"autogluon(Fsize,Drop)_submission.csv"</span>,index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a059e8ec-d555-4e8d-aa09-32fd909d497a" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df_test.assign(Survived = predictr.predict(_df_test)).loc[:,['PassengerId','Survived']]\</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .to_csv("autogluon(Fsize,Drop)_submission.csv",index=False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

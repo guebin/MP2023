@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-10-05">
 
-<title>MP2023 - 05wk-021: 취업(오버피팅) / 오버피팅의 개념</title>
+<title>MP2023 - 05wk-021: 취업(오버피팅) / 오버피팅의 개념 – 추가해설</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">05wk-021: 취업(오버피팅) / 오버피팅의 개념</h1>
+<h1 class="title">05wk-021: 취업(오버피팅) / 오버피팅의 개념 – 추가해설</h1>
 </div>
 
 
@@ -1445,6 +1445,24 @@ Please also refer to the documentation for alternative solver options:
 <p><code>-</code> 시험 공부(2): (시험 하루 전날에) 공부 그만하고 술이나 먹으러 가자.. 더 공부하면 train error만 줄일 뿐이야..</p>
 <p><code>-</code> 운전: 특정도로에서만 운전연습을 했음. 그래서 그 도로의 구멍, 곡률, 신호등의 위치까지 완벽하게 숙지하였음. 그 결과 그 도로에서는 잘하게 되었지만, 그 도로 이외의 다른도로에서 운전을 한다면 문제가 발생함.</p>
 <p><code>-</code> 언어: 특정 주제나 특정 상황에 대한 대화만을 반복적으로 연습하여, 그 상황에서는 완벽한 대화가 가능하지만 그 외의 상황에서는 대화를 제대로 이어나갈 수 없음.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>오버피팅에 대한 내 개념</strong>: <code>Predictor</code>가 언더라잉이 아니라 오차항을 적합하고 있는 상황.</p>
+<ul>
+<li>이 예제에서 언더라잉은 <code>gpa</code>,<code>toiec</code>만으로 충분히 적합할 수 있다.</li>
+<li>따라서 <code>gpa</code>,<code>toiec</code> 이의외 변수가 적합하고 있는 것은 오차항이다.</li>
+<li>그래서 오버핏이 발생</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 <section id="숙제" class="level1">

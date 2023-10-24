@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-09-21">
 
-<title>MP2023 - 03wk-013: 타이타닉 / 로지스틱</title>
+<title>MP2023 - 03wk-013: 타이타닉 / 로지스틱 – 추가해설</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -186,7 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">03wk-013: 타이타닉 / 로지스틱</h1>
+<h1 class="title">03wk-013: 타이타닉 / 로지스틱 – 추가해설</h1>
 </div>
 
 
@@ -506,6 +506,19 @@ memory usage: 83.7+ KB</code></pre>
 <pre><code>681</code></pre>
 </div>
 </div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>밸런스게임 예제</strong>: 이걸 one-hot 인코딩한다면 열이 엄청나게 많아진다. 이러한 열들은 당연히 y와 직접적인 상관관계는 없게 나올것이다. 즉 쓸모없는 변수들이 많아지는 상황이 되는데 이는 <code>모듈21</code>에서 소개한 “밸런스게임으로 변수를 증가시킨” 예제와 비슷한 상황이다.</p>
+</div>
+</div>
 <p><code>-</code> 문제3: df_train의 <code>Age</code>와 <code>Embarked</code>에 약간 포함된 결측치가 마음에 걸린다.. <span class="math inline">\(\to\)</span> 빼자!</p>
 <p><code>-</code> 문제4: df_test의 <code>Fare</code>에 포함된 결측값도 걸린다. <span class="math inline">\(\to\)</span> 빼자!</p>
 <div id="7ee03b1d-c9b9-43f9-bb93-b2e205e69868" class="cell" data-execution_count="11">
@@ -529,6 +542,19 @@ Data columns (total 11 columns):
  10  Embarked     418 non-null    object 
 dtypes: float64(2), int64(4), object(5)
 memory usage: 36.0+ KB</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>결측치처리</strong>: 결측치가 포함된 열을 제외하는 것도 좋지만 적절한 값을 impute하는 것도 좋다.</p>
 </div>
 </div>
 </section>

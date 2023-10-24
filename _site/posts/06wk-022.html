@@ -9,7 +9,7 @@
 <meta name="author" content="최규빈">
 <meta name="dcterms.date" content="2023-10-05">
 
-<title>MP2023 - 06wk-022: 취업(다중공선성) / 다중공선성의 개념</title>
+<title>MP2023 - 06wk-022: 취업(다중공선성) / 다중공선성의 개념 – 추가해설</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">06wk-022: 취업(다중공선성) / 다중공선성의 개념</h1>
+<h1 class="title">06wk-022: 취업(다중공선성) / 다중공선성의 개념 – 추가해설</h1>
 </div>
 
 
@@ -1021,11 +1021,46 @@ test_score: 0.9115</code></pre>
 <h1>6. Discussions</h1>
 <p><code>-</code> 의문: 왜 변수를 더 많이 넣었는데 이상한 결과가 나올까?</p>
 <p><code>-</code> 어렴풋한 감각: 쓸모없는 변수가 많이 있으면 오히려 모형의 적합도가 떨어진다. (규칙을 찾으면 안될것에서 규칙을 찾고있으니까 잘 될리가 없지)</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>오버피팅에 대한 내 개념</strong>: <code>Predictor</code>가 언더라잉이 아니라 오차항을 적합하고 있는 상황.</p>
+<ul>
+<li>규칙을 찾으면 안될 것 = 오차항</li>
+<li>규칙을 찾고 있음 = 오차항을 적합하고 있음</li>
+</ul>
+</div>
+</div>
 <p><code>-</code> 쓸모없는 변수란 느낌이 드는 경우?</p>
 <ul>
 <li>경우1: 진짜 쓸모 없는거.. (X1= 부먹/찍먹, X2= 민초/민초X) <span class="math inline">\(\to\)</span> 애초에 <code>X1</code>,<code>X2</code>을 보고 <code>y</code>를 맞출 생각이 들지 않어..</li>
 <li>경우2: 실제론 쓸모 있는데, 대체자가 있는 경우. (X1= toeic, X2= 유사toeic) <span class="math inline">\(\to\)</span> <code>X1</code> 을 보고 <code>y</code>를 맞출 것 같은 생각이 들어, 그리고 <code>X2</code>를 보고 <code>y</code>를 맞출 것 같은 생각도 들어. 그런데 <code>X1</code>이랑 <code>X2</code>는 너무 비슷해</li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+2023-10-24 추가해설
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>경우1,2에 대한 추가설명</strong>:</p>
+<ul>
+<li>경우1,2는 모듈28에서 소개한 것 처럼 히트맵을 그려서 파악할 수 있다.</li>
+<li>경우1은 corr(y,X1), corr(y,X2)의 값이 낮게 나온다.</li>
+<li>경우2는 corr(y,X1), corr(y,X2)의 값이 높게 나온다. 하지만 corr(X1,X2)의 값도 높게 나온다.</li>
+</ul>
+</div>
+</div>
 <p><code>-</code> 경우1, 경우2 모두 과대적합(overfitting)을 야기한다. 그리고 경우2와 같은 상황에서 발생하는 문제를 특별히 다중공선성이라고 칭한다.</p>
 </section>
 <section id="다중공선성의-특징" class="level1">
