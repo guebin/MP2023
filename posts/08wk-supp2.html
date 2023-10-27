@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="최규빈">
+<meta name="dcterms.date" content="2023-11-02">
 
-<title>MP2023 - 대면수업</title>
+<title>MP2023 - 08wk: 중간고사 (ver 0.1)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,59 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -66,40 +100,11 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -109,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">MP2023</span>
     </a>
   </div>
@@ -120,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./offline.html" aria-current="page"> 
+    <a class="nav-link" href="../offline.html"> 
 <span class="menu-text"><strong>대면수업</strong></span></a>
   </li>  
 </ul>
@@ -143,23 +148,45 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ox" id="toc-ox" class="nav-link active" data-scroll-target="#ox"><code>1</code>. O/X</a></li>
+  <li><a href="#자료분석" id="toc-자료분석" class="nav-link" data-scroll-target="#자료분석"><code>2</code>. 자료분석</a></li>
+  <li><a href="#연구" id="toc-연구" class="nav-link" data-scroll-target="#연구"><code>3</code>. 연구</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="08wk-supp2.out.ipynb" download="08wk-supp2.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><strong>대면수업</strong></h1>
+<h1 class="title">08wk: 중간고사 (ver 0.1)</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>최규빈 </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 2, 2023</p>
+    </div>
+  </div>
   
     
   </div>
@@ -168,85 +195,68 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>기계학습활용은 비대면수업과 대면수업을 병행합니다. 본 페이지는 대면수업을 위한 강의자료입니다.</p>
-<p><strong>공지사항</strong></p>
-<ul>
-<li>대면수업은 학점과 무관한 수업입니다. (대면수업에 참여하지 않아도 학점에 불이익이 없습니다)</li>
-<li><strong>9월7일 대면수업</strong>: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론</li>
-<li><strong>9월12일 대면수업</strong>: 9월12일 대면수업은 Quarto를 이용한 기술블로그 만들기를 이어서 설명하겠습니다. 9월7일 대면수업 내용을 따라오신 상태이어야 합니다. (가능하면 지난시간에 실습했던 자리를 이어서 하는게 좋을거에요)</li>
-<li><strong>9월21일 대면수업</strong>: Anaconda를 이용한 개발환경만들기</li>
-</ul>
-<p><strong>강의노트</strong></p>
-
-
-
-
-<div class="quarto-listing quarto-listing-container-table" id="listing-listing">
-<table class="quarto-listing-table table">
-<thead>
-<tr>
-<th>
-Date
-</th>
-<th>
-Title
-</th>
-<th>
-Author
-</th>
-</tr>
-</thead>
-<tbody class="list">
-<tr data-index="0" data-listing-date-sort="1695654000000" data-listing-file-modified-sort="1698408680761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="106" data-listing-title-sort="2023-09-26 -- 코드스페이스, 리눅스명령어, kaggle.json" data-listing-filename-sort="230926.ipynb">
-<td>
-<span class="listing-date">Sep 26, 2023</span>
-</td>
-<td>
-<a href="./offline/230926.html" class="title listing-title">2023-09-26 – 코드스페이스, 리눅스명령어, kaggle.json</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-<tr data-index="1" data-listing-date-sort="1695222000000" data-listing-file-modified-sort="1698408680761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="198" data-listing-title-sort="2023-09-21 -- Anaconda를 이용하여 autogluon 설치하기" data-listing-filename-sort="230921.ipynb">
-<td>
-<span class="listing-date">Sep 21, 2023</span>
-</td>
-<td>
-<a href="./offline/230921.html" class="title listing-title">2023-09-21 – Anaconda를 이용하여 autogluon 설치하기</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-<tr data-index="2" data-listing-date-sort="1694444400000" data-listing-file-modified-sort="1698408680761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="434" data-listing-title-sort="2023-09-12 -- Quarto Blog 만들기" data-listing-filename-sort="230912.ipynb">
-<td>
-<span class="listing-date">Sep 12, 2023</span>
-</td>
-<td>
-<a href="./offline/230912.html" class="title listing-title">2023-09-12 – Quarto Blog 만들기</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-<tr data-index="3" data-listing-date-sort="1694012400000" data-listing-file-modified-sort="1698408680761" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="271" data-listing-title-sort="2023-09-07 -- 준비, 가상환경설정, Local ↔ Github" data-listing-filename-sort="230907.ipynb">
-<td>
-<span class="listing-date">Sep 7, 2023</span>
-</td>
-<td>
-<a href="./offline/230907.html" class="title listing-title">2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github</a>
-</td>
-<td>
-<span class="listing-author">최규빈 </span>
-</td>
-</tr>
-</tbody>
-</table>
-<div class="listing-no-matching d-none">
-No matching items
+<hr>
+<ol type="1">
+<li>True/False를 판단하는 문제는 답만 써도 무방함.</li>
+<li>“자료분석” 문제는 “kaggle style score = 50%”, “분석의 논리 = 50%” 의 배점으로 채점한다.</li>
+<li>“자료분석” 유형의 경우 분석의 논리가 매우 우수하거나, 창의적인 접근법으로 분석을 시도할 경우 가산점을 부여한다. (아이디어 단계에서도 가산점 부여가능) 가산점은 문항점수의 최대 100%까지 부여한다.</li>
+<li>“연구” 문항의 경우 세부문항을 정확하게 수행한 경우에만 100%의 점수를 부여하며 이를 어길시 부분점수를 부여하지 않는다. 연구결과의 시각화나 해석이 우수한 답안은 문항점수의 20%까지 가산점을 부여한다.</li>
+</ol>
+<hr>
+<div id="70bd7605-1f7a-48be-ab9a-ccca3295104e" class="cell" data-tags="[]" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.preprocessing </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.model_selection</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div></main> <!-- /main -->
+<section id="ox" class="level1">
+<h1><code>1</code>. O/X</h1>
+<p><code>(1)</code> <a href="https://guebin.github.io/MP2023/posts/03wk-009.html#b.-predictor-%EC%83%9D%EC%84%B1">모듈9 5-B</a>에서 <code>sklearn.linear_model.LinearRegression()</code> 대신 <code>sklearn.linear_model.LogisticRegression()</code> 를 이용하여 predictor를 생성해도 무방하다.</p>
+</section>
+<section id="자료분석" class="level1">
+<h1><code>2</code>. 자료분석</h1>
+<p><code>(1)</code> 아래의 자료를 해석하고 세부지침에 맞추어 분석하라.</p>
+<div id="54316308-ea49-4eac-9887-2896d4ee3011" class="cell" data-tags="[]" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/icesales_train.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/icesales_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>세부지침</strong></p>
+<ol type="1">
+<li>반응변수 <span class="math inline">\({\bf y}\)</span>를 <code>sales</code>로 설정하고 나머지는 설명변수로 설정하라.</li>
+<li><code>sklearn.linear_model</code> 에 포함된 모형들을 이용하여 분석하라.</li>
+</ol>
+<p><code>(2)</code> 아래의 자료를 해석하고 세부지침에 맞추어 분석하라.</p>
+<div id="18a24cc9-5a5e-487d-9c21-2c728a0124a0" class="cell" data-tags="[]" data-execution_count="104">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/synthetic_train.csv'</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/synthetic_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>세부지침</strong></p>
+<ol type="1">
+<li>반응변수 <span class="math inline">\({\bf y}\)</span>를 <code>y</code>로 설정하고 나머지는 설명변수로 설정하라.</li>
+<li><code>sklearn.preprocessing</code>내의 적절한 scaler 설명변수를 scaling하라.</li>
+</ol>
+</section>
+<section id="연구" class="level1 page-columns page-full">
+<h1><code>3</code>. 연구</h1>
+<p><code>(1)</code> 아래의 자료를 세부지침에 맞추어 연구하라.</p>
+<div id="7ea9b65b-6206-4cbf-b411-4acf4c6c1758" class="cell" data-tags="[]" data-execution_count="96">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/guebin/MP2023/main/posts/employment_multicollinearity.csv"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'employment_score'</span>] <span class="op">=</span> df.gpa <span class="op">*</span> <span class="fl">1.0</span> <span class="op">+</span> df.toeic<span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100</span> <span class="op">+</span> np.random.randn(<span class="dv">500</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>세부지침</strong></p>
+<ol type="1">
+<li>종속변수 <span class="math inline">\({\bf y}\)</span>를 <code>sales</code>로 설정하고 나머지는 설명변수로 설정하라.</li>
+<li><code>sklearn.linear_model.Lasso</code>를 이용하여 <span class="math inline">\(\alpha =0,1,0.2, \dots, 1.9, 2.0\)</span>에 대해 predictor를 생성하라.</li>
+<li><span class="math inline">\(\alpha\)</span>의 변화에 따른 score의 변화와<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> 0이 아닌 계수값의 수를 시각화하라.</li>
+</ol>
+
+
+<div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;<code>predictor.score</code> 함수이용하여 계산되는 값</p></li></div></section>
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -590,6 +600,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 
