@@ -1,21 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><meta charset="utf-8">
+
+<meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.322">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -178,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#funcanimation" id="toc-funcanimation" class="nav-link" data-scroll-target="#funcanimation">3. <code>FuncAnimation</code></a></li>
   <li><a href="#hw" id="toc-hw" class="nav-link" data-scroll-target="#hw">4. HW</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="10wk-036.out.ipynb" download="10wk-036.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="10wk-036.out.ipynb" download="10wk-036.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="10wk-036.out.ipynb" download="10wk-036.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -223,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.animation</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> IPython</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> IPython</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="funcanimation" class="level1">
@@ -233,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">6</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">100</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(<span class="fl">0.1</span><span class="op">*</span>k<span class="op">*</span>x) </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="10wk-036_files/figure-html/cell-3-output-1.png" class="" width="590" height="411"></p>
 </div>
@@ -251,14 +237,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(<span class="fl">0.1</span><span class="op">*</span>k<span class="op">*</span>x) </span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure() <span class="co"># 하나의 고정된 그림을 정의하는 코드 </span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.gca() </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax.plot(x,y) <span class="co"># 고정된 그림에서 내용물을 frame에 따라서 바꾸는 동작을 정의하는 코드 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ax.plot(x,y) <span class="co"># 고정된 그림에서 내용물을 frame에 따라서 바꾸는 동작을 정의하는 코드 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="10wk-036_files/figure-html/cell-4-output-1.png" class="" width="590" height="411"></p>
 </div>
 </div>
 <p><code>-</code> 애니메이션</p>
 <div id="0d1ac693-c3ae-45b1-bf5e-5b46e9b39324" class="cell" data-tags="[]" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure() <span class="co"># 하나의 고정된 그림을 정의하는 코드 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure() <span class="co"># 하나의 고정된 그림을 정의하는 코드 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>&lt;Figure size 672x480 with 0 Axes&gt;</code></pre>
 </div>
@@ -269,17 +255,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    ax.clear()</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">100</span>)</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.sin(<span class="fl">0.1</span><span class="op">*</span>frame<span class="op">*</span>x) </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(x,y) <span class="co"># 고정된 그림에서 내용물을 frame에 따라서 바꾸는 동작을 정의하는 코드 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    ax.plot(x,y) <span class="co"># 고정된 그림에서 내용물을 frame에 따라서 바꾸는 동작을 정의하는 코드 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="73181eb6-d90a-4da4-9bca-33d1353d13be" class="cell" data-tags="[]" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ani <span class="op">=</span> matplotlib.animation.FuncAnimation(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    fig, <span class="co"># 하나의 고정된 그림</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    func, <span class="co"># 고정된 그림에서 내용물을 frame에 따라서 바꾸는 동작을 함수로 정의하고, 그 함수를 넣음</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    frames<span class="op">=</span><span class="dv">50</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="d8ecaf3f-10d5-4a8f-a5cf-b3bdd5df71f6" class="cell" data-tags="[]" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>display(IPython.display.HTML(ani.to_jshtml()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>display(IPython.display.HTML(ani.to_jshtml()))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -465,36 +451,36 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img6751100ca4ef406092ab4ffb42003bf8">
+  <img id="_anim_imgcb6e722782f041098e5bf32eb0f8de58">
   <div class="anim-controls">
-    <input id="_anim_slider6751100ca4ef406092ab4ffb42003bf8" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anim6751100ca4ef406092ab4ffb42003bf8.set_frame(parseInt(this.value));">
+    <input id="_anim_slidercb6e722782f041098e5bf32eb0f8de58" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="animcb6e722782f041098e5bf32eb0f8de58.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim6751100ca4ef406092ab4ffb42003bf8.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animcb6e722782f041098e5bf32eb0f8de58.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim6751100ca4ef406092ab4ffb42003bf8.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animcb6e722782f041098e5bf32eb0f8de58.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim6751100ca4ef406092ab4ffb42003bf8.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animcb6e722782f041098e5bf32eb0f8de58.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim6751100ca4ef406092ab4ffb42003bf8.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animcb6e722782f041098e5bf32eb0f8de58.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim6751100ca4ef406092ab4ffb42003bf8.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animcb6e722782f041098e5bf32eb0f8de58.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim6751100ca4ef406092ab4ffb42003bf8.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animcb6e722782f041098e5bf32eb0f8de58.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim6751100ca4ef406092ab4ffb42003bf8.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animcb6e722782f041098e5bf32eb0f8de58.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim6751100ca4ef406092ab4ffb42003bf8.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animcb6e722782f041098e5bf32eb0f8de58.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim6751100ca4ef406092ab4ffb42003bf8.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animcb6e722782f041098e5bf32eb0f8de58.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select6751100ca4ef406092ab4ffb42003bf8" class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_6751100ca4ef406092ab4ffb42003bf8">
-      <label for="_anim_radio1_6751100ca4ef406092ab4ffb42003bf8">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_6751100ca4ef406092ab4ffb42003bf8" checked="">
-      <label for="_anim_radio2_6751100ca4ef406092ab4ffb42003bf8">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_6751100ca4ef406092ab4ffb42003bf8">
-      <label for="_anim_radio3_6751100ca4ef406092ab4ffb42003bf8">Reflect</label>
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectcb6e722782f041098e5bf32eb0f8de58" class="anim-state">
+      <input type="radio" name="state" value="once" id="_anim_radio1_cb6e722782f041098e5bf32eb0f8de58">
+      <label for="_anim_radio1_cb6e722782f041098e5bf32eb0f8de58">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_cb6e722782f041098e5bf32eb0f8de58" checked="">
+      <label for="_anim_radio2_cb6e722782f041098e5bf32eb0f8de58">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_cb6e722782f041098e5bf32eb0f8de58">
+      <label for="_anim_radio3_cb6e722782f041098e5bf32eb0f8de58">Reflect</label>
     </form>
   </div>
 </div>
@@ -504,9 +490,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img6751100ca4ef406092ab4ffb42003bf8";
-    var slider_id = "_anim_slider6751100ca4ef406092ab4ffb42003bf8";
-    var loop_select_id = "_anim_loop_select6751100ca4ef406092ab4ffb42003bf8";
+    var img_id = "_anim_imgcb6e722782f041098e5bf32eb0f8de58";
+    var slider_id = "_anim_slidercb6e722782f041098e5bf32eb0f8de58";
+    var loop_select_id = "_anim_loop_selectcb6e722782f041098e5bf32eb0f8de58";
     var frames = new Array(50);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAYAAAB6jN80AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -27963,7 +27949,7 @@ BEEQBFcoACUIgiAIgiC4QgEoQRAEQRAEwRUKQAmCIAiCIAiuUABKEARBEARBcIUCUIIgCIIgCIIr\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim6751100ca4ef406092ab4ffb42003bf8 = new Animation(frames, img_id, slider_id, 200.0,
+        animcb6e722782f041098e5bf32eb0f8de58 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -27976,7 +27962,7 @@ BEEQBFcoACUIgiAIgiC4QgEoQRAEQRAEwRUKQAmCIAiCIAiuUABKEARBEARBcIUCUIIgCIIgCIIr\
 <div id="963af332-b32f-404b-9dee-125c79b209f9" class="cell" data-tags="[]" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">10</span>,<span class="dv">100</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(<span class="dv">5</span><span class="op">*</span>x) </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="10wk-036_files/figure-html/cell-9-output-1.png" class="" width="590" height="411"></p>
 </div>
