@@ -203,22 +203,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="f2298395-f61a-45d1-92d9-53afd0c1f1f3" class="cell" data-tags="[]" data-execution_count="8">
+<div id="f2298395-f61a-45d1-92d9-53afd0c1f1f3" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.model_selection</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.linear_model</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.tree</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="data" class="level1">
 <h1>3. Data</h1>
-<div id="9073c08d-3f2b-4cb4-9ad3-115b84e031ac" class="cell" data-tags="[]" data-execution_count="9">
+<div id="9073c08d-3f2b-4cb4-9ad3-115b84e031ac" class="cell" data-tags="[]" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/guebin/MP2023/main/posts/employment_multicollinearity.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'employment_score'</span>] <span class="op">=</span> df.gpa <span class="op">*</span> <span class="fl">1.0</span> <span class="op">+</span> df.toeic<span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100</span> <span class="op">+</span> np.random.randn(<span class="dv">500</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -521,10 +524,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="fe562d4f-becb-445a-984d-d9b0e1d3e1f5" class="cell" data-tags="[]" data-execution_count="10">
+<div id="fe562d4f-becb-445a-984d-d9b0e1d3e1f5" class="cell" data-tags="[]" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f94aa4ad-3682-4088-b912-3e2b23c96f71" class="cell" data-tags="[]" data-execution_count="11">
+<div id="f94aa4ad-3682-4088-b912-3e2b23c96f71" class="cell" data-tags="[]" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>X,y <span class="op">=</span> df_train.loc[:,<span class="st">'gpa'</span>:],df_train[<span class="st">'employment_score'</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>XX,yy <span class="op">=</span> df_test.loc[:,<span class="st">'gpa'</span>:],df_test[<span class="st">'employment_score'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -535,7 +538,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="분석" class="level1">
 <h1>4. 분석</h1>
 <p><code>-</code> 분석1: 의사결정나무</p>
-<div id="2b51b5f8-8039-437a-b8bb-0cb8ec2d3ac6" class="cell" data-tags="[]" data-execution_count="14">
+<div id="2b51b5f8-8039-437a-b8bb-0cb8ec2d3ac6" class="cell" data-tags="[]" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 -- pass </span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">## step2 </span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.tree.DecisionTreeRegressor(random_state<span class="op">=</span><span class="dv">42</span>)</span>
@@ -556,7 +559,7 @@ test score: 0.8300</code></pre>
 <li>오버핏이긴한데 나쁘지 않음..</li>
 </ul>
 <p><code>-</code> 분석2: Lasso</p>
-<div id="1c17de70-4ce2-4a2b-8196-c76efab2efe4" class="cell" data-tags="[]" data-execution_count="15">
+<div id="1c17de70-4ce2-4a2b-8196-c76efab2efe4" class="cell" data-tags="[]" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 -- pass </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">## step2 </span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LassoCV()</span>
@@ -568,162 +571,6 @@ test score: 0.8300</code></pre>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'train score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'test score: </span><span class="sc">{</span>predictr<span class="sc">.</span>score(XX,yy)<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.405e-01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.201e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.824e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.914e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 6.018e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 8.785e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.007e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.099e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.120e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.084e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.171e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.346e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.655e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.898e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.112e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.258e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.147e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.844e+00, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.174e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.206e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.447e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.739e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.238e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.561e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.673e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.799e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.659e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.574e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.414e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.699e+01, tolerance: 2.707e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.640e-01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 9.357e-01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.353e+00, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.341e+00, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 4.380e+00, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 7.561e+00, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 9.144e+00, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 9.869e+00, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.042e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.151e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.362e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.393e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.565e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.660e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.788e+01, tolerance: 2.670e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.947e-01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 8.008e-01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.337e+00, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.410e+00, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.400e+00, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 9.299e+00, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.387e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.721e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.116e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.587e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.865e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.174e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.254e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.614e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 2.732e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.030e+01, tolerance: 2.721e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 8.196e-01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.200e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 3.779e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 6.594e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 6.524e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.851e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 5.160e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 6.410e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 8.755e+00, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.131e+01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.388e+01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.581e+01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.547e+01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.379e+01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 1.953e+01, tolerance: 2.540e-01
-  model = cd_fast.enet_coordinate_descent(
-/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/linear_model/_coordinate_descent.py:628: ConvergenceWarning: Objective did not converge. You might want to increase the number of iterations, check the scale of the features or consider increasing regularisation. Duality gap: 8.392e+01, tolerance: 3.337e-01
-  model = cd_fast.enet_coordinate_descent(</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>train score: 0.8994
 test score: 0.8587</code></pre>
