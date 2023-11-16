@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="최규빈">
-<meta name="dcterms.date" content="2023-11-14">
+<meta name="dcterms.date" content="2023-11-16">
 
-<title>MP2023 - 11wk:</title>
+<title>MP2023 - 11wk-040: Medical Cost / 의사결정나무의 시각화</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -157,15 +157,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#tree와-관련된-옵션" id="toc-tree와-관련된-옵션" class="nav-link active" data-scroll-target="#tree와-관련된-옵션">1. Tree와 관련된 옵션</a>
+  <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
+  <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports">2. Imports</a></li>
+  <li><a href="#데이터준비-적합" id="toc-데이터준비-적합" class="nav-link" data-scroll-target="#데이터준비-적합">3. 데이터준비 + 적합</a></li>
+  <li><a href="#matplotlib-기반-시각화" id="toc-matplotlib-기반-시각화" class="nav-link" data-scroll-target="#matplotlib-기반-시각화">4. matplotlib 기반 시각화</a>
   <ul class="collapse">
-  <li><a href="#random-state" id="toc-random-state" class="nav-link" data-scroll-target="#random-state">random state</a></li>
-  <li><a href="#max_feature" id="toc-max_feature" class="nav-link" data-scroll-target="#max_feature">max_feature</a></li>
+  <li><a href="#a.-기본시각화" id="toc-a.-기본시각화" class="nav-link" data-scroll-target="#a.-기본시각화">A. 기본시각화</a></li>
+  <li><a href="#b.-max_depth-조정" id="toc-b.-max_depth-조정" class="nav-link" data-scroll-target="#b.-max_depth-조정">B. max_depth 조정</a></li>
+  <li><a href="#c.-변수이름-추가" id="toc-c.-변수이름-추가" class="nav-link" data-scroll-target="#c.-변수이름-추가">C. 변수이름 추가</a></li>
+  <li><a href="#d.-fig-오브젝트" id="toc-d.-fig-오브젝트" class="nav-link" data-scroll-target="#d.-fig-오브젝트">D. fig 오브젝트</a></li>
+  <li><a href="#e.-matplotlib의-ax에-그리기" id="toc-e.-matplotlib의-ax에-그리기" class="nav-link" data-scroll-target="#e.-matplotlib의-ax에-그리기">E. <code>matplotlib</code>의 ax에 그리기</a></li>
   </ul></li>
-  <li><a href="#시각화" id="toc-시각화" class="nav-link" data-scroll-target="#시각화">2. 시각화</a></li>
-  <li><a href="#배깅" id="toc-배깅" class="nav-link" data-scroll-target="#배깅">2. 배깅</a></li>
-  <li><a href="#랜덤포레스트" id="toc-랜덤포레스트" class="nav-link" data-scroll-target="#랜덤포레스트">4. 랜덤포레스트</a></li>
-  <li><a href="#부스팅" id="toc-부스팅" class="nav-link" data-scroll-target="#부스팅">5. 부스팅</a></li>
+  <li><a href="#graphviz-를-이용" id="toc-graphviz-를-이용" class="nav-link" data-scroll-target="#graphviz-를-이용">5. GraphViz 를 이용</a></li>
+  <li><a href="#hw" id="toc-hw" class="nav-link" data-scroll-target="#hw">6. HW</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="11wk-040.out.ipynb" download="11wk-040.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -174,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">11wk:</h1>
+<h1 class="title">11wk-040: Medical Cost / 의사결정나무의 시각화</h1>
 </div>
 
 
@@ -191,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 14, 2023</p>
+      <p class="date">November 16, 2023</p>
     </div>
   </div>
   
@@ -202,147 +206,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<div id="3af36d5d-48d8-4ab7-af9b-9e0a75b3aa1a" class="cell" data-tags="[]" data-execution_count="325">
+<section id="강의영상" class="level1">
+<h1>1. 강의영상</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wy5HZfyF9HIZKvAXrdBwzO&amp;si=vTJ3EiJLr487p2DT" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="imports" class="level1">
+<h1>2. Imports</h1>
+<div id="a332db65-62bb-4b88-be1a-23ccae014939" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.tree</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.ensemble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="tree와-관련된-옵션" class="level1">
-<h1>1. Tree와 관련된 옵션</h1>
-<section id="random-state" class="level2">
-<h2 class="anchored" data-anchor-id="random-state">random state</h2>
-<div id="4cde6e69-8018-4b92-abc6-cfe91392964c" class="cell" data-tags="[]" data-execution_count="326">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'X1'</span>:[<span class="op">-</span><span class="fl">0.609</span>,  <span class="fl">0.240</span>,  <span class="fl">0.605</span>,  <span class="fl">0.685</span>,  <span class="fl">0.739</span>,  <span class="fl">1.605</span>],</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'X2'</span>:[ <span class="fl">1.</span>   ,  <span class="fl">1.</span>   ,  <span class="fl">1.</span>   ,  <span class="fl">0.</span>   ,  <span class="fl">0.</span>   ,  <span class="fl">0.</span>   ],</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'y'</span>:[<span class="fl">1.</span>, <span class="fl">1.</span>, <span class="fl">1.</span>, <span class="fl">2.</span>, <span class="fl">2.</span>, <span class="fl">2.</span>]</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="25f9b75d-5c1e-44e8-b5e0-6f8a5ced2fbb" class="cell" data-tags="[]" data-execution_count="327">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'X1'</span>,<span class="st">'X2'</span>]]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="9057ddb5-02da-4bce-b87a-3a857f36f7d5" class="cell" data-tags="[]" data-execution_count="328">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.tree.DecisionTreeRegressor()</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="328">
-<style>#sk-container-id-54 {color: black;}#sk-container-id-54 pre{padding: 0;}#sk-container-id-54 div.sk-toggleable {background-color: white;}#sk-container-id-54 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-54 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-54 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-54 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-54 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-54 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-54 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-54 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-54 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-54 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-54 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-54 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-54 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-54 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-54 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-54 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-54 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-54 div.sk-item {position: relative;z-index: 1;}#sk-container-id-54 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-54 div.sk-item::before, #sk-container-id-54 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-54 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-54 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-54 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-54 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-54 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-54 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-54 div.sk-label-container {text-align: center;}#sk-container-id-54 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-54 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-54" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeRegressor()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-54" type="checkbox" checked=""><label for="sk-estimator-id-54" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeRegressor</label><div class="sk-toggleable__content"><pre>DecisionTreeRegressor()</pre></div></div></div></div></div>
-</div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sklearn.tree</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> graphviz</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="max_feature" class="level2">
-<h2 class="anchored" data-anchor-id="max_feature">max_feature</h2>
-<div id="ab4336b5-a986-435f-b213-a81c71e11553" class="cell" data-tags="[]" data-execution_count="329">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array([<span class="st">'male'</span>] <span class="op">*</span> <span class="dv">500</span> <span class="op">+</span> [<span class="st">'female'</span>] <span class="op">*</span> <span class="dv">500</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_data(data, male_prob, female_prob, size):</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    male_sample <span class="op">=</span> np.random.choice(data[data<span class="op">==</span><span class="st">'male'</span>], size<span class="op">=</span><span class="bu">int</span>(size <span class="op">*</span> male_prob))</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    female_sample <span class="op">=</span> np.random.choice(data[data<span class="op">==</span><span class="st">'female'</span>], size<span class="op">=</span><span class="bu">int</span>(size <span class="op">*</span> female_prob))</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.concatenate([male_sample, female_sample])</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>train <span class="op">=</span> sample_data(data, <span class="fl">0.8</span>, <span class="fl">0.2</span>, <span class="dv">280</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>test <span class="op">=</span> sample_data(data, <span class="fl">0.2</span>, <span class="fl">0.8</span>, <span class="dv">120</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>np.random.shuffle(train)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>np.random.shuffle(test)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>sex <span class="op">=</span> np.concatenate([train,test])</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>weight <span class="op">=</span> np.random.randn(<span class="dv">400</span>)<span class="op">*</span><span class="dv">7</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> np.random.randn(<span class="dv">400</span>)<span class="op">*</span><span class="dv">3</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i,s <span class="kw">in</span> <span class="bu">enumerate</span>(sex):</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> s <span class="op">==</span><span class="st">'male'</span>:</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        weight[i] <span class="op">=</span> <span class="dv">75</span><span class="op">+</span>weight[i]</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        height[i] <span class="op">=</span> height[i]<span class="op">+</span><span class="fl">0.8</span><span class="op">*</span>weight[i]<span class="op">+</span><span class="dv">120</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        weight[i] <span class="op">=</span> <span class="dv">50</span><span class="op">+</span>weight[i]<span class="op">*</span><span class="fl">0.6</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        height[i] <span class="op">=</span> height[i]<span class="op">+</span><span class="fl">1.3</span><span class="op">*</span>weight[i]<span class="op">+</span><span class="dv">100</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'weight'</span>:weight,<span class="st">'sex'</span>:sex,<span class="st">'height'</span>:height})</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="dv">120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="f19812b7-8070-42d6-8212-d5971fd07155" class="cell" data-tags="[]" data-execution_count="345">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,marker<span class="op">=</span><span class="st">'o'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_test,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,marker<span class="op">=</span><span class="st">'o'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="345">
-<pre><code>&lt;Axes: xlabel='weight', ylabel='height'&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="11wk-040_files/figure-html/cell-13-output-2.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="0f4efb9d-b9de-42aa-906e-7df0adf0d793" class="cell" data-tags="[]" data-execution_count="396">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train)[[<span class="st">'weight'</span>,<span class="st">'sex_female'</span>,<span class="st">'sex_male'</span>]] <span class="co"># drop_first 를 하는게 더 좋긴한데요, 설명을 위해서..</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'height'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="c8f43eaa-9e16-4f47-8a2e-519e01a1d5cf" class="cell" data-tags="[]" data-execution_count="429">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.ensemble.RandomForestRegressor(max_features<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="5931eff9-43ba-45fd-9a4e-a9e20ef2d2fc" class="cell" data-tags="[]" data-execution_count="430">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="430">
-<style>#sk-container-id-74 {color: black;}#sk-container-id-74 pre{padding: 0;}#sk-container-id-74 div.sk-toggleable {background-color: white;}#sk-container-id-74 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-74 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-74 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-74 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-74 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-74 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-74 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-74 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-74 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-74 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-74 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-74 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-74 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-74 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-74 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-74 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-74 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-74 div.sk-item {position: relative;z-index: 1;}#sk-container-id-74 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-74 div.sk-item::before, #sk-container-id-74 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-74 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-74 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-74 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-74 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-74 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-74 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-74 div.sk-label-container {text-align: center;}#sk-container-id-74 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-74 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-74" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor(max_features=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-74" type="checkbox" checked=""><label for="sk-estimator-id-74" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestRegressor</label><div class="sk-toggleable__content"><pre>RandomForestRegressor(max_features=1)</pre></div></div></div></div></div>
-</div>
-</div>
-<div id="d0bfca8c-ca41-415f-9a89-b393cff1442a" class="cell" data-tags="[]" data-execution_count="431">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,marker<span class="op">=</span><span class="st">'o'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>predictr.predict(X),hue<span class="op">=</span><span class="st">'sex'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="431">
-<pre><code>&lt;Axes: xlabel='weight', ylabel='height'&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<p><img src="11wk-040_files/figure-html/cell-17-output-2.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="시각화" class="level1">
-<h1>2. 시각화</h1>
-<div id="a9e846f7-a0c7-4344-a31a-2962151888e8" class="cell" data-tags="[]" data-execution_count="307">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    predictr,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span> [<span class="st">'X1'</span>,<span class="st">'X2'</span>] </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.gcf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="11wk-040_files/figure-html/cell-18-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="33247c7c-e408-4a22-be7f-cba8e4b01847" class="cell" data-tags="[]" data-execution_count="311">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Decision_Tree_Result"</span>,size<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="311">
-<pre><code>Text(0.5, 0.98, 'Decision_Tree_Result')</code></pre>
-</div>
-</div>
-<div id="932f5ce7-6de0-421f-b2a3-484af49ab866" class="cell" data-tags="[]" data-execution_count="312">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="312">
-<p><img src="11wk-040_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-<div id="7f223b0a-e356-4a48-aaff-99bd01dd2ebe" class="cell" data-tags="[]" data-execution_count="313">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fig.get_dpi()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="313">
-<pre><code>100.0</code></pre>
-</div>
-</div>
-<div id="9c2a4aa3-37d4-4ac2-8f7c-9fda08294a36" class="cell" data-tags="[]" data-execution_count="315">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fig.set_dpi(<span class="dv">150</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="315">
-<p><img src="11wk-040_files/figure-html/cell-22-output-1.png" class="img-fluid"></p>
-</div>
-</div>
-</section>
-<section id="배깅" class="level1">
-<h1>2. 배깅</h1>
-<div id="ba75afd1-68ad-474a-8f60-c4d0bc79b613" class="cell" data-tags="[]" data-execution_count="316">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">3</span>].to_numpy()[:<span class="dv">100</span>]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>temp.sort()</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>eps <span class="op">=</span> np.random.randn(<span class="dv">100</span>)<span class="op">*</span><span class="dv">3</span> <span class="co"># 오차</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>icecream_sales <span class="op">=</span> <span class="dv">20</span> <span class="op">+</span> temp <span class="op">*</span> <span class="fl">2.5</span> <span class="op">+</span> eps </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.DataFrame({<span class="st">'temp'</span>:temp,<span class="st">'sales'</span>:icecream_sales})</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="316">
+<section id="데이터준비-적합" class="level1">
+<h1>3. 데이터준비 + 적합</h1>
+<div id="0f4fcf29-0eca-4c4a-8cff-ed7d8ae0c99c" class="cell" data-tags="[]" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/main/posts/insurance.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -350,233 +236,271 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">temp</th>
-<th data-quarto-table-cell-role="th">sales</th>
+<th data-quarto-table-cell-role="th">age</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">bmi</th>
+<th data-quarto-table-cell-role="th">children</th>
+<th data-quarto-table-cell-role="th">smoker</th>
+<th data-quarto-table-cell-role="th">region</th>
+<th data-quarto-table-cell-role="th">charges</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
-<td>-4.1</td>
-<td>10.900261</td>
+<td>19</td>
+<td>female</td>
+<td>27.900</td>
+<td>0</td>
+<td>yes</td>
+<td>southwest</td>
+<td>16884.92400</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
-<td>-3.7</td>
-<td>14.002524</td>
+<td>18</td>
+<td>male</td>
+<td>33.770</td>
+<td>1</td>
+<td>no</td>
+<td>southeast</td>
+<td>1725.55230</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
-<td>-3.0</td>
-<td>15.928335</td>
+<td>28</td>
+<td>male</td>
+<td>33.000</td>
+<td>3</td>
+<td>no</td>
+<td>southeast</td>
+<td>4449.46200</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3</td>
-<td>-1.3</td>
-<td>17.673681</td>
+<td>33</td>
+<td>male</td>
+<td>22.705</td>
+<td>0</td>
+<td>no</td>
+<td>northwest</td>
+<td>21984.47061</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4</td>
-<td>-0.5</td>
-<td>19.463362</td>
+<td>32</td>
+<td>male</td>
+<td>28.880</td>
+<td>0</td>
+<td>no</td>
+<td>northwest</td>
+<td>3866.85520</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
 <td>...</td>
 <td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">95</td>
-<td>12.4</td>
-<td>54.926065</td>
+<td data-quarto-table-cell-role="th">1333</td>
+<td>50</td>
+<td>male</td>
+<td>30.970</td>
+<td>3</td>
+<td>no</td>
+<td>northwest</td>
+<td>10600.54830</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">96</td>
-<td>13.4</td>
-<td>54.716129</td>
+<td data-quarto-table-cell-role="th">1334</td>
+<td>18</td>
+<td>female</td>
+<td>31.920</td>
+<td>0</td>
+<td>no</td>
+<td>northeast</td>
+<td>2205.98080</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">97</td>
-<td>14.7</td>
-<td>56.194791</td>
+<td data-quarto-table-cell-role="th">1335</td>
+<td>18</td>
+<td>female</td>
+<td>36.850</td>
+<td>0</td>
+<td>no</td>
+<td>southeast</td>
+<td>1629.83350</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">98</td>
-<td>15.0</td>
-<td>60.666163</td>
+<td data-quarto-table-cell-role="th">1336</td>
+<td>21</td>
+<td>female</td>
+<td>25.800</td>
+<td>0</td>
+<td>no</td>
+<td>southwest</td>
+<td>2007.94500</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">99</td>
-<td>15.2</td>
-<td>61.561043</td>
+<td data-quarto-table-cell-role="th">1337</td>
+<td>61</td>
+<td>female</td>
+<td>29.070</td>
+<td>0</td>
+<td>yes</td>
+<td>northwest</td>
+<td>29141.36030</td>
 </tr>
 </tbody>
 </table>
 
-<p>100 rows × 2 columns</p>
+<p>1338 rows × 7 columns</p>
 </div>
 </div>
 </div>
-<div id="1fcdf69f-9df2-4279-8b66-cdf954a2bd0f" class="cell" data-tags="[]" data-execution_count="317">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">## step1</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'temp'</span>]]</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'sales'</span>]</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">## step2</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.ensemble.BaggingRegressor() </span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co">## step3 </span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y) </span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co">## step4 -- pass </span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co"># predictr.predict(X) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="317">
-<style>#sk-container-id-53 {color: black;}#sk-container-id-53 pre{padding: 0;}#sk-container-id-53 div.sk-toggleable {background-color: white;}#sk-container-id-53 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-53 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-53 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-53 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-53 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-53 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-53 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-53 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-53 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-53 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-53 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-53 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-53 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-53 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-53 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-53 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-53 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-53 div.sk-item {position: relative;z-index: 1;}#sk-container-id-53 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-53 div.sk-item::before, #sk-container-id-53 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-53 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-53 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-53 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-53 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-53 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-53 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-53 div.sk-label-container {text-align: center;}#sk-container-id-53 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-53 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-53" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>BaggingRegressor()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-53" type="checkbox" checked=""><label for="sk-estimator-id-53" class="sk-toggleable__label sk-toggleable__label-arrow">BaggingRegressor</label><div class="sk-toggleable__content"><pre>BaggingRegressor()</pre></div></div></div></div></div>
-</div>
-</div>
-<div id="79ca92f2-9311-40ab-b00f-5ce952d0ebc8" class="cell" data-tags="[]" data-execution_count="207">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>trees <span class="op">=</span> predictr.estimators_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="ce448b4e-ae0a-4557-b6e3-d8ddb2de0162" class="cell" data-tags="[]" data-execution_count="208">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> predictr.estimators_samples_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="f95e594b-068f-4357-a678-7d9671d9c22e" class="cell" data-tags="[]" data-execution_count="209">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>trees[<span class="dv">1</span>].predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/base.py:458: UserWarning: X has feature names, but DecisionTreeRegressor was fitted without feature names</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="209">
-<pre><code>array([14.0025235 , 14.0025235 , 15.92833474, 15.76077374, 15.76077374,
-       15.76077374, 15.76077374, 16.85168046, 16.85168046, 17.29135111,
-       17.29135111, 21.83665228, 21.83665228, 21.83665228, 18.34698175,
-       27.5369675 , 27.5369675 , 19.35814522, 19.35814522, 25.60634212,
-       25.60634212, 25.60634212, 32.42440294, 21.09890576, 21.09890576,
-       21.09890576, 28.09502366, 28.09502366, 29.55903213, 30.75418385,
-       27.39353391, 27.39353391, 27.39353391, 27.39353391, 27.39353391,
-       25.9552363 , 25.9552363 , 25.9552363 , 25.9552363 , 25.9552363 ,
-       28.77913678, 28.77913678, 28.77913678, 30.47132105, 30.47132105,
-       36.55080009, 30.35623814, 30.35623814, 30.35623814, 37.4829917 ,
-       37.4829917 , 32.76368326, 32.76368326, 35.41843425, 35.41843425,
-       40.1783271 , 40.1783271 , 36.08400962, 34.22629655, 35.86837964,
-       35.86837964, 36.83742646, 36.83742646, 33.93877582, 33.93877582,
-       33.93877582, 41.86734269, 41.86734269, 39.9036573 , 39.9036573 ,
-       39.32604237, 39.32604237, 39.32604237, 39.32604237, 39.32604237,
-       48.56374143, 48.56374143, 36.83769073, 36.83769073, 36.83769073,
-       36.83769073, 36.83769073, 36.83769073, 43.96756583, 43.96756583,
-       43.96756583, 45.27629809, 42.92028786, 45.91596595, 45.91596595,
-       48.09778984, 48.09778984, 48.09778984, 48.09778984, 51.91224393,
-       51.91224393, 54.71612873, 56.19479095, 60.66616291, 60.66616291])</code></pre>
-</div>
-</div>
-<div id="035be1fa-a0d9-40a6-ab1d-96d623727aa6" class="cell" data-tags="[]" data-execution_count="210">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>samples[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="210">
-<pre><code>array([41, 57, 94, 59, 65, 80, 27, 62, 46,  1, 39, 10, 71, 57, 15, 67, 87,
-       80, 50, 47, 12, 99,  1, 91, 91, 79, 92, 16, 12, 84, 99, 80,  2,  4,
-       89, 69,  8, 22,  7, 62, 93, 29, 59, 38, 61, 26, 18, 30, 28, 80, 36,
-       35, 62, 70, 54, 19,  1, 21, 16, 72, 12, 49, 97, 91, 93, 16, 82, 10,
-       84, 51,  3, 33, 36, 27, 28, 91, 84, 77,  3, 21, 64, 21, 69, 61, 50,
-       26, 24, 56, 85, 61, 13, 10, 71, 64, 97, 68, 64, 43, 64, 86])</code></pre>
-</div>
-</div>
-<div id="cfbecc4d-0cb6-4828-819e-befe0cbc35f2" class="cell" data-tags="[]" data-execution_count="211">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pre <span class="op">=</span> sklearn.tree.DecisionTreeRegressor()</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pre.fit(np.array(X)[samples[<span class="dv">1</span>]],np.array(y)[samples[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="211">
-<style>#sk-container-id-34 {color: black;}#sk-container-id-34 pre{padding: 0;}#sk-container-id-34 div.sk-toggleable {background-color: white;}#sk-container-id-34 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-34 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-34 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-34 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-34 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-34 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-34 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-34 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-34 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-34 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-34 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-34 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-34 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-34 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-34 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-34 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-34 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-34 div.sk-item {position: relative;z-index: 1;}#sk-container-id-34 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-34 div.sk-item::before, #sk-container-id-34 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-34 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-34 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-34 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-34 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-34 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-34 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-34 div.sk-label-container {text-align: center;}#sk-container-id-34 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-34 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-34" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeRegressor()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-34" type="checkbox" checked=""><label for="sk-estimator-id-34" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeRegressor</label><div class="sk-toggleable__content"><pre>DecisionTreeRegressor()</pre></div></div></div></div></div>
-</div>
-</div>
-<div id="a5005cdb-baa1-45f9-9c1b-daf6aaadc326" class="cell" data-tags="[]" data-execution_count="212">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pre.predict(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/sklearn/base.py:458: UserWarning: X has feature names, but DecisionTreeRegressor was fitted without feature names</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="212">
-<pre><code>array([14.0025235 , 14.0025235 , 15.92833474, 15.76077374, 15.76077374,
-       15.76077374, 15.76077374, 16.85168046, 16.85168046, 17.29135111,
-       17.29135111, 21.83665228, 21.83665228, 21.83665228, 18.34698175,
-       27.5369675 , 27.5369675 , 19.35814522, 19.35814522, 25.60634212,
-       25.60634212, 25.60634212, 32.42440294, 21.09890576, 21.09890576,
-       21.09890576, 28.09502366, 28.09502366, 29.55903213, 30.75418385,
-       27.39353391, 27.39353391, 27.39353391, 27.39353391, 27.39353391,
-       25.9552363 , 25.9552363 , 25.9552363 , 25.9552363 , 25.9552363 ,
-       28.77913678, 28.77913678, 28.77913678, 30.47132105, 30.47132105,
-       36.55080009, 30.35623814, 30.35623814, 30.35623814, 37.4829917 ,
-       37.4829917 , 32.76368326, 32.76368326, 35.41843425, 35.41843425,
-       40.1783271 , 40.1783271 , 36.08400962, 34.22629655, 35.86837964,
-       35.86837964, 36.83742646, 36.83742646, 33.93877582, 33.93877582,
-       33.93877582, 41.86734269, 41.86734269, 39.9036573 , 39.9036573 ,
-       39.32604237, 39.32604237, 39.32604237, 39.32604237, 39.32604237,
-       48.56374143, 48.56374143, 36.83769073, 36.83769073, 36.83769073,
-       36.83769073, 36.83769073, 36.83769073, 43.96756583, 43.96756583,
-       43.96756583, 45.27629809, 42.92028786, 45.91596595, 45.91596595,
-       48.09778984, 48.09778984, 48.09778984, 48.09778984, 51.91224393,
-       51.91224393, 54.71612873, 56.19479095, 60.66616291, 60.66616291])</code></pre>
-</div>
-</div>
-<div id="5cfc5573-13f2-4b95-8d7c-b5b453879a11" class="cell" data-tags="[]" data-execution_count="213">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X,y,<span class="st">'o'</span>)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>plt.plot(X,predictr.predict(X),<span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<p><img src="11wk-040_files/figure-html/cell-31-output-1.png" class="img-fluid"></p>
+<div id="541a5d15-7d6d-4d32-8ae3-9931a0b18471" class="cell" data-tags="[]" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train.loc[:,<span class="st">'age'</span>:<span class="st">'region'</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'charges'</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.tree.DecisionTreeRegressor(max_depth<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 -- pass </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<style>#sk-container-id-2 {color: black;}#sk-container-id-2 pre{padding: 0;}#sk-container-id-2 div.sk-toggleable {background-color: white;}#sk-container-id-2 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-2 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-2 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-2 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-2 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-2 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-2 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-2 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-2 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-2 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-2 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-2 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-2 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-2 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-2 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-2 div.sk-item {position: relative;z-index: 1;}#sk-container-id-2 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-2 div.sk-item::before, #sk-container-id-2 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-2 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-2 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-2 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-2 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-2 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-2 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-2 div.sk-label-container {text-align: center;}#sk-container-id-2 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-2 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-2" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>DecisionTreeRegressor(max_depth=3)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" checked=""><label for="sk-estimator-id-2" class="sk-toggleable__label sk-toggleable__label-arrow">DecisionTreeRegressor</label><div class="sk-toggleable__content"><pre>DecisionTreeRegressor(max_depth=3)</pre></div></div></div></div></div>
 </div>
 </div>
 </section>
-<section id="랜덤포레스트" class="level1">
-<h1>4. 랜덤포레스트</h1>
-<div id="9f0ac435-0e79-4ca4-96af-b370318e7f81" class="cell" data-tags="[]" data-execution_count="241">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.ensemble.RandomForestRegressor()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="a0d2c880-975a-4750-bac9-4f209f2dd6af" class="cell" data-tags="[]" data-execution_count="243">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>X,y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="243">
-<pre><code>(array([[-0.609,  1.   ],
-        [ 0.24 ,  1.   ],
-        [ 0.605,  1.   ],
-        [ 0.685,  0.   ],
-        [ 0.739,  0.   ],
-        [ 1.605,  0.   ]]),
- array([1, 1, 1, 2, 2, 2]))</code></pre>
+<section id="matplotlib-기반-시각화" class="level1">
+<h1>4. matplotlib 기반 시각화</h1>
+<section id="a.-기본시각화" class="level2">
+<h2 class="anchored" data-anchor-id="a.-기본시각화">A. 기본시각화</h2>
+<div id="497d1672-3d6b-485f-bbf2-50ba05dc7fb6" class="cell" data-tags="[]" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(predictr)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="11wk-040_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div id="ded8cec3-1a4f-4c3a-80e0-082dda443b4f" class="cell" data-tags="[]" data-execution_count="242">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="242">
-<style>#sk-container-id-37 {color: black;}#sk-container-id-37 pre{padding: 0;}#sk-container-id-37 div.sk-toggleable {background-color: white;}#sk-container-id-37 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-37 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-37 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-37 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-37 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-37 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-37 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-37 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-37 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-37 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-37 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-37 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-37 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-37 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-37 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-37 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-37 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-37 div.sk-item {position: relative;z-index: 1;}#sk-container-id-37 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-37 div.sk-item::before, #sk-container-id-37 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-37 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-37 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-37 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-37 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-37 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-37 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-37 div.sk-label-container {text-align: center;}#sk-container-id-37 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-37 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-37" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>RandomForestRegressor()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-37" type="checkbox" checked=""><label for="sk-estimator-id-37" class="sk-toggleable__label sk-toggleable__label-arrow">RandomForestRegressor</label><div class="sk-toggleable__content"><pre>RandomForestRegressor()</pre></div></div></div></div></div>
+<ul>
+<li>잘 안보임</li>
+</ul>
+</section>
+<section id="b.-max_depth-조정" class="level2">
+<h2 class="anchored" data-anchor-id="b.-max_depth-조정">B. max_depth 조정</h2>
+<div id="a9271aee-4fa6-4269-89cf-39afba459dc1" class="cell" data-tags="[]" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    predictr,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="11wk-040_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 </section>
-<section id="부스팅" class="level1">
-<h1>5. 부스팅</h1>
-<div id="e4b82ebe-23be-4277-9a01-8305ae93aed0" class="cell" data-tags="[]" data-execution_count="259">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.ensemble.GradientBoostingRegressor() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="3b41f498-2592-4396-9001-a034d12e3a3d" class="cell" data-tags="[]" data-execution_count="260">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>X,y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="260">
-<pre><code>(array([[-0.609,  1.   ],
-        [ 0.24 ,  1.   ],
-        [ 0.605,  1.   ],
-        [ 0.685,  0.   ],
-        [ 0.739,  0.   ],
-        [ 1.605,  0.   ]]),
- array([1, 1, 1, 2, 2, 2]))</code></pre>
-</div>
-</div>
-<div id="c7536506-f000-467a-8daa-dee103c1e232" class="cell" data-tags="[]" data-execution_count="262">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="262">
-<style>#sk-container-id-43 {color: black;}#sk-container-id-43 pre{padding: 0;}#sk-container-id-43 div.sk-toggleable {background-color: white;}#sk-container-id-43 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-43 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-43 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-43 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-43 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-43 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-43 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-43 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-43 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-43 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-43 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-43 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-43 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-43 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-43 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-43 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-43 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-43 div.sk-item {position: relative;z-index: 1;}#sk-container-id-43 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-43 div.sk-item::before, #sk-container-id-43 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-43 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-43 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-43 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-43 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-43 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-43 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-43 div.sk-label-container {text-align: center;}#sk-container-id-43 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-43 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-43" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GradientBoostingRegressor()</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br>On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden=""><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-43" type="checkbox" checked=""><label for="sk-estimator-id-43" class="sk-toggleable__label sk-toggleable__label-arrow">GradientBoostingRegressor</label><div class="sk-toggleable__content"><pre>GradientBoostingRegressor()</pre></div></div></div></div></div>
-</div>
-</div>
-<div id="3e0f0cb3-9d63-40a9-bfa1-a82ef6dc66e9" class="cell" data-tags="[]" data-execution_count="291">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(predictr.estimators_[<span class="dv">5</span>][<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="291">
-<pre><code>[Text(0.5, 0.75, 'x[1] &lt;= 0.5\nfriedman_mse = 0.087\nsamples = 6\nvalue = 0.0'),
- Text(0.25, 0.25, 'friedman_mse = -0.0\nsamples = 3\nvalue = 0.295'),
- Text(0.75, 0.25, 'friedman_mse = 0.0\nsamples = 3\nvalue = -0.295')]</code></pre>
-</div>
+<section id="c.-변수이름-추가" class="level2">
+<h2 class="anchored" data-anchor-id="c.-변수이름-추가">C. 변수이름 추가</h2>
+<div id="8061ca6c-1cac-456d-8cac-55cbf4561a6a" class="cell" data-tags="[]" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    predictr,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>X.columns</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="11wk-040_files/figure-html/cell-38-output-2.png" class="img-fluid"></p>
+<p><img src="11wk-040_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
 </div>
 </div>
+</section>
+<section id="d.-fig-오브젝트" class="level2">
+<h2 class="anchored" data-anchor-id="d.-fig-오브젝트">D. fig 오브젝트</h2>
+<p><code>-</code> <code>plt.gcf()</code>를 이용하여 fig 오브젝트 추출</p>
+<div id="00d6f5ca-5b2c-4f59-9bd2-8f072ff3b8c1" class="cell" data-tags="[]" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    predictr,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    max_depth<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>X.columns</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.gcf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="11wk-040_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p><code>-</code> <code>fig.suptitle</code> 을 이용하여 제목을 붙일 수도 있지 않을까?</p>
+<div id="4fe7fa53-dfa1-4074-b731-6f94537c4565" class="cell" data-tags="[]" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"title??"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>Text(0.5, 0.98, 'title??')</code></pre>
+</div>
+</div>
+<div id="690f6c28-c4c0-42b6-a278-a5ec78fc6f87" class="cell" data-tags="[]" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<p><img src="11wk-040_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p><code>-</code> dpi 조정</p>
+<div id="949ba3a3-cadc-4dd3-9f1d-4999f0a1478e" class="cell" data-tags="[]" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig.set_dpi(<span class="dv">250</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<p><img src="11wk-040_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="e.-matplotlib의-ax에-그리기" class="level2">
+<h2 class="anchored" data-anchor-id="e.-matplotlib의-ax에-그리기">E. <code>matplotlib</code>의 ax에 그리기</h2>
+<div id="5d89ba95-f2ad-430f-aed3-8ee44714b7b0" class="cell" data-tags="[]" data-execution_count="66">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.subplots(<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(y,y,<span class="st">'--'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].plot(y,predictr.predict(X),<span class="st">'o'</span>,alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sklearn.tree.plot_tree(predictr,feature_names<span class="op">=</span>X.columns,ax<span class="op">=</span>ax[<span class="dv">1</span>],max_depth<span class="op">=</span><span class="dv">0</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="11wk-040_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+</section>
+<section id="graphviz-를-이용" class="level1">
+<h1>5. GraphViz 를 이용</h1>
+<div id="4d1c75de-d1d5-4152-bb80-c5013fbaffdc" class="cell" data-tags="[]" data-execution_count="69">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sklearn.tree.export_graphviz(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    predictr,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>X.columns</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="ae9c054b-edd7-4653-a3e9-b2240abfb96b" class="cell" data-tags="[]" data-execution_count="71">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>graphviz.Source(g)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="71">
+<p><img src="11wk-040_files/figure-html/cell-14-output-1.svg" class="img-fluid"></p>
+</div>
+</div>
+<ul>
+<li>보기에 훨씬 깔끔함</li>
+</ul>
+<p><code>-</code> 파일로 추출하여 저장하는 방법</p>
+<div id="bb09a512-6cb0-497b-bf50-e7829c2ed1b6" class="cell" data-tags="[]" data-execution_count="72">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sklearn.tree.export_graphviz(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    predictr,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    feature_names<span class="op">=</span>X.columns</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>graphviz.Source(g).render(<span class="st">'tree'</span>,<span class="bu">format</span><span class="op">=</span><span class="st">"pdf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="72">
+<pre><code>'tree.pdf'</code></pre>
+</div>
+</div>
+<ul>
+<li><code>tree.pdf</code> 이 생성되고 이 파일을 열면 tree의 구조를 쉽게 파악할 수 있음.</li>
+</ul>
+</section>
+<section id="hw" class="level1">
+<h1>6. HW</h1>
+<p><code>tree.pdf</code> 파일을 제출</p>
 
 
 </section>

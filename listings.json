@@ -2,6 +2,11 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/부스팅.html",
+      "/posts/랜포.html",
+      "/posts/11wk-043.html",
+      "/posts/11wk-042.html",
+      "/posts/11wk-041.html",
       "/posts/11wk-040.html",
       "/posts/10wk-039.html",
       "/posts/10wk-038.html",
@@ -50,6 +55,7 @@
     "listing": "/offline.html",
     "items": [
       "/offline/231114.html",
+      "/offline/231116.html",
       "/offline/230926.html",
       "/offline/230921.html",
       "/offline/230912.html",
