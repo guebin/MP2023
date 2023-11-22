@@ -9,42 +9,42 @@
   {
     "objectID": "offline/231116.html",
     "href": "offline/231116.html",
-    "title": "2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기",
+    "title": "2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기",
     "section": "",
     "text": "- 개발환경의 변화\n\n0세대 프로그래머 (프롬프트)\n1세대 프로그래머 (스크립트활용)\n2세대 프로그래머 (IDE 활용)\n3세대 프로그래머 (가상환경)\n4세대 프로그래머 (원격컴퓨터)"
   },
   {
     "objectID": "offline/231116.html#a.-ssh-연결-22",
     "href": "offline/231116.html#a.-ssh-연결-22",
-    "title": "2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기",
+    "title": "2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기",
     "section": "A. SSH 연결 (22)",
     "text": "A. SSH 연결 (22)\n- 연결하는 방법\nssh test@210.117.173.182"
   },
   {
     "objectID": "offline/231116.html#b.-ssh-연결-22번포트-우회하기",
     "href": "offline/231116.html#b.-ssh-연결-22번포트-우회하기",
-    "title": "2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기",
+    "title": "2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기",
     "section": "B. SSH 연결 (22번포트 우회하기)",
     "text": "B. SSH 연결 (22번포트 우회하기)\n- step1: /etc/ssh/sshd_config 파일을 연다.\nsudo vi /etc/ssh/sshd_config \n- step2: Port 22 라고 된 부분의 주석을 풀고 원하는 포트번호 설정 (예를들면 1116)\n...\n\n#Port 22\n#AddressFamily any\n#ListenAddress 0.0.0.0\n#ListenAddress ::\n\n...\n- step3: 수정내용을 적용\nsudo systemctl restart ssh.service\n- step4: 수정한 포트로 ssh접속\nssh test@210.117.173.182 -p 1116"
   },
   {
     "objectID": "offline/231116.html#c.-아나콘다-설치",
     "href": "offline/231116.html#c.-아나콘다-설치",
-    "title": "2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기",
+    "title": "2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기",
     "section": "C. 아나콘다 설치",
     "text": "C. 아나콘다 설치\n- 아나콘다 다운로드\nwget 주소\n- (아나콘다 설치) 아나콘다를 다운받은 폴더로 가서 아래와 같이 실행한다.\nbash Anaconda3-2019.03-Linux-x86_64.sh\n대충 bash Ana 정도까지만 치고 tab을 누르면 알아서 완성된다."
   },
   {
     "objectID": "offline/231116.html#d.-콘다-개발환경-셋팅-pass",
     "href": "offline/231116.html#d.-콘다-개발환경-셋팅-pass",
-    "title": "2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기",
+    "title": "2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기",
     "section": "D. 콘다 개발환경 셋팅 – pass",
     "text": "D. 콘다 개발환경 셋팅 – pass"
   },
   {
     "objectID": "offline/231116.html#e.-주피터-원격설정",
     "href": "offline/231116.html#e.-주피터-원격설정",
-    "title": "2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기",
+    "title": "2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기",
     "section": "E. 주피터 원격설정",
     "text": "E. 주피터 원격설정\n- 설정파일 생성\n(env) jupyter notebook --generate-config\n- 패스워드 설정\n(env) jupyter notebook password\n## 패스워드 치고\n## 확인해야함\n- 설정파일을 열고\nnano /home/test/.jupyter/jupyter_notebook_config.py\n아래의 내용을 수정한다.\nc.ServerApp.ip = '210.117.172.18X'\nc.ServerApp.port = ????\n아래의 내용을 추가로 수정하면 좋다.\nc.ServerApp.open_browser=False \nc.ExtensionApp.open_browser=False\nc.ServerApp.allow_origin = '*'\nc.ServerApp.allow_remote_access = True"
   },
@@ -1243,7 +1243,7 @@
     "href": "offline.html",
     "title": "대면수업",
     "section": "",
-    "text": "기계학습활용은 비대면수업과 대면수업을 병행합니다. 본 페이지는 대면수업을 위한 강의자료입니다.\n공지사항\n\n대면수업은 학점과 무관한 수업입니다. (대면수업에 참여하지 않아도 학점에 불이익이 없습니다)\n9월7일 대면수업: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론\n9월12일 대면수업: 9월12일 대면수업은 Quarto를 이용한 기술블로그 만들기를 이어서 설명하겠습니다. 9월7일 대면수업 내용을 따라오신 상태이어야 합니다. (가능하면 지난시간에 실습했던 자리를 이어서 하는게 좋을거에요)\n9월21일 대면수업: Anaconda를 이용한 개발환경만들기\n9월26일 대면수업: 코드스페이스를 이용한 리눅스명령어 실습\n11월14일 대면수업: 개발환경의 변천사\n11월16일 대면수업: 원격컴퓨터에서 주피터랩 실행\n\n강의노트\n\n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nNov 14, 2023\n\n\n2023-11-14 – 개발환경의 변천사\n\n\n최규빈 \n\n\n\n\nNov 14, 2023\n\n\n2023-11-14 – 원격컴퓨터에서 개발환경 셋팅하기\n\n\n최규빈 \n\n\n\n\nSep 26, 2023\n\n\n2023-09-26 – 코드스페이스, 리눅스명령어, kaggle.json\n\n\n최규빈 \n\n\n\n\nSep 21, 2023\n\n\n2023-09-21 – Anaconda를 이용하여 autogluon 설치하기\n\n\n최규빈 \n\n\n\n\nSep 12, 2023\n\n\n2023-09-12 – Quarto Blog 만들기\n\n\n최규빈 \n\n\n\n\nSep 7, 2023\n\n\n2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github\n\n\n최규빈 \n\n\n\n\n\nNo matching items"
+    "text": "기계학습활용은 비대면수업과 대면수업을 병행합니다. 본 페이지는 대면수업을 위한 강의자료입니다.\n공지사항\n\n대면수업은 학점과 무관한 수업입니다. (대면수업에 참여하지 않아도 학점에 불이익이 없습니다)\n9월7일 대면수업: Quarto를 이용한 기술블로그 만들기 + 타이타닉 자료에 대한 발표/토론\n9월12일 대면수업: 9월12일 대면수업은 Quarto를 이용한 기술블로그 만들기를 이어서 설명하겠습니다. 9월7일 대면수업 내용을 따라오신 상태이어야 합니다. (가능하면 지난시간에 실습했던 자리를 이어서 하는게 좋을거에요)\n9월21일 대면수업: Anaconda를 이용한 개발환경만들기\n9월26일 대면수업: 코드스페이스를 이용한 리눅스명령어 실습\n11월14일 대면수업: 개발환경의 변천사\n11월16일 대면수업: 원격컴퓨터에서 주피터랩 실행\n\n강의노트\n\n\n\n\n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nNov 16, 2023\n\n\n2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기\n\n\n최규빈 \n\n\n\n\nNov 14, 2023\n\n\n2023-11-14 – 개발환경의 변천사\n\n\n최규빈 \n\n\n\n\nSep 26, 2023\n\n\n2023-09-26 – 코드스페이스, 리눅스명령어, kaggle.json\n\n\n최규빈 \n\n\n\n\nSep 21, 2023\n\n\n2023-09-21 – Anaconda를 이용하여 autogluon 설치하기\n\n\n최규빈 \n\n\n\n\nSep 12, 2023\n\n\n2023-09-12 – Quarto Blog 만들기\n\n\n최규빈 \n\n\n\n\nSep 7, 2023\n\n\n2023-09-07 – 준비, 가상환경설정, Local ↔︎ Github\n\n\n최규빈 \n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "offline/230926.html",
