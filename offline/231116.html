@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="최규빈">
-<meta name="dcterms.date" content="2023-11-16">
+<meta name="dcterms.date" content="2023-11-14">
 
-<title>MP2023 - 2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기</title>
+<title>MP2023 - 2023-11-14 – 개발환경의 변천사 (2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -154,14 +120,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#지난시간에-한것" id="toc-지난시간에-한것" class="nav-link active" data-scroll-target="#지난시간에-한것">1. 지난시간에 한것</a></li>
-  <li><a href="#원격컴퓨터에서-개발환경-셋팅하기" id="toc-원격컴퓨터에서-개발환경-셋팅하기" class="nav-link" data-scroll-target="#원격컴퓨터에서-개발환경-셋팅하기">2. 원격컴퓨터에서 개발환경 셋팅하기</a>
+  <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
+  <li><a href="#개발환경의-변화" id="toc-개발환경의-변화" class="nav-link" data-scroll-target="#개발환경의-변화">2. 개발환경의 변화</a>
   <ul class="collapse">
-  <li><a href="#a.-ssh-연결-22" id="toc-a.-ssh-연결-22" class="nav-link" data-scroll-target="#a.-ssh-연결-22">A. SSH 연결 (22)</a></li>
-  <li><a href="#b.-ssh-연결-22번포트-우회하기" id="toc-b.-ssh-연결-22번포트-우회하기" class="nav-link" data-scroll-target="#b.-ssh-연결-22번포트-우회하기">B. SSH 연결 (22번포트 우회하기)</a></li>
-  <li><a href="#c.-아나콘다-설치" id="toc-c.-아나콘다-설치" class="nav-link" data-scroll-target="#c.-아나콘다-설치">C. 아나콘다 설치</a></li>
-  <li><a href="#d.-콘다-개발환경-셋팅-pass" id="toc-d.-콘다-개발환경-셋팅-pass" class="nav-link" data-scroll-target="#d.-콘다-개발환경-셋팅-pass">D. 콘다 개발환경 셋팅 – pass</a></li>
-  <li><a href="#e.-주피터-원격설정" id="toc-e.-주피터-원격설정" class="nav-link" data-scroll-target="#e.-주피터-원격설정">E. 주피터 원격설정</a></li>
+  <li><a href="#a.-0세대-프로그래머-프롬프트" id="toc-a.-0세대-프로그래머-프롬프트" class="nav-link" data-scroll-target="#a.-0세대-프로그래머-프롬프트">A. 0세대 프로그래머 (프롬프트)</a></li>
+  <li><a href="#b.-1세대-프로그래머-스크립트활용" id="toc-b.-1세대-프로그래머-스크립트활용" class="nav-link" data-scroll-target="#b.-1세대-프로그래머-스크립트활용">B. 1세대 프로그래머 (스크립트활용)</a></li>
+  <li><a href="#c.-2세대-프로그래머-ide-활용" id="toc-c.-2세대-프로그래머-ide-활용" class="nav-link" data-scroll-target="#c.-2세대-프로그래머-ide-활용">C. 2세대 프로그래머 (IDE 활용)</a></li>
+  <li><a href="#d.-3세대-프로그래머-가상환경" id="toc-d.-3세대-프로그래머-가상환경" class="nav-link" data-scroll-target="#d.-3세대-프로그래머-가상환경">D. 3세대 프로그래머 (가상환경)</a></li>
+  <li><a href="#e.-4세대-프로그래머-원격컴퓨터" id="toc-e.-4세대-프로그래머-원격컴퓨터" class="nav-link" data-scroll-target="#e.-4세대-프로그래머-원격컴퓨터">E. 4세대 프로그래머 (원격컴퓨터)</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="231116.out.ipynb" download="231116.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
@@ -171,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">2023-11-16 – 원격컴퓨터에서 개발환경 셋팅하기</h1>
+<h1 class="title">2023-11-14 – 개발환경의 변천사 (2)</h1>
 </div>
 
 
@@ -188,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 16, 2023</p>
+      <p class="date">November 14, 2023</p>
     </div>
   </div>
   
@@ -199,71 +165,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="지난시간에-한것" class="level1">
-<h1>1. 지난시간에 한것</h1>
-<p><code>-</code> 개발환경의 변화</p>
-<ul>
-<li>0세대 프로그래머 (프롬프트)</li>
-<li>1세대 프로그래머 (스크립트활용)</li>
-<li>2세대 프로그래머 (IDE 활용)</li>
-<li>3세대 프로그래머 (가상환경)</li>
-<li>4세대 프로그래머 (원격컴퓨터)</li>
-</ul>
+<section id="강의영상" class="level1">
+<h1>1. 강의영상</h1>
 </section>
-<section id="원격컴퓨터에서-개발환경-셋팅하기" class="level1">
-<h1>2. 원격컴퓨터에서 개발환경 셋팅하기</h1>
-<section id="a.-ssh-연결-22" class="level2">
-<h2 class="anchored" data-anchor-id="a.-ssh-연결-22">A. SSH 연결 (22)</h2>
-<p><code>-</code> 연결하는 방법</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> test@210.117.173.182</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="개발환경의-변화" class="level1">
+<h1>2. 개발환경의 변화</h1>
+<section id="a.-0세대-프로그래머-프롬프트" class="level2">
+<h2 class="anchored" data-anchor-id="a.-0세대-프로그래머-프롬프트">A. 0세대 프로그래머 (프롬프트)</h2>
 </section>
-<section id="b.-ssh-연결-22번포트-우회하기" class="level2">
-<h2 class="anchored" data-anchor-id="b.-ssh-연결-22번포트-우회하기">B. SSH 연결 (22번포트 우회하기)</h2>
-<p><code>-</code> step1: <code>/etc/ssh/sshd_config</code> 파일을 연다.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> vi /etc/ssh/sshd_config </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> step2: Port 22 라고 된 부분의 주석을 풀고 원하는 포트번호 설정 (예를들면 1116)</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Port 22</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#AddressFamily any</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress 0.0.0.0</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#ListenAddress ::</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> step3: 수정내용을 적용</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl restart ssh.service</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> step4: 수정한 포트로 ssh접속</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> test@210.117.173.182 <span class="at">-p</span> 1116 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="b.-1세대-프로그래머-스크립트활용" class="level2">
+<h2 class="anchored" data-anchor-id="b.-1세대-프로그래머-스크립트활용">B. 1세대 프로그래머 (스크립트활용)</h2>
 </section>
-<section id="c.-아나콘다-설치" class="level2">
-<h2 class="anchored" data-anchor-id="c.-아나콘다-설치">C. 아나콘다 설치</h2>
-<p><code>-</code> 아나콘다 다운로드</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> 주소</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> (아나콘다 설치) 아나콘다를 다운받은 폴더로 가서 아래와 같이 실행한다.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> Anaconda3-2019.03-Linux-x86_64.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>대충 <code>bash Ana</code> 정도까지만 치고 <code>tab</code>을 누르면 알아서 완성된다.</p>
+<section id="c.-2세대-프로그래머-ide-활용" class="level2">
+<h2 class="anchored" data-anchor-id="c.-2세대-프로그래머-ide-활용">C. 2세대 프로그래머 (IDE 활용)</h2>
 </section>
-<section id="d.-콘다-개발환경-셋팅-pass" class="level2">
-<h2 class="anchored" data-anchor-id="d.-콘다-개발환경-셋팅-pass">D. 콘다 개발환경 셋팅 – pass</h2>
+<section id="d.-3세대-프로그래머-가상환경" class="level2">
+<h2 class="anchored" data-anchor-id="d.-3세대-프로그래머-가상환경">D. 3세대 프로그래머 (가상환경)</h2>
+<p><code>-</code> <code>Anaconda</code>, <code>Docker</code> 를 활용할 수 있는 프로그래머를 3세대 프로그래머라고 부르겠음.</p>
+<p><code>-</code> 3세대 프로그래머는 “하나의” 로컬(=지금 내 눈앞에 있는 물리적컴퓨터)에서 “여러개”의 가상환경(=논리적으로 나누어진 여러개의 컴퓨터)를 다룰수 있음.</p>
+<p><code>-</code> 왜 이런일을 하는가? 패키지 충돌 관리</p>
 </section>
-<section id="e.-주피터-원격설정" class="level2">
-<h2 class="anchored" data-anchor-id="e.-주피터-원격설정">E. 주피터 원격설정</h2>
-<p><code>-</code> 설정파일 생성</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">env</span><span class="kw">)</span> <span class="ex">jupyter</span> notebook <span class="at">--generate-config</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> 패스워드 설정</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">env</span><span class="kw">)</span> <span class="ex">jupyter</span> notebook password</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">## 패스워드 치고</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">## 확인해야함</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><code>-</code> 설정파일을 열고</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> /home/test/.jupyter/jupyter_notebook_config.py</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>아래의 내용을 수정한다.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>c.ServerApp.ip = '210.117.172.18X'</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>c.ServerApp.port = ????</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>아래의 내용을 추가로 수정하면 좋다.</p>
-<pre><code>c.ServerApp.open_browser=False 
-c.ExtensionApp.open_browser=False
-c.ServerApp.allow_origin = '*'
-c.ServerApp.allow_remote_access = True</code></pre>
+<section id="e.-4세대-프로그래머-원격컴퓨터" class="level2">
+<h2 class="anchored" data-anchor-id="e.-4세대-프로그래머-원격컴퓨터">E. 4세대 프로그래머 (원격컴퓨터)</h2>
 
 
 </section>

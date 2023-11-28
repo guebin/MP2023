@@ -2,9 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/12wk-046.html",
-      "/posts/12wk-045.html",
-      "/posts/12wk-044.html",
       "/posts/11wk-043.html",
       "/posts/11wk-042.html",
       "/posts/11wk-041.html",
@@ -55,8 +52,9 @@
   {
     "listing": "/offline.html",
     "items": [
-      "/offline/231116.html",
+      "/offline/231128.html",
       "/offline/231114.html",
+      "/offline/231116.html",
       "/offline/230926.html",
       "/offline/230921.html",
       "/offline/230912.html",
