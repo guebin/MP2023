@@ -81,7 +81,7 @@
     "href": "offline/231128.html#d.-주피터랩-설치-및-실행",
     "title": "2023-11-28 – 원격컴퓨터에서 개발환경 셋팅하기 (Docker-가상환경)",
     "section": "D. 주피터랩 설치 및 실행",
-    "text": "D. 주피터랩 설치 및 실행\n- 주피터랩 설치\nconda install -c conda-forge jupyterlab \nconda install -c conda-forge notebook \n- 패스워드 설정\njupyter notebook password\n## 패스워드 치고\n## 확인해야함\n- 실행\njupyter lab --ip=\"0.0.0.0\" --port={MY-PORT} --no-browser --allow-root\n\n\n\n\n\n\nNote\n\n\n\nport는 2,3,4 + 학번끝4자리 조합으로 쓸 수 있음. 예를들어 학번끝 4자리가 3052라면\n23052\n33052\n43052\n에 해당하는 port번호를 쓸 수 있음.\n\n\n\n- 백엔드에서 주피터랩 실행 (터미널을 껐을때 주피터도 꺼지는게 싫다면..)\n\n- 백엔드에서 실행된 주피터랩 종료"
+    "text": "D. 주피터랩 설치 및 실행\n- 주피터랩 설치\nconda install -c conda-forge jupyterlab \nconda install -c conda-forge notebook \n- 패스워드 설정\njupyter notebook password\n## 패스워드 치고\n## 확인해야함\n- 실행\njupyter lab --ip=\"0.0.0.0\" --port={MY-PORT} --no-browser --allow-root\n\n\n\n\n\n\nNote\n\n\n\nport는 {1,2,3,4 중 학번끝5자리의 첫 글자 제외} + {학번끝4자리} 조합으로 쓸 수 있음. 예를들어 학번끝 5자리가 43052라면\n13052\n23052\n33052\n에 해당하는 port번호를 쓸 수 있음.\n\n\n\n- 백엔드에서 주피터랩 실행 (터미널을 껐을때 주피터도 꺼지는게 싫다면..)\n\n- 백엔드에서 실행된 주피터랩 종료"
   },
   {
     "objectID": "offline/231128.html#e.-git을-이용하여-강의노트-다운로드-업데이트",
