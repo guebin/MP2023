@@ -163,8 +163,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#b.-password-변경" id="toc-b.-password-변경" class="nav-link" data-scroll-target="#b.-password-변경">B. password 변경</a></li>
   <li><a href="#c.-아나콘다-설치" id="toc-c.-아나콘다-설치" class="nav-link" data-scroll-target="#c.-아나콘다-설치">C. 아나콘다 설치</a></li>
   <li><a href="#d.-주피터랩-설치-및-실행" id="toc-d.-주피터랩-설치-및-실행" class="nav-link" data-scroll-target="#d.-주피터랩-설치-및-실행">D. 주피터랩 설치 및 실행</a></li>
-  <li><a href="#e.-git을-이용하여-강의노트-다운로드-업데이트" id="toc-e.-git을-이용하여-강의노트-다운로드-업데이트" class="nav-link" data-scroll-target="#e.-git을-이용하여-강의노트-다운로드-업데이트">E. Git을 이용하여 강의노트 다운로드, 업데이트</a></li>
-  <li><a href="#f.-kaggle-설정하기" id="toc-f.-kaggle-설정하기" class="nav-link" data-scroll-target="#f.-kaggle-설정하기">F. Kaggle 설정하기</a></li>
+  <li><a href="#e.-오토글루온-설치" id="toc-e.-오토글루온-설치" class="nav-link" data-scroll-target="#e.-오토글루온-설치">E. 오토글루온 설치</a></li>
+  <li><a href="#f.-git을-이용하여-강의노트-다운로드-업데이트" id="toc-f.-git을-이용하여-강의노트-다운로드-업데이트" class="nav-link" data-scroll-target="#f.-git을-이용하여-강의노트-다운로드-업데이트">F. Git을 이용하여 강의노트 다운로드, 업데이트</a></li>
+  <li><a href="#g.-kaggle-설정하기" id="toc-g.-kaggle-설정하기" class="nav-link" data-scroll-target="#g.-kaggle-설정하기">G. Kaggle 설정하기</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="231128.out.ipynb" download="231128.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
@@ -272,22 +273,29 @@ Note
 <p><code>-</code> 백엔드에서 실행된 주피터랩 종료</p>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/pzuPd_4FZHw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
-<section id="e.-git을-이용하여-강의노트-다운로드-업데이트" class="level2">
-<h2 class="anchored" data-anchor-id="e.-git을-이용하여-강의노트-다운로드-업데이트">E. Git을 이용하여 강의노트 다운로드, 업데이트</h2>
+<section id="e.-오토글루온-설치" class="level2">
+<h2 class="anchored" data-anchor-id="e.-오토글루온-설치">E. 오토글루온 설치</h2>
+<p><code>-</code> ref: <a href="https://auto.gluon.ai/stable/install.html" class="uri">https://auto.gluon.ai/stable/install.html</a></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate ag </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge mamba</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> install <span class="at">-c</span> conda-forge autogluon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="f.-git을-이용하여-강의노트-다운로드-업데이트" class="level2">
+<h2 class="anchored" data-anchor-id="f.-git을-이용하여-강의노트-다운로드-업데이트">F. Git을 이용하여 강의노트 다운로드, 업데이트</h2>
 <p><code>-</code> 예를들어 데이터시각화 강의노트를 받는다면 아래와 같이 입력한다.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/guebin/DV2023.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/guebin/DV2023.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/u2usXzz5ZxA" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><code>-</code> updated된 데이터시각화 강의노트를 받으려면 “해당폴더로 이동한 후” 아래와 같이 입력한다.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/LusjjjtaEHg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
-<section id="f.-kaggle-설정하기" class="level2">
-<h2 class="anchored" data-anchor-id="f.-kaggle-설정하기">F. Kaggle 설정하기</h2>
+<section id="g.-kaggle-설정하기" class="level2">
+<h2 class="anchored" data-anchor-id="g.-kaggle-설정하기">G. Kaggle 설정하기</h2>
 <p><code>-</code> 아래를 실행</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda activate ag</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kaggle </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># conda activate ag</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install kaggle </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>-</code> <code>kaggle.json</code> 파일 업로드 + <code>/root/.kaggle</code>로 복사</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> kaggle.json /root/.kaggle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> kaggle.json /root/.kaggle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/y0TWNlw1ZfI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
