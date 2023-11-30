@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.322">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="최규빈">
+<meta name="dcterms.date" content="2023-12-01">
+
+<title>MP2023 - 13wk-53: 취업(다중공선성) / 자료분석(Autogluon)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">MP2023</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../offline.html"> 
+<span class="menu-text"><strong>대면수업</strong></span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guebin/MP2023"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/channel/UCQk9RyBNgXc7ORIsYlOfQrg/playlists?view=50&amp;sort=dd&amp;shelf_id=2"> <i class="bi bi-youtube" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
+  <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports">2. Imports</a></li>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">3. Data</a></li>
+  <li><a href="#적합" id="toc-적합" class="nav-link" data-scroll-target="#적합">4. 적합</a></li>
+  <li><a href="#해석-및-시각화" id="toc-해석-및-시각화" class="nav-link" data-scroll-target="#해석-및-시각화">5. 해석 및 시각화</a>
+  <ul class="collapse">
+  <li><a href="#a.-y의-분포-xy의-관계-시각화" id="toc-a.-y의-분포-xy의-관계-시각화" class="nav-link" data-scroll-target="#a.-y의-분포-xy의-관계-시각화">A. y의 분포, (X,y)의 관계 시각화</a></li>
+  <li><a href="#b.-중요한-설명변수" id="toc-b.-중요한-설명변수" class="nav-link" data-scroll-target="#b.-중요한-설명변수">B. 중요한 설명변수</a></li>
+  <li><a href="#c.-관측치별-해석" id="toc-c.-관측치별-해석" class="nav-link" data-scroll-target="#c.-관측치별-해석">C. 관측치별 해석</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="13wk-53.out.ipynb" download="13wk-53.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">13wk-53: 취업(다중공선성) / 자료분석(Autogluon)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>최규빈 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">December 1, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+<section id="강의영상" class="level1">
+<h1>1. 강의영상</h1>
+<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="????"></video></div>
+</section>
+<section id="imports" class="level1">
+<h1>2. Imports</h1>
+<div id="701076c2-df22-49de-b9dc-df3a6171e841" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install autogluon.eda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="21646279-6c20-47dd-b34e-d04734e4e052" class="cell" data-tags="[]" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> autogluon.tabular <span class="im">import</span> TabularPredictor</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> autogluon.eda.auto <span class="im">as</span> auto</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data" class="level1">
+<h1>3. Data</h1>
+<div id="d04c54ff-55bb-42b7-85fd-8206aa352e95" class="cell" data-tags="[]" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">43052</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/guebin/MP2023/main/posts/employment_multicollinearity.csv"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_train[<span class="st">'employment_score'</span>] <span class="op">=</span> df_train.gpa <span class="op">*</span> <span class="fl">1.0</span> <span class="op">+</span> df_train.toeic<span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100</span> <span class="op">+</span> np.random.randn(<span class="dv">500</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> df_train.iloc[:,:<span class="dv">8</span>]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">employment_score</th>
+<th data-quarto-table-cell-role="th">gpa</th>
+<th data-quarto-table-cell-role="th">toeic</th>
+<th data-quarto-table-cell-role="th">toeic0</th>
+<th data-quarto-table-cell-role="th">toeic1</th>
+<th data-quarto-table-cell-role="th">toeic2</th>
+<th data-quarto-table-cell-role="th">toeic3</th>
+<th data-quarto-table-cell-role="th">toeic4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1.784955</td>
+<td>0.051535</td>
+<td>135</td>
+<td>129.566309</td>
+<td>133.078481</td>
+<td>121.678398</td>
+<td>113.457366</td>
+<td>133.564200</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10.789671</td>
+<td>0.355496</td>
+<td>935</td>
+<td>940.563187</td>
+<td>935.723570</td>
+<td>939.190519</td>
+<td>938.995672</td>
+<td>945.376482</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>8.221213</td>
+<td>2.228435</td>
+<td>485</td>
+<td>493.671390</td>
+<td>493.909118</td>
+<td>475.500970</td>
+<td>480.363752</td>
+<td>478.868942</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2.137594</td>
+<td>1.179701</td>
+<td>65</td>
+<td>62.272565</td>
+<td>55.957257</td>
+<td>68.521468</td>
+<td>76.866765</td>
+<td>51.436321</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>8.650144</td>
+<td>3.962356</td>
+<td>445</td>
+<td>449.280637</td>
+<td>438.895582</td>
+<td>433.598274</td>
+<td>444.081141</td>
+<td>437.005100</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">495</td>
+<td>9.057243</td>
+<td>4.288465</td>
+<td>280</td>
+<td>276.680902</td>
+<td>274.502675</td>
+<td>277.868536</td>
+<td>292.283300</td>
+<td>277.476630</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">496</td>
+<td>4.108020</td>
+<td>2.601212</td>
+<td>310</td>
+<td>296.940263</td>
+<td>301.545000</td>
+<td>306.725610</td>
+<td>314.811407</td>
+<td>311.935810</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">497</td>
+<td>2.430590</td>
+<td>0.042323</td>
+<td>225</td>
+<td>206.793217</td>
+<td>228.335345</td>
+<td>222.115146</td>
+<td>216.479498</td>
+<td>227.469560</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">498</td>
+<td>5.343171</td>
+<td>1.041416</td>
+<td>320</td>
+<td>327.461442</td>
+<td>323.019899</td>
+<td>329.589337</td>
+<td>313.312233</td>
+<td>315.645050</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">499</td>
+<td>6.505106</td>
+<td>3.626883</td>
+<td>375</td>
+<td>370.966595</td>
+<td>364.668477</td>
+<td>371.853566</td>
+<td>373.574930</td>
+<td>376.701708</td>
+</tr>
+</tbody>
+</table>
+
+<p>500 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="적합" class="level1">
+<h1>4. 적합</h1>
+<div id="b0f59e3f-cf5f-4524-b835-58be9e2dc3cf" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 -- pass</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label <span class="op">=</span> <span class="st">'employment_score'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(df_train,num_gpus<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(df_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_195813/"
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20231130_195813/"
+AutoGluon Version:  0.8.1
+Python Version:     3.10.13
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #140-Ubuntu SMP Thu Aug 4 02:23:37 UTC 2022
+Disk Space Avail:   1585.56 GB / 1887.51 GB (84.0%)
+Train Data Rows:    500
+Train Data Columns: 7
+Label Column: employment_score
+Preprocessing data ...
+AutoGluon infers your prediction problem is: 'regression' (because dtype of label-column == float and many unique label-values observed).
+    Label info (max, min, mean, stddev): (15.12090627137731, -0.6447161480491369, 7.2271, 3.11598)
+    If 'regression' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    440399.76 MB
+    Train Data (Original)  Memory Usage: 0.03 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', []) : 6 | ['gpa', 'toeic0', 'toeic1', 'toeic2', 'toeic3', ...]
+        ('int', [])   : 1 | ['toeic']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('float', []) : 6 | ['gpa', 'toeic0', 'toeic1', 'toeic2', 'toeic3', ...]
+        ('int', [])   : 1 | ['toeic']
+    0.0s = Fit runtime
+    7 features in original data used to generate 7 features in processed data.
+    Train Data (Processed) Memory Usage: 0.03 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.03s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'root_mean_squared_error'
+    This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
+    To change this, specify the eval_metric parameter of Predictor()
+Automatically generating train/validation split with holdout_frac=0.2, Train Rows: 400, Val Rows: 100
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 11 L1 models ...
+Fitting model: KNeighborsUnif ...
+    -1.5764  = Validation score   (-root_mean_squared_error)
+    0.01s    = Training   runtime
+    0.03s    = Validation runtime
+Fitting model: KNeighborsDist ...
+    -1.5604  = Validation score   (-root_mean_squared_error)
+    0.01s    = Training   runtime
+    0.04s    = Validation runtime
+Fitting model: LightGBMXT ...
+    Training LightGBMXT with GPU, note that this may negatively impact model quality compared to CPU training.
+[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
+Please recompile with CMake option -DUSE_GPU=1
+Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
+    -0.9448  = Validation score   (-root_mean_squared_error)
+    1.87s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: LightGBM ...
+    Training LightGBM with GPU, note that this may negatively impact model quality compared to CPU training.
+[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
+Please recompile with CMake option -DUSE_GPU=1
+Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
+    -0.9643  = Validation score   (-root_mean_squared_error)
+    0.74s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: RandomForestMSE ...
+    -0.9278  = Validation score   (-root_mean_squared_error)
+    0.43s    = Training   runtime
+    0.05s    = Validation runtime
+Fitting model: CatBoost ...
+    Training CatBoost with GPU, note that this may negatively impact model quality compared to CPU training.
+    Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
+    -0.9462  = Validation score   (-root_mean_squared_error)
+    3.24s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: ExtraTreesMSE ...
+    -0.9428  = Validation score   (-root_mean_squared_error)
+    0.4s     = Training   runtime
+    0.06s    = Validation runtime
+Fitting model: NeuralNetFastAI ...
+    -0.9747  = Validation score   (-root_mean_squared_error)
+    1.98s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: XGBoost ...
+    -0.9637  = Validation score   (-root_mean_squared_error)
+    0.87s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: NeuralNetTorch ...
+    -0.8815  = Validation score   (-root_mean_squared_error)
+    1.12s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: LightGBMLarge ...
+    Training LightGBMLarge with GPU, note that this may negatively impact model quality compared to CPU training.
+[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
+Please recompile with CMake option -DUSE_GPU=1
+Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
+    -0.981   = Validation score   (-root_mean_squared_error)
+    0.72s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    -0.8727  = Validation score   (-root_mean_squared_error)
+    0.25s    = Training   runtime
+    0.0s     = Validation runtime
+AutoGluon training complete, total runtime = 11.97s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231130_195813/")</code></pre>
+</div>
+</div>
+</section>
+<section id="해석-및-시각화" class="level1">
+<h1>5. 해석 및 시각화</h1>
+<section id="a.-y의-분포-xy의-관계-시각화" class="level2">
+<h2 class="anchored" data-anchor-id="a.-y의-분포-xy의-관계-시각화">A. y의 분포, (X,y)의 관계 시각화</h2>
+<div id="9d6a5bc1-299a-4cb3-84e7-7b912491618c" class="cell" data-tags="[]" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auto.target_analysis(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'employment_score'</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    fit_distributions<span class="op">=</span><span class="va">False</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="target-variable-analysis" class="level2 cell-output cell-output-display">
+<h2 class="anchored" data-anchor-id="target-variable-analysis">Target variable analysis</h2>
+</section>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">mean</th>
+<th data-quarto-table-cell-role="th">std</th>
+<th data-quarto-table-cell-role="th">min</th>
+<th data-quarto-table-cell-role="th">25%</th>
+<th data-quarto-table-cell-role="th">50%</th>
+<th data-quarto-table-cell-role="th">75%</th>
+<th data-quarto-table-cell-role="th">max</th>
+<th data-quarto-table-cell-role="th">dtypes</th>
+<th data-quarto-table-cell-role="th">unique</th>
+<th data-quarto-table-cell-role="th">missing_count</th>
+<th data-quarto-table-cell-role="th">missing_ratio</th>
+<th data-quarto-table-cell-role="th">raw_type</th>
+<th data-quarto-table-cell-role="th">special_types</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">employment_score</td>
+<td>500</td>
+<td>7.227104</td>
+<td>3.115979</td>
+<td>-0.644716</td>
+<td>4.695513</td>
+<td>7.281178</td>
+<td>9.548811</td>
+<td>15.120906</td>
+<td>float64</td>
+<td>500</td>
+<td></td>
+<td></td>
+<td>float</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-3.png" class="img-fluid"></p>
+</div>
+<section id="target-variable-correlations" class="level3 cell-output cell-output-display">
+<h3 class="anchored" data-anchor-id="target-variable-correlations">Target variable correlations</h3>
+</section>
+<div class="cell-output cell-output-display">
+<p><strong><code>train_data</code> - <code>spearman</code> correlation matrix; focus: absolute correlation for <code>employment_score</code> &gt;= <code>0.5</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-6.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><strong>Feature interaction between <code>toeic</code>/<code>employment_score</code> in <code>train_data</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-8.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><strong>Feature interaction between <code>toeic2</code>/<code>employment_score</code> in <code>train_data</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-10.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><strong>Feature interaction between <code>toeic4</code>/<code>employment_score</code> in <code>train_data</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-12.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><strong>Feature interaction between <code>toeic3</code>/<code>employment_score</code> in <code>train_data</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-14.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><strong>Feature interaction between <code>toeic1</code>/<code>employment_score</code> in <code>train_data</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-16.png" class="img-fluid"></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><strong>Feature interaction between <code>toeic0</code>/<code>employment_score</code> in <code>train_data</code></strong></p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-6-output-18.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="b.-중요한-설명변수" class="level2">
+<h2 class="anchored" data-anchor-id="b.-중요한-설명변수">B. 중요한 설명변수</h2>
+<div id="1ecf3852-9a65-4517-9fe4-030661db2ca3" class="cell" data-tags="[]" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>auto.quick_fit(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    train_data <span class="op">=</span> df_train, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'employment_score'</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    show_feature_importance_barplots<span class="op">=</span><span class="va">True</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_133142/"</code></pre>
+</div>
+<section id="model-prediction-for-employment_score" class="level3 cell-output cell-output-display">
+<h3 class="anchored" data-anchor-id="model-prediction-for-employment_score">Model Prediction for employment_score</h3>
+</section>
+<div class="cell-output cell-output-display">
+<p>Using validation data for <code>Test</code> points</p>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-7-output-4.png" class="img-fluid"></p>
+</div>
+<section id="model-leaderboard" class="level3 cell-output cell-output-display">
+<h3 class="anchored" data-anchor-id="model-leaderboard">Model Leaderboard</h3>
+</section>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">score_test</th>
+<th data-quarto-table-cell-role="th">score_val</th>
+<th data-quarto-table-cell-role="th">pred_time_test</th>
+<th data-quarto-table-cell-role="th">pred_time_val</th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">pred_time_test_marginal</th>
+<th data-quarto-table-cell-role="th">pred_time_val_marginal</th>
+<th data-quarto-table-cell-role="th">fit_time_marginal</th>
+<th data-quarto-table-cell-role="th">stack_level</th>
+<th data-quarto-table-cell-role="th">can_infer</th>
+<th data-quarto-table-cell-role="th">fit_order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>LightGBMXT</td>
+<td>-1.012202</td>
+<td>-0.979194</td>
+<td>0.001492</td>
+<td>0.001117</td>
+<td>0.301716</td>
+<td>0.001492</td>
+<td>0.001117</td>
+<td>0.301716</td>
+<td>1</td>
+<td>True</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<section id="feature-importance-for-trained-model" class="level3 cell-output cell-output-display">
+<h3 class="anchored" data-anchor-id="feature-importance-for-trained-model">Feature Importance for Trained Model</h3>
+</section>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">importance</th>
+<th data-quarto-table-cell-role="th">stddev</th>
+<th data-quarto-table-cell-role="th">p_value</th>
+<th data-quarto-table-cell-role="th">n</th>
+<th data-quarto-table-cell-role="th">p99_high</th>
+<th data-quarto-table-cell-role="th">p99_low</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">gpa</td>
+<td>1.020679</td>
+<td>0.095581</td>
+<td>0.000009</td>
+<td>5</td>
+<td>1.217483</td>
+<td>0.823876</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">toeic0</td>
+<td>0.266908</td>
+<td>0.043618</td>
+<td>0.000083</td>
+<td>5</td>
+<td>0.356718</td>
+<td>0.177098</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">toeic2</td>
+<td>0.252605</td>
+<td>0.038863</td>
+<td>0.000065</td>
+<td>5</td>
+<td>0.332626</td>
+<td>0.172585</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">toeic</td>
+<td>0.241941</td>
+<td>0.043093</td>
+<td>0.000116</td>
+<td>5</td>
+<td>0.330669</td>
+<td>0.153212</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">toeic3</td>
+<td>0.161979</td>
+<td>0.035012</td>
+<td>0.000246</td>
+<td>5</td>
+<td>0.234070</td>
+<td>0.089888</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">toeic1</td>
+<td>0.158796</td>
+<td>0.040579</td>
+<td>0.000470</td>
+<td>5</td>
+<td>0.242350</td>
+<td>0.075242</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">toeic4</td>
+<td>0.136791</td>
+<td>0.037064</td>
+<td>0.000588</td>
+<td>5</td>
+<td>0.213106</td>
+<td>0.060476</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-7-output-9.png" class="img-fluid"></p>
+</div>
+<section id="rows-with-the-highest-prediction-error" class="level3 cell-output cell-output-display">
+<h3 class="anchored" data-anchor-id="rows-with-the-highest-prediction-error">Rows with the highest prediction error</h3>
+</section>
+<div class="cell-output cell-output-display">
+<p>Rows in this category worth inspecting for the causes of the error</p>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">gpa</th>
+<th data-quarto-table-cell-role="th">toeic</th>
+<th data-quarto-table-cell-role="th">toeic0</th>
+<th data-quarto-table-cell-role="th">toeic1</th>
+<th data-quarto-table-cell-role="th">toeic2</th>
+<th data-quarto-table-cell-role="th">toeic3</th>
+<th data-quarto-table-cell-role="th">toeic4</th>
+<th data-quarto-table-cell-role="th">employment_score</th>
+<th data-quarto-table-cell-role="th">employment_score_pred</th>
+<th data-quarto-table-cell-role="th">error</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">55</td>
+<td>0.200267</td>
+<td>450</td>
+<td>450.310311</td>
+<td>464.340472</td>
+<td>458.213429</td>
+<td>456.215452</td>
+<td>448.932120</td>
+<td>2.234912</td>
+<td>4.809618</td>
+<td>2.574706</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>4.191552</td>
+<td>25</td>
+<td>29.000939</td>
+<td>22.725391</td>
+<td>19.529454</td>
+<td>35.896321</td>
+<td>24.151228</td>
+<td>2.514707</td>
+<td>5.069639</td>
+<td>2.554931</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">491</td>
+<td>1.754276</td>
+<td>425</td>
+<td>428.686989</td>
+<td>439.377437</td>
+<td>446.630603</td>
+<td>439.109681</td>
+<td>423.056878</td>
+<td>8.008441</td>
+<td>5.771637</td>
+<td>2.236804</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">144</td>
+<td>2.013480</td>
+<td>520</td>
+<td>519.674312</td>
+<td>521.390587</td>
+<td>531.847782</td>
+<td>511.375625</td>
+<td>525.305439</td>
+<td>8.755093</td>
+<td>6.543661</td>
+<td>2.211432</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>3.585276</td>
+<td>675</td>
+<td>679.425199</td>
+<td>680.429579</td>
+<td>677.878530</td>
+<td>674.812300</td>
+<td>672.177564</td>
+<td>12.785551</td>
+<td>10.599931</td>
+<td>2.185620</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">469</td>
+<td>1.969145</td>
+<td>5</td>
+<td>3.785864</td>
+<td>4.575646</td>
+<td>-8.358037</td>
+<td>1.071854</td>
+<td>7.253616</td>
+<td>4.552622</td>
+<td>2.385054</td>
+<td>2.167567</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">403</td>
+<td>1.678080</td>
+<td>70</td>
+<td>53.993037</td>
+<td>65.691879</td>
+<td>65.135837</td>
+<td>58.510651</td>
+<td>51.307683</td>
+<td>4.136691</td>
+<td>2.040128</td>
+<td>2.096563</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">75</td>
+<td>0.564461</td>
+<td>795</td>
+<td>799.270794</td>
+<td>791.212118</td>
+<td>803.426181</td>
+<td>805.178974</td>
+<td>803.979166</td>
+<td>10.702375</td>
+<td>8.615296</td>
+<td>2.087079</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">293</td>
+<td>4.364023</td>
+<td>990</td>
+<td>973.878219</td>
+<td>966.687506</td>
+<td>991.332887</td>
+<td>987.137768</td>
+<td>989.321286</td>
+<td>15.120906</td>
+<td>13.106976</td>
+<td>2.013931</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">137</td>
+<td>4.248511</td>
+<td>115</td>
+<td>106.422018</td>
+<td>114.653052</td>
+<td>106.830406</td>
+<td>124.361062</td>
+<td>118.754414</td>
+<td>7.183716</td>
+<td>5.199379</td>
+<td>1.984337</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="c.-관측치별-해석" class="level2">
+<h2 class="anchored" data-anchor-id="c.-관측치별-해석">C. 관측치별 해석</h2>
+<div id="e2b47334-f686-4d72-8957-7c922dbf7b77" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>1    10.530768
+Name: employment_score, dtype: float32</code></pre>
+</div>
+</div>
+<div id="8f210545-f26e-4e6c-918c-6e774a198593" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">1</span>]]<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">employment_score</th>
+<th data-quarto-table-cell-role="th">gpa</th>
+<th data-quarto-table-cell-role="th">toeic</th>
+<th data-quarto-table-cell-role="th">toeic0</th>
+<th data-quarto-table-cell-role="th">toeic1</th>
+<th data-quarto-table-cell-role="th">toeic2</th>
+<th data-quarto-table-cell-role="th">toeic3</th>
+<th data-quarto-table-cell-role="th">toeic4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1</td>
+<td>10.789671</td>
+<td>0.355496</td>
+<td>935.0</td>
+<td>940.563187</td>
+<td>935.72357</td>
+<td>939.190519</td>
+<td>938.995672</td>
+<td>945.376482</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-53_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        console.log("RESIZE");
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<script>videojs(video_shortcode_videojs_video1);</script>
+
+
+
+
+</body></html>
