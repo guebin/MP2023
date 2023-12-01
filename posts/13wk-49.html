@@ -75,8 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -213,14 +211,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="강의영상" class="level1">
 <h1>1. 강의영상</h1>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="???"></video></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-wlppn6TBGZYzyd9FOp1uB9&amp;si=6MMfePEnviGCFWbE" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="11893307-9836-4fe4-8d74-c0788bfb8474" class="cell" data-execution_count="1">
+<div id="11893307-9836-4fe4-8d74-c0788bfb8474" class="cell" data-tags="[]" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install autogluon.eda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="305cd624-5b6a-4de8-a0a3-f211df42b441" class="cell" data-tags="[]" data-execution_count="11">
+<div id="305cd624-5b6a-4de8-a0a3-f211df42b441" class="cell" data-tags="[]" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
@@ -235,13 +233,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data" class="level1">
 <h1>3. Data</h1>
-<div id="1947c394-4433-46bc-b4b1-0aa028f62819" class="cell" data-tags="[]" data-execution_count="12">
+<div id="1947c394-4433-46bc-b4b1-0aa028f62819" class="cell" data-tags="[]" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/height_train.csv'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/height_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="78f45d84-6d72-493e-b432-7a4bc13b302d" class="cell" data-tags="[]" data-execution_count="13">
+<div id="78f45d84-6d72-493e-b432-7a4bc13b302d" class="cell" data-tags="[]" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -297,9 +295,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>성별간 교호작용 존재</li>
 <li>결측치 존재 (성별로 결측치를 처리해야 좋았음)</li>
 </ul>
-<div id="4b93ac5f-6c6a-4b0a-bb2b-391caa20d921" class="cell" data-execution_count="20">
+<div id="665cc8fe-34fe-4728-95ce-bbb92d750f52" class="cell" data-tags="[]" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>&lt;AxesSubplot: xlabel='weight', ylabel='height'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -309,24 +307,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="적합" class="level1">
 <h1>4. 적합</h1>
-<div id="1a194ce6-8948-42ac-bc0c-1123fee44b4a" class="cell" data-tags="[]" data-execution_count="21">
+<div id="ee6cf519-09e6-42ca-8e4b-cad90fbfe75a" class="cell" data-tags="[]" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 -- pass</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label <span class="op">=</span> <span class="st">'height'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">'height'</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(df_train,num_gpus<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(df_train) </span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(df_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_184850/"
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_095220/"
 Beginning AutoGluon training ...
-AutoGluon will save models to "AutogluonModels/ag-20231130_184850/"
-AutoGluon Version:  0.8.1
+AutoGluon will save models to "AutogluonModels/ag-20231201_095220/"
+AutoGluon Version:  0.8.2
 Python Version:     3.10.13
 Operating System:   Linux
 Platform Machine:   x86_64
-Platform Version:   #140-Ubuntu SMP Thu Aug 4 02:23:37 UTC 2022
-Disk Space Avail:   1585.65 GB / 1887.51 GB (84.0%)
+Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
+Disk Space Avail:   248.45 GB / 490.57 GB (50.6%)
 Train Data Rows:    280
 Train Data Columns: 2
 Label Column: height
@@ -336,7 +334,7 @@ AutoGluon infers your prediction problem is: 'regression' (because dtype of labe
     If 'regression' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-    Available Memory:                    446019.52 MB
+    Available Memory:                    127239.43 MB
     Train Data (Original)  Memory Usage: 0.02 MB (0.0% of available memory)
     Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
     Stage 1 Generators:
@@ -378,87 +376,72 @@ User-specified model hyperparameters to be fit:
 Fitting 11 L1 models ...
 Fitting model: KNeighborsUnif ...
     -3.463   = Validation score   (-root_mean_squared_error)
-    0.0s     = Training   runtime
-    0.03s    = Validation runtime
+    0.01s    = Training   runtime
+    0.01s    = Validation runtime
 Fitting model: KNeighborsDist ...
     -3.3929  = Validation score   (-root_mean_squared_error)
-    0.0s     = Training   runtime
-    0.03s    = Validation runtime
+    0.01s    = Training   runtime
+    0.01s    = Validation runtime
 Fitting model: LightGBMXT ...
-    Training LightGBMXT with GPU, note that this may negatively impact model quality compared to CPU training.
-[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
-Please recompile with CMake option -DUSE_GPU=1
-Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
     -3.0349  = Validation score   (-root_mean_squared_error)
-    0.91s    = Training   runtime
+    0.55s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: LightGBM ...
-    Training LightGBM with GPU, note that this may negatively impact model quality compared to CPU training.
-[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
-Please recompile with CMake option -DUSE_GPU=1
-Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
     -3.1331  = Validation score   (-root_mean_squared_error)
-    0.31s    = Training   runtime
+    0.3s     = Training   runtime
     0.0s     = Validation runtime
 Fitting model: RandomForestMSE ...
     -3.0811  = Validation score   (-root_mean_squared_error)
-    0.43s    = Training   runtime
-    0.06s    = Validation runtime
+    0.27s    = Training   runtime
+    0.12s    = Validation runtime
 Fitting model: CatBoost ...
-    Training CatBoost with GPU, note that this may negatively impact model quality compared to CPU training.
-    Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
-    -2.919   = Validation score   (-root_mean_squared_error)
-    1.83s    = Training   runtime
+    -2.8341  = Validation score   (-root_mean_squared_error)
+    0.37s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: ExtraTreesMSE ...
     -3.0481  = Validation score   (-root_mean_squared_error)
-    0.37s    = Training   runtime
-    0.06s    = Validation runtime
+    0.39s    = Training   runtime
+    0.12s    = Validation runtime
 Fitting model: NeuralNetFastAI ...
-No improvement since epoch 6: early stopping
-    -3.1807  = Validation score   (-root_mean_squared_error)
-    1.16s    = Training   runtime
+    -3.0808  = Validation score   (-root_mean_squared_error)
+    2.23s    = Training   runtime
     0.01s    = Validation runtime
 Fitting model: XGBoost ...
     -3.0563  = Validation score   (-root_mean_squared_error)
-    0.69s    = Training   runtime
+    0.16s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: NeuralNetTorch ...
-    -2.9378  = Validation score   (-root_mean_squared_error)
-    1.24s    = Training   runtime
+    -2.8592  = Validation score   (-root_mean_squared_error)
+    2.49s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: LightGBMLarge ...
-    Training LightGBMLarge with GPU, note that this may negatively impact model quality compared to CPU training.
-Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
-[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
-Please recompile with CMake option -DUSE_GPU=1
     -3.1759  = Validation score   (-root_mean_squared_error)
-    0.48s    = Training   runtime
+    0.38s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: WeightedEnsemble_L2 ...
-    -2.7764  = Validation score   (-root_mean_squared_error)
-    0.26s    = Training   runtime
+    -2.7259  = Validation score   (-root_mean_squared_error)
+    0.19s    = Training   runtime
     0.0s     = Validation runtime
-AutoGluon training complete, total runtime = 8.03s ... Best model: "WeightedEnsemble_L2"
-TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231130_184850/")</code></pre>
+AutoGluon training complete, total runtime = 7.83s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231201_095220/")</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1000]  valid_set's rmse: 3.05149</code></pre>
 </div>
 </div>
-<div id="c6974db0-104e-492e-b55d-617788a48eae" class="cell" data-tags="[]" data-execution_count="22">
+<div id="53f5b359-31a6-446c-a615-5c31f5189166" class="cell" data-tags="[]" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>yhat,hue<span class="op">=</span><span class="st">'sex'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>yhat,hue<span class="op">=</span><span class="st">'sex'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>&lt;AxesSubplot: xlabel='weight', ylabel='height'&gt;</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <p><img src="13wk-49_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<div id="ea371dec-a487-4d0e-9e4c-ab8c4e8c91a7" class="cell" data-tags="[]" data-execution_count="24">
+<div id="7e437aa0-601d-48db-b2d9-3d1b3cdfea4c" class="cell" data-tags="[]" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard(silent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <div>
 
 
@@ -481,11 +464,11 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>WeightedEnsemble_L2</td>
-<td>-2.776426</td>
-<td>0.072438</td>
-<td>5.194827</td>
-<td>0.000323</td>
-<td>0.263616</td>
+<td>-2.725900</td>
+<td>0.030083</td>
+<td>5.460742</td>
+<td>0.000256</td>
+<td>0.193579</td>
 <td>2</td>
 <td>True</td>
 <td>12</td>
@@ -493,11 +476,11 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tr class="even">
 <td data-quarto-table-cell-role="th">1</td>
 <td>CatBoost</td>
-<td>-2.918961</td>
-<td>0.001410</td>
-<td>1.827764</td>
-<td>0.001410</td>
-<td>1.827764</td>
+<td>-2.834127</td>
+<td>0.000847</td>
+<td>0.371781</td>
+<td>0.000847</td>
+<td>0.371781</td>
 <td>1</td>
 <td>True</td>
 <td>6</td>
@@ -505,11 +488,11 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2</td>
 <td>NeuralNetTorch</td>
-<td>-2.937819</td>
-<td>0.003240</td>
-<td>1.240666</td>
-<td>0.003240</td>
-<td>1.240666</td>
+<td>-2.859244</td>
+<td>0.003287</td>
+<td>2.488698</td>
+<td>0.003287</td>
+<td>2.488698</td>
 <td>1</td>
 <td>True</td>
 <td>10</td>
@@ -518,10 +501,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">3</td>
 <td>LightGBMXT</td>
 <td>-3.034869</td>
-<td>0.002074</td>
-<td>0.910003</td>
-<td>0.002074</td>
-<td>0.910003</td>
+<td>0.001212</td>
+<td>0.553330</td>
+<td>0.001212</td>
+<td>0.553330</td>
 <td>1</td>
 <td>True</td>
 <td>3</td>
@@ -530,10 +513,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">4</td>
 <td>ExtraTreesMSE</td>
 <td>-3.048093</td>
-<td>0.058414</td>
-<td>0.370572</td>
-<td>0.058414</td>
-<td>0.370572</td>
+<td>0.120210</td>
+<td>0.387424</td>
+<td>0.120210</td>
+<td>0.387424</td>
 <td>1</td>
 <td>True</td>
 <td>7</td>
@@ -542,70 +525,70 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">5</td>
 <td>XGBoost</td>
 <td>-3.056270</td>
-<td>0.003721</td>
-<td>0.693386</td>
-<td>0.003721</td>
-<td>0.693386</td>
+<td>0.002181</td>
+<td>0.162659</td>
+<td>0.002181</td>
+<td>0.162659</td>
 <td>1</td>
 <td>True</td>
 <td>9</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">6</td>
+<td>NeuralNetFastAI</td>
+<td>-3.080801</td>
+<td>0.008601</td>
+<td>2.234955</td>
+<td>0.008601</td>
+<td>2.234955</td>
+<td>1</td>
+<td>True</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
 <td>RandomForestMSE</td>
 <td>-3.081138</td>
-<td>0.055940</td>
-<td>0.434527</td>
-<td>0.055940</td>
-<td>0.434527</td>
+<td>0.119838</td>
+<td>0.269562</td>
+<td>0.119838</td>
+<td>0.269562</td>
 <td>1</td>
 <td>True</td>
 <td>5</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
 <td>LightGBM</td>
 <td>-3.133082</td>
-<td>0.001120</td>
-<td>0.314481</td>
-<td>0.001120</td>
-<td>0.314481</td>
+<td>0.000696</td>
+<td>0.304734</td>
+<td>0.000696</td>
+<td>0.304734</td>
 <td>1</td>
 <td>True</td>
 <td>4</td>
 </tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
 <td>LightGBMLarge</td>
 <td>-3.175914</td>
-<td>0.001557</td>
-<td>0.483664</td>
-<td>0.001557</td>
-<td>0.483664</td>
+<td>0.000813</td>
+<td>0.384626</td>
+<td>0.000813</td>
+<td>0.384626</td>
 <td>1</td>
 <td>True</td>
 <td>11</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>NeuralNetFastAI</td>
-<td>-3.180717</td>
-<td>0.007104</td>
-<td>1.163207</td>
-<td>0.007104</td>
-<td>1.163207</td>
-<td>1</td>
-<td>True</td>
-<td>8</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
 <td>KNeighborsDist</td>
 <td>-3.392890</td>
-<td>0.028729</td>
-<td>0.003170</td>
-<td>0.028729</td>
-<td>0.003170</td>
+<td>0.014543</td>
+<td>0.006030</td>
+<td>0.014543</td>
+<td>0.006030</td>
 <td>1</td>
 <td>True</td>
 <td>2</td>
@@ -614,10 +597,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td data-quarto-table-cell-role="th">11</td>
 <td>KNeighborsUnif</td>
 <td>-3.463039</td>
-<td>0.027912</td>
-<td>0.003019</td>
-<td>0.027912</td>
-<td>0.003019</td>
+<td>0.014911</td>
+<td>0.009069</td>
+<td>0.014911</td>
+<td>0.009069</td>
 <td>1</td>
 <td>True</td>
 <td>1</td>
@@ -633,9 +616,9 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <h1>5. 해석 및 시각화</h1>
 <section id="a.-y의-분포-xy의-관계-시각화" class="level2">
 <h2 class="anchored" data-anchor-id="a.-y의-분포-xy의-관계-시각화">A. y의 분포, (X,y)의 관계 시각화</h2>
-<div id="1eab9cba-8e5d-4f31-afcf-c603519ac2c9" class="cell" data-tags="[]" data-execution_count="25">
+<div id="e34fb4ce-0e48-4873-b6e2-180731e2c834" class="cell" data-tags="[]" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>auto.target_analysis(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'height'</span>,</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    fit_distributions<span class="op">=</span><span class="va">False</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -717,14 +700,14 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </section>
 <section id="b.-중요한-설명변수" class="level2">
 <h2 class="anchored" data-anchor-id="b.-중요한-설명변수">B. 중요한 설명변수?</h2>
-<div id="42002e0f-53db-4e0c-83fe-9087870cf949" class="cell" data-tags="[]" data-execution_count="26">
+<div id="96743713-0d6b-4118-93cb-02c9cadf2dc5" class="cell" data-tags="[]" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>auto.quick_fit(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    train_data <span class="op">=</span> df_train, </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'height'</span>,</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    show_feature_importance_barplots<span class="op">=</span><span class="va">True</span></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_185031/"</code></pre>
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_095928/"</code></pre>
 </div>
 <section id="model-prediction-for-height" class="level3 cell-output cell-output-display">
 <h3 class="anchored" data-anchor-id="model-prediction-for-height">Model Prediction for height</h3>
@@ -766,12 +749,12 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td>LightGBMXT</td>
 <td>-3.441217</td>
 <td>-3.881789</td>
-<td>0.007022</td>
-<td>0.002552</td>
-<td>0.748225</td>
-<td>0.007022</td>
-<td>0.002552</td>
-<td>0.748225</td>
+<td>0.006186</td>
+<td>0.001353</td>
+<td>0.514913</td>
+<td>0.006186</td>
+<td>0.001353</td>
+<td>0.514913</td>
 <td>1</td>
 <td>True</td>
 <td>1</td>
@@ -941,9 +924,9 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <section id="번-obs" class="level3">
 <h3 class="anchored" data-anchor-id="번-obs">0번 obs</h3>
 <p><code>-</code> 0번 observation</p>
-<div id="21e6bc28-cf29-4de1-9237-aa35cbe2046a" class="cell" data-execution_count="35">
+<div id="eec986db-b62d-4a52-866a-6c901111efc9" class="cell" data-tags="[]" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_train.iloc[[<span class="dv">0</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="24">
 <div>
 
 
@@ -969,24 +952,24 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </div>
 </div>
 </div>
-<div id="7940a8f6-39fa-494b-be6e-3e5da2664ce2" class="cell" data-execution_count="36">
+<div id="76dc5ce4-34b4-42a3-95c0-cf0545038ec0" class="cell" data-tags="[]" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">0</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="36">
-<pre><code>0    178.368637
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>0    178.642868
 Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <ul>
-<li>왜 178.368637로 예측했을까?</li>
+<li>왜 178.642868로 예측했을까?</li>
 </ul>
 <p><code>-</code> 해석</p>
-<div id="92da4671-d3f1-4b1e-8a77-639c57a6cc06" class="cell" data-tags="[]" data-execution_count="31">
+<div id="7209277d-a3f9-47d0-b201-bb75d0708989" class="cell" data-tags="[]" data-execution_count="32">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">0</span>]]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span> df_train,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> predictr,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> df_train.iloc[[<span class="dv">0</span>]],</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1018,18 +1001,19 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <ul>
-<li>일단 평균값인 173.029로 적합</li>
-<li>sex를 고려하여 +1.57</li>
-<li>weight를 고려하여 +3.77</li>
-<li>최종적으로는 178.369</li>
+<li>왜 178.642868로 예측했을까?</li>
+<li>일단은 평균값인 173.115에 적합</li>
+<li><code>sex</code>을 고려하여 +2.1</li>
+<li><code>weight</code>을 고려하여 +3.77</li>
+<li>최종적으로는 178.643</li>
 </ul>
 </section>
 <section id="번-obs-1" class="level3">
 <h3 class="anchored" data-anchor-id="번-obs-1">208번 obs</h3>
-<p><code>-</code> 0번 observation</p>
-<div id="78c3b786-dae1-4cfe-ac6b-c4c462c8fa3a" class="cell" data-execution_count="41">
+<p><code>-</code> 208번 observation</p>
+<div id="3eaa6dba-488f-4fba-a35d-1470b2c71de0" class="cell" data-tags="[]" data-execution_count="33">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_train.iloc[[<span class="dv">208</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 
 
@@ -1055,24 +1039,24 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 </div>
-<div id="b420bf37-2629-4037-9e62-7809db6b00a9" class="cell" data-execution_count="42">
+<div id="5d81cc78-93ae-4008-8404-e2a50d893580" class="cell" data-tags="[]" data-execution_count="34">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">208</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="42">
-<pre><code>208    169.037048
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>208    168.788971
 Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <ul>
-<li>왜 169.037048로 예측했을까?</li>
+<li>왜 168.788971로 예측했을까?</li>
 </ul>
 <p><code>-</code> 해석</p>
-<div id="33892857-f97c-4363-a47d-7e4c90435bc5" class="cell" data-tags="[]" data-execution_count="43">
+<div id="0614954b-5af0-4baf-ab22-b5943f322dd8" class="cell" data-tags="[]" data-execution_count="36">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">208</span>]]</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span> df_train,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> predictr,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">208</span>]],</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span></span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1104,23 +1088,25 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <ul>
-<li>일단 평균인 173.029로 적합</li>
-<li><code>sex</code>를 고려하여 -4.42</li>
-<li><code>weight</code>를 고려하여 +0.43</li>
+<li>왜 178.642868로 예측했을까?</li>
+<li>일단은 평균값인 173.115에 적합</li>
+<li><code>sex</code>을 고려하여 -4.57</li>
+<li><code>weight=nan</code>을 고려하여 +0.25</li>
+<li>최종적으로는 168.789</li>
 </ul>
 <blockquote class="blockquote">
-<p>결측값을 그냥 하나의 관측치로 해석함 (nan이라는 값을 가지고 있다고 해석해버림!!)</p>
+<p>결측치를 그냥 하나의 관측치로 해석함 (nan이라는 값을 가지고 있다고 해석하는 느낌)</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>이게 왜 가능하지? (이런걸 가능하게 하는 테크닉 많아요, 쉽게 생각해서 nan을 -9999로 처리하고 tree를 돌린다고 생각해보세요..)</p>
+<p>이게 왜 가능한가? (이런걸 가능하게 하는 테크닉이 많음, nan을 -9999로 처리하고 트리를 돌린다고 상상)</p>
 </blockquote>
 </section>
 <section id="번-obs-2" class="level3">
 <h3 class="anchored" data-anchor-id="번-obs-2">211번 obs</h3>
-<p><code>-</code> 0번 observation</p>
-<div id="314560ed-f113-40cd-a193-85a8cab1e91a" class="cell" data-execution_count="49">
+<p><code>-</code> 211번 observation</p>
+<div id="68da938b-e57b-45f4-838d-408aecfd32ae" class="cell" data-tags="[]" data-execution_count="37">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_train.iloc[[<span class="dv">211</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="49">
+<div class="cell-output cell-output-display" data-execution_count="37">
 <div>
 
 
@@ -1146,21 +1132,21 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 </div>
-<div id="3ed9dbb0-0a77-43a4-b794-414367a760fb" class="cell" data-execution_count="50">
+<div id="e503c078-25b7-4cd9-9e1d-616861efd9bc" class="cell" data-tags="[]" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">211</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
-<pre><code>211    169.037048
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>211    168.788971
 Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <p><code>-</code> 해석</p>
-<div id="ca2cb0bb-3f7d-4b1f-9b6f-74d8a7f1b56a" class="cell" data-tags="[]" data-execution_count="51">
+<div id="3f75c900-4bf5-4063-8a78-f72ec78c5256" class="cell" data-tags="[]" data-execution_count="39">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">211</span>]]</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span> df_train,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> predictr,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">208</span>]],</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span></span>
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1177,10 +1163,10 @@ Name: height, dtype: float32</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">211</td>
+<td data-quarto-table-cell-role="th">208</td>
 <td>NaN</td>
 <td>female</td>
-<td>165.076235</td>
+<td>159.02743</td>
 </tr>
 </tbody>
 </table>
@@ -1191,24 +1177,18 @@ Name: height, dtype: float32</code></pre>
 <p><img src="13wk-49_files/figure-html/cell-20-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<ul>
-<li>일단 평균인 173.029로 적합</li>
-<li><code>sex</code>를 고려하여 -4.42</li>
-<li><code>weight</code>를 고려하여 +0.43</li>
-<li>208번과 적합값이 같음!! (이거 합리적임..)</li>
-</ul>
 <p><code>-</code> 우리가 생각한 현실적인 적합은 사실 이러함</p>
-<div id="58f4a008-7734-4d8d-8f4d-94b047642dbb" class="cell" data-execution_count="57">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_train[df_train.sex <span class="op">==</span> <span class="st">'female'</span>].weight.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="57">
+<div id="0e2d6576-c30f-49fa-b584-0c1a6735aa83" class="cell" data-tags="[]" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_train[df_train.sex <span class="op">==</span><span class="st">'female'</span>].weight.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
 <pre><code>49.567060917121516</code></pre>
 </div>
 </div>
-<div id="ecb50076-e65b-4295-a5fc-e2d85bc12ed2" class="cell" data-execution_count="61">
+<div id="0f4869a5-610f-497d-8ab3-5991627cf62e" class="cell" data-tags="[]" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>onerow <span class="op">=</span> df_train.iloc[[<span class="dv">211</span>]].copy()</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>onerow.weight <span class="op">=</span> <span class="fl">49.567060917121516</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>onerow</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="61">
+<div class="cell-output cell-output-display" data-execution_count="46">
 <div>
 
 
@@ -1234,24 +1214,57 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 </div>
-<div id="a3e9bb0a-675d-4deb-a7d8-8e0ddfb7f2e1" class="cell" data-execution_count="63">
+<div id="553fefa5-62aa-42c0-aed9-ee841fcc69c3" class="cell" data-tags="[]" data-execution_count="47">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(onerow)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="63">
-<pre><code>211    164.756104
+<div class="cell-output cell-output-display" data-execution_count="47">
+<pre><code>211    164.488647
 Name: height, dtype: float32</code></pre>
 </div>
 </div>
-<ul>
-<li>우리가 생각한 방법과 같지 않지만 거의 대등한 효과를 준다!</li>
-<li>놀라운점은 데이터에 대한 어떠한 전처리도 필요하지 않다는것!</li>
-</ul>
+<div id="a3cc4dfb-8eb9-43d1-b874-3f1fcb68b775" class="cell" data-tags="[]" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span> df_train,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> predictr,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>onerow,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">height</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">211</td>
+<td>49.567061</td>
+<td>female</td>
+<td>165.076235</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-49_files/figure-html/cell-24-output-2.png" class="img-fluid"></p>
+</div>
+</div>
 </section>
 <section id="번-obs-3" class="level3">
 <h3 class="anchored" data-anchor-id="번-obs-3">198번 obs</h3>
-<p><code>-</code> 0번 observation</p>
-<div id="d834bc69-3fec-4012-8049-098151142e26" class="cell" data-execution_count="44">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df_train.iloc[[<span class="dv">198</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="44">
+<p><code>-</code> 198번 observation</p>
+<div id="2254f312-d262-4a84-b5d6-5af14c4ae31e" class="cell" data-tags="[]" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df_train.iloc[[<span class="dv">198</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
 <div>
 
 
@@ -1277,22 +1290,22 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 </div>
-<div id="5b5ed0e6-fb0e-418f-b4d0-9b58f81aa70b" class="cell" data-execution_count="45">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">198</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="45">
-<pre><code>198    178.495316
+<div id="a70c0230-d023-45d6-aa59-99caece600c4" class="cell" data-tags="[]" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">198</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>198    178.869781
 Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <p><code>-</code> 해석</p>
-<div id="aae4c04a-7ead-48a7-8ab2-be37c0d5c785" class="cell" data-tags="[]" data-execution_count="46">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">198</span>]]</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="9ab14b29-ff4d-47da-b8da-9d5b3807ae1d" class="cell" data-tags="[]" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span> df_train,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> predictr,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">198</span>]],</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span> <span class="va">True</span>,</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -1319,14 +1332,9 @@ Name: height, dtype: float32</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-49_files/figure-html/cell-26-output-2.png" class="img-fluid"></p>
+<p><img src="13wk-49_files/figure-html/cell-27-output-2.png" class="img-fluid"></p>
 </div>
 </div>
-<ul>
-<li>일단 평균인 173.029로 적합</li>
-<li><code>sex</code>를 고려하여 +2.2</li>
-<li><code>weight</code>를 고려하여 +3.26</li>
-</ul>
 
 
 </section>
@@ -1681,7 +1689,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
-<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 

@@ -75,8 +75,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/videojs/video.min.js"></script>
-<link href="../site_libs/quarto-contrib/videojs/video-js.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -207,14 +205,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="강의영상" class="level1">
 <h1>1. 강의영상</h1>
-<div class="quarto-video"><video id="video_shortcode_videojs_video1" class="video-js vjs-default-skin vjs-fluid" controls="" preload="auto" data-setup="{}" title=""><source src="????"></video></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-yZk2JLez3iAcWxjbc6_qp-&amp;si=PPBAZ7JB5L2NYPPZ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="701076c2-df22-49de-b9dc-df3a6171e841" class="cell" data-execution_count="2">
+<div id="701076c2-df22-49de-b9dc-df3a6171e841" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install autogluon.eda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="21646279-6c20-47dd-b34e-d04734e4e052" class="cell" data-tags="[]" data-execution_count="3">
+<div id="21646279-6c20-47dd-b34e-d04734e4e052" class="cell" data-tags="[]" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
@@ -385,24 +383,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="적합" class="level1">
 <h1>4. 적합</h1>
-<div id="b0f59e3f-cf5f-4524-b835-58be9e2dc3cf" class="cell" data-execution_count="5">
+<div id="de16fbc2-0014-440c-84b5-becd4276cb93" class="cell" data-tags="[]" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 -- pass</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label <span class="op">=</span> <span class="st">'employment_score'</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(df_train,num_gpus<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># step2</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label<span class="op">=</span><span class="st">'employment_score'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># step3</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>predictr.fit(df_train)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step4</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(df_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_195813/"
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_112421/"
 Beginning AutoGluon training ...
-AutoGluon will save models to "AutogluonModels/ag-20231130_195813/"
-AutoGluon Version:  0.8.1
+AutoGluon will save models to "AutogluonModels/ag-20231201_112421/"
+AutoGluon Version:  0.8.2
 Python Version:     3.10.13
 Operating System:   Linux
 Platform Machine:   x86_64
-Platform Version:   #140-Ubuntu SMP Thu Aug 4 02:23:37 UTC 2022
-Disk Space Avail:   1585.56 GB / 1887.51 GB (84.0%)
+Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
+Disk Space Avail:   248.36 GB / 490.57 GB (50.6%)
 Train Data Rows:    500
 Train Data Columns: 7
 Label Column: employment_score
@@ -412,7 +410,7 @@ AutoGluon infers your prediction problem is: 'regression' (because dtype of labe
     If 'regression' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-    Available Memory:                    440399.76 MB
+    Available Memory:                    125968.81 MB
     Train Data (Original)  Memory Usage: 0.03 MB (0.0% of available memory)
     Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
     Stage 1 Generators:
@@ -454,67 +452,53 @@ Fitting 11 L1 models ...
 Fitting model: KNeighborsUnif ...
     -1.5764  = Validation score   (-root_mean_squared_error)
     0.01s    = Training   runtime
-    0.03s    = Validation runtime
+    0.01s    = Validation runtime
 Fitting model: KNeighborsDist ...
     -1.5604  = Validation score   (-root_mean_squared_error)
     0.01s    = Training   runtime
-    0.04s    = Validation runtime
+    0.01s    = Validation runtime
 Fitting model: LightGBMXT ...
-    Training LightGBMXT with GPU, note that this may negatively impact model quality compared to CPU training.
-[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
-Please recompile with CMake option -DUSE_GPU=1
-Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
     -0.9448  = Validation score   (-root_mean_squared_error)
-    1.87s    = Training   runtime
+    0.33s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: LightGBM ...
-    Training LightGBM with GPU, note that this may negatively impact model quality compared to CPU training.
-[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
-Please recompile with CMake option -DUSE_GPU=1
-Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
     -0.9643  = Validation score   (-root_mean_squared_error)
-    0.74s    = Training   runtime
+    0.18s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: RandomForestMSE ...
     -0.9278  = Validation score   (-root_mean_squared_error)
-    0.43s    = Training   runtime
-    0.05s    = Validation runtime
+    0.3s     = Training   runtime
+    0.04s    = Validation runtime
 Fitting model: CatBoost ...
-    Training CatBoost with GPU, note that this may negatively impact model quality compared to CPU training.
-    Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
-    -0.9462  = Validation score   (-root_mean_squared_error)
-    3.24s    = Training   runtime
+    -0.9398  = Validation score   (-root_mean_squared_error)
+    0.3s     = Training   runtime
     0.0s     = Validation runtime
 Fitting model: ExtraTreesMSE ...
     -0.9428  = Validation score   (-root_mean_squared_error)
-    0.4s     = Training   runtime
-    0.06s    = Validation runtime
+    0.3s     = Training   runtime
+    0.02s    = Validation runtime
 Fitting model: NeuralNetFastAI ...
-    -0.9747  = Validation score   (-root_mean_squared_error)
-    1.98s    = Training   runtime
+    -0.9448  = Validation score   (-root_mean_squared_error)
+    0.7s     = Training   runtime
     0.01s    = Validation runtime
 Fitting model: XGBoost ...
     -0.9637  = Validation score   (-root_mean_squared_error)
-    0.87s    = Training   runtime
+    0.2s     = Training   runtime
     0.0s     = Validation runtime
 Fitting model: NeuralNetTorch ...
-    -0.8815  = Validation score   (-root_mean_squared_error)
-    1.12s    = Training   runtime
-    0.0s     = Validation runtime
+    -0.9001  = Validation score   (-root_mean_squared_error)
+    2.4s     = Training   runtime
+    0.01s    = Validation runtime
 Fitting model: LightGBMLarge ...
-    Training LightGBMLarge with GPU, note that this may negatively impact model quality compared to CPU training.
-[LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
-Please recompile with CMake option -DUSE_GPU=1
-Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
     -0.981   = Validation score   (-root_mean_squared_error)
-    0.72s    = Training   runtime
+    0.31s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: WeightedEnsemble_L2 ...
-    -0.8727  = Validation score   (-root_mean_squared_error)
-    0.25s    = Training   runtime
+    -0.8742  = Validation score   (-root_mean_squared_error)
+    0.19s    = Training   runtime
     0.0s     = Validation runtime
-AutoGluon training complete, total runtime = 11.97s ... Best model: "WeightedEnsemble_L2"
-TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231130_195813/")</code></pre>
+AutoGluon training complete, total runtime = 5.53s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231201_112421/")</code></pre>
 </div>
 </div>
 </section>
@@ -522,9 +506,9 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <h1>5. 해석 및 시각화</h1>
 <section id="a.-y의-분포-xy의-관계-시각화" class="level2">
 <h2 class="anchored" data-anchor-id="a.-y의-분포-xy의-관계-시각화">A. y의 분포, (X,y)의 관계 시각화</h2>
-<div id="9d6a5bc1-299a-4cb3-84e7-7b912491618c" class="cell" data-tags="[]" data-execution_count="20">
+<div id="2aa37103-c09f-4b42-b47d-27cdd96d6cd2" class="cell" data-tags="[]" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>auto.target_analysis(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train, </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'employment_score'</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    fit_distributions<span class="op">=</span><span class="va">False</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -630,14 +614,14 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </section>
 <section id="b.-중요한-설명변수" class="level2">
 <h2 class="anchored" data-anchor-id="b.-중요한-설명변수">B. 중요한 설명변수</h2>
-<div id="1ecf3852-9a65-4517-9fe4-030661db2ca3" class="cell" data-tags="[]" data-execution_count="21">
+<div id="5c8ce48e-8ae3-445e-bc5c-9e22bbbd45d4" class="cell" data-tags="[]" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>auto.quick_fit(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    train_data <span class="op">=</span> df_train, </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'employment_score'</span>,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    show_feature_importance_barplots<span class="op">=</span><span class="va">True</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_133142/"</code></pre>
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_112654/"</code></pre>
 </div>
 <section id="model-prediction-for-employment_score" class="level3 cell-output cell-output-display">
 <h3 class="anchored" data-anchor-id="model-prediction-for-employment_score">Model Prediction for employment_score</h3>
@@ -679,12 +663,12 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td>LightGBMXT</td>
 <td>-1.012202</td>
 <td>-0.979194</td>
-<td>0.001492</td>
-<td>0.001117</td>
-<td>0.301716</td>
-<td>0.001492</td>
-<td>0.001117</td>
-<td>0.301716</td>
+<td>0.001505</td>
+<td>0.000941</td>
+<td>0.187162</td>
+<td>0.001505</td>
+<td>0.000941</td>
+<td>0.187162</td>
 <td>1</td>
 <td>True</td>
 <td>1</td>
@@ -951,22 +935,9 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </section>
 <section id="c.-관측치별-해석" class="level2">
 <h2 class="anchored" data-anchor-id="c.-관측치별-해석">C. 관측치별 해석</h2>
-<div id="e2b47334-f686-4d72-8957-7c922dbf7b77" class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>1    10.530768
-Name: employment_score, dtype: float32</code></pre>
-</div>
-</div>
-<div id="8f210545-f26e-4e6c-918c-6e774a198593" class="cell" data-execution_count="23">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">1</span>]]<span class="op">*</span><span class="dv">1</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<div id="4489e03d-945c-4682-b419-68d8ba547032" class="cell" data-tags="[]" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_train.iloc[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -989,7 +960,7 @@ Name: employment_score, dtype: float32</code></pre>
 <td data-quarto-table-cell-role="th">1</td>
 <td>10.789671</td>
 <td>0.355496</td>
-<td>935.0</td>
+<td>935</td>
 <td>940.563187</td>
 <td>935.72357</td>
 <td>939.190519</td>
@@ -1001,8 +972,24 @@ Name: employment_score, dtype: float32</code></pre>
 
 </div>
 </div>
+</div>
+<div id="5fdc9865-3a9d-44d5-b223-47f2ecc59eb7" class="cell" data-tags="[]" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(df_train.iloc[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>1    10.539183
+Name: employment_score, dtype: float32</code></pre>
+</div>
+</div>
+<div id="01309d10-ced5-495f-b98d-3fce8cc8ca9d" class="cell" data-tags="[]" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    train_data <span class="op">=</span> df_train,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> predictr,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> df_train.iloc[[<span class="dv">1</span>]],</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    display_rows <span class="op">=</span> <span class="va">False</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-53_files/figure-html/cell-9-output-2.png" class="img-fluid"></p>
+<p><img src="13wk-53_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
@@ -1358,7 +1345,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
-<script>videojs(video_shortcode_videojs_video1);</script>
 
 
 
