@@ -211,10 +211,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="8b730ccd-58bc-41e7-8bfd-2e2435571a18" class="cell" data-execution_count="1">
+<div id="8b730ccd-58bc-41e7-8bfd-2e2435571a18" class="cell" data-tags="[]" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install autogluon.eda</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="39130bde-9458-4f45-85fe-2d5305793c09" class="cell" data-tags="[]" data-execution_count="1">
+<div id="39130bde-9458-4f45-85fe-2d5305793c09" class="cell" data-tags="[]" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data" class="level1">
 <h1>3. Data</h1>
-<div id="27d847e7-a4d6-482c-81b6-e978f5fdae14" class="cell" data-tags="[]" data-execution_count="2">
+<div id="27d847e7-a4d6-482c-81b6-e978f5fdae14" class="cell" data-tags="[]" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>np.random.randn(<span class="dv">43052</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n_balance <span class="op">=</span> <span class="dv">10</span> </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>toeic <span class="op">=</span> np.random.randint(<span class="dv">0</span>,<span class="dv">199</span>,size<span class="op">=</span><span class="dv">5000</span>)<span class="op">*</span><span class="dv">5</span></span>
@@ -248,9 +248,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.concat([df,df_balance],axis<span class="op">=</span><span class="dv">1</span>).assign(employment <span class="op">=</span> <span class="kw">lambda</span> df: df.employment.<span class="bu">map</span>({<span class="dv">0</span>:<span class="st">'No'</span>,<span class="dv">1</span>:<span class="st">'Yes'</span>}))</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df, test_size<span class="op">=</span><span class="fl">0.7</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="443f10b7-dad8-415f-8de1-1038d80546b4" class="cell" data-execution_count="3">
+<div id="443f10b7-dad8-415f-8de1-1038d80546b4" class="cell" data-tags="[]" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="21">
 <div>
 
 
@@ -276,83 +276,83 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4431</td>
-<td>165</td>
-<td>1.38</td>
+<td>460</td>
+<td>1.98</td>
 <td>No</td>
 <td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
 <td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">2162</td>
-<td>735</td>
-<td>2.44</td>
+<td>940</td>
+<td>3.70</td>
 <td>Yes</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
 <td>False</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2396</td>
-<td>135</td>
-<td>2.98</td>
-<td>No</td>
+<td>680</td>
+<td>2.45</td>
+<td>Yes</td>
 <td>True</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
 <td>True</td>
+<td>True</td>
+<td>False</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">4768</td>
-<td>805</td>
-<td>1.86</td>
+<td>55</td>
+<td>3.59</td>
 <td>No</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
+<td>False</td>
+<td>False</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
-<td>True</td>
+<td>False</td>
+<td>False</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">2271</td>
-<td>185</td>
-<td>1.97</td>
+<td>420</td>
+<td>1.55</td>
 <td>No</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
 <td>False</td>
 <td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">...</td>
@@ -372,82 +372,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4426</td>
-<td>95</td>
-<td>3.63</td>
+<td>735</td>
+<td>3.80</td>
 <td>Yes</td>
-<td>False</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
-<td>False</td>
+<td>True</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
+<td>True</td>
+<td>True</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">466</td>
-<td>495</td>
-<td>2.09</td>
-<td>No</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
+<td>735</td>
+<td>3.05</td>
+<td>Yes</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
+<td>True</td>
+<td>True</td>
 <td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">3092</td>
-<td>960</td>
-<td>4.29</td>
-<td>Yes</td>
+<td>10</td>
+<td>3.59</td>
+<td>No</td>
+<td>False</td>
+<td>False</td>
 <td>False</td>
 <td>True</td>
-<td>True</td>
 <td>False</td>
 <td>True</td>
-<td>True</td>
 <td>False</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">3772</td>
-<td>375</td>
-<td>2.86</td>
-<td>No</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
+<td>490</td>
+<td>2.74</td>
+<td>Yes</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
+<td>False</td>
 <td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
 <td>True</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">860</td>
-<td>920</td>
-<td>1.89</td>
+<td>635</td>
+<td>2.28</td>
 <td>Yes</td>
-<td>False</td>
-<td>False</td>
 <td>True</td>
 <td>True</td>
 <td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
 <td>False</td>
 <td>True</td>
-<td>True</td>
-<td>True</td>
+<td>False</td>
 <td>False</td>
 </tr>
 </tbody>
@@ -460,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="적합" class="level1">
 <h1>4. 적합</h1>
-<div id="4bf7b53c-06ed-4c12-a578-51c8bfe9806d" class="cell" data-execution_count="4">
+<div id="4bf7b53c-06ed-4c12-a578-51c8bfe9806d" class="cell" data-tags="[]" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 -- pass</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(label <span class="op">=</span> <span class="st">'employment'</span>)</span>
@@ -470,15 +470,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(df_train)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>yyhat <span class="op">=</span> predictr.predict(df_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_195640/"
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_083631/"
 Beginning AutoGluon training ...
-AutoGluon will save models to "AutogluonModels/ag-20231130_195640/"
-AutoGluon Version:  0.8.1
+AutoGluon will save models to "AutogluonModels/ag-20231201_083631/"
+AutoGluon Version:  0.8.2
 Python Version:     3.10.13
 Operating System:   Linux
 Platform Machine:   x86_64
-Platform Version:   #140-Ubuntu SMP Thu Aug 4 02:23:37 UTC 2022
-Disk Space Avail:   1585.62 GB / 1887.51 GB (84.0%)
+Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
+Disk Space Avail:   248.57 GB / 490.57 GB (50.7%)
 Train Data Rows:    1500
 Train Data Columns: 12
 Label Column: employment
@@ -491,7 +491,7 @@ Selected class &lt;--&gt; label mapping:  class 1 = Yes, class 0 = No
     To explicitly set the positive_class, either rename classes to 1 and 0, or specify positive_class in Predictor init.
 Using Feature Generators to preprocess the data ...
 Fitting AutoMLPipelineFeatureGenerator...
-    Available Memory:                    443035.93 MB
+    Available Memory:                    128760.81 MB
     Train Data (Original)  Memory Usage: 0.04 MB (0.0% of available memory)
     Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
     Stage 1 Generators:
@@ -513,10 +513,10 @@ Fitting AutoMLPipelineFeatureGenerator...
         ('float', [])     :  1 | ['gpa']
         ('int', [])       :  1 | ['toiec']
         ('int', ['bool']) : 10 | ['balance0', 'balance1', 'balance2', 'balance3', 'balance4', ...]
-    0.1s = Fit runtime
+    0.0s = Fit runtime
     12 features in original data used to generate 12 features in processed data.
     Train Data (Processed) Memory Usage: 0.04 MB (0.0% of available memory)
-Data preprocessing and feature engineering runtime = 0.14s ...
+Data preprocessing and feature engineering runtime = 0.04s ...
 AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
     To change this, specify the eval_metric parameter of Predictor()
 Automatically generating train/validation split with holdout_frac=0.2, Train Rows: 1200, Val Rows: 300
@@ -533,82 +533,83 @@ User-specified model hyperparameters to be fit:
 }
 Fitting 13 L1 models ...
 Fitting model: KNeighborsUnif ...
-    0.7767   = Validation score   (accuracy)
+    0.7067   = Validation score   (accuracy)
     0.01s    = Training   runtime
-    0.05s    = Validation runtime
+    0.02s    = Validation runtime
 Fitting model: KNeighborsDist ...
-    0.7867   = Validation score   (accuracy)
+    0.7333   = Validation score   (accuracy)
     0.01s    = Training   runtime
-    0.04s    = Validation runtime
+    0.01s    = Validation runtime
 Fitting model: LightGBMXT ...
     Training LightGBMXT with GPU, note that this may negatively impact model quality compared to CPU training.
 [LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
 Please recompile with CMake option -DUSE_GPU=1
 Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
-    0.8167   = Validation score   (accuracy)
-    3.41s    = Training   runtime
+    0.84     = Validation score   (accuracy)
+    0.24s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: LightGBM ...
     Training LightGBM with GPU, note that this may negatively impact model quality compared to CPU training.
 [LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
 Please recompile with CMake option -DUSE_GPU=1
 Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
-    0.81     = Validation score   (accuracy)
-    0.51s    = Training   runtime
+    0.8267   = Validation score   (accuracy)
+    0.18s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: RandomForestGini ...
-    0.8167   = Validation score   (accuracy)
-    0.61s    = Training   runtime
-    0.08s    = Validation runtime
-Fitting model: RandomForestEntr ...
     0.82     = Validation score   (accuracy)
-    0.51s    = Training   runtime
-    0.08s    = Validation runtime
+    0.36s    = Training   runtime
+    0.14s    = Validation runtime
+Fitting model: RandomForestEntr ...
+    0.8067   = Validation score   (accuracy)
+    0.47s    = Training   runtime
+    0.19s    = Validation runtime
 Fitting model: CatBoost ...
     Training CatBoost with GPU, note that this may negatively impact model quality compared to CPU training.
     Warning: CatBoost on GPU is experimental. If you encounter issues, use CPU for training CatBoost instead.
-    0.8233   = Validation score   (accuracy)
-    3.33s    = Training   runtime
-    0.0s     = Validation runtime
-Fitting model: ExtraTreesGini ...
-    0.8067   = Validation score   (accuracy)
-    0.54s    = Training   runtime
-    0.08s    = Validation runtime
-Fitting model: ExtraTreesEntr ...
-    0.7933   = Validation score   (accuracy)
-    0.49s    = Training   runtime
-    0.08s    = Validation runtime
-Fitting model: NeuralNetFastAI ...
-    0.8067   = Validation score   (accuracy)
-    2.45s    = Training   runtime
-    0.01s    = Validation runtime
-Fitting model: XGBoost ...
-    0.8067   = Validation score   (accuracy)
-    0.94s    = Training   runtime
-    0.0s     = Validation runtime
-Fitting model: NeuralNetTorch ...
-    0.8033   = Validation score   (accuracy)
+    0.83     = Validation score   (accuracy)
     1.03s    = Training   runtime
     0.0s     = Validation runtime
+Fitting model: ExtraTreesGini ...
+    0.8233   = Validation score   (accuracy)
+    0.35s    = Training   runtime
+    0.03s    = Validation runtime
+Fitting model: ExtraTreesEntr ...
+    0.8267   = Validation score   (accuracy)
+    0.35s    = Training   runtime
+    0.03s    = Validation runtime
+Fitting model: NeuralNetFastAI ...
+No improvement since epoch 6: early stopping
+    0.85     = Validation score   (accuracy)
+    1.72s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: XGBoost ...
+    0.84     = Validation score   (accuracy)
+    0.49s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: NeuralNetTorch ...
+    0.85     = Validation score   (accuracy)
+    2.46s    = Training   runtime
+    0.01s    = Validation runtime
 Fitting model: LightGBMLarge ...
     Training LightGBMLarge with GPU, note that this may negatively impact model quality compared to CPU training.
 [LightGBM] [Fatal] GPU Tree Learner was not enabled in this build.
 Please recompile with CMake option -DUSE_GPU=1
 Warning: GPU mode might not be installed for LightGBM, GPU training raised an exception. Falling back to CPU training...Refer to LightGBM GPU documentation: https://github.com/Microsoft/LightGBM/tree/master/python-package#build-gpu-versionOne possible method is:  pip uninstall lightgbm -y   pip install lightgbm --install-option=--gpu
-    0.8167   = Validation score   (accuracy)
-    2.17s    = Training   runtime
+    0.8367   = Validation score   (accuracy)
+    0.36s    = Training   runtime
     0.0s     = Validation runtime
 Fitting model: WeightedEnsemble_L2 ...
-    0.8267   = Validation score   (accuracy)
-    0.57s    = Training   runtime
+    0.85     = Validation score   (accuracy)
+    0.48s    = Training   runtime
     0.0s     = Validation runtime
-AutoGluon training complete, total runtime = 17.34s ... Best model: "WeightedEnsemble_L2"
-TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231130_195640/")</code></pre>
+AutoGluon training complete, total runtime = 9.14s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231201_083631/")</code></pre>
 </div>
 </div>
-<div id="7bbaaccf-1667-46da-b867-159ab155d314" class="cell" data-execution_count="5">
+<div id="7bbaaccf-1667-46da-b867-159ab155d314" class="cell" data-tags="[]" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard(silent<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="23">
 <div>
 
 
@@ -630,156 +631,156 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
+<td>NeuralNetTorch</td>
+<td>0.850000</td>
+<td>0.007131</td>
+<td>2.457541</td>
+<td>0.007131</td>
+<td>2.457541</td>
+<td>1</td>
+<td>True</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>NeuralNetFastAI</td>
+<td>0.850000</td>
+<td>0.009152</td>
+<td>1.720239</td>
+<td>0.009152</td>
+<td>1.720239</td>
+<td>1</td>
+<td>True</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
 <td>WeightedEnsemble_L2</td>
-<td>0.826667</td>
-<td>0.049673</td>
-<td>3.899518</td>
-<td>0.001024</td>
-<td>0.568280</td>
+<td>0.850000</td>
+<td>0.009814</td>
+<td>2.204533</td>
+<td>0.000662</td>
+<td>0.484294</td>
 <td>2</td>
 <td>True</td>
 <td>14</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>CatBoost</td>
-<td>0.823333</td>
-<td>0.002378</td>
-<td>3.325201</td>
-<td>0.002378</td>
-<td>3.325201</td>
+<td data-quarto-table-cell-role="th">3</td>
+<td>LightGBMXT</td>
+<td>0.840000</td>
+<td>0.001822</td>
+<td>0.243193</td>
+<td>0.001822</td>
+<td>0.243193</td>
 <td>1</td>
 <td>True</td>
-<td>7</td>
+<td>3</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>RandomForestEntr</td>
-<td>0.820000</td>
-<td>0.077597</td>
-<td>0.509793</td>
-<td>0.077597</td>
-<td>0.509793</td>
+<td data-quarto-table-cell-role="th">4</td>
+<td>XGBoost</td>
+<td>0.840000</td>
+<td>0.002539</td>
+<td>0.490928</td>
+<td>0.002539</td>
+<td>0.490928</td>
 <td>1</td>
 <td>True</td>
-<td>6</td>
+<td>11</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
+<td data-quarto-table-cell-role="th">5</td>
 <td>LightGBMLarge</td>
-<td>0.816667</td>
-<td>0.001998</td>
-<td>2.172234</td>
-<td>0.001998</td>
-<td>2.172234</td>
+<td>0.836667</td>
+<td>0.001348</td>
+<td>0.356557</td>
+<td>0.001348</td>
+<td>0.356557</td>
 <td>1</td>
 <td>True</td>
 <td>13</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>LightGBMXT</td>
-<td>0.816667</td>
-<td>0.002532</td>
-<td>3.407431</td>
-<td>0.002532</td>
-<td>3.407431</td>
+<td data-quarto-table-cell-role="th">6</td>
+<td>CatBoost</td>
+<td>0.830000</td>
+<td>0.001263</td>
+<td>1.025847</td>
+<td>0.001263</td>
+<td>1.025847</td>
 <td>1</td>
 <td>True</td>
-<td>3</td>
+<td>7</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>RandomForestGini</td>
-<td>0.816667</td>
-<td>0.080121</td>
-<td>0.610838</td>
-<td>0.080121</td>
-<td>0.610838</td>
-<td>1</td>
-<td>True</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
+<td data-quarto-table-cell-role="th">7</td>
 <td>LightGBM</td>
-<td>0.810000</td>
-<td>0.002109</td>
-<td>0.505123</td>
-<td>0.002109</td>
-<td>0.505123</td>
+<td>0.826667</td>
+<td>0.001327</td>
+<td>0.175052</td>
+<td>0.001327</td>
+<td>0.175052</td>
 <td>1</td>
 <td>True</td>
 <td>4</td>
 </tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>XGBoost</td>
-<td>0.806667</td>
-<td>0.004611</td>
-<td>0.940170</td>
-<td>0.004611</td>
-<td>0.940170</td>
-<td>1</td>
-<td>True</td>
-<td>11</td>
-</tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">8</td>
-<td>NeuralNetFastAI</td>
-<td>0.806667</td>
-<td>0.008672</td>
-<td>2.453271</td>
-<td>0.008672</td>
-<td>2.453271</td>
+<td>ExtraTreesEntr</td>
+<td>0.826667</td>
+<td>0.034885</td>
+<td>0.350995</td>
+<td>0.034885</td>
+<td>0.350995</td>
 <td>1</td>
 <td>True</td>
-<td>10</td>
+<td>9</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">9</td>
 <td>ExtraTreesGini</td>
-<td>0.806667</td>
-<td>0.079068</td>
-<td>0.540996</td>
-<td>0.079068</td>
-<td>0.540996</td>
+<td>0.823333</td>
+<td>0.034255</td>
+<td>0.347509</td>
+<td>0.034255</td>
+<td>0.347509</td>
 <td>1</td>
 <td>True</td>
 <td>8</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">10</td>
-<td>NeuralNetTorch</td>
-<td>0.803333</td>
-<td>0.004218</td>
-<td>1.028363</td>
-<td>0.004218</td>
-<td>1.028363</td>
+<td>RandomForestGini</td>
+<td>0.820000</td>
+<td>0.135983</td>
+<td>0.355266</td>
+<td>0.135983</td>
+<td>0.355266</td>
 <td>1</td>
 <td>True</td>
-<td>12</td>
+<td>5</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">11</td>
-<td>ExtraTreesEntr</td>
-<td>0.793333</td>
-<td>0.076970</td>
-<td>0.492502</td>
-<td>0.076970</td>
-<td>0.492502</td>
+<td>RandomForestEntr</td>
+<td>0.806667</td>
+<td>0.191616</td>
+<td>0.474959</td>
+<td>0.191616</td>
+<td>0.474959</td>
 <td>1</td>
 <td>True</td>
-<td>9</td>
+<td>6</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">12</td>
 <td>KNeighborsDist</td>
-<td>0.786667</td>
-<td>0.044063</td>
-<td>0.005833</td>
-<td>0.044063</td>
-<td>0.005833</td>
+<td>0.733333</td>
+<td>0.014585</td>
+<td>0.006530</td>
+<td>0.014585</td>
+<td>0.006530</td>
 <td>1</td>
 <td>True</td>
 <td>2</td>
@@ -787,11 +788,11 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tr class="even">
 <td data-quarto-table-cell-role="th">13</td>
 <td>KNeighborsUnif</td>
-<td>0.776667</td>
-<td>0.046271</td>
-<td>0.006037</td>
-<td>0.046271</td>
-<td>0.006037</td>
+<td>0.706667</td>
+<td>0.015452</td>
+<td>0.006703</td>
+<td>0.015452</td>
+<td>0.006703</td>
 <td>1</td>
 <td>True</td>
 <td>1</td>
@@ -807,7 +808,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <h1>5. 해석 및 시각화</h1>
 <section id="a.-y의-분포-xy의-관계-시각화" class="level2">
 <h2 class="anchored" data-anchor-id="a.-y의-분포-xy의-관계-시각화">A. y의 분포, (X,y)의 관계 시각화</h2>
-<div id="a899813f-7b15-4003-af4e-5dcf848fe741" class="cell" data-tags="[]" data-execution_count="282">
+<div id="a899813f-7b15-4003-af4e-5dcf848fe741" class="cell" data-tags="[]" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>auto.target_analysis(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train, </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'employment'</span>,</span>
@@ -841,7 +842,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <td>1500</td>
 <td>2</td>
 <td>Yes</td>
-<td>761</td>
+<td>753</td>
 <td>object</td>
 <td></td>
 <td></td>
@@ -875,14 +876,14 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </section>
 <section id="b.-중요한-설명변수" class="level2">
 <h2 class="anchored" data-anchor-id="b.-중요한-설명변수">B. 중요한 설명변수</h2>
-<div id="ececbbab-cb9a-4cfb-8240-32fae8171ad9" class="cell" data-tags="[]" data-execution_count="283">
+<div id="ececbbab-cb9a-4cfb-8240-32fae8171ad9" class="cell" data-tags="[]" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>auto.quick_fit(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    train_data <span class="op">=</span> df_train, </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'employment'</span>,</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    show_feature_importance_barplots<span class="op">=</span><span class="va">True</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231130_131659/"</code></pre>
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_083641/"</code></pre>
 </div>
 <section id="model-prediction-for-employment" class="level3 cell-output cell-output-display">
 <h3 class="anchored" data-anchor-id="model-prediction-for-employment">Model Prediction for employment</h3>
@@ -891,7 +892,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <p>Using validation data for <code>Test</code> points</p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-52_files/figure-html/cell-10-output-4.png" class="img-fluid"></p>
+<p><img src="13wk-52_files/figure-html/cell-9-output-4.png" class="img-fluid"></p>
 </div>
 <section id="model-leaderboard" class="level3 cell-output cell-output-display">
 <h3 class="anchored" data-anchor-id="model-leaderboard">Model Leaderboard</h3>
@@ -922,14 +923,14 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tr class="odd">
 <td data-quarto-table-cell-role="th">0</td>
 <td>LightGBMXT</td>
-<td>0.784444</td>
-<td>0.819048</td>
-<td>0.001048</td>
-<td>0.002229</td>
-<td>0.815803</td>
-<td>0.001048</td>
-<td>0.002229</td>
-<td>0.815803</td>
+<td>0.811111</td>
+<td>0.809524</td>
+<td>0.000758</td>
+<td>0.001052</td>
+<td>0.161432</td>
+<td>0.000758</td>
+<td>0.001052</td>
+<td>0.161432</td>
 <td>1</td>
 <td>True</td>
 <td>1</td>
@@ -961,111 +962,111 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">gpa</td>
-<td>0.166222</td>
-<td>0.013090</td>
-<td>0.000005</td>
+<td>0.184444</td>
+<td>0.009813</td>
+<td>9.578572e-07</td>
 <td>5</td>
-<td>0.193175</td>
-<td>0.139269</td>
+<td>0.204650</td>
+<td>0.164239</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">toiec</td>
-<td>0.127111</td>
-<td>0.008374</td>
-<td>0.000002</td>
+<td>0.180444</td>
+<td>0.011590</td>
+<td>2.031000e-06</td>
 <td>5</td>
-<td>0.144353</td>
-<td>0.109869</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">balance2</td>
-<td>0.011111</td>
-<td>0.005879</td>
-<td>0.006708</td>
-<td>5</td>
-<td>0.023217</td>
-<td>-0.000995</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">balance8</td>
-<td>0.009333</td>
-<td>0.000994</td>
-<td>0.000015</td>
-<td>5</td>
-<td>0.011380</td>
-<td>0.007287</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">balance4</td>
-<td>0.006222</td>
-<td>0.006555</td>
-<td>0.050519</td>
-<td>5</td>
-<td>0.019718</td>
-<td>-0.007274</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">balance9</td>
-<td>0.005778</td>
-<td>0.003718</td>
-<td>0.012741</td>
-<td>5</td>
-<td>0.013434</td>
-<td>-0.001879</td>
+<td>0.204308</td>
+<td>0.156581</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">balance5</td>
-<td>0.005333</td>
-<td>0.004037</td>
-<td>0.020897</td>
+<td>0.004889</td>
+<td>0.004554</td>
+<td>3.716217e-02</td>
 <td>5</td>
-<td>0.013645</td>
-<td>-0.002979</td>
+<td>0.014266</td>
+<td>-0.004488</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">balance7</td>
-<td>0.001778</td>
-<td>0.003296</td>
-<td>0.147128</td>
+<td>0.004444</td>
+<td>0.005879</td>
+<td>8.311638e-02</td>
 <td>5</td>
-<td>0.008564</td>
-<td>-0.005009</td>
+<td>0.016550</td>
+<td>-0.007661</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">balance3</td>
-<td>-0.000444</td>
-<td>0.001859</td>
-<td>0.689346</td>
+<td>0.002667</td>
+<td>0.004818</td>
+<td>1.417555e-01</td>
 <td>5</td>
-<td>0.003384</td>
-<td>-0.004273</td>
+<td>0.012586</td>
+<td>-0.007253</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">balance0</td>
-<td>-0.001333</td>
-<td>0.003370</td>
-<td>0.786841</td>
+<td data-quarto-table-cell-role="th">balance8</td>
+<td>0.002222</td>
+<td>0.005666</td>
+<td>2.149867e-01</td>
 <td>5</td>
-<td>0.005606</td>
-<td>-0.008273</td>
+<td>0.013888</td>
+<td>-0.009443</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">balance2</td>
+<td>0.001778</td>
+<td>0.004275</td>
+<td>2.025117e-01</td>
+<td>5</td>
+<td>0.010579</td>
+<td>-0.007024</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">balance4</td>
+<td>0.000889</td>
+<td>0.003718</td>
+<td>3.106541e-01</td>
+<td>5</td>
+<td>0.008545</td>
+<td>-0.006768</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">balance6</td>
-<td>-0.005333</td>
-<td>0.008255</td>
-<td>0.888966</td>
+<td>0.000889</td>
+<td>0.004037</td>
+<td>3.241306e-01</td>
 <td>5</td>
-<td>0.011664</td>
-<td>-0.022331</td>
+<td>0.009201</td>
+<td>-0.007423</td>
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">balance1</td>
-<td>-0.015111</td>
-<td>0.006740</td>
-<td>0.996289</td>
+<td>-0.000444</td>
+<td>0.004818</td>
+<td>5.766784e-01</td>
 <td>5</td>
-<td>-0.001233</td>
-<td>-0.028990</td>
+<td>0.009475</td>
+<td>-0.010364</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">balance9</td>
+<td>-0.004000</td>
+<td>0.003651</td>
+<td>9.647580e-01</td>
+<td>5</td>
+<td>0.003518</td>
+<td>-0.011518</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">balance0</td>
+<td>-0.007111</td>
+<td>0.005305</td>
+<td>9.799713e-01</td>
+<td>5</td>
+<td>0.003813</td>
+<td>-0.018035</td>
 </tr>
 </tbody>
 </table>
@@ -1073,7 +1074,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-52_files/figure-html/cell-10-output-9.png" class="img-fluid"></p>
+<p><img src="13wk-52_files/figure-html/cell-9-output-9.png" class="img-fluid"></p>
 </div>
 <section id="rows-with-the-highest-prediction-error" class="level3 cell-output cell-output-display">
 <h3 class="anchored" data-anchor-id="rows-with-the-highest-prediction-error">Rows with the highest prediction error</h3>
@@ -1109,194 +1110,194 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4586</td>
-<td>135</td>
-<td>2.57</td>
+<td data-quarto-table-cell-role="th">160</td>
+<td>440</td>
+<td>3.12</td>
 <td>True</td>
 <td>True</td>
 <td>True</td>
-<td>True</td>
 <td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>Yes</td>
-<td>0.631605</td>
-<td>0.368395</td>
-<td>0.263209</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">2675</td>
-<td>690</td>
-<td>2.70</td>
 <td>False</td>
 <td>False</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>No</td>
-<td>0.370955</td>
-<td>0.629045</td>
-<td>0.258090</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">46</td>
-<td>710</td>
-<td>2.72</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
 <td>True</td>
 <td>No</td>
-<td>0.374433</td>
-<td>0.625567</td>
-<td>0.251134</td>
+<td>0.403186</td>
+<td>0.596814</td>
+<td>0.193628</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2054</td>
-<td>490</td>
-<td>1.92</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
+<td data-quarto-table-cell-role="th">223</td>
+<td>870</td>
+<td>3.02</td>
 <td>False</td>
 <td>True</td>
+<td>False</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
-<td>Yes</td>
-<td>0.621921</td>
-<td>0.378079</td>
-<td>0.243843</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>No</td>
+<td>0.405564</td>
+<td>0.594436</td>
+<td>0.188872</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">635</td>
-<td>475</td>
-<td>1.32</td>
+<td data-quarto-table-cell-role="th">232</td>
+<td>190</td>
+<td>2.49</td>
+<td>True</td>
+<td>True</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
 <td>True</td>
+<td>False</td>
 <td>Yes</td>
-<td>0.618619</td>
-<td>0.381381</td>
-<td>0.237238</td>
+<td>0.594199</td>
+<td>0.405801</td>
+<td>0.188399</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3297</td>
+<td data-quarto-table-cell-role="th">722</td>
+<td>315</td>
+<td>4.03</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>No</td>
+<td>0.406428</td>
+<td>0.593572</td>
+<td>0.187144</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4187</td>
 <td>610</td>
-<td>4.26</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
+<td>3.91</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
 <td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
 <td>False</td>
 <td>No</td>
-<td>0.385972</td>
-<td>0.614028</td>
-<td>0.228056</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2000</td>
-<td>710</td>
-<td>2.69</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>No</td>
-<td>0.401345</td>
-<td>0.598655</td>
-<td>0.197309</td>
+<td>0.413631</td>
+<td>0.586369</td>
+<td>0.172738</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">4556</td>
-<td>265</td>
-<td>2.48</td>
+<td data-quarto-table-cell-role="th">15</td>
+<td>415</td>
+<td>2.47</td>
+<td>False</td>
 <td>False</td>
 <td>True</td>
-<td>True</td>
 <td>False</td>
-<td>True</td>
-<td>True</td>
+<td>False</td>
+<td>False</td>
 <td>False</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
 <td>Yes</td>
-<td>0.589588</td>
-<td>0.410412</td>
-<td>0.179176</td>
+<td>0.584466</td>
+<td>0.415534</td>
+<td>0.168932</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2736</td>
-<td>555</td>
-<td>3.19</td>
+<td data-quarto-table-cell-role="th">750</td>
+<td>305</td>
+<td>2.63</td>
 <td>False</td>
 <td>False</td>
-<td>True</td>
 <td>False</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
-<td>No</td>
-<td>0.411065</td>
-<td>0.588935</td>
-<td>0.177870</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>Yes</td>
+<td>0.580264</td>
+<td>0.419736</td>
+<td>0.160529</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2961</td>
-<td>585</td>
-<td>3.11</td>
+<td data-quarto-table-cell-role="th">4276</td>
+<td>555</td>
+<td>3.58</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>No</td>
+<td>0.421053</td>
+<td>0.578947</td>
+<td>0.157895</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3863</td>
+<td>345</td>
+<td>2.43</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>Yes</td>
+<td>0.575093</td>
+<td>0.424907</td>
+<td>0.150185</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">823</td>
+<td>670</td>
+<td>3.13</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
-<td>False</td>
+<td>True</td>
 <td>True</td>
 <td>False</td>
-<td>True</td>
+<td>False</td>
 <td>False</td>
 <td>No</td>
-<td>0.413114</td>
-<td>0.586886</td>
-<td>0.173772</td>
+<td>0.427126</td>
+<td>0.572874</td>
+<td>0.145748</td>
 </tr>
 </tbody>
 </table>
@@ -1337,194 +1338,194 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">924</td>
-<td>880</td>
-<td>1.08</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
+<td data-quarto-table-cell-role="th">2930</td>
+<td>665</td>
+<td>2.73</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
-<td>No</td>
-<td>0.499017</td>
-<td>0.500983</td>
-<td>0.001966</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3056</td>
-<td>60</td>
-<td>3.78</td>
-<td>True</td>
-<td>True</td>
 <td>False</td>
 <td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>No</td>
-<td>0.498953</td>
-<td>0.501047</td>
-<td>0.002094</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">853</td>
-<td>430</td>
-<td>3.54</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
 <td>True</td>
 <td>True</td>
 <td>Yes</td>
-<td>0.501092</td>
-<td>0.498908</td>
-<td>0.002183</td>
+<td>0.500071</td>
+<td>0.499929</td>
+<td>0.000142</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2143</td>
-<td>880</td>
-<td>1.61</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
+<td data-quarto-table-cell-role="th">3251</td>
+<td>100</td>
+<td>4.08</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
 <td>False</td>
-<td>True</td>
-<td>Yes</td>
-<td>0.501756</td>
-<td>0.498244</td>
-<td>0.003511</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3726</td>
-<td>730</td>
-<td>1.97</td>
-<td>False</td>
 <td>False</td>
 <td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
 <td>False</td>
 <td>True</td>
 <td>False</td>
 <td>True</td>
 <td>No</td>
-<td>0.497156</td>
-<td>0.502844</td>
-<td>0.005687</td>
+<td>0.499858</td>
+<td>0.500142</td>
+<td>0.000283</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3769</td>
+<td>990</td>
+<td>2.11</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>Yes</td>
+<td>0.501805</td>
+<td>0.498195</td>
+<td>0.003611</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3234</td>
+<td data-quarto-table-cell-role="th">2485</td>
+<td>105</td>
+<td>3.70</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>No</td>
+<td>0.497379</td>
+<td>0.502621</td>
+<td>0.005243</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2941</td>
+<td>170</td>
+<td>4.35</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>Yes</td>
+<td>0.504219</td>
+<td>0.495781</td>
+<td>0.008438</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1304</td>
+<td>825</td>
+<td>1.93</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>No</td>
+<td>0.495184</td>
+<td>0.504816</td>
+<td>0.009633</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2165</td>
+<td>805</td>
+<td>1.27</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>True</td>
+<td>Yes</td>
+<td>0.504844</td>
+<td>0.495156</td>
+<td>0.009689</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">2435</td>
+<td>975</td>
+<td>1.48</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+<td>No</td>
+<td>0.495000</td>
+<td>0.505000</td>
+<td>0.010000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">1120</td>
 <td>315</td>
-<td>3.25</td>
-<td>False</td>
+<td>2.99</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
 <td>True</td>
 <td>True</td>
 <td>True</td>
-<td>True</td>
 <td>False</td>
 <td>True</td>
+<td>True</td>
+<td>False</td>
 <td>No</td>
-<td>0.496464</td>
-<td>0.503536</td>
-<td>0.007072</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">616</td>
-<td>535</td>
-<td>2.55</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>True</td>
-<td>No</td>
-<td>0.495745</td>
-<td>0.504255</td>
-<td>0.008510</td>
+<td>0.494613</td>
+<td>0.505387</td>
+<td>0.010775</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">2568</td>
-<td>50</td>
-<td>4.43</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
-<td>False</td>
+<td data-quarto-table-cell-role="th">4051</td>
+<td>640</td>
+<td>2.96</td>
 <td>True</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>No</td>
-<td>0.494524</td>
-<td>0.505476</td>
-<td>0.010953</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">126</td>
-<td>95</td>
-<td>3.96</td>
-<td>False</td>
 <td>True</td>
 <td>True</td>
 <td>True</td>
 <td>True</td>
 <td>False</td>
 <td>False</td>
-<td>False</td>
-<td>False</td>
 <td>True</td>
+<td>False</td>
+<td>False</td>
 <td>Yes</td>
-<td>0.505630</td>
-<td>0.494370</td>
-<td>0.011259</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">854</td>
-<td>200</td>
-<td>3.83</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>True</td>
-<td>False</td>
-<td>False</td>
-<td>True</td>
-<td>False</td>
-<td>True</td>
-<td>No</td>
-<td>0.492740</td>
-<td>0.507260</td>
-<td>0.014520</td>
+<td>0.505709</td>
+<td>0.494291</td>
+<td>0.011418</td>
 </tr>
 </tbody>
 </table>
@@ -1535,9 +1536,10 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </section>
 <section id="c.-관측치별-해석" class="level2">
 <h2 class="anchored" data-anchor-id="c.-관측치별-해석">C. 관측치별 해석</h2>
-<div id="14ba6686-0ded-4e22-ad82-7d9dc3523d28" class="cell" data-execution_count="285">
+<p><code>-</code> 0번관측치</p>
+<div id="14ba6686-0ded-4e22-ad82-7d9dc3523d28" class="cell" data-tags="[]" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>predictr.predict_proba(df_train.iloc[[<span class="dv">0</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="285">
+<div class="cell-output cell-output-display" data-execution_count="26">
 <div>
 
 
@@ -1552,8 +1554,8 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4431</td>
-<td>0.960422</td>
-<td>0.039578</td>
+<td>0.793558</td>
+<td>0.206442</td>
 </tr>
 </tbody>
 </table>
@@ -1561,7 +1563,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </div>
 </div>
 </div>
-<div id="9cc94ec0-54c9-40ce-9bc4-ee0ca51079e8" class="cell" data-execution_count="286">
+<div id="9cc94ec0-54c9-40ce-9bc4-ee0ca51079e8" class="cell" data-tags="[]" data-execution_count="30">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
@@ -1595,18 +1597,18 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <tbody>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">4431</td>
-<td>100</td>
-<td>1.22</td>
+<td>460</td>
+<td>1.98</td>
 <td>No</td>
-<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
 <td>1</td>
 <td>0</td>
 <td>1</td>
 <td>1</td>
-<td>0</td>
 <td>1</td>
 <td>1</td>
-<td>0</td>
 <td>1</td>
 </tr>
 </tbody>
@@ -1615,8 +1617,98 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-52_files/figure-html/cell-12-output-2.png" class="img-fluid"></p>
+<p><img src="13wk-52_files/figure-html/cell-11-output-2.png" class="img-fluid"></p>
 </div>
+</div>
+<div id="4f3abb66-d816-4c47-b8f8-c2837b20a969" class="cell" data-tags="[]">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 떨어진이유</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>-</code> 1번관측치</p>
+<div id="f92254b4-e7ab-49c8-ab2b-66f848fab381" class="cell" data-tags="[]" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>predictr.predict_proba(df_train.iloc[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">No</th>
+<th data-quarto-table-cell-role="th">Yes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2162</td>
+<td>0.006966</td>
+<td>0.993034</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="ea10c59a-1630-46f5-b090-32e7774f668a" class="cell" data-tags="[]" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>auto.explain_rows(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    train_data<span class="op">=</span>df_train,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span>predictr,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    display_rows<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    plot<span class="op">=</span><span class="st">'waterfall'</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    rows<span class="op">=</span>df_train.iloc[[<span class="dv">1</span>]]<span class="op">*</span><span class="dv">1</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">toiec</th>
+<th data-quarto-table-cell-role="th">gpa</th>
+<th data-quarto-table-cell-role="th">employment</th>
+<th data-quarto-table-cell-role="th">balance0</th>
+<th data-quarto-table-cell-role="th">balance1</th>
+<th data-quarto-table-cell-role="th">balance2</th>
+<th data-quarto-table-cell-role="th">balance3</th>
+<th data-quarto-table-cell-role="th">balance4</th>
+<th data-quarto-table-cell-role="th">balance5</th>
+<th data-quarto-table-cell-role="th">balance6</th>
+<th data-quarto-table-cell-role="th">balance7</th>
+<th data-quarto-table-cell-role="th">balance8</th>
+<th data-quarto-table-cell-role="th">balance9</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2162</td>
+<td>940</td>
+<td>3.7</td>
+<td>Yes</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="13wk-52_files/figure-html/cell-14-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div id="531d2ff8-1f56-40a6-8c9f-0de922f3460f" class="cell" data-tags="[]" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 합격한이유</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
