@@ -155,6 +155,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#r과-jupyter의-연결" id="toc-r과-jupyter의-연결" class="nav-link active" data-scroll-target="#r과-jupyter의-연결">1. R과 Jupyter의 연결</a></li>
+  <li><a href="#몇가지-필수-패키지-설치" id="toc-몇가지-필수-패키지-설치" class="nav-link" data-scroll-target="#몇가지-필수-패키지-설치">2. 몇가지 필수 패키지 설치</a></li>
+  <li><a href="#블로그만들기" id="toc-블로그만들기" class="nav-link" data-scroll-target="#블로그만들기">3. 블로그만들기</a>
+  <ul class="collapse">
+  <li><a href="#a.-quarto설치" id="toc-a.-quarto설치" class="nav-link" data-scroll-target="#a.-quarto설치">A. Quarto설치</a></li>
+  <li><a href="#b.-github-토큰얻기" id="toc-b.-github-토큰얻기" class="nav-link" data-scroll-target="#b.-github-토큰얻기">B. github 토큰얻기</a></li>
+  <li><a href="#c.-github-repo-생성후-clone" id="toc-c.-github-repo-생성후-clone" class="nav-link" data-scroll-target="#c.-github-repo-생성후-clone">C. github repo 생성후 clone</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="231205.out.ipynb" download="231205.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
@@ -202,8 +209,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>IRkernel<span class="sc">::</span><span class="fu">installspec</span>()</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">q</span>() <span class="co"># 이후에 n을 누르고 빠져나간다.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>-</code> 주피터에서 R이 실행되는지 확인한다.</p>
+</section>
+<section id="몇가지-필수-패키지-설치" class="level1">
+<h1>2. 몇가지 필수 패키지 설치</h1>
+<p><code>-</code> 아래를 이용하여 설치</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">apt-get</span> install unzip </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">apt-get</span> install gdebi-core</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>-</code> <code>apt install</code> vs <code>apt-get install</code>: 예전에는 <code>apt-get</code>이었음. 그래서 오래된 앱은 <code>apt-get</code>만 되는것도 있다고함. (본적은없음)</p>
+<p><code>*</code> apt install / pip install / conda install 차이</p>
+<ul>
+<li>설치되는 경로가 다름 (그래서 지우는 법도 다름)</li>
+<li>apt install 로 설치되는건 우분투 자체의 프로그램</li>
+<li>pip install 로 설치되는건 파이썬 모듈</li>
+<li>우분투자체의 프로그램: Python, CUDA, Anaconda, Quarto, Git, …</li>
+<li>Python의 모듈: Numpy, Pandas, …</li>
+<li>conda install: 모든 종류의 프로그램을 다 설치할 수 있음.. (apt, pip로만 설치가능한 것이 콘다로는 싹 설치가능, 심지어 tidyverse같은 R패키지도 설치가능)</li>
+</ul>
+</section>
+<section id="블로그만들기" class="level1">
+<h1>3. 블로그만들기</h1>
+<p>사용하기 까다로움. (블로그 게시물을 올리는 컴퓨터는 하나로 정리하는게 좋음)</p>
+<section id="a.-quarto설치" class="level2">
+<h2 class="anchored" data-anchor-id="a.-quarto설치">A. Quarto설치</h2>
+<p><code>-</code> 아래를 이용해 설치</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gdebi</span> quarto-1.3.450-linux-amd64.deb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="b.-github-토큰얻기" class="level2">
+<h2 class="anchored" data-anchor-id="b.-github-토큰얻기">B. github 토큰얻기</h2>
+<p><code>-</code> 아래의 주소로가서 토큰을 생성 (어디에 잘 저장할 것)</p>
+<blockquote class="blockquote">
+<p><a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a></p>
+</blockquote>
+</section>
+<section id="c.-github-repo-생성후-clone" class="level2">
+<h2 class="anchored" data-anchor-id="c.-github-repo-생성후-clone">C. github repo 생성후 clone</h2>
+<p><code>-</code> 적당한 이름의 repo를 만들것</p>
+<p><img src="231205_files/figure-html/35b2f1ed-dc65-47c8-bd6a-00536fb06071-1-2195059e-5d51-4965-848b-da5a83d7fb81.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>주의: repository 만들때 readme.md 파일을 생성 할 것. 그래야 이후의 작업이 편리.</p>
+</blockquote>
+<p><code>-</code> clone이후 local-git과 github를 연결</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone {복사한주소}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> {생성된디렉토리}</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">## README.md 파일 수정 </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">## email, username 등록 </span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config credential.helper store</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">## username 입력</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">## token 입력</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/4DMY4kEUsZw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><code>-</code> blog project 생성후 publish</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> create-project <span class="at">--type</span> website:blog</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-browser</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">## github선택 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/Cbot3fBAgKM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p><code>-</code> 이후에 수정사항이 생기면 아래를 연속적으로 실행</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add .</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-browser</span> <span class="at">--no-prompt</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
