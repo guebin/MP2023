@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.322">
+<meta name="generator" content="quarto-1.4.520">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,12 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -95,13 +96,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -114,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -197,6 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header>
+
 
 <hr>
 <ol type="1">
@@ -729,18 +732,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>(더 좋은 풀이)</code></p>
 <div id="ecb0ac98-124c-4942-b859-e7bace775dd3" class="cell" data-tags="[]" data-execution_count="241">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'temp'</span>, y<span class="op">=</span><span class="st">'sales'</span>, hue<span class="op">=</span><span class="st">'type'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="241">
-<pre><code>&lt;Axes: xlabel='temp', ylabel='sales'&gt;</code></pre>
-</div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-57-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-57-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>시각화를 해보고 <code>type</code>은 y를 예측할때 도움이 되지 않음을 파악하고 <code>type</code>을 제외하고 예측하면 가산점.</p>
 <p><code>(2)</code> 아래의 자료를 해석하고 세부지침에 맞추어 분석하라.</p>
 <div id="b3e213ae-4d11-42f2-97b8-abbadedcac5d" class="cell" data-execution_count="266">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/height_train.csv'</span>)</span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/height_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/height_train.csv'</span>)</span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/height_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>세부지침</strong></p>
 <ol type="1">
@@ -749,7 +753,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><code>(풀이)</code></p>
 <div id="91731d96-8ffb-430e-813d-68b90d5ce34d" class="cell" data-tags="[]" data-execution_count="267">
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>df_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a>df_train.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="267">
 <div>
 
@@ -801,35 +805,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="5f930755-ae42-4988-bb65-72a4f39f656c" class="cell" data-tags="[]" data-execution_count="298">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
-<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="co">## 데이터분리</span></span>
-<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> pd.get_dummies(df_test[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'height'</span>]</span>
-<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a><span class="co">## 결측치처리</span></span>
-<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> sklearn.impute.SimpleImputer()</span>
-<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a>X[[<span class="st">'weight'</span>]] <span class="op">=</span> imputer.fit_transform(X[[<span class="st">'weight'</span>]])</span>
-<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a>XX[[<span class="st">'weight'</span>]] <span class="op">=</span> imputer.transform(XX[[<span class="st">'weight'</span>]])</span>
-<span id="cb116-10"><a href="#cb116-10" aria-hidden="true" tabindex="-1"></a><span class="co">## 교호작용고려 </span></span>
-<span id="cb116-11"><a href="#cb116-11" aria-hidden="true" tabindex="-1"></a>X[<span class="st">'interaction'</span>] <span class="op">=</span> X[<span class="st">'weight'</span>]<span class="op">*</span>X[<span class="st">'sex_male'</span>]</span>
-<span id="cb116-12"><a href="#cb116-12" aria-hidden="true" tabindex="-1"></a>XX[<span class="st">'interaction'</span>] <span class="op">=</span> XX[<span class="st">'weight'</span>]<span class="op">*</span>XX[<span class="st">'sex_male'</span>]</span>
-<span id="cb116-13"><a href="#cb116-13" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb116-14"><a href="#cb116-14" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb116-15"><a href="#cb116-15" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb116-16"><a href="#cb116-16" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y) </span>
-<span id="cb116-17"><a href="#cb116-17" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb116-18"><a href="#cb116-18" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(XX) </span>
-<span id="cb116-19"><a href="#cb116-19" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'height'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="co">## 데이터분리</span></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> pd.get_dummies(df_test[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'height'</span>]</span>
+<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="co">## 결측치처리</span></span>
+<span id="cb115-7"><a href="#cb115-7" aria-hidden="true" tabindex="-1"></a>imputer <span class="op">=</span> sklearn.impute.SimpleImputer()</span>
+<span id="cb115-8"><a href="#cb115-8" aria-hidden="true" tabindex="-1"></a>X[[<span class="st">'weight'</span>]] <span class="op">=</span> imputer.fit_transform(X[[<span class="st">'weight'</span>]])</span>
+<span id="cb115-9"><a href="#cb115-9" aria-hidden="true" tabindex="-1"></a>XX[[<span class="st">'weight'</span>]] <span class="op">=</span> imputer.transform(XX[[<span class="st">'weight'</span>]])</span>
+<span id="cb115-10"><a href="#cb115-10" aria-hidden="true" tabindex="-1"></a><span class="co">## 교호작용고려 </span></span>
+<span id="cb115-11"><a href="#cb115-11" aria-hidden="true" tabindex="-1"></a>X[<span class="st">'interaction'</span>] <span class="op">=</span> X[<span class="st">'weight'</span>]<span class="op">*</span>X[<span class="st">'sex_male'</span>]</span>
+<span id="cb115-12"><a href="#cb115-12" aria-hidden="true" tabindex="-1"></a>XX[<span class="st">'interaction'</span>] <span class="op">=</span> XX[<span class="st">'weight'</span>]<span class="op">*</span>XX[<span class="st">'sex_male'</span>]</span>
+<span id="cb115-13"><a href="#cb115-13" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb115-14"><a href="#cb115-14" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb115-15"><a href="#cb115-15" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb115-16"><a href="#cb115-16" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y) </span>
+<span id="cb115-17"><a href="#cb115-17" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb115-18"><a href="#cb115-18" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(XX) </span>
+<span id="cb115-19"><a href="#cb115-19" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'height'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>적합결과 시각화 (train)</p>
 <div id="89306704-a598-4d05-8b70-1008b3086741" class="cell" data-tags="[]" data-execution_count="299">
-<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>predictr.predict(X),hue<span class="op">=</span><span class="st">'sex'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="299">
-<pre><code>&lt;Axes: xlabel='weight', ylabel='height'&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>predictr.predict(X),hue<span class="op">=</span><span class="st">'sex'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-61-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-61-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -838,46 +843,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>(더 좋은 풀이)</code></p>
 <p>남여의 몸무게 평균이 다르므로 그룹별로 몸무게를 예측하는것이 더 올바르다.</p>
 <div id="b3df47c4-b851-47bf-a184-aba0efb6af42" class="cell" data-tags="[]" data-execution_count="275">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
-<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="co">## 데이터분리</span></span>
-<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="fl">1.0</span></span>
-<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> pd.get_dummies(df_test[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="fl">1.0</span></span>
-<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'height'</span>]</span>
-<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a><span class="co">## 결측치처리</span></span>
-<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- male </span></span>
-<span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a>imputer_male <span class="op">=</span> sklearn.impute.SimpleImputer()</span>
-<span id="cb119-9"><a href="#cb119-9" aria-hidden="true" tabindex="-1"></a>X[X.sex_male<span class="op">==</span><span class="dv">1</span>] <span class="op">=</span> imputer_male.fit_transform(X[X.sex_male<span class="op">==</span><span class="dv">1</span>])</span>
-<span id="cb119-10"><a href="#cb119-10" aria-hidden="true" tabindex="-1"></a>XX[XX.sex_male<span class="op">==</span><span class="dv">1</span>] <span class="op">=</span> imputer_male.transform(XX[XX.sex_male<span class="op">==</span><span class="dv">1</span>])</span>
-<span id="cb119-11"><a href="#cb119-11" aria-hidden="true" tabindex="-1"></a><span class="co"># -- female </span></span>
-<span id="cb119-12"><a href="#cb119-12" aria-hidden="true" tabindex="-1"></a>imputer_female <span class="op">=</span> sklearn.impute.SimpleImputer()</span>
-<span id="cb119-13"><a href="#cb119-13" aria-hidden="true" tabindex="-1"></a>X[X.sex_male<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> imputer_female.fit_transform(X[X.sex_male<span class="op">==</span><span class="dv">0</span>])</span>
-<span id="cb119-14"><a href="#cb119-14" aria-hidden="true" tabindex="-1"></a>XX[XX.sex_male<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> imputer_female.fit_transform(XX[XX.sex_male<span class="op">==</span><span class="dv">0</span>])</span>
-<span id="cb119-15"><a href="#cb119-15" aria-hidden="true" tabindex="-1"></a><span class="co">## 교호작용고려 </span></span>
-<span id="cb119-16"><a href="#cb119-16" aria-hidden="true" tabindex="-1"></a>X[<span class="st">'interaction'</span>] <span class="op">=</span> X[<span class="st">'weight'</span>]<span class="op">*</span>X[<span class="st">'sex_male'</span>]</span>
-<span id="cb119-17"><a href="#cb119-17" aria-hidden="true" tabindex="-1"></a>XX[<span class="st">'interaction'</span>] <span class="op">=</span> XX[<span class="st">'weight'</span>]<span class="op">*</span>XX[<span class="st">'sex_male'</span>]</span>
-<span id="cb119-18"><a href="#cb119-18" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb119-19"><a href="#cb119-19" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb119-20"><a href="#cb119-20" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb119-21"><a href="#cb119-21" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y) </span>
-<span id="cb119-22"><a href="#cb119-22" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb119-23"><a href="#cb119-23" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(XX) </span>
-<span id="cb119-24"><a href="#cb119-24" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'height'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="co">## 데이터분리</span></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> pd.get_dummies(df_train[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="fl">1.0</span></span>
+<span id="cb117-4"><a href="#cb117-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> pd.get_dummies(df_test[[<span class="st">'weight'</span>,<span class="st">'sex'</span>]],drop_first<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="fl">1.0</span></span>
+<span id="cb117-5"><a href="#cb117-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'height'</span>]</span>
+<span id="cb117-6"><a href="#cb117-6" aria-hidden="true" tabindex="-1"></a><span class="co">## 결측치처리</span></span>
+<span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a><span class="co"># -- male </span></span>
+<span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a>imputer_male <span class="op">=</span> sklearn.impute.SimpleImputer()</span>
+<span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a>X[X.sex_male<span class="op">==</span><span class="dv">1</span>] <span class="op">=</span> imputer_male.fit_transform(X[X.sex_male<span class="op">==</span><span class="dv">1</span>])</span>
+<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a>XX[XX.sex_male<span class="op">==</span><span class="dv">1</span>] <span class="op">=</span> imputer_male.transform(XX[XX.sex_male<span class="op">==</span><span class="dv">1</span>])</span>
+<span id="cb117-11"><a href="#cb117-11" aria-hidden="true" tabindex="-1"></a><span class="co"># -- female </span></span>
+<span id="cb117-12"><a href="#cb117-12" aria-hidden="true" tabindex="-1"></a>imputer_female <span class="op">=</span> sklearn.impute.SimpleImputer()</span>
+<span id="cb117-13"><a href="#cb117-13" aria-hidden="true" tabindex="-1"></a>X[X.sex_male<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> imputer_female.fit_transform(X[X.sex_male<span class="op">==</span><span class="dv">0</span>])</span>
+<span id="cb117-14"><a href="#cb117-14" aria-hidden="true" tabindex="-1"></a>XX[XX.sex_male<span class="op">==</span><span class="dv">0</span>] <span class="op">=</span> imputer_female.fit_transform(XX[XX.sex_male<span class="op">==</span><span class="dv">0</span>])</span>
+<span id="cb117-15"><a href="#cb117-15" aria-hidden="true" tabindex="-1"></a><span class="co">## 교호작용고려 </span></span>
+<span id="cb117-16"><a href="#cb117-16" aria-hidden="true" tabindex="-1"></a>X[<span class="st">'interaction'</span>] <span class="op">=</span> X[<span class="st">'weight'</span>]<span class="op">*</span>X[<span class="st">'sex_male'</span>]</span>
+<span id="cb117-17"><a href="#cb117-17" aria-hidden="true" tabindex="-1"></a>XX[<span class="st">'interaction'</span>] <span class="op">=</span> XX[<span class="st">'weight'</span>]<span class="op">*</span>XX[<span class="st">'sex_male'</span>]</span>
+<span id="cb117-18"><a href="#cb117-18" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb117-19"><a href="#cb117-19" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb117-20"><a href="#cb117-20" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb117-21"><a href="#cb117-21" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y) </span>
+<span id="cb117-22"><a href="#cb117-22" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb117-23"><a href="#cb117-23" aria-hidden="true" tabindex="-1"></a>yhat <span class="op">=</span> predictr.predict(XX) </span>
+<span id="cb117-24"><a href="#cb117-24" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'height'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>적합결과 시각화 (train)</p>
 <div id="811702c3-c59b-458e-a8d8-639f4b3edf23" class="cell" data-tags="[]" data-execution_count="294">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>predictr.predict(X),hue<span class="op">=</span><span class="st">'sex'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="294">
-<pre><code>&lt;Axes: xlabel='weight', ylabel='height'&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(df_train, x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span><span class="st">'height'</span>,hue<span class="op">=</span><span class="st">'sex'</span>,alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>sns.lineplot(df_train,x<span class="op">=</span><span class="st">'weight'</span>,y<span class="op">=</span>predictr.predict(X),hue<span class="op">=</span><span class="st">'sex'</span>,linestyle<span class="op">=</span><span class="st">'--'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-63-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-63-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><code>(3)</code> 아래의 자료를 해석하고 세부지침에 맞추어 분석하라.</p>
 <div id="7915a2fd-b15f-4627-ae77-e23de31d610e" class="cell" data-execution_count="301">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/synthetic_train.csv'</span>)</span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/synthetic_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/synthetic_train.csv'</span>)</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/MP2023/master/posts/mid/synthetic_test.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>세부지침</strong></p>
 <ol type="1">
@@ -886,92 +892,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p><code>(풀이)</code></p>
 <div id="5caafee3-2117-40ab-9607-177e3c3f3cb9" class="cell" data-tags="[]" data-execution_count="326">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 생성된 데이터 시각화</span></span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df_train.corr())</span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.gcf()</span>
-<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Figure1"</span>)</span>
-<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">0</span>].plot(df_train.X1, df_train.y,<span class="st">'o'</span>)</span>
-<span id="cb123-8"><a href="#cb123-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">0</span>].set_title(<span class="vs">r'$(X_1,y)$'</span>)</span>
-<span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">1</span>].plot(df_train.X2, df_train.y,<span class="st">'o'</span>)</span>
-<span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">1</span>].set_title(<span class="vs">r'$(X_2,y)$'</span>)</span>
-<span id="cb123-11"><a href="#cb123-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">0</span>].plot(df_train.X3, df_train.y,<span class="st">'o'</span>)</span>
-<span id="cb123-12"><a href="#cb123-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">0</span>].set_title(<span class="vs">r'$(X_3,y)$'</span>)</span>
-<span id="cb123-13"><a href="#cb123-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">1</span>].plot(df_train.X4, df_train.y,<span class="st">'o'</span>)</span>
-<span id="cb123-14"><a href="#cb123-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">1</span>].set_title(<span class="vs">r'$(X_4,y)$'</span>)</span>
-<span id="cb123-15"><a href="#cb123-15" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Figure2"</span>)</span>
-<span id="cb123-16"><a href="#cb123-16" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
-<span id="cb123-17"><a href="#cb123-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-18"><a href="#cb123-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-19"><a href="#cb123-19" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb123-20"><a href="#cb123-20" aria-hidden="true" tabindex="-1"></a>ax.plot(df_train.X2, df_train.X3,<span class="st">'o'</span>)</span>
-<span id="cb123-21"><a href="#cb123-21" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r'Figure3: $(X_2,X_3)$'</span>)</span>
-<span id="cb123-22"><a href="#cb123-22" aria-hidden="true" tabindex="-1"></a><span class="co">#fig.suptitle("Figure3")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 생성된 데이터 시각화</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>sns.heatmap(df_train.corr())</span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.gcf()</span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Figure1"</span>)</span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>fig,ax <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">0</span>].plot(df_train.X1, df_train.y,<span class="st">'o'</span>)</span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">0</span>].set_title(<span class="vs">r'$(X_1,y)$'</span>)</span>
+<span id="cb120-9"><a href="#cb120-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">1</span>].plot(df_train.X2, df_train.y,<span class="st">'o'</span>)</span>
+<span id="cb120-10"><a href="#cb120-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>,<span class="dv">1</span>].set_title(<span class="vs">r'$(X_2,y)$'</span>)</span>
+<span id="cb120-11"><a href="#cb120-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">0</span>].plot(df_train.X3, df_train.y,<span class="st">'o'</span>)</span>
+<span id="cb120-12"><a href="#cb120-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">0</span>].set_title(<span class="vs">r'$(X_3,y)$'</span>)</span>
+<span id="cb120-13"><a href="#cb120-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">1</span>].plot(df_train.X4, df_train.y,<span class="st">'o'</span>)</span>
+<span id="cb120-14"><a href="#cb120-14" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>,<span class="dv">1</span>].set_title(<span class="vs">r'$(X_4,y)$'</span>)</span>
+<span id="cb120-15"><a href="#cb120-15" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Figure2"</span>)</span>
+<span id="cb120-16"><a href="#cb120-16" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb120-17"><a href="#cb120-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-18"><a href="#cb120-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-19"><a href="#cb120-19" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb120-20"><a href="#cb120-20" aria-hidden="true" tabindex="-1"></a>ax.plot(df_train.X2, df_train.X3,<span class="st">'o'</span>)</span>
+<span id="cb120-21"><a href="#cb120-21" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r'Figure3: $(X_2,X_3)$'</span>)</span>
+<span id="cb120-22"><a href="#cb120-22" aria-hidden="true" tabindex="-1"></a><span class="co">#fig.suptitle("Figure3")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="326">
 <pre><code>Text(0.5, 1.0, 'Figure3: $(X_2,X_3)$')</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-65-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-65-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-65-output-3.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-65-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-65-output-4.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-65-output-4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><code>-</code> <span class="math inline">\((X_1,X_4)\)</span>은 <span class="math inline">\(y\)</span>와 관련이 없으므로 제외한다. (Figure1, Figure2)</p>
 <p><code>-</code> <span class="math inline">\((X_2,X_3)\)</span>은 모두 <span class="math inline">\(y\)</span>와 관련이 있으나 둘 사이의 선형관계가 존재하므로 공선성의 관계가 있다. (Figure1, Figure3) 따라서 둘중하나를 제거하고 분석하거나, Lasso/Ridge중 하나를 쓰는것이 합리적으로 보인다. 본 풀이에서는 둘 중 하나를 제거하고 분석하도록 하겠다.</p>
 <div id="a8684023-c993-4b3b-9573-0a9c9419e9d5" class="cell" data-tags="[]" data-execution_count="354">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
-<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'X3'</span>]]</span>
-<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span>
-<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test[[<span class="st">'X3'</span>]]</span>
-<span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb125-7"><a href="#cb125-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb125-8"><a href="#cb125-8" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb125-9"><a href="#cb125-9" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb125-10"><a href="#cb125-10" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'y'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'X3'</span>]]</span>
+<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span>
+<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test[[<span class="st">'X3'</span>]]</span>
+<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb122-6"><a href="#cb122-6" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb122-7"><a href="#cb122-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb122-8"><a href="#cb122-8" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb122-9"><a href="#cb122-9" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb122-10"><a href="#cb122-10" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'y'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>-</code> 적합결과 시각화</p>
 <div id="f0182eb4-6ec1-4e26-91ed-00ec9775679e" class="cell" data-execution_count="355">
-<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],df_train[<span class="st">'y'</span>],<span class="st">'-'</span>,label<span class="op">=</span><span class="st">'True'</span>)</span>
-<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],predictr.predict(X),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Predictted'</span>)</span>
-<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'score =</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="355">
-<pre><code>&lt;matplotlib.legend.Legend at 0x7fadc7c7bb50&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],df_train[<span class="st">'y'</span>],<span class="st">'-'</span>,label<span class="op">=</span><span class="st">'True'</span>)</span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],predictr.predict(X),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Predictted'</span>)</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'score =</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-67-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-67-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><code>(더 좋은 풀이) -- 1</code></p>
 <p><span class="math inline">\((X_3,y)\)</span> 사이에 비 선형성이 있어보이므로, 의사결정나무를 이용하여 적합하여 보자.</p>
 <div id="0647fdd4-3767-4d3b-8bfc-57ba94d47313" class="cell" data-tags="[]" data-execution_count="393">
-<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
-<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'X3'</span>]]</span>
-<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span>
-<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test[[<span class="st">'X3'</span>]]</span>
-<span id="cb128-5"><a href="#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb128-6"><a href="#cb128-6" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.tree.DecisionTreeRegressor()</span>
-<span id="cb128-7"><a href="#cb128-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb128-8"><a href="#cb128-8" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb128-9"><a href="#cb128-9" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb128-10"><a href="#cb128-10" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'y'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train[[<span class="st">'X3'</span>]]</span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test[[<span class="st">'X3'</span>]]</span>
+<span id="cb124-5"><a href="#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb124-6"><a href="#cb124-6" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.tree.DecisionTreeRegressor()</span>
+<span id="cb124-7"><a href="#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb124-8"><a href="#cb124-8" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb124-9"><a href="#cb124-9" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb124-10"><a href="#cb124-10" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'y'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="bcbdd7ea-7173-4b99-b5fb-0419038405e0" class="cell" data-execution_count="394">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb129-1"><a href="#cb129-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],df_train[<span class="st">'y'</span>],<span class="st">'-'</span>,label<span class="op">=</span><span class="st">'True'</span>)</span>
-<span id="cb129-2"><a href="#cb129-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],predictr.predict(X),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Predictted'</span>)</span>
-<span id="cb129-3"><a href="#cb129-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'score =</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb129-4"><a href="#cb129-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="394">
-<pre><code>&lt;matplotlib.legend.Legend at 0x7fadbb962bf0&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],df_train[<span class="st">'y'</span>],<span class="st">'-'</span>,label<span class="op">=</span><span class="st">'True'</span>)</span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],predictr.predict(X),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Predictted'</span>)</span>
+<span id="cb125-3"><a href="#cb125-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'score =</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb125-4"><a href="#cb125-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-69-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-69-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -980,28 +1000,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>(더 좋은 풀이) -- 2</code></p>
 <p><span class="math inline">\((X_3,y)\)</span> 사이에 비 선형성이 있어보이므로, <span class="math inline">\((X_3)^2\)</span>을 모델링하여 적합하자. (배운내용X, 이러한 방법을 ploynomial regression 혹은 자기자신과의 교호작용을 고려한 모형이라고 한다.)</p>
 <div id="512fed67-be47-4de7-a2b1-b38a66842b84" class="cell" data-tags="[]" data-execution_count="395">
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb131-1"><a href="#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
-<span id="cb131-2"><a href="#cb131-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.assign(X3_square <span class="op">=</span> df_train[<span class="st">'X3'</span>]<span class="op">**</span><span class="dv">2</span>)[[<span class="st">'X3'</span>,<span class="st">'X3_square'</span>]]</span>
-<span id="cb131-3"><a href="#cb131-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span>
-<span id="cb131-4"><a href="#cb131-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test.assign(X3_square <span class="op">=</span> df_test[<span class="st">'X3'</span>]<span class="op">**</span><span class="dv">2</span>)[[<span class="st">'X3'</span>,<span class="st">'X3_square'</span>]]</span>
-<span id="cb131-5"><a href="#cb131-5" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
-<span id="cb131-6"><a href="#cb131-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
-<span id="cb131-7"><a href="#cb131-7" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
-<span id="cb131-8"><a href="#cb131-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
-<span id="cb131-9"><a href="#cb131-9" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
-<span id="cb131-10"><a href="#cb131-10" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
-<span id="cb131-11"><a href="#cb131-11" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'y'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="co"># step1 </span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df_train.assign(X3_square <span class="op">=</span> df_train[<span class="st">'X3'</span>]<span class="op">**</span><span class="dv">2</span>)[[<span class="st">'X3'</span>,<span class="st">'X3_square'</span>]]</span>
+<span id="cb126-3"><a href="#cb126-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_train[<span class="st">'y'</span>]</span>
+<span id="cb126-4"><a href="#cb126-4" aria-hidden="true" tabindex="-1"></a>XX <span class="op">=</span> df_test.assign(X3_square <span class="op">=</span> df_test[<span class="st">'X3'</span>]<span class="op">**</span><span class="dv">2</span>)[[<span class="st">'X3'</span>,<span class="st">'X3_square'</span>]]</span>
+<span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
+<span id="cb126-6"><a href="#cb126-6" aria-hidden="true" tabindex="-1"></a><span class="co"># step2 </span></span>
+<span id="cb126-7"><a href="#cb126-7" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> sklearn.linear_model.LinearRegression()</span>
+<span id="cb126-8"><a href="#cb126-8" aria-hidden="true" tabindex="-1"></a><span class="co"># step3 </span></span>
+<span id="cb126-9"><a href="#cb126-9" aria-hidden="true" tabindex="-1"></a>predictr.fit(X,y)</span>
+<span id="cb126-10"><a href="#cb126-10" aria-hidden="true" tabindex="-1"></a><span class="co"># step4 </span></span>
+<span id="cb126-11"><a href="#cb126-11" aria-hidden="true" tabindex="-1"></a>df_test[<span class="st">'y'</span>] <span class="op">=</span> predictr.predict(XX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="545dd4ec-9ece-4133-95f9-718236e038ce" class="cell" data-execution_count="396">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb132-1"><a href="#cb132-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],df_train[<span class="st">'y'</span>],<span class="st">'-'</span>,label<span class="op">=</span><span class="st">'True'</span>)</span>
-<span id="cb132-2"><a href="#cb132-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],predictr.predict(X),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Predictted'</span>)</span>
-<span id="cb132-3"><a href="#cb132-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'score =</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
-<span id="cb132-4"><a href="#cb132-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="396">
-<pre><code>&lt;matplotlib.legend.Legend at 0x7fadb9f717b0&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],df_train[<span class="st">'y'</span>],<span class="st">'-'</span>,label<span class="op">=</span><span class="st">'True'</span>)</span>
+<span id="cb127-2"><a href="#cb127-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train[<span class="st">'y'</span>],predictr.predict(X),<span class="st">'o'</span>,label<span class="op">=</span><span class="st">'Predictted'</span>)</span>
+<span id="cb127-3"><a href="#cb127-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f'score =</span><span class="sc">{</span>predictr<span class="sc">.</span>score(X,y)<span class="sc">:.4f}</span><span class="ss">'</span>)</span>
+<span id="cb127-4"><a href="#cb127-4" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="09wk-mid_files/figure-html/cell-71-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="09wk-mid_files/figure-html/cell-71-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <ul>
@@ -1012,10 +1033,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1><code>3</code>. 연구 (20점)</h1>
 <p>아래의 코드를 이용하여 자료를 불러오라.</p>
 <div id="385b14f1-0eb0-4e0a-ab28-c4fd0a75ab94" class="cell" data-tags="[]" data-execution_count="398">
-<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb134-1"><a href="#cb134-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb134-2"><a href="#cb134-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/guebin/MP2023/main/posts/employment_multicollinearity.csv"</span>)</span>
-<span id="cb134-3"><a href="#cb134-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'employment_score'</span>] <span class="op">=</span> df.gpa <span class="op">*</span> <span class="fl">1.0</span> <span class="op">+</span> df.toeic<span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100</span> <span class="op">+</span> np.random.randn(<span class="dv">500</span>)</span>
-<span id="cb134-4"><a href="#cb134-4" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb128-1"><a href="#cb128-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb128-2"><a href="#cb128-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/guebin/MP2023/main/posts/employment_multicollinearity.csv"</span>)</span>
+<span id="cb128-3"><a href="#cb128-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'employment_score'</span>] <span class="op">=</span> df.gpa <span class="op">*</span> <span class="fl">1.0</span> <span class="op">+</span> df.toeic<span class="op">*</span> <span class="dv">1</span><span class="op">/</span><span class="dv">100</span> <span class="op">+</span> np.random.randn(<span class="dv">500</span>)</span>
+<span id="cb128-4"><a href="#cb128-4" aria-hidden="true" tabindex="-1"></a>df_train, df_test <span class="op">=</span> sklearn.model_selection.train_test_split(df,test_size<span class="op">=</span><span class="fl">0.3</span>,random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>아래의 절차에 따라 자료를 연구하라. 결과를 해석하라.</p>
 <ol type="1">
@@ -1158,15 +1179,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -1175,6 +1226,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1217,6 +1269,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1292,7 +1367,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

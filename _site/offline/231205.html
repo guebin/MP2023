@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.322">
+<meta name="generator" content="quarto-1.4.520">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -81,12 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -95,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -109,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -198,6 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+
 <section id="r과-jupyter의-연결" class="level1">
 <h1>1. R과 Jupyter의 연결</h1>
 <p><code>-</code> 아래를 이용하여 가상환경생성, 가상환경활성화, 가상환경에R설치,R실행</p>
@@ -275,6 +278,162 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> .</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> publish <span class="at">--no-browser</span> <span class="at">--no-prompt</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="77db373b-9120-48df-96b4-5675b99b2ecb" class="cell" data-tags="[]" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git add .</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git commit <span class="op">-</span>m .</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git push </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>quarto publish <span class="op">--</span>no<span class="op">-</span>browser <span class="op">--</span>no<span class="op">-</span>prompt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[main d2d9269] .
+ 2 files changed, 464 insertions(+)
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 305.58 KiB | 19.10 MiB/s, done.
+Total 5 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+To https://github.com/guebin/MP2023.git
+   02a82c4..d2d9269  main -&gt; main
+From https://github.com/guebin/MP2023
+ * branch            gh-pages   -&gt; FETCH_HEAD
+Rendering for publish:
+
+[ 1/70] posts/03wk-13.ipynb
+[ 2/70] posts/01wk-02.ipynb
+[ 3/70] posts/07wk-30.ipynb
+[ 4/70] posts/06wk-24.ipynb
+[ 5/70] posts/08wk-supp2.ipynb
+[ 6/70] posts/12wk-46.ipynb
+[ 7/70] posts/12wk-45.ipynb
+[ 8/70] posts/03wk-10.ipynb
+[ 9/70] posts/07wk-28.ipynb
+[10/70] posts/08wk-supp1.ipynb
+[11/70] posts/04wk-16.ipynb
+[12/70] posts/13wk-48.ipynb
+[13/70] posts/05wk-20.ipynb
+[14/70] posts/11wk-40.ipynb
+[15/70] posts/05wk-21.ipynb
+[16/70] posts/13wk-54.ipynb
+[17/70] posts/13wk-50.ipynb
+[18/70] posts/11wk-42.ipynb
+[19/70] posts/10wk-39.ipynb
+[20/70] posts/02wk-03.ipynb
+[21/70] posts/05wk-19.ipynb
+[22/70] posts/03wk-11.ipynb
+[23/70] posts/04wk-17.ipynb
+[24/70] posts/07wk-35.ipynb
+[25/70] posts/11wk-41.ipynb
+[26/70] posts/07wk-27.ipynb
+[27/70] posts/11wk-43.ipynb
+[28/70] posts/13wk-51.ipynb
+[29/70] posts/13wk-57.ipynb
+[30/70] posts/10wk-38.ipynb
+
+Starting python3 kernel...Done
+
+Executing '10wk-38.ipynb'
+  Cell 1/16: ''...Done
+  Cell 2/16: ''...Done
+  Cell 3/16: ''...Done
+  Cell 4/16: ''...Done
+  Cell 5/16: ''...Done
+  Cell 6/16: ''...Done
+  Cell 7/16: ''...Done
+  Cell 8/16: ''...Done
+  Cell 9/16: ''...Done
+  Cell 10/16: ''...Done
+  Cell 11/16: ''...Done
+  Cell 12/16: ''...Done
+  Cell 13/16: ''...Done
+  Cell 14/16: ''...Done
+  Cell 15/16: ''...Done
+  Cell 16/16: ''...Done
+
+
+Starting python3 kernel...Done
+
+Executing '10wk-38.ipynb'
+  Cell 1/16: ''...Done
+  Cell 2/16: ''...Done
+  Cell 3/16: ''...Done
+  Cell 4/16: ''...Done
+  Cell 5/16: ''...Done
+  Cell 6/16: ''...Done
+  Cell 7/16: ''...Done
+  Cell 8/16: ''...Done
+  Cell 9/16: ''...Done
+  Cell 10/16: ''...Done
+  Cell 11/16: ''...Done
+  Cell 12/16: ''...Done
+  Cell 13/16: ''...Done
+  Cell 14/16: ''...Done
+  Cell 15/16: ''...Done
+  Cell 16/16: ''...Done
+
+[31/70] posts/03wk-12.ipynb
+[32/70] posts/07wk-32.ipynb
+[33/70] posts/09wk-mid.ipynb
+[34/70] posts/01wk-01.ipynb
+[35/70] posts/06wk-26.ipynb
+[36/70] posts/04wk-14.ipynb
+[37/70] posts/06wk-23.ipynb
+[38/70] posts/04wk-15.ipynb
+[39/70] posts/07wk-29.ipynb
+[40/70] posts/10wk-37.ipynb
+[41/70] posts/10wk-36.ipynb
+[42/70] posts/07wk-33.ipynb
+[43/70] posts/06wk-22.ipynb
+[44/70] posts/06wk-25.ipynb
+[45/70] posts/07wk-31.ipynb
+[46/70] posts/12wk-44.ipynb
+[47/70] posts/13wk-52.ipynb
+[48/70] posts/02wk-07.ipynb
+[49/70] posts/13wk-55.ipynb
+[50/70] posts/07wk-34.ipynb
+[51/70] posts/03wk-09.ipynb
+[52/70] posts/13wk-53.ipynb
+[53/70] posts/02wk-06.ipynb
+[54/70] posts/13wk-49.ipynb
+[55/70] posts/02wk-04.ipynb
+[56/70] posts/13wk-56.ipynb
+[57/70] posts/04wk-18.ipynb
+[58/70] posts/02wk-08.ipynb
+[59/70] posts/02wk-05.ipynb
+[60/70] posts/13wk-47.ipynb
+[61/70] offline.qmd
+[62/70] offline/231114.ipynb
+[63/70] offline/231128.ipynb
+[64/70] offline/231130.ipynb
+[65/70] offline/231205.ipynb
+[66/70] offline/230926.ipynb
+[67/70] offline/230912.ipynb
+[68/70] offline/230907.ipynb
+Warning: couldn't recognize format, using default tabset rendering
+[69/70] offline/230921.ipynb
+[70/70] index.qmd
+
+Preparing worktree (resetting branch 'gh-pages'; was at e123168)
+Branch 'gh-pages' set up to track remote branch 'gh-pages' from 'origin'.
+HEAD is now at e123168 Built site for gh-pages
+[gh-pages 9a0e5cd] Built site for gh-pages
+ 76 files changed, 824 insertions(+), 632 deletions(-)
+ create mode 100644 offline/231205_files/figure-html/35b2f1ed-dc65-47c8-bd6a-00536fb06071-1-2195059e-5d51-4965-848b-da5a83d7fb81.png
+origin  https://github.com/guebin/MP2023.git (fetch)
+origin  https://github.com/guebin/MP2023.git (push)
+To https://github.com/guebin/MP2023.git
+   e123168..9a0e5cd  HEAD -&gt; gh-pages
+
+NOTE: GitHub Pages sites use caching so you might need to click the refresh
+button within your web browser to see changes after deployment.
+
+[✓] Published to https://guebin.github.io/MP2023/
+
+NOTE: GitHub Pages deployments normally take a few minutes (your site updates
+will be visible once the deploy completes)
+</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -409,15 +568,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -426,6 +615,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -468,6 +658,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -543,7 +756,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
