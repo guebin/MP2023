@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.322">
+<meta name="generator" content="quarto-1.4.520">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,12 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -95,13 +96,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -112,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -202,6 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header>
+
 
 <section id="강의영상" class="level1">
 <h1>1. 강의영상</h1>
@@ -503,7 +506,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    label<span class="op">=</span><span class="st">'charges'</span>,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    fit_distributions<span class="op">=</span><span class="va">False</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="target-variable-analysis" class="level2 cell-output cell-output-display">
+<section id="target-variable-analysis" class="level2 cell-output cell-output-display cell-output-markdown">
 <h2 class="anchored" data-anchor-id="target-variable-analysis">Target variable analysis</h2>
 </section>
 <div class="cell-output cell-output-display">
@@ -554,28 +557,44 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-6-output-3.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-6-output-3.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<section id="target-variable-correlations" class="level3 cell-output cell-output-display">
+</div>
+<section id="target-variable-correlations" class="level3 cell-output cell-output-display cell-output-markdown">
 <h3 class="anchored" data-anchor-id="target-variable-correlations">Target variable correlations</h3>
 </section>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display cell-output-markdown">
 <p><strong><code>train_data</code> - <code>spearman</code> correlation matrix; focus: absolute correlation for <code>charges</code> &gt;= <code>0.5</code></strong></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-6-output-6.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-6-output-6.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div class="cell-output cell-output-display">
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
 <p><strong>Feature interaction between <code>smoker</code>/<code>charges</code> in <code>train_data</code></strong></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-6-output-8.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-6-output-8.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<div class="cell-output cell-output-display">
+</div>
+<div class="cell-output cell-output-display cell-output-markdown">
 <p><strong>Feature interaction between <code>age</code>/<code>charges</code> in <code>train_data</code></strong></p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-6-output-10.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-6-output-10.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -590,16 +609,20 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 <div class="cell-output cell-output-stderr">
 <pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231201_114747/"</code></pre>
 </div>
-<section id="model-prediction-for-charges" class="level3 cell-output cell-output-display">
+<section id="model-prediction-for-charges" class="level3 cell-output cell-output-display cell-output-markdown">
 <h3 class="anchored" data-anchor-id="model-prediction-for-charges">Model Prediction for charges</h3>
 </section>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display cell-output-markdown">
 <p>Using validation data for <code>Test</code> points</p>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-7-output-4.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-7-output-4.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<section id="model-leaderboard" class="level3 cell-output cell-output-display">
+</div>
+<section id="model-leaderboard" class="level3 cell-output cell-output-display cell-output-markdown">
 <h3 class="anchored" data-anchor-id="model-leaderboard">Model Leaderboard</h3>
 </section>
 <div class="cell-output cell-output-display">
@@ -645,7 +668,7 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 
 </div>
 </div>
-<section id="feature-importance-for-trained-model" class="level3 cell-output cell-output-display">
+<section id="feature-importance-for-trained-model" class="level3 cell-output cell-output-display cell-output-markdown">
 <h3 class="anchored" data-anchor-id="feature-importance-for-trained-model">Feature Importance for Trained Model</h3>
 </section>
 <div class="cell-output cell-output-display">
@@ -725,12 +748,16 @@ TabularPredictor saved. To load, use: predictor = TabularPredictor.load("Autoglu
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-7-output-9.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-7-output-9.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
-<section id="rows-with-the-highest-prediction-error" class="level3 cell-output cell-output-display">
+</div>
+<section id="rows-with-the-highest-prediction-error" class="level3 cell-output cell-output-display cell-output-markdown">
 <h3 class="anchored" data-anchor-id="rows-with-the-highest-prediction-error">Rows with the highest prediction error</h3>
 </section>
-<div class="cell-output cell-output-display">
+<div class="cell-output cell-output-display cell-output-markdown">
 <p>Rows in this category worth inspecting for the causes of the error</p>
 </div>
 <div class="cell-output cell-output-display">
@@ -968,7 +995,11 @@ Name: charges, dtype: float32</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-10-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p><code>-</code> 6번째 관측치</p>
@@ -1057,7 +1088,11 @@ Name: charges, dtype: float32</code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="13wk-55_files/figure-html/cell-13-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="13wk-55_files/figure-html/cell-13-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 
@@ -1194,15 +1229,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -1211,6 +1276,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1253,6 +1319,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1328,7 +1417,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);
