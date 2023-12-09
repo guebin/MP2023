@@ -1579,7 +1579,28 @@
     "href": "offline/231205.html",
     "title": "2023-12-05 – 원격컴퓨터에서 개발환경 셋팅하기 (3)",
     "section": "",
-    "text": "1. R과 Jupyter의 연결\n- 아래를 이용하여 가상환경생성, 가상환경활성화, 가상환경에R설치,R실행\nconda create -n r \nconda activate r \nconda install -c conda-forge r-essentials \nR\n- R이 실행되면 아래를 입력\nIRkernel::installspec()\nq() # 이후에 n을 누르고 빠져나간다.\n- 주피터에서 R이 실행되는지 확인한다."
+    "text": "- 아래를 이용하여 가상환경생성, 가상환경활성화, 가상환경에R설치,R실행\nconda create -n r \nconda activate r \nconda install -c conda-forge r-essentials \nR\n- R이 실행되면 아래를 입력\nIRkernel::installspec()\nq() # 이후에 n을 누르고 빠져나간다.\n- 주피터에서 R이 실행되는지 확인한다."
+  },
+  {
+    "objectID": "offline/231205.html#a.-quarto설치",
+    "href": "offline/231205.html#a.-quarto설치",
+    "title": "2023-12-05 – 원격컴퓨터에서 개발환경 셋팅하기 (3)",
+    "section": "A. Quarto설치",
+    "text": "A. Quarto설치\n- 아래를 이용해 설치\nwget https://github.com/quarto-dev/quarto-cli/releases/download/v1.3.450/quarto-1.3.450-linux-amd64.deb\ngdebi quarto-1.3.450-linux-amd64.deb"
+  },
+  {
+    "objectID": "offline/231205.html#b.-github-토큰얻기",
+    "href": "offline/231205.html#b.-github-토큰얻기",
+    "title": "2023-12-05 – 원격컴퓨터에서 개발환경 셋팅하기 (3)",
+    "section": "B. github 토큰얻기",
+    "text": "B. github 토큰얻기\n- 아래의 주소로가서 토큰을 생성 (어디에 잘 저장할 것)\n\nhttps://github.com/settings/tokens"
+  },
+  {
+    "objectID": "offline/231205.html#c.-github-repo-생성후-clone",
+    "href": "offline/231205.html#c.-github-repo-생성후-clone",
+    "title": "2023-12-05 – 원격컴퓨터에서 개발환경 셋팅하기 (3)",
+    "section": "C. github repo 생성후 clone",
+    "text": "C. github repo 생성후 clone\n- 적당한 이름의 repo를 만들것\n\n\n주의: repository 만들때 readme.md 파일을 생성 할 것. 그래야 이후의 작업이 편리.\n\n- clone이후 local-git과 github를 연결\ngit clone {복사한주소}\ncd {생성된디렉토리}\n## README.md 파일 수정 \ngit add .\ngit commit -m .\n## email, username 등록 \ngit commit -m .\ngit config credential.helper store\ngit push\n## username 입력\n## token 입력\n\n- blog project 생성후 publish\nquarto create-project --type website:blog\ngit add .\ngit commit -m .\ngit push \nquarto publish --no-browser \n## github선택 \n\n- 이후에 수정사항이 생기면 아래를 연속적으로 실행\ngit add .\ngit commit -m .\ngit push \nquarto publish --no-browser --no-prompt"
   },
   {
     "objectID": "offline/230912.html",
