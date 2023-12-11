@@ -219,10 +219,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="imports" class="level1">
 <h1>2. Imports</h1>
-<div id="80713e7c-c091-4a30-98eb-fd39569caa42" class="cell" data-tags="[]" data-execution_count="121">
+<div id="80713e7c-c091-4a30-98eb-fd39569caa42" class="cell" data-tags="[]" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install autogluon.multimodal </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="ccbd6cdf-ad80-47c9-94ea-faac6aad8d4f" class="cell" data-tags="[]" data-execution_count="106">
+<div id="ccbd6cdf-ad80-47c9-94ea-faac6aad8d4f" class="cell" data-tags="[]" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -236,12 +236,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data" class="level1">
 <h1>3. Data</h1>
-<div id="f7f745a6-0c73-4260-b48a-1c546c8a28c5" class="cell" data-tags="[]" data-execution_count="107">
+<div id="f7f745a6-0c73-4260-b48a-1c546c8a28c5" class="cell" data-tags="[]" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">2</span>:<span class="dv">4</span>].set_axis([<span class="st">'date'</span>,<span class="st">'temp'</span>],axis<span class="op">=</span><span class="dv">1</span>).assign(date<span class="op">=</span> <span class="kw">lambda</span> df: df.date.<span class="bu">apply</span>(pd.to_datetime))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> df[:<span class="dv">580</span>].assign(item_id <span class="op">=</span> <span class="st">'평균기온'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> df[<span class="dv">580</span>:].assign(item_id <span class="op">=</span> <span class="st">'평균기온'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="e1d6d73f-6d9e-4ab8-88f0-2ffe7eb43f1e" class="cell" data-tags="[]" data-execution_count="108">
+<div id="e1d6d73f-6d9e-4ab8-88f0-2ffe7eb43f1e" class="cell" data-tags="[]" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>display(df_train.head())</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>display(df_test.head())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>여기에서 세번째 칼럼은 오토글루온으로 시계열을 적합하기 위한 인덱스 역할을 함.</p>
-<div id="898aa826-a286-47ce-a5b0-f619b424df82" class="cell" data-execution_count="109">
+<div id="898aa826-a286-47ce-a5b0-f619b424df82" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.date,df_train.temp)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,df_test.temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
@@ -371,10 +371,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p><code>-</code> 오토글루온에서 분석가능한 시계열 자료의 형태</p>
 <p><strong>1. 하나의 시계열</strong></p>
-<div id="17276da8-2f1e-495a-93ed-2e9476cd42d9" class="cell" data-tags="[]" data-execution_count="110">
+<div id="17276da8-2f1e-495a-93ed-2e9476cd42d9" class="cell" data-tags="[]" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> pd.DataFrame({<span class="st">'시간'</span>:[<span class="st">'2023-12-07'</span>,<span class="st">'2023-12-08'</span>], <span class="st">'종목'</span>:[<span class="st">'삼성전자'</span>]<span class="op">*</span><span class="dv">2</span>, <span class="st">'주가'</span>:[<span class="dv">72600</span>, <span class="dv">72800</span>]})</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="110">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
@@ -406,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3276c22f-1ef2-4cf2-9eca-ab4bf0e32cac" class="cell" data-tags="[]" data-execution_count="111">
+<div id="3276c22f-1ef2-4cf2-9eca-ab4bf0e32cac" class="cell" data-tags="[]" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ts1 <span class="op">=</span> TimeSeriesDataFrame(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df1,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    static_features <span class="op">=</span> <span class="va">None</span>, </span>
@@ -414,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    timestamp_column <span class="op">=</span> <span class="st">'시간'</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ts1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="111">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
@@ -448,10 +448,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>2. 여러개의 시계열</strong></p>
-<div id="f9c10671-65b7-4a9e-b0b8-d5197cbbf38e" class="cell" data-tags="[]" data-execution_count="112">
+<div id="f9c10671-65b7-4a9e-b0b8-d5197cbbf38e" class="cell" data-tags="[]" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">'시간'</span>:[<span class="st">'2023-12-07'</span>,<span class="st">'2023-12-08'</span>]<span class="op">*</span><span class="dv">2</span>, <span class="st">'종목'</span>:[<span class="st">'삼성전자'</span>]<span class="op">*</span><span class="dv">2</span><span class="op">+</span>[<span class="st">'카카오'</span>]<span class="op">*</span><span class="dv">2</span>, <span class="st">'주가'</span>:[<span class="dv">72600</span>, <span class="dv">72800</span>, <span class="dv">51700</span>, <span class="dv">51600</span>]})</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="112">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -495,7 +495,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="402e5ef8-5beb-4cd9-a6cc-120b0862d346" class="cell" data-tags="[]" data-execution_count="113">
+<div id="402e5ef8-5beb-4cd9-a6cc-120b0862d346" class="cell" data-tags="[]" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ts2 <span class="op">=</span> TimeSeriesDataFrame(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df2,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    static_features <span class="op">=</span> <span class="va">None</span>, </span>
@@ -503,7 +503,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    timestamp_column <span class="op">=</span> <span class="st">'시간'</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ts2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="113">
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -546,7 +546,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p><strong>3. 여러개의 시계열 + static_feature</strong></p>
-<div id="0e35f598-1556-4204-8718-be05420c6944" class="cell" data-tags="[]" data-execution_count="114">
+<div id="0e35f598-1556-4204-8718-be05420c6944" class="cell" data-tags="[]" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="op">=</span> pd.DataFrame({<span class="st">'시간'</span>:[<span class="st">'2023-12-07'</span>,<span class="st">'2023-12-08'</span>]<span class="op">*</span><span class="dv">2</span>, <span class="st">'종목'</span>:[<span class="st">'삼성전자'</span>]<span class="op">*</span><span class="dv">2</span><span class="op">+</span>[<span class="st">'카카오'</span>]<span class="op">*</span><span class="dv">2</span>, <span class="st">'주가'</span>:[<span class="dv">72600</span>, <span class="dv">72800</span>, <span class="dv">51700</span>, <span class="dv">51600</span>]})</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df3 <span class="op">=</span> pd.DataFrame({<span class="st">'종목'</span>:[<span class="st">'삼성전자'</span>,<span class="st">'카카오'</span>],<span class="st">'특징1(기업성격)'</span>:[<span class="st">'제조'</span>,<span class="st">'IT'</span>],<span class="st">'특징2(사원수)'</span>:[<span class="dv">500</span>,<span class="dv">25</span>]})</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>display(df2,df3)</span>
@@ -632,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="114">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 
 
@@ -679,7 +679,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>5. 적합</h1>
 <section id="a.-step1-데이터의-정리" class="level2">
 <h2 class="anchored" data-anchor-id="a.-step1-데이터의-정리">A. Step1: 데이터의 정리</h2>
-<div id="916faf4a-1355-44b0-9256-5979fd3f4c4b" class="cell" data-tags="[]" data-execution_count="115">
+<div id="916faf4a-1355-44b0-9256-5979fd3f4c4b" class="cell" data-tags="[]" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ts_train <span class="op">=</span> TimeSeriesDataFrame(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df_train,</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    static_features <span class="op">=</span> <span class="va">None</span>, </span>
@@ -690,7 +690,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="b.-step2-timeseriespredictor-생성" class="level2">
 <h2 class="anchored" data-anchor-id="b.-step2-timeseriespredictor-생성">B. Step2: <code>TimeSeriesPredictor</code> 생성</h2>
-<div id="cd7030bd-a3be-4df6-b7f7-e732762824c0" class="cell" data-tags="[]" data-execution_count="116">
+<div id="cd7030bd-a3be-4df6-b7f7-e732762824c0" class="cell" data-tags="[]" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TimeSeriesPredictor(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> <span class="st">'temp'</span>, <span class="co"># 예측하고 싶은것 </span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    known_covariates_names <span class="op">=</span> <span class="va">None</span>, <span class="co"># 온도를 예측할때 쓸 수 있는 다른 시계열 자료 </span></span>
@@ -701,21 +701,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="c.-step3-학습" class="level2">
 <h2 class="anchored" data-anchor-id="c.-step3-학습">C. Step3: 학습</h2>
-<div id="936ae122-9181-4766-99a0-e07af80ca045" class="cell" data-tags="[]" data-execution_count="117">
+<div id="936ae122-9181-4766-99a0-e07af80ca045" class="cell" data-tags="[]" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(ts_train,presets<span class="op">=</span><span class="st">'medium_quality'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Beginning AutoGluon training...
-AutoGluon will save models to 'AutogluonModels/ag-20231209_020312'
+AutoGluon will save models to 'AutogluonModels/ag-20231210_101358'
 =================== System Info ===================
 AutoGluon Version:  1.0.0
 Python Version:     3.11.6
 Operating System:   Linux
 Platform Machine:   x86_64
-Platform Version:   #140-Ubuntu SMP Thu Aug 4 02:23:37 UTC 2022
-CPU Count:          128
+Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
+CPU Count:          16
 GPU Count:          1
-Memory Avail:       401.20 GB / 503.74 GB (79.6%)
-Disk Space Avail:   1159.47 GB / 1757.88 GB (66.0%)
+Memory Avail:       117.48 GB / 125.71 GB (93.5%)
+Disk Space Avail:   198.80 GB / 456.88 GB (43.5%)
 ===================================================
 Setting presets to: medium_quality
 
@@ -743,55 +743,143 @@ AutoGluon will gauge predictive performance using evaluation metric: 'WQL'
     This metric's sign has been flipped to adhere to being higher_is_better. The metric score can be multiplied by -1 to get the metric value.
 ===================================================
 
-Starting training. Start time is 2023-12-09 02:03:12
+Starting training. Start time is 2023-12-10 19:14:00
 Models that will be trained: ['Naive', 'SeasonalNaive', 'ETS', 'Theta', 'RecursiveTabular', 'DirectTabular', 'TemporalFusionTransformer']
 Training timeseries model Naive. 
     -0.2088       = Validation score (-WQL)
     0.00    s     = Training runtime
-    0.99    s     = Validation (prediction) runtime
+    0.78    s     = Validation (prediction) runtime
 Training timeseries model SeasonalNaive. 
     -0.1648       = Validation score (-WQL)
-    0.00    s     = Training runtime
-    0.97    s     = Validation (prediction) runtime
+    0.01    s     = Training runtime
+    0.61    s     = Validation (prediction) runtime
 Training timeseries model ETS. 
     -0.2091       = Validation score (-WQL)
-    0.00    s     = Training runtime
-    14.10   s     = Validation (prediction) runtime
+    0.01    s     = Training runtime
+    11.22   s     = Validation (prediction) runtime
 Training timeseries model Theta. 
     -0.2281       = Validation score (-WQL)
     0.00    s     = Training runtime
-    16.11   s     = Validation (prediction) runtime
+    12.67   s     = Validation (prediction) runtime
 Training timeseries model RecursiveTabular. 
     -0.2031       = Validation score (-WQL)
-    1.17    s     = Training runtime
-    0.54    s     = Validation (prediction) runtime
+    1.43    s     = Training runtime
+    0.82    s     = Validation (prediction) runtime
 Training timeseries model DirectTabular. 
     -0.0976       = Validation score (-WQL)
-    3.83    s     = Training runtime
-    0.06    s     = Validation (prediction) runtime
+    1.19    s     = Training runtime
+    0.05    s     = Validation (prediction) runtime
 Training timeseries model TemporalFusionTransformer. 
-    -0.0648       = Validation score (-WQL)
-    43.09   s     = Training runtime
+    -0.0613       = Validation score (-WQL)
+    51.25   s     = Training runtime
     0.02    s     = Validation (prediction) runtime
 Fitting simple weighted ensemble.
-    Ensemble weights: {'RecursiveTabular': 0.03, 'TemporalFusionTransformer': 0.97}
-    -0.0644       = Validation score (-WQL)
-    0.54    s     = Training runtime
-    0.56    s     = Validation (prediction) runtime
+    Ensemble weights: {'RecursiveTabular': 0.04, 'TemporalFusionTransformer': 0.96}
+    -0.0602       = Validation score (-WQL)
+    0.44    s     = Training runtime
+    0.84    s     = Validation (prediction) runtime
 Training complete. Models trained: ['Naive', 'SeasonalNaive', 'ETS', 'Theta', 'RecursiveTabular', 'DirectTabular', 'TemporalFusionTransformer', 'WeightedEnsemble']
-Total runtime: 81.49 s
+Total runtime: 80.66 s
 Best model: WeightedEnsemble
-Best model score: -0.0644</code></pre>
+Best model score: -0.0602</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="117">
-<pre><code>&lt;autogluon.timeseries.predictor.TimeSeriesPredictor at 0x7f1ecc493a10&gt;</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>&lt;autogluon.timeseries.predictor.TimeSeriesPredictor at 0x7f49628f3010&gt;</code></pre>
+</div>
+</div>
+<div id="99baa21c-2170-4522-822f-dca52f85b7e1" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">score_val</th>
+<th data-quarto-table-cell-role="th">pred_time_val</th>
+<th data-quarto-table-cell-role="th">fit_time_marginal</th>
+<th data-quarto-table-cell-role="th">fit_order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>WeightedEnsemble</td>
+<td>-0.060161</td>
+<td>0.837295</td>
+<td>0.436255</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>TemporalFusionTransformer</td>
+<td>-0.061296</td>
+<td>0.015947</td>
+<td>51.248755</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>DirectTabular</td>
+<td>-0.097625</td>
+<td>0.053171</td>
+<td>1.194808</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>SeasonalNaive</td>
+<td>-0.164817</td>
+<td>0.608853</td>
+<td>0.006057</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>RecursiveTabular</td>
+<td>-0.203124</td>
+<td>0.821348</td>
+<td>1.425918</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Naive</td>
+<td>-0.208796</td>
+<td>0.779727</td>
+<td>0.004866</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>ETS</td>
+<td>-0.209098</td>
+<td>11.216964</td>
+<td>0.005571</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Theta</td>
+<td>-0.228130</td>
+<td>12.673510</td>
+<td>0.004869</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+
+</div>
 </div>
 </div>
 </section>
 <section id="d.-step4-예측" class="level2">
 <h2 class="anchored" data-anchor-id="d.-step4-예측">D. Step4: 예측</h2>
 <div id="6f0c8160-9a9c-4903-b48b-01a703e75e66" class="cell" data-tags="[]" data-execution_count="118">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(ts_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>predictr.predict(ts_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Model not specified in predict, will default to the model with the best validation score: WeightedEnsemble</code></pre>
 </div>
@@ -986,8 +1074,8 @@ Best model score: -0.0644</code></pre>
 <section id="e.-시각화" class="level2">
 <h2 class="anchored" data-anchor-id="e.-시각화">E. 시각화</h2>
 <div id="5f884908-d6f1-45a1-b554-6d20e06b229c" class="cell" data-tags="[]" data-execution_count="119">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> predictr.predict(ts_train)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> predictr.predict(ts_train)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>predictions</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Model not specified in predict, will default to the model with the best validation score: WeightedEnsemble</code></pre>
 </div>
@@ -1179,15 +1267,15 @@ Best model score: -0.0644</code></pre>
 </div>
 </div>
 <div id="9182322e-e543-481e-9cb0-35d98780155a" class="cell" data-tags="[]" data-execution_count="120">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.date,df_train.temp,label<span class="op">=</span><span class="st">'observed'</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,df_test.temp,color<span class="op">=</span><span class="st">'gray'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,label<span class="op">=</span><span class="st">'future value'</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,predictions[<span class="st">'mean'</span>],color<span class="op">=</span><span class="st">'C1'</span>,label<span class="op">=</span><span class="st">'estimated'</span>)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df_test.date, predictions[<span class="st">'0.1'</span>], predictions[<span class="st">'0.9'</span>],color<span class="op">=</span><span class="st">'C1'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.date,df_train.temp,label<span class="op">=</span><span class="st">'observed'</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,df_test.temp,color<span class="op">=</span><span class="st">'gray'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,label<span class="op">=</span><span class="st">'future value'</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,predictions[<span class="st">'mean'</span>],color<span class="op">=</span><span class="st">'C1'</span>,label<span class="op">=</span><span class="st">'estimated'</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df_test.date, predictions[<span class="st">'0.1'</span>], predictions[<span class="st">'0.9'</span>],color<span class="op">=</span><span class="st">'C1'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14wk-58_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="14wk-58_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1211,35 +1299,35 @@ Best model score: -0.0644</code></pre>
 <section id="b.-장기예측" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="b.-장기예측">B. 장기예측</h2>
 <div id="02fd47a0-d680-4b18-913a-2fddecada23b" class="cell" data-tags="[]" data-execution_count="102">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">2</span>:<span class="dv">4</span>].set_axis([<span class="st">'date'</span>,<span class="st">'temp'</span>],axis<span class="op">=</span><span class="dv">1</span>).assign(date<span class="op">=</span> <span class="kw">lambda</span> df: df.date.<span class="bu">apply</span>(pd.to_datetime))</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> df[:<span class="dv">513</span>].assign(item_id <span class="op">=</span> <span class="st">'평균기온'</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> df[<span class="dv">513</span>:].assign(item_id <span class="op">=</span> <span class="st">'평균기온'</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 </span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>ts_train <span class="op">=</span> TimeSeriesDataFrame(</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df_train,</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    static_features <span class="op">=</span> <span class="va">None</span>, </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    id_column <span class="op">=</span> <span class="st">'item_id'</span>,</span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    timestamp_column <span class="op">=</span> <span class="st">'date'</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="co">## step2 </span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TimeSeriesPredictor(</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> <span class="st">'temp'</span>, <span class="co"># 예측하고 싶은것 </span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    known_covariates_names <span class="op">=</span> <span class="va">None</span>, <span class="co"># 온도를 예측할때 쓸 수 있는 다른 시계열 자료 </span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    prediction_length <span class="op">=</span> <span class="bu">len</span>(df_test), <span class="co"># 예측하고 싶은 자료의 길이</span></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    freq <span class="op">=</span> <span class="st">'D'</span> <span class="co"># 주기 (보통은 'D', 'H'를 씀, 일반적으로 명시하지 않아도 오토글루온이 알아서 찾아줌) </span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a><span class="co">## step3 </span></span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>predictr.fit(ts_train)</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">## step4 </span></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>predictr.predict(ts_train)</span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a><span class="co">#---# </span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> predictr.predict(ts_train)</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.date,df_train.temp,label<span class="op">=</span><span class="st">'observed'</span>)</span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,df_test.temp,color<span class="op">=</span><span class="st">'gray'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,label<span class="op">=</span><span class="st">'future value'</span>)</span>
-<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,predictions[<span class="st">'mean'</span>],color<span class="op">=</span><span class="st">'C1'</span>,label<span class="op">=</span><span class="st">'estimated'</span>)</span>
-<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df_test.date, predictions[<span class="st">'0.1'</span>], predictions[<span class="st">'0.9'</span>],color<span class="op">=</span><span class="st">'C1'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
-<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'https://raw.githubusercontent.com/guebin/DV2022/master/posts/temp.csv'</span>).iloc[:,<span class="dv">2</span>:<span class="dv">4</span>].set_axis([<span class="st">'date'</span>,<span class="st">'temp'</span>],axis<span class="op">=</span><span class="dv">1</span>).assign(date<span class="op">=</span> <span class="kw">lambda</span> df: df.date.<span class="bu">apply</span>(pd.to_datetime))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> df[:<span class="dv">513</span>].assign(item_id <span class="op">=</span> <span class="st">'평균기온'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> df[<span class="dv">513</span>:].assign(item_id <span class="op">=</span> <span class="st">'평균기온'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#---#</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">## step1 </span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>ts_train <span class="op">=</span> TimeSeriesDataFrame(</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df_train,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    static_features <span class="op">=</span> <span class="va">None</span>, </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    id_column <span class="op">=</span> <span class="st">'item_id'</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    timestamp_column <span class="op">=</span> <span class="st">'date'</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">## step2 </span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TimeSeriesPredictor(</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    target <span class="op">=</span> <span class="st">'temp'</span>, <span class="co"># 예측하고 싶은것 </span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    known_covariates_names <span class="op">=</span> <span class="va">None</span>, <span class="co"># 온도를 예측할때 쓸 수 있는 다른 시계열 자료 </span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    prediction_length <span class="op">=</span> <span class="bu">len</span>(df_test), <span class="co"># 예측하고 싶은 자료의 길이</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    freq <span class="op">=</span> <span class="st">'D'</span> <span class="co"># 주기 (보통은 'D', 'H'를 씀, 일반적으로 명시하지 않아도 오토글루온이 알아서 찾아줌) </span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">## step3 </span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>predictr.fit(ts_train)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="co">## step4 </span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>predictr.predict(ts_train)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="co">#---# </span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>predictions <span class="op">=</span> predictr.predict(ts_train)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>plt.plot(df_train.date,df_train.temp,label<span class="op">=</span><span class="st">'observed'</span>)</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,df_test.temp,color<span class="op">=</span><span class="st">'gray'</span>,alpha<span class="op">=</span><span class="fl">0.5</span>,label<span class="op">=</span><span class="st">'future value'</span>)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>plt.plot(df_test.date,predictions[<span class="st">'mean'</span>],color<span class="op">=</span><span class="st">'C1'</span>,label<span class="op">=</span><span class="st">'estimated'</span>)</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df_test.date, predictions[<span class="st">'0.1'</span>], predictions[<span class="st">'0.9'</span>],color<span class="op">=</span><span class="st">'C1'</span>,alpha<span class="op">=</span><span class="fl">0.2</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231209_020014"
 Beginning AutoGluon training...
@@ -1341,7 +1429,7 @@ Model not specified in predict, will default to the model with the best validati
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="14wk-58_files/figure-html/cell-18-output-2.png" class="img-fluid figure-img"></p>
+<p><img src="14wk-58_files/figure-html/cell-19-output-2.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
