@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.520">
+<meta name="generator" content="quarto-1.4.533">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,6 +105,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -241,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">그림1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">그림2</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="230907_files/figure-html/e97e713a-bb72-4b9b-87de-2272764262d3-1-792156c8-5be0-4c26-bb31-06955100413f.png" class="img-fluid figure-img"></p>
 <figcaption>그림1: 정상적으로 설치된 경우 (base)가 보임</figcaption>
@@ -249,7 +276,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="230907_files/figure-html/e97e713a-bb72-4b9b-87de-2272764262d3-2-a909dc60-cd8c-498a-8785-677f55dad84a.png" class="img-fluid figure-img"></p>
 <figcaption>그림2: 정상적으로 설치된 경우 cond env list 등의 명령이 잘 동작함. 현재환경은 *로 표시됨</figcaption>
@@ -269,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>본인이 편리한 경우 github desktop 혹은 sourcetree 등에서 작업해도 무방함. 하지만 수업에서는 다루지 않음.</p>
 </blockquote>
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="230907_files/figure-html/97e2e5c9-5c9b-4fd6-bbbb-1fa91d9fc73c-1-b36ae87d-a850-49b9-9d28-e23395eda4db.png" class="img-fluid figure-img"></p>
 <figcaption>그림3: git이 정상적으로 설치된 경우 출력예시</figcaption>
@@ -283,7 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>설치</li>
 <li>터미널에서 <code>quarto help</code>를 입력하여 정상적으로 설치되었는지 확인. 그림4 참고.</li>
 </ol>
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="230907_files/figure-html/7b11ab12-889d-493c-87cb-aeaec5ec40b3-1-17c1b8d6-23c9-404c-9840-d10bc9d7e361.png" class="img-fluid figure-img"></p>
 <figcaption>그림4: quarto가 정상적으로 설치된 경우 출력예시</figcaption>
@@ -304,7 +331,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>3. Local <span class="math inline">\(\leftrightarrow\)</span> Github</h1>
 <p><code>-</code> 깃헙레포지토리 접속</p>
 <p><code>-</code> 주소복사. 그림5 참고. 그림5의 화면이 나오지 않는다면 레포지토리를 잘 못 만든 것임</p>
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="230907_files/figure-html/dc1bb89d-b2eb-429c-b1c6-856b252b4560-1-07fcf238-0b50-473e-b85f-a818c49d586f.png" class="img-fluid figure-img"></p>
 <figcaption>그림5: github repo -&gt; code -&gt; local, https:// -&gt; 복사버튼. 이 예시의 경우 복사가 정상적으로 되었다면 “https://github.com/guebin/asdf.git” 이 복사되어야함</figcaption>
@@ -453,27 +480,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -488,10 +494,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             break;
           }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -500,7 +510,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }
