@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.533">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="최규빈">
+<meta name="dcterms.date" content="2023-09-12">
+
+<title>MP2023 - 02wk-05: 타이타닉 / Autogluon</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">MP2023</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../offline.html"> 
+<span class="menu-text"><strong>대면수업</strong></span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/guebin/MP2023"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.youtube.com/channel/UCQk9RyBNgXc7ORIsYlOfQrg/playlists?view=50&amp;sort=dd&amp;shelf_id=2"> <i class="bi bi-youtube" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#강의영상" id="toc-강의영상" class="nav-link active" data-scroll-target="#강의영상">1. 강의영상</a></li>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import">2. Import</a></li>
+  <li><a href="#분석의-절차" id="toc-분석의-절차" class="nav-link" data-scroll-target="#분석의-절차">3. 분석의 절차</a>
+  <ul class="collapse">
+  <li><a href="#a.-데이터" id="toc-a.-데이터" class="nav-link" data-scroll-target="#a.-데이터">A. 데이터</a></li>
+  <li><a href="#b.-predictor-생성" id="toc-b.-predictor-생성" class="nav-link" data-scroll-target="#b.-predictor-생성">B. Predictor 생성</a></li>
+  <li><a href="#c.-적합fit" id="toc-c.-적합fit" class="nav-link" data-scroll-target="#c.-적합fit">C. 적합(fit)</a></li>
+  <li><a href="#d.-예측-predict" id="toc-d.-예측-predict" class="nav-link" data-scroll-target="#d.-예측-predict">D. 예측 (predict)</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="02wk-05.out.ipynb" download="02wk-05.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">02wk-05: 타이타닉 / Autogluon</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>최규빈 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 12, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="강의영상" class="level1">
+<h1>1. 강의영상</h1>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/playlist?list=PLQqh36zP38-zZrOGpLc8spPa9L39RiNhR&amp;si=TFl5m9-VohYT_47L" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="import" class="level1">
+<h1>2. Import</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This Python 3 environment comes with many helpful analytics libraries installed</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, here's several helpful packages to load</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># linear algebra</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># data processing, CSV file I/O (e.g. pd.read_csv)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Input data files are available in the read-only "../input/" directory</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dirname, _, filenames <span class="kw">in</span> os.walk(<span class="st">'/kaggle/input'</span>):</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> filename <span class="kw">in</span> filenames:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(os.path.join(dirname, filename))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save &amp; Run All" </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>/kaggle/input/titanic/train.csv
+/kaggle/input/titanic/test.csv
+/kaggle/input/titanic/gender_submission.csv</code></pre>
+<div id="438db173-0810-4140-98cd-65314c5695af" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pip install autogluon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="77a36c4a-ac65-4270-bb1e-bca688db2eb1" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> autogluon.tabular <span class="im">import</span> TabularDataset, TabularPredictor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm</code></pre>
+</div>
+</div>
+</section>
+<section id="분석의-절차" class="level1">
+<h1>3. 분석의 절차</h1>
+<section id="a.-데이터" class="level2">
+<h2 class="anchored" data-anchor-id="a.-데이터">A. 데이터</h2>
+<p><code>-</code> 비유: 문제를 받아오는 과정으로 비유할 수 있다.</p>
+<div id="7c66df28-7fe6-47de-ba1f-4d1c74976f0f" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>kaggle competitions download <span class="op">-</span>c titanic</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>unzip titanic.<span class="bu">zip</span> <span class="op">-</span>d .<span class="op">/</span>titanic</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> TabularDataset(<span class="st">'titanic/train.csv'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_test <span class="op">=</span> TabularDataset(<span class="st">'titanic/test.csv'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm titanic.<span class="bu">zip</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>rm <span class="op">-</span>rf titanic<span class="op">/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Downloading titanic.zip to /home/cgb2/Dropbox/07_lectures/2023-09-MP2023/posts
+  0%|                                               | 0.00/34.1k [00:00&lt;?, ?B/s]
+100%|██████████████████████████████████████| 34.1k/34.1k [00:00&lt;00:00, 5.82MB/s]
+Archive:  titanic.zip
+  inflating: ./titanic/gender_submission.csv  
+  inflating: ./titanic/test.csv      
+  inflating: ./titanic/train.csv     </code></pre>
+</div>
+</div>
+</section>
+<section id="b.-predictor-생성" class="level2">
+<h2 class="anchored" data-anchor-id="b.-predictor-생성">B. Predictor 생성</h2>
+<p><code>-</code> 비유: 문제를 풀 학생을 생성하는 과정으로 비유할 수 있다.</p>
+<div id="0ba98784-7f27-48dd-9b7f-6c0a738eb56c" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>predictr <span class="op">=</span> TabularPredictor(<span class="st">"Survived"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>No path specified. Models will be saved in: "AutogluonModels/ag-20231024_084026"</code></pre>
+</div>
+</div>
+</section>
+<section id="c.-적합fit" class="level2">
+<h2 class="anchored" data-anchor-id="c.-적합fit">C. 적합(fit)</h2>
+<p><code>-</code> 비유: 학생이 공부를 하는 과정으로 비유할 수 있다.</p>
+<p><code>-</code> 학습</p>
+<div id="2ff440a6-2707-4849-8c16-efb51eb4f3b4" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>predictr.fit(df_train) </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 학생(predictr)에게 문제(tr)를 줘서 학습을 시킴(predictr.fit())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/core/utils/utils.py:564: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context("mode.use_inf_as_na", True):  # treat None, NaN, INF, NINF as NA
+Beginning AutoGluon training ...
+AutoGluon will save models to "AutogluonModels/ag-20231024_084026"
+AutoGluon Version:  0.8.2
+Python Version:     3.10.13
+Operating System:   Linux
+Platform Machine:   x86_64
+Platform Version:   #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2
+Disk Space Avail:   265.30 GB / 490.57 GB (54.1%)
+Train Data Rows:    891
+Train Data Columns: 11
+Label Column: Survived
+Preprocessing data ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/core/utils/utils.py:564: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context("mode.use_inf_as_na", True):  # treat None, NaN, INF, NINF as NA
+AutoGluon infers your prediction problem is: 'binary' (because only two unique label-values observed).
+    2 unique label values:  [0, 1]
+    If 'binary' is not the correct problem_type, please manually specify the problem_type parameter during predictor init (You may specify problem_type as one of: ['binary', 'multiclass', 'regression'])
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/learner/default_learner.py:215: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context("mode.use_inf_as_na", True):  # treat None, NaN, INF, NINF as NA
+Selected class &lt;--&gt; label mapping:  class 1 = 1, class 0 = 0
+Using Feature Generators to preprocess the data ...
+Fitting AutoMLPipelineFeatureGenerator...
+    Available Memory:                    124529.88 MB
+    Train Data (Original)  Memory Usage: 0.31 MB (0.0% of available memory)
+    Inferring data type of each feature based on column values. Set feature_metadata_in to manually specify special dtypes of the features.
+    Stage 1 Generators:
+        Fitting AsTypeFeatureGenerator...
+            Note: Converting 1 features to boolean dtype as they only contain 2 unique values.
+    Stage 2 Generators:
+        Fitting FillNaFeatureGenerator...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/features/generators/fillna.py:58: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  X.fillna(self._fillna_feature_map, inplace=True, downcast=False)
+    Stage 3 Generators:
+        Fitting IdentityFeatureGenerator...
+        Fitting CategoryFeatureGenerator...
+            Fitting CategoryMemoryMinimizeFeatureGenerator...
+        Fitting TextSpecialFeatureGenerator...
+            Fitting BinnedFeatureGenerator...
+            Fitting DropDuplicatesFeatureGenerator...
+        Fitting TextNgramFeatureGenerator...
+            Fitting CountVectorizer for text features: ['Name']
+            CountVectorizer fit with vocabulary size = 8
+    Stage 4 Generators:
+        Fitting DropUniqueFeatureGenerator...
+    Stage 5 Generators:
+        Fitting DropDuplicatesFeatureGenerator...
+    Types of features in original data (raw dtype, special dtypes):
+        ('float', [])        : 2 | ['Age', 'Fare']
+        ('int', [])          : 4 | ['PassengerId', 'Pclass', 'SibSp', 'Parch']
+        ('object', [])       : 4 | ['Sex', 'Ticket', 'Cabin', 'Embarked']
+        ('object', ['text']) : 1 | ['Name']
+    Types of features in processed data (raw dtype, special dtypes):
+        ('category', [])                    : 3 | ['Ticket', 'Cabin', 'Embarked']
+        ('float', [])                       : 2 | ['Age', 'Fare']
+        ('int', [])                         : 4 | ['PassengerId', 'Pclass', 'SibSp', 'Parch']
+        ('int', ['binned', 'text_special']) : 9 | ['Name.char_count', 'Name.word_count', 'Name.capital_ratio', 'Name.lower_ratio', 'Name.special_ratio', ...]
+        ('int', ['bool'])                   : 1 | ['Sex']
+        ('int', ['text_ngram'])             : 9 | ['__nlp__.henry', '__nlp__.john', '__nlp__.master', '__nlp__.miss', '__nlp__.mr', ...]
+    0.2s = Fit runtime
+    11 features in original data used to generate 28 features in processed data.
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2417.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+    Train Data (Processed) Memory Usage: 0.07 MB (0.0% of available memory)
+Data preprocessing and feature engineering runtime = 0.19s ...
+AutoGluon will gauge predictive performance using evaluation metric: 'accuracy'
+    To change this, specify the eval_metric parameter of Predictor()
+Automatically generating train/validation split with holdout_frac=0.2, Train Rows: 712, Val Rows: 179
+User-specified model hyperparameters to be fit:
+{
+    'NN_TORCH': {},
+    'GBM': [{'extra_trees': True, 'ag_args': {'name_suffix': 'XT'}}, {}, 'GBMLarge'],
+    'CAT': {},
+    'XGB': {},
+    'FASTAI': {},
+    'RF': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'XT': [{'criterion': 'gini', 'ag_args': {'name_suffix': 'Gini', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'entropy', 'ag_args': {'name_suffix': 'Entr', 'problem_types': ['binary', 'multiclass']}}, {'criterion': 'squared_error', 'ag_args': {'name_suffix': 'MSE', 'problem_types': ['regression', 'quantile']}}],
+    'KNN': [{'weights': 'uniform', 'ag_args': {'name_suffix': 'Unif'}}, {'weights': 'distance', 'ag_args': {'name_suffix': 'Dist'}}],
+}
+Fitting 13 L1 models ...
+Fitting model: KNeighborsUnif ...
+    0.6536   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.03s    = Validation runtime
+Fitting model: KNeighborsDist ...
+    0.6536   = Validation score   (accuracy)
+    0.01s    = Training   runtime
+    0.02s    = Validation runtime
+Fitting model: LightGBMXT ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+    0.8156   = Validation score   (accuracy)
+    0.48s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: LightGBM ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+    0.8212   = Validation score   (accuracy)
+    0.16s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: RandomForestGini ...
+    0.8156   = Validation score   (accuracy)
+    0.54s    = Training   runtime
+    0.2s     = Validation runtime
+Fitting model: RandomForestEntr ...
+    0.8156   = Validation score   (accuracy)
+    0.61s    = Training   runtime
+    0.18s    = Validation runtime
+Fitting model: CatBoost ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+    0.8268   = Validation score   (accuracy)
+    0.56s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: ExtraTreesGini ...
+    0.8156   = Validation score   (accuracy)
+    0.82s    = Training   runtime
+    0.22s    = Validation runtime
+Fitting model: ExtraTreesEntr ...
+    0.8101   = Validation score   (accuracy)
+    0.7s     = Training   runtime
+    0.23s    = Validation runtime
+Fitting model: NeuralNetFastAI ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/data/transforms.py:225: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if is_categorical_dtype(col):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/data/transforms.py:225: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if is_categorical_dtype(col):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+No improvement since epoch 9: early stopping
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+    0.8324   = Validation score   (accuracy)
+    2.15s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: XGBoost ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/xgboost/data.py:440: FutureWarning: is_sparse is deprecated and will be removed in a future version. Check `isinstance(dtype, pd.SparseDtype)` instead.
+  if is_sparse(data):
+    0.8101   = Validation score   (accuracy)
+    0.23s    = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: NeuralNetTorch ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+    0.8212   = Validation score   (accuracy)
+    3.4s     = Training   runtime
+    0.01s    = Validation runtime
+Fitting model: LightGBMLarge ...
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/common/utils/pandas_utils.py:50: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise in a future error of pandas. Value '2059.259259259259' has dtype incompatible with int64, please explicitly cast to a compatible dtype first.
+  memory_usage[column] = (
+    0.8324   = Validation score   (accuracy)
+    0.42s    = Training   runtime
+    0.0s     = Validation runtime
+Fitting model: WeightedEnsemble_L2 ...
+    0.8324   = Validation score   (accuracy)
+    0.48s    = Training   runtime
+    0.0s     = Validation runtime
+AutoGluon training complete, total runtime = 12.03s ... Best model: "WeightedEnsemble_L2"
+TabularPredictor saved. To load, use: predictor = TabularPredictor.load("AutogluonModels/ag-20231024_084026")</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>&lt;autogluon.tabular.predictor.predictor.TabularPredictor at 0x7fd1a92d4af0&gt;</code></pre>
+</div>
+</div>
+<p><code>-</code> 리더보드확인 (모의고사 채점)</p>
+<div id="6e513eca-aed5-420d-afca-aca5ce499dc5" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>predictr.leaderboard()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  model  score_val  pred_time_val  fit_time  pred_time_val_marginal  fit_time_marginal  stack_level  can_infer  fit_order
+0         LightGBMLarge   0.832402       0.003578  0.422645                0.003578           0.422645            1       True         13
+1       NeuralNetFastAI   0.832402       0.011829  2.153854                0.011829           2.153854            1       True         10
+2   WeightedEnsemble_L2   0.832402       0.012396  2.629154                0.000567           0.475301            2       True         14
+3              CatBoost   0.826816       0.007282  0.558903                0.007282           0.558903            1       True          7
+4              LightGBM   0.821229       0.003267  0.163059                0.003267           0.163059            1       True          4
+5        NeuralNetTorch   0.821229       0.014016  3.402719                0.014016           3.402719            1       True         12
+6            LightGBMXT   0.815642       0.003467  0.479265                0.003467           0.479265            1       True          3
+7      RandomForestEntr   0.815642       0.175467  0.606128                0.175467           0.606128            1       True          6
+8      RandomForestGini   0.815642       0.204887  0.539022                0.204887           0.539022            1       True          5
+9        ExtraTreesGini   0.815642       0.224873  0.821764                0.224873           0.821764            1       True          8
+10              XGBoost   0.810056       0.005781  0.229575                0.005781           0.229575            1       True         11
+11       ExtraTreesEntr   0.810056       0.229908  0.699347                0.229908           0.699347            1       True          9
+12       KNeighborsDist   0.653631       0.016264  0.011564                0.016264           0.011564            1       True          2
+13       KNeighborsUnif   0.653631       0.028849  0.011524                0.028849           0.011524            1       True          1</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">score_val</th>
+<th data-quarto-table-cell-role="th">pred_time_val</th>
+<th data-quarto-table-cell-role="th">fit_time</th>
+<th data-quarto-table-cell-role="th">pred_time_val_marginal</th>
+<th data-quarto-table-cell-role="th">fit_time_marginal</th>
+<th data-quarto-table-cell-role="th">stack_level</th>
+<th data-quarto-table-cell-role="th">can_infer</th>
+<th data-quarto-table-cell-role="th">fit_order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>LightGBMLarge</td>
+<td>0.832402</td>
+<td>0.003578</td>
+<td>0.422645</td>
+<td>0.003578</td>
+<td>0.422645</td>
+<td>1</td>
+<td>True</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>NeuralNetFastAI</td>
+<td>0.832402</td>
+<td>0.011829</td>
+<td>2.153854</td>
+<td>0.011829</td>
+<td>2.153854</td>
+<td>1</td>
+<td>True</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>WeightedEnsemble_L2</td>
+<td>0.832402</td>
+<td>0.012396</td>
+<td>2.629154</td>
+<td>0.000567</td>
+<td>0.475301</td>
+<td>2</td>
+<td>True</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>CatBoost</td>
+<td>0.826816</td>
+<td>0.007282</td>
+<td>0.558903</td>
+<td>0.007282</td>
+<td>0.558903</td>
+<td>1</td>
+<td>True</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>LightGBM</td>
+<td>0.821229</td>
+<td>0.003267</td>
+<td>0.163059</td>
+<td>0.003267</td>
+<td>0.163059</td>
+<td>1</td>
+<td>True</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>NeuralNetTorch</td>
+<td>0.821229</td>
+<td>0.014016</td>
+<td>3.402719</td>
+<td>0.014016</td>
+<td>3.402719</td>
+<td>1</td>
+<td>True</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>LightGBMXT</td>
+<td>0.815642</td>
+<td>0.003467</td>
+<td>0.479265</td>
+<td>0.003467</td>
+<td>0.479265</td>
+<td>1</td>
+<td>True</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>RandomForestEntr</td>
+<td>0.815642</td>
+<td>0.175467</td>
+<td>0.606128</td>
+<td>0.175467</td>
+<td>0.606128</td>
+<td>1</td>
+<td>True</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>RandomForestGini</td>
+<td>0.815642</td>
+<td>0.204887</td>
+<td>0.539022</td>
+<td>0.204887</td>
+<td>0.539022</td>
+<td>1</td>
+<td>True</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>ExtraTreesGini</td>
+<td>0.815642</td>
+<td>0.224873</td>
+<td>0.821764</td>
+<td>0.224873</td>
+<td>0.821764</td>
+<td>1</td>
+<td>True</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>XGBoost</td>
+<td>0.810056</td>
+<td>0.005781</td>
+<td>0.229575</td>
+<td>0.005781</td>
+<td>0.229575</td>
+<td>1</td>
+<td>True</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>ExtraTreesEntr</td>
+<td>0.810056</td>
+<td>0.229908</td>
+<td>0.699347</td>
+<td>0.229908</td>
+<td>0.699347</td>
+<td>1</td>
+<td>True</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>KNeighborsDist</td>
+<td>0.653631</td>
+<td>0.016264</td>
+<td>0.011564</td>
+<td>0.016264</td>
+<td>0.011564</td>
+<td>1</td>
+<td>True</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>KNeighborsUnif</td>
+<td>0.653631</td>
+<td>0.028849</td>
+<td>0.011524</td>
+<td>0.028849</td>
+<td>0.011524</td>
+<td>1</td>
+<td>True</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="d.-예측-predict" class="level2">
+<h2 class="anchored" data-anchor-id="d.-예측-predict">D. 예측 (predict)</h2>
+<p><code>-</code> 비유: 학습이후에 문제를 푸는 과정으로 비유할 수 있다.</p>
+<p><code>-</code> training set 을 풀어봄 (predict) <span class="math inline">\(\to\)</span> 점수 확인</p>
+<div id="91daef3c-7a51-48b6-9692-3b68b04df6b9" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(df_train.Survived <span class="op">==</span> predictr.predict(df_train)).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/features/generators/fillna.py:58: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  X.fillna(self._fillna_feature_map, inplace=True, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>0.8810325476992144</code></pre>
+</div>
+</div>
+<div id="e521d63e-3e90-413b-8b3b-89e27bf38b26" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(df_train.Survived <span class="op">==</span> (df_train.Sex <span class="op">==</span> <span class="st">"female"</span>)).mean() <span class="co"># 예전점수와 비교</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>0.7867564534231201</code></pre>
+</div>
+</div>
+<p><code>-</code> test set 을 풀어봄 (predict) <span class="math inline">\(\to\)</span> 점수 확인 하러 캐글에 결과제출</p>
+<div id="7354ebf0-b4f0-4adf-af2f-814fa92d84bf" class="cell" data-tags="[]" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df_test.assign(Survived <span class="op">=</span> predictr.predict(df_test)).loc[:,[<span class="st">'PassengerId'</span>,<span class="st">'Survived'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/features/generators/fillna.py:58: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  X.fillna(self._fillna_feature_map, inplace=True, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/autogluon/tabular/models/fastainn/tabular_nn_fastai.py:192: FutureWarning: The 'downcast' keyword in fillna is deprecated and will be removed in a future version. Use res.infer_objects(copy=False) to infer non-object dtype, or pd.to_numeric with the 'downcast' keyword to downcast numeric results.
+  df = df.fillna(column_fills, inplace=False, downcast=False)
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):
+/home/cgb2/anaconda3/envs/ag/lib/python3.10/site-packages/fastai/tabular/core.py:233: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+  if not is_categorical_dtype(c):</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">PassengerId</th>
+<th data-quarto-table-cell-role="th">Survived</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>892</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>893</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>894</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>895</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>896</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">413</td>
+<td>1305</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">414</td>
+<td>1306</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">415</td>
+<td>1307</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">416</td>
+<td>1308</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">417</td>
+<td>1309</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+<p>418 rows × 2 columns</p>
+</div>
+</div>
+</div>
+<div id="fb8b17e6-2738-4e8f-a792-e02cfb025ef2" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># df_test.assign(Survived = predictr.predict(df_test)).loc[:,['PassengerId','Survived']]\</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># .to_csv("autogluon_submission.csv",index=False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="guebin/MP2023" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
